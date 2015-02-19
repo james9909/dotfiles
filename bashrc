@@ -79,7 +79,7 @@ function ExitCode {
 # Changes the sign of the user based on various conditions
 function Sign {
     if [[ $UID == 0 ]]; then
-        echo "$(tput bold)$(tput setaf 9) #$(tput sgr0)"
+        echo " #"
     else
 	# The sign changes based on whether or not the user inputted a valid command
         if [[ $status == 0 ]]; then
