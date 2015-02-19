@@ -104,7 +104,7 @@ function Period() {
     if [[ $showPeriod != true ]]; then
         return
     fi
-    period=$(python /home/james/Dev/Schedule/schedule.py )
+    period=$(python ~/Schedule/schedule.py )
     echo " [$period]"
 }
 
@@ -113,7 +113,7 @@ function EndPeriod() {
     if [[ $showEnd != true ]]; then
         return
     fi
-    end=$(python /home/james/Dev/Schedule/endtimes.py )
+    end=$(python ~/Schedule/endtimes.py )
     echo " [$end]"
 }
 
