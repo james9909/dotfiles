@@ -50,7 +50,7 @@ Plugin 'gmarik/vundle'
 " My Plugins
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpop/vim-surround'
+Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'ervandew/supertab'
