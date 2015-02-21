@@ -33,6 +33,31 @@ augroup JumpCursorOnEdit
 augroup END
 
 "}}}
+"{{{Vundle and Plugins
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let Vundle manage Vundle
+Plugin 'gmarik/vundle'
+
+" My Plugins
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+NERDTree
+Plugin 'tpop/vim-surround'
+
+" {{{ Syntastic
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"}}}
+
+call vundle#end()
+"}}}
+
 "{{{Misc Settings
 
 set nocompatible "Disable Vi-compatibility settings
@@ -65,7 +90,9 @@ set wrap " Allow wrapping
 let g:clipbrdDefaultReg = '+'
 
 filetype on
+filetype plugin indent on
 filetype plugin on
+
 syntax enable " Enable syntax highlighting
 
 " }}}
@@ -177,7 +204,7 @@ map <leader>ss :setlocal spell!<cr>
 set background=dark
 colorscheme Tomorrow-Night
 
-"Status line
+" Status line
 set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 
@@ -241,14 +268,6 @@ function! TodoListMode()
 endfunction
 
 "}}}
-
-"}}}
-" {{{ Pathogen
-execute pathogen#infect()
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 "}}}
 " {{{ Syntax
