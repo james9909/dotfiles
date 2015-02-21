@@ -1,10 +1,15 @@
 "{{{Auto Commands
 
-" Automatically cd into the directory that the file is in
+" Automagically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
-" Remove any trailing whitespace that is in the file
+" Automagically hack YCM to work with UltiSnips
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+" Automagically Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+
+" Automagically set the snippet file based on filetype
 
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
@@ -37,6 +42,7 @@ augroup END
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+filetype off
 
 " Let Vundle manage Vundle
 Plugin 'gmarik/vundle'
@@ -49,6 +55,22 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
+Plugin 'SirVer/UltiSnips'
+
+" Trigger configuration for UltiSnips.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=["~/.vim/bundle/vim-snippets/UltiSnips"]
+
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let python_highlight_all = 1
+" setlocal spell spelllang=en_us " Spellcheck
 
 call vundle#end()
 "}}}
@@ -83,8 +105,6 @@ set wrap " Allow wrapping
 
 let g:clipbrdDefaultReg = '+'
 
-filetype on
-filetype plugin indent on
 filetype plugin on
 
 syntax enable " Enable syntax highlighting
@@ -110,6 +130,9 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" UltiSnips hack
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 " Toggle NERDTree if needed
 nnoremap <F5> :NERDTreeToggle<CR>
@@ -208,6 +231,24 @@ set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 " }}}
 "{{{ Functions
 
+"{{{ Make Ultisnips and YCM work together
+" Function to make Ultisnips and YCM work together
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+                return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+"}}}
+
 "{{{ Open URL in browser
 
 function! Browser ()
@@ -267,16 +308,6 @@ endfunction
 "}}}
 
 "}}}
-" {{{ Syntax
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let python_highlight_all = 1
-
-" setlocal spell spelllang=en_us " Spellcheck
-" }}}
 "{{{Taglist configuration
 let Tlist_Use_Right_Window = 1
 let Tlist_Enable_Fold_Column = 0
