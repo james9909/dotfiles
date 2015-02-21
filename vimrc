@@ -6,9 +6,6 @@ autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 " Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-" Automagically start NERDTree
-autocmd VimEnter * NERDTree
-
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
    au!
@@ -51,6 +48,7 @@ Plugin 'tpop/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'ervandew/supertab'
+Plugin 'kien/ctrlp'
 
 call vundle#end()
 "}}}
@@ -112,6 +110,9 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Toggle NERDTree if needed
+nnoremap <F5> :NERDTreeToggle<CR>
 
 " Swap $ and ^
 noremap $ ^
