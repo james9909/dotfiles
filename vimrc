@@ -48,18 +48,12 @@ Plugin 'gmarik/vundle'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpop/vim-surround'
-
-" {{{ Syntastic
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-"}}}
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/MatchTagAlways'
+Plugin 'ervandew/supertab'
 
 call vundle#end()
 "}}}
-
 "{{{Misc Settings
 
 set nocompatible "Disable Vi-compatibility settings
