@@ -7,3 +7,9 @@
 [submodule "vim/bundle/MatchTagAlways"]
 	path = vim/bundle/MatchTagAlways
 	url = https://github.com/Valloric/MatchTagAlways
+[submodule "ctrlp.vim"]
+	path = ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim
+[submodule "vim/bundle/ctrlp.vim"]
+	path = vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim

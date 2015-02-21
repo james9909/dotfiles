@@ -48,7 +48,7 @@ Plugin 'tpop/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'ervandew/supertab'
-Plugin 'kien/ctrlp'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 "}}}
