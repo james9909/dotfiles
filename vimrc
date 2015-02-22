@@ -9,11 +9,9 @@ au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:U
 " Automagically Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-" Automagically set the snippet file based on filetype
-
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
-   au!
+  au!
    autocmd BufReadPost *
             \ if expand("<afile>:p:h") !=? $TEMP |
             \   if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -70,7 +68,13 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let python_highlight_all = 1
-" setlocal spell spelllang=en_us " Spellcheck
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+
+" MatchTagAlways
+let g:mta_use_match_paren_group = 1
 
 call vundle#end()
 "}}}
