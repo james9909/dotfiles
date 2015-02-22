@@ -46,7 +46,6 @@ RESET='\[\033[0m\]'
 BWHITE='\[\033[1;37m\]'
 WHITE='\[\033[0;37m\]'
 
-
 # Acquires the current working branch in a repo
 function GitBranch {
     if [[ ! $(git status 2>&1) =~ "fatal" ]]; then
@@ -72,6 +71,7 @@ function GitUpToDate {
     echo -ne "\n"
 }
 
+# Get the exit code
 function ExitCode {
     status=$?
 }
@@ -197,52 +197,50 @@ function cppcompile {
     if [[ "$#" != "2" ]]; then
         echo "Usage: cppcompile [cpp file] [name]"
     else
-        eval g++ $1 -o $2 `pkg-config --libs opencv --cflags`
+        eval g++ $1 -o $2 `pkg-config --libs opencv --cflags` -O2 # For some of that optimization
     fi
 }
 
 # Extracts any compressed file
 function extract {
-	if [ -f $1 ] ; then
-		case $1 in
-			*.tar.bz2)	tar xjf $1		;;
-			*.tar.gz)	tar xzf $1		;;
-			*.bz2)		bunzip2 $1		;;
-			*.rar)		rar x $1		;;
-			*.gz)		gunzip $1		;;
-			*.tar)		tar xf $1		;;
-			*.tbz2)		tar xjf $1		;;
-			*.tgz)		tar xzf $1		;;
-			*.zip)		unzip $1		;;
-			*.Z)		uncompress $1	;;
-			*)		echo "'$1' cannot be extracted via extract()" ;;
-		esac
-	else
+    if [-f $1] ; then
+        case $1 in
+            *.tar.bz2)      tar xjf $1;;
+            *tar.gz)        tar xzf $1;;
+            *bz2)           bunzip2 $1;;
+            *.rar)          rar x $1;;
+            *.gz)           gunzip $1;;
+            *.tar)          tar xf $1;;
+            *.tbz2)         tar xzf $1;;
+            *.tgz)          unzip $1;;
+            *.Z)            uncompress $1;;
+            *)              echo "'$1' cannot be extracted via extract"
+        esac
+    else
         echo "'$1' is not a valid file"
     fi
 }
 
 # Handy reminder that reminds user about a task
 function reminder {
-    PS1="$PS1\[$(tput setaf 7)\](Reminder: " # Add space to PS1, change text color
+    PS1="$PS1$WHITE(Reminder: " # Add space to PS1, change text color
     for word in "$@"
     do
         PS1="$PS1$word "
     done
-    PS1="${PS1:0:$[${#PS1}-1]})\[$(tput sgr0)\] "
+    PS1="${PS1:0:$[${#PS1}-1]})$BWHITE "
     echo "Reminder set: $@"
 }
 
 # Unzips a file and removes it
 function ziprm {
-	if [ -f $1 ] ; then
-		unzip $1
-		rm $1
-	else
-		echo "Need a valid zipfile"
-	fi
+    if [-f $1] ; then
+        extract $1
+        rm $1
+    fi
 }
 
+# boreeeddddd
 function imbored {
     echo "fortune"
     echo "cowsay"
