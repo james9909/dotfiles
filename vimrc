@@ -3,9 +3,6 @@
 " Automagically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
-" Automagically hack YCM to work with UltiSnips
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
 " Automagically Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
@@ -39,6 +36,7 @@ augroup END
 "{{{Vundle and Plugins
 
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/snippets
 call vundle#begin()
 filetype off
 
@@ -55,12 +53,13 @@ Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/UltiSnips'
 
-" Trigger configuration for UltiSnips.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=["~/.vim/bundle/vim-snippets/UltiSnips"]
+let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/UltiSnips/'
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -75,6 +74,11 @@ let g:syntastic_style_warning_symbol = '⚠'
 
 " MatchTagAlways
 let g:mta_use_match_paren_group = 1
+
+" Make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 call vundle#end()
 "}}}
@@ -135,9 +139,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" UltiSnips hack
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-
 " Toggle NERDTree if needed
 nnoremap <F5> :NERDTreeToggle<CR>
 
@@ -148,10 +149,10 @@ noremap ^ $
 " Remove search highlights
 nnoremap <CR> :noh<CR><CR>
 
-" Convenient leader maps
+" Convenient leader maps, save, quit and format
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
-noremap <Leader>a =ip
+noremap <Leader>i =ip
 
 " TODO Mode
 nnoremap <silent> <Leader>todo :execute TodoListMode()<CR>
@@ -234,24 +235,6 @@ set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 
 " }}}
 "{{{ Functions
-
-"{{{ Make Ultisnips and YCM work together
-" Function to make Ultisnips and YCM work together
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-                return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
-"}}}
 
 "{{{ Open URL in browser
 
