@@ -73,6 +73,11 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 
+" Vim-schlepp
+let g:Schlepp#allowSquishingLines = 1
+let g:Schlepp#allowSquishingBlocks = 1
+let g:Schlepp#dupTrimWS = 1
+
 " MatchTagAlways
 let g:mta_use_match_paren_group = 1
 
@@ -139,6 +144,14 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Vim-schlepp bindings
+vmap <unique> K  <Plug>SchleppUp
+vmap <unique> J  <Plug>SchleppDown
+vmap <unique> H  <Plug>SchleppLeft
+vmap <unique> L  <Plug>SchleppRight
+vmap <unique> i  <Plug>SchleppToggleReindent
+vmap <unique> D  <Plug>SchleppDup
 
 " Toggle NERDTree if needed
 nnoremap <F5> :NERDTreeToggle<CR>
