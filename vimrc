@@ -53,6 +53,11 @@ Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/UltiSnips'
 Plugin 'zirrostig/vim-schlepp'
+Plugin 'Raimondi/delimitMate'
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " Better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -82,8 +87,8 @@ let g:Schlepp#dupTrimWS = 1
 let g:mta_use_match_paren_group = 1
 
 " Make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 call vundle#end()
@@ -146,12 +151,12 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Vim-schlepp bindings
-vmap <unique> K  <Plug>SchleppUp
-vmap <unique> J  <Plug>SchleppDown
-vmap <unique> H  <Plug>SchleppLeft
-vmap <unique> L  <Plug>SchleppRight
-vmap <unique> i  <Plug>SchleppToggleReindent
-vmap <unique> D  <Plug>SchleppDup
+vmap K  <Plug>SchleppUp
+vmap J  <Plug>SchleppDown
+vmap H  <Plug>SchleppLeft
+vmap L  <Plug>SchleppRight
+vmap i  <Plug>SchleppToggleReindent
+vmap D  <Plug>SchleppDup
 
 " Toggle NERDTree if needed
 nnoremap <F5> :NERDTreeToggle<CR>
@@ -167,6 +172,7 @@ nnoremap <CR> :noh<CR><CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 noremap <Leader>i =ip
+nnoremap <Leader>f :CtrlP<CR>
 
 " TODO Mode
 nnoremap <silent> <Leader>todo :execute TodoListMode()<CR>
@@ -192,20 +198,15 @@ nnoremap <silent> <F9> :%s/$//g<CR>:%s// /g<CR>
 nnoremap <silent> <F10> :call Paste_on_off()<CR>
 set pastetoggle=<F10>
 
-" Edit vimrc \ev
+" Edit vimrc
 nnoremap <silent> <Leader>ev :tabnew<CR>:e ~/.vimrc<CR>
 
-" Edit gvimrc \gv
+" Edit gvimrc
 nnoremap <silent> <Leader>gv :tabnew<CR>:e ~/.gvimrc<CR>
 
-" Up and down are more logical with g
+" Better k and j movement
 nnoremap <silent> k gk
 nnoremap <silent> j gj
-inoremap <silent> <Up> <Esc>gka
-inoremap <silent> <Down> <Esc>gja
-
-nnoremap <silent> <Home> i <Esc>r
-nnoremap <silent> <End> a <Esc>r
 
 " Create Blank Newlines and stay in Normal mode
 nnoremap <silent> zj o<Esc>
@@ -216,7 +217,6 @@ nnoremap <silent> zk O<Esc>
 map N Nzz
 map n nzz
 
-" Testing
 set completeopt=longest,menuone,preview
 
 " Swap ; and :
