@@ -247,14 +247,20 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 
 " }}}
+" Abbreviations {{{
+iabbrev teh the
+iabbrev wghat what
+iabbrev waht what
+iabbrev tehn then
+" }}}
 "{{{ Functions
 
 "{{{ Open URL in browser
 
 function! Browser ()
-   let line = getline (".")
-   let line = matchstr (line, "http[^   ]*")
-   exec "!konqueror ".line
+    let line = getline (".")
+    let line = matchstr (line, "http[^   ]*")
+    exec "!konqueror ".line
 endfunction
 
 "}}}
@@ -262,19 +268,19 @@ endfunction
 "{{{Theme Rotating
 let themeindex=0
 function! RotateColorTheme()
-   let y = -1
-   while y == -1
-      let colorstring = "placeholder#darkeclipse#SolarizedDark#Tomorrow-Night#"
-      let x = match( colorstring, "#", g:themeindex )
-      let y = match( colorstring, "#", x + 1 )
-      let g:themeindex = x + 1
-      if y == -1
-         let g:themeindex = 0
-      else
-         let themestring = strpart(colorstring, x + 1, y - x - 1)
-         return ":colorscheme ".themestring
-      endif
-   endwhile
+    let y = -1
+    while y == -1
+        let colorstring = "placeholder#darkeclipse#SolarizedDark#Tomorrow-Night#"
+        let x = match( colorstring, "#", g:themeindex )
+        let y = match( colorstring, "#", x + 1 )
+        let g:themeindex = x + 1
+        if y == -1
+            let g:themeindex = 0
+        else
+            let themestring = strpart(colorstring, x + 1, y - x - 1)
+            return ":colorscheme ".themestring
+        endif
+    endwhile
 endfunction
 " }}}
 
@@ -282,27 +288,27 @@ endfunction
 let paste_mode = 0 " 0 = normal, 1 = paste
 
 func! Paste_on_off()
-   if g:paste_mode == 0
-      set paste
-      let g:paste_mode = 1
-   else
-      set nopaste
-      let g:paste_mode = 0
-   endif
-   return
+    if g:paste_mode == 0
+        set paste
+        let g:paste_mode = 1
+    else
+        set nopaste
+        let g:paste_mode = 0
+    endif
+    return
 endfunc
 "}}}
 
 "{{{ Todo List Mode
 
 function! TodoListMode()
-   e ~/.todo.otl
-   Calendar
-   wincmd l
-   set foldlevel=1
-   tabnew ~/.notes.txt
-   tabfirst
-   " or 'norm! zMzr'
+    e ~/.todo.otl
+    Calendar
+    wincmd l
+    set foldlevel=1
+    tabnew ~/.notes.txt
+    tabfirst
+    " or 'norm! zMzr'
 endfunction
 
 "}}}
