@@ -30,3 +30,6 @@
 [submodule "vim/bundle/supertab"]
     path = vim/bundle/supertab
     url = https://github.com/ervandew/supertab
+[submodule "vim/bundle/vim-schlepp"]
+    path = vim/bundle/vim-schlepp
+    url = https://github.com/zirrostig/vim-schlepp

@@ -405,7 +405,6 @@ hi doxygenargumentword guifg=#0000ff guibg=#000000 guisp=#000000 gui=NONE ctermf
 "hi cssattributeselector -- no settings --
 hi tmesupport guifg=#7d6c55 guibg=NONE guisp=NONE gui=NONE ctermfg=101 ctermbg=NONE cterm=NONE
 hi special guifg=#ebac47 guibg=NONE guisp=NONE gui=NONE ctermfg=215 ctermbg=NONE cterm=NONE
-hi cterm=.((s:fontface==plain) ? none : bold) guifg=#efface guibg=#efface guisp=#efface gui=NONE ctermfg=230 ctermbg=230 cterm=NONE
 hi incsearch guifg=#f0f0f0 guibg=#806060 guisp=#806060 gui=NONE ctermfg=255 ctermbg=95 cterm=NONE
 hi cterm_style guifg=#efface guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi moremsg guifg=#489000 guibg=NONE guisp=NONE gui=NONE ctermfg=64 ctermbg=NONE cterm=NONE

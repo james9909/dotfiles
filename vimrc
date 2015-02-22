@@ -52,6 +52,7 @@ Plugin 'Valloric/MatchTagAlways'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/UltiSnips'
+Plugin 'zirrostig/vim-schlepp'
 
 " Better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -220,7 +221,6 @@ nnoremap <silent> p p`]
 " Enable spellcheck with leader ss
 map <leader>ss :setlocal spell!<cr>
 
-
 "ly$O#{{{ "lpjjj_%A#}}}jjzajj
 
 "}}}
@@ -251,7 +251,7 @@ let themeindex=0
 function! RotateColorTheme()
    let y = -1
    while y == -1
-      let colorstring = "inkpot#ron#blue#elflord#evening#koehler#murphy#pablo#desert#torte#"
+      let colorstring = "placeholder#darkeclipse#SolarizedDark#Tomorrow-Night#"
       let x = match( colorstring, "#", g:themeindex )
       let y = match( colorstring, "#", x + 1 )
       let g:themeindex = x + 1
