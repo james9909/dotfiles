@@ -53,11 +53,12 @@ Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/UltiSnips'
 Plugin 'zirrostig/vim-schlepp'
-Plugin 'Raimondi/delimitMate'
+Plugin 'jiangmiao/auto-pairs'
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " Better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -121,6 +122,7 @@ set ignorecase " Ignore cases in search
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
 set wrap " Allow wrapping
+set colorcolumn=80 "Highlight 80th column to make sure my code isn't too long
 
 let g:clipbrdDefaultReg = '+'
 

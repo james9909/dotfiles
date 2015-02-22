@@ -33,3 +33,6 @@
 [submodule "vim/bundle/vim-schlepp"]
     path = vim/bundle/vim-schlepp
     url = https://github.com/zirrostig/vim-schlepp
+[submodule "vim/bundle/auto-pairs"]
+    path = vim/bundle/auto-pairs
+    url = https://github.com/jiangmiao/auto-pairs
