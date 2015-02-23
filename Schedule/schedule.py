@@ -12,7 +12,7 @@ day =  datetime.today().weekday()
 
 def getPeriod():
     if day < 5:
-        if hour == 24 or hour <= 8:
+        if hour == 24 or hour < 8:
             now = period[0]
         elif hour == 8 and minute <= 41:
             now = period[1]
@@ -21,7 +21,7 @@ def getPeriod():
         elif (hour == 9 and minute >= 31) or (hour == 10 and minute <= 15):
             now = period[3]
         elif (hour == 10 and minute >= 20) or (hour == 11 and minute <= 1):
-            now = period[4] 
+            now = period[4]
         elif hour == 11 and (minute >= 06 and minute <= 47):
             now = period[5]
         elif (hour == 11 and minute >= 52) or (hour == 12 and minute <= 33):
