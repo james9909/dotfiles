@@ -104,8 +104,12 @@ function Period() {
     if [[ $showPeriod != true ]]; then
         return
     fi
-    period=$(python ~/Schedule/schedule.py )
-    echo " [$period]"
+    period=$(python ~/Schedule/schedule.py)
+    if [[ $period == 'No School' ]]; then
+        return
+    else
+        echo " [$period]"
+    fi
 }
 
 # Shows the end of the current period
@@ -113,8 +117,12 @@ function EndPeriod() {
     if [[ $showEnd != true ]]; then
         return
     fi
-    end=$(python ~/Schedule/endtimes.py )
-    echo " [$end]"
+    end=$(python ~/Schedule/endtimes.py)
+    if [[ $end == 'Starts at 8:00' ]]; then
+        return
+    else
+        echo " [$end]"
+    fi
 }
 
 # Alters the display of the user
