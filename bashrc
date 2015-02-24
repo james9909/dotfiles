@@ -104,33 +104,29 @@ function Period {
     minute=$(date +%M) # 0 - 60
     day=$(date +%w) # 0 is Sunday, 6 is Saturday
 
-    if [ $day != 0 ] && [ $day != 1 ]; then
-        if [ $hour == 24 ] || [ $hour -le 8 ]; then
-            echo "[Before School]"
-        elif [ $hour == 8 ] && [ $minute -le 41 ]; then
+    if [ "$day" -ne 0 ] && [ $day -ne 6 ]; then
+        if [ $hour -eq 8 ] && [ $minute -l 41 ]; then
             echo "[Period 1]"
-        elif [ [ $hour == 8 ] && [ $minute -ge 45 ] ] || [ [$hour == 9 ] && [ $minute -le 26 ] ]; then
-            echo "[Period 2]"
-        elif [ [ $hour == 9 ] && [ $minute -ge 31 ] ] || [ [$hour == 10 ] && [ $minute -le 15 ] ]; then
-            echo "[Period 3]"
-        elif [ [ $hour == 10 ] && [ $minute -ge 20 ] ] || [ [$hour == 11 ] && [ $minute -le 1 ] ]; then
-            echo "[Period 4]"
-        elif [ $hour == 11 ] && [$minute -ge 6 ] && [ $minute -le 47 ] ; then
-            echo "[Period 5]"
-        elif [ [ $hour == 11 ] && [ $minute -ge 52 ] ] || [ [$hour == 12 ] && [ $minute -le 33 ] ]; then
-            echo "[Period 6]"
-        elif [ [ $hour == 12 ] && [ $minute -ge 38 ] ] || [ [$hour == 13 ] && [ $minute -le 19 ] ]; then
-            echo "[Period 7]"
-        elif [ [ $hour == 13 ] && [ $minute -ge 24 ] ] || [ [$hour == 14 ] && [ $minute -le 5 ] ]; then
-            echo "[Period 8]"
-        elif [ $hour == 14 ] && [ [$minute -ge 9 ] && [ $minute -le 50 ] ]; then
-            echo "[Period 9]"
-        elif [ [ $hour == 14 ] && [ $minute -ge 54 ] ] || [ [$hour == 15 ] && [ $minute -l 35 ] ]; then
-            echo "[Period 10]"
-            # elif [ [ $hour == 8 ] && [ $minute -ge 45 ] ] || [ [$hour == 9 ] && [ $minute -le 26 ] ]; then
-            #     echo "[After School]"
-        else
-            return
+#        elif ; then
+#            echo "[Period 2]"
+#        elif ; then
+#            echo "[Period 3]"
+#        elif ; then
+#            echo "[Period 4]"
+#        elif ; then
+#            echo "[Period 5]"
+#        elif ; then
+#            echo "[Period 6]"
+#        elif ; then
+#            echo "[Period 7]"
+#        elif ; then
+#            echo "[Period 8]"
+#        elif ; then
+#            echo "[Period 9]"
+#        elif ; then
+#            echo "[Period 10]"
+#        else
+#            return
         fi
     else
         return
@@ -198,7 +194,7 @@ status=0
 
 PROMPT_COMMAND="ExitCode"
 
-prompt1="${BGREEN}\$(Time)\$(Period)\$(PyEndPeriod) ${BRED}\$(User)${BRED}\$(Pulse)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitBranch)${BWHITE}\$(Sign) >> "
+prompt1="${BGREEN}\$(Time)\$(PyPeriod)\$(PyEndPeriod) ${BRED}\$(User)${BRED}\$(Pulse)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitBranch)${BWHITE}\$(Sign) >> "
 PS1=$prompt1
 
 # Configuration options
