@@ -107,26 +107,26 @@ function Period {
     if [ "$day" -ne 0 ] && [ $day -ne 6 ]; then
         if [ $hour -eq 8 ] && [ $minute -l 41 ]; then
             echo "[Period 1]"
-#        elif ; then
-#            echo "[Period 2]"
-#        elif ; then
-#            echo "[Period 3]"
-#        elif ; then
-#            echo "[Period 4]"
-#        elif ; then
-#            echo "[Period 5]"
-#        elif ; then
-#            echo "[Period 6]"
-#        elif ; then
-#            echo "[Period 7]"
-#        elif ; then
-#            echo "[Period 8]"
-#        elif ; then
-#            echo "[Period 9]"
-#        elif ; then
-#            echo "[Period 10]"
-#        else
-#            return
+        elif [[  $hour -eq 8 && $minute -ge 45 || $hour -eq 9 && $minute -le 26 ]]; then
+            echo "[Period 2]"
+        elif [[ $hour -eq 9 && $minute -ge 31 || $hour -eq 10 && $minute -le 15 ]] ; then
+            echo "[Period 3]"
+        elif [[ $hour -eq 10 && $minute -ge 20 || $hour -eq 11 && $minute -le 1 ]]; then
+            echo "[Period 4]"
+        elif [[ $hour -eq 11 && $minute -ge 6 && $minute -le 47 ]]; then
+            echo "[Period 5]"
+        elif [[ $hour -eq 11 && $minute -ge 52 || $hour -eq 12 && $minute -le 33 ]]; then
+            echo "[Period 6]"
+        elif [[ $hour -eq 12 && $minute -ge 38 || $hour -eq 13 && $minute -le 19 ]]; then
+            echo "[Period 7]"
+        elif [[ $hour -eq 13 && $minute -ge 24 || $hour -eq 14 && $minute -le 5 ]]; then
+            echo "[Period 8]"
+        elif [[ $hour -eq 14 && $minute -ge 9 && $minute -le 50 ]]; then
+            echo "[Period 9]"
+        elif [[ $hour -eq 14 && $minute -ge 54 || $hour -eq 15 && $minute -lt 35 ]]; then
+            echo "[Period 10]"
+        else
+            return
         fi
     else
         return
@@ -140,7 +140,7 @@ function PyPeriod {
         return
     fi
     period=$(python ~/Schedule/schedule.py)
-    if [[ $period == 'No School' ]]; then
+    if [[ $period == 'No School' || $period == 'After School' || $period == 'Before School' ]]; then
         return
     else
         echo " [$period]"
