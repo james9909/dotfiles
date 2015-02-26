@@ -160,6 +160,32 @@ function PyEndPeriod {
     fi
 }
 
+function EndPeriod {
+    if [[ $Period == "[Period 1]" ]]; then
+        echo 'Ends at 8:41'
+    elif [[ $Period == "[Period 2]" ]]; then
+        echo 'Ends at 9:26'
+    elif [[ $Period == "[Period 3]" ]]; then
+        echo 'Ends at 10:15'
+    elif [[ $Period == "[Period 4]" ]]; then
+        echo 'Ends at 11:01'
+    elif [[ $Period == "[Period 5]" ]]; then
+        echo 'Ends at 11:47'
+    elif [[ $Period == "[Period 6]" ]]; then
+        echo 'Ends at 12:33'
+    elif [[ $Period == "[Period 7]" ]]; then
+        echo 'Ends at 1:19'
+    elif [[ $Period == "[Period 8]" ]]; then
+        echo 'Ends at 2:05'
+    elif [[ $Period == "[Period 9]" ]]; then
+        echo 'Ends at 2:50'
+    elif [[ $Period == "[Period 10]" ]]; then
+        echo 'Ends at 3:35'
+    else
+        return
+    fi
+}
+
 # Alters the display of the user
 function User {
     if [[ $showUsername == true ]]; then
