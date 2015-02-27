@@ -108,6 +108,7 @@ function Time {
     echo "[$date]"
 }
 
+# Shows the current period
 function Period {
     hour=$(date +%H) # 0 - 60
     minute=$(date +%M) # 0 - 60
@@ -143,6 +144,7 @@ function Period {
 
 }
 
+# Shows when the current period ends
 function EndPeriod {
     period="$(Period)"
 
