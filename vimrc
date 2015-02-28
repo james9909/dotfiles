@@ -122,7 +122,8 @@ set ignorecase " Ignore cases in search
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
 set wrap " Allow wrapping
-set colorcolumn=80 "Highlight 80th column to make sure my code isn't too long
+set colorcolumn=80 " Highlight 80th column to make sure my code isn't too long
+set t_Co=256 " 256 color enable
 
 let g:clipbrdDefaultReg = '+'
 
@@ -241,7 +242,6 @@ map <leader>ss :setlocal spell!<cr>
 "}}}
 "{{{Look and Feel
 
-set background=dark
 colorscheme Tomorrow-Night
 
 " Status line
@@ -272,7 +272,7 @@ let themeindex=0
 function! RotateColorTheme()
     let y = -1
     while y == -1
-        let colorstring = "placeholder#darkeclipse#SolarizedDark#Tomorrow-Night#"
+        let colorstring = "placeholder#darkeclipse#hybrid#hybrid-dark#SolarizedDark#Tomorrow-Night#"
         let x = match( colorstring, "#", g:themeindex )
         let y = match( colorstring, "#", x + 1 )
         let g:themeindex = x + 1

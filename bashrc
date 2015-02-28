@@ -19,8 +19,14 @@ shopt -s checkwinsize
 export EDITOR=vim
 
 # }}}
-# Color {{{
+# Color{{{
 
+# 256 color support
+if [ -n "$DISPLAY" -a "$TERM" == "xterm"  ]; then
+    export TERM=xterm-256color
+elif [ "$TERM" == "screen"  ]; then
+    export TERM=screen-256color
+fi
 # enable color support of various listing commands
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -116,25 +122,25 @@ function Period {
 
     if [ "$day" -ne 0 ] && [ $day -ne 6 ]; then
         if [[ $hour -eq 8 && $minute -le 41 ]]; then
-            echo "Period 1"
+            echo "[Period 1 | "
         elif [[  $hour -eq 8 && $minute -ge 45 || $hour -eq 9 && $minute -le 26 ]]; then
-            echo "Period 2"
+            echo "[Period 2 | "
         elif [[ $hour -eq 9 && $minute -ge 31 || $hour -eq 10 && $minute -le 15 ]] ; then
-            echo "Period 3"
+            echo "[Period 3 | "
         elif [[ $hour -eq 10 && $minute -ge 20 || $hour -eq 11 && $minute -le 1 ]]; then
-            echo "Period 4"
+            echo "[Period 4 | "
         elif [[ $hour -eq 11 && $minute -ge 6 && $minute -le 47 ]]; then
-            echo "Period 5"
+            echo "[Period 5 | "
         elif [[ $hour -eq 11 && $minute -ge 52 || $hour -eq 12 && $minute -le 33 ]]; then
-            echo "Period 6"
+            echo "[Period 6 | "
         elif [[ $hour -eq 12 && $minute -ge 38 || $hour -eq 13 && $minute -le 19 ]]; then
-            echo "Period 7"
+            echo "[Period 7 | "
         elif [[ $hour -eq 13 && $minute -ge 24 || $hour -eq 14 && $minute -le 5 ]]; then
-            echo "Period 8"
+            echo "[Period 8 | "
         elif [[ $hour -eq 14 && $minute -ge 9 && $minute -le 50 ]]; then
-            echo "Period 9"
+            echo "[Period 9 | "
         elif [[ $hour -eq 14 && $minute -ge 54 || $hour -eq 15 && $minute -lt 35 ]]; then
-            echo "Period 10"
+            echo "[Period 10 | "
         else
             return
         fi
@@ -149,25 +155,25 @@ function EndPeriod {
     period="$(Period)"
 
     if [[ $period == 'Period 1' ]]; then
-        echo 'Ends at 8:41'
+        echo 'Ends at 8:41]'
     elif [[ $period == 'Period 2' ]]; then
-        echo 'Ends at 9:26'
+        echo 'Ends at 9:26]'
     elif [[ $period == 'Period 3' ]]; then
-        echo 'Ends at 10:15'
+        echo 'Ends at 10:15]'
     elif [[ $period == 'Period 4' ]]; then
-        echo 'Ends at 11:01'
+        echo 'Ends at 11:01]'
     elif [[ $period == 'Period 5' ]]; then
-        echo 'Ends at 11:47'
+        echo 'Ends at 11:47]'
     elif [[ $period == 'Period 6' ]]; then
-        echo 'Ends at 12:33'
+        echo 'Ends at 12:33]'
     elif [[ $period == 'Period 7' ]]; then
-        echo 'Ends at 1:19'
+        echo 'Ends at 1:19]'
     elif [[ $period == 'Period 8' ]]; then
-        echo 'Ends at 2:05'
+        echo 'Ends at 2:05]'
     elif [[ $period == 'Period 9' ]]; then
-        echo 'Ends at 2:50'
+        echo 'Ends at 2:50]'
     elif [[ $period == 'Period 10' ]]; then
-        echo 'Ends at 3:35'
+        echo 'Ends at 3:35]'
     else
         return
     fi
@@ -207,7 +213,7 @@ status=0
 
 PROMPT_COMMAND="ExitCode"
 
-prompt1="${BGREEN}\$(Time) [\$(Period) | \$(EndPeriod)] ${BRED}\$(User)${BRED}\$(Pulse)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) >> "
+prompt1="${BGREEN}\$(Time)\$(Period)\$(EndPeriod) ${BRED}\$(User)${BRED}\$(Pulse)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) >> "
 PS1=$prompt1
 
 # Configuration options
