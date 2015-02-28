@@ -51,6 +51,10 @@ BLUE='\[\033[0;34m\]'
 RESET='\[\033[0m\]'
 BWHITE='\[\033[1;37m\]'
 WHITE='\[\033[0;37m\]'
+TPUTWHITE=$(tput setaf 7)
+TPUTGREEN=$(tput setaf 2)
+TPUTRED=$(tput setaf 1)
+TPUTNORMAL=$(tput sgr0)
 
 # Generates the git prompt
 function GitPrompt {
@@ -98,9 +102,10 @@ function Sign {
     else
 	# The sign changes based on whether or not the user inputted a valid command
         if [[ $status == 0 ]]; then
-            echo " :)"
+            echo "${TPUTGREEN} :)${TPUTNORMAL}"
         else
-            echo " :("
+            echo "${TPUTRED} :(${TPUTNORMAL}"
+
         fi
     fi
 }
@@ -213,7 +218,7 @@ status=0
 
 PROMPT_COMMAND="ExitCode"
 
-prompt1="${BGREEN}\$(Time)\$(Period)\$(EndPeriod) ${BRED}\$(User)${BRED}\$(Pulse)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) >> "
+prompt1="${BGREEN}\$(Time)\$(Period)\$(EndPeriod) ${BRED}\$(User)${BRED}\$(Pulse)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) \n>> "
 PS1=$prompt1
 
 # Configuration options
