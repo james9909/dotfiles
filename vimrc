@@ -96,8 +96,8 @@ call vundle#end()
 "}}}
 "{{{Misc Settings
 
-set nocompatible "Disable Vi-compatibility settings
-set noswapfile " No swp files!
+set nocompatible " Disable Vi-compatibility settings
+set noswapfile " No swap files
 set showcmd " Shows what you are typing as a command
 set t_Co=256 " Enable 256 color
 set foldmethod=marker " Folds are neat
@@ -122,12 +122,15 @@ set ignorecase " Ignore cases in search
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
 set wrap " Allow wrapping
-set colorcolumn=80 " Highlight 80th column to make sure my code isn't too long
-set t_Co=256 " 256 color enable
+set colorcolumn=80 " Highlight 80th column as guideline
+set formatoptions-=cro " Remove auto comment
+set completeopt=longest,menuone,preview
+set pastetoggle=<Leader>p " If this changes, change the paste leader
 
 let g:clipbrdDefaultReg = '+'
 
 filetype plugin on
+filetype plugin indent on
 
 syntax enable " Enable syntax highlighting
 
@@ -137,7 +140,7 @@ syntax enable " Enable syntax highlighting
 " Map leader to space
 let mapleader = "\<Space>"
 
-" Get rid of that nasty arrow key habit
+" Get rid of that arrow key habit
 inoremap  <Up>     <NOP>
 inoremap  <Down>   <NOP>
 inoremap  <Left>   <NOP>
@@ -159,10 +162,6 @@ vmap J  <Plug>SchleppDown
 vmap H  <Plug>SchleppLeft
 vmap L  <Plug>SchleppRight
 vmap i  <Plug>SchleppToggleReindent
-vmap D  <Plug>SchleppDup
-
-" Toggle NERDTree if needed
-nnoremap <F5> :NERDTreeToggle<CR>
 
 " Swap $ and ^
 noremap $ ^
@@ -171,41 +170,29 @@ noremap ^ $
 " Remove search highlights
 nnoremap <CR> :noh<CR><CR>
 
-" Convenient leader maps, save, quit and format
+" Convenient leader maps
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
-noremap <Leader>i =ip
+nnoremap <Leader>i =ip
 nnoremap <Leader>f :CtrlP<CR>
+nnoremap <Leader>c :SyntasticCheck<CR>
+nnoremap <Leader>rn :set relativenumber!<CR>
+nnoremap <Leader>ss :setlocal spell!<CR>"
+nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>h :split<CR>
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <silent> <Leader>ev :tabnew<CR>:e ~/.vimrc<CR>
+" If this changes, change the pastetoggle mapping above
+nnoremap <silent> <Leader>p :call Paste_on_off()<CR>
 
-" TODO Mode
-nnoremap <silent> <Leader>todo :execute TodoListMode()<CR>
-
-" Open the TagList Plugin <F3>
-nnoremap <silent> <F3> :Tlist<CR>
-
-" Next Tab
+" Tab Mappings
 nnoremap <silent> <C-Right> :tabnext<CR>
-
-" Previous Tab
 nnoremap <silent> <C-Left> :tabprevious<CR>
-
-" New Tab
 nnoremap <silent> <C-t> :tabnew<CR>
-
-" Rotate Color Scheme <F8>
 nnoremap <silent> <F8> :execute RotateColorTheme()<CR>
 
+" WHITESPACE
 nnoremap <silent> <F9> :%s/$//g<CR>:%s// /g<CR>
-
-" Paste Mode
-nnoremap <silent> <F10> :call Paste_on_off()<CR>
-set pastetoggle=<F10>
-
-" Edit vimrc
-nnoremap <silent> <Leader>ev :tabnew<CR>:e ~/.vimrc<CR>
-
-" Edit gvimrc
-nnoremap <silent> <Leader>gv :tabnew<CR>:e ~/.gvimrc<CR>
 
 " Better k and j movement
 nnoremap <silent> k gk
@@ -220,8 +207,6 @@ nnoremap <silent> zk O<Esc>
 map N Nzz
 map n nzz
 
-set completeopt=longest,menuone,preview
-
 " Swap ; and :
 nnoremap ; :
 nnoremap : ;
@@ -234,11 +219,6 @@ nnoremap JJJJ <Nop>
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-" Enable spellcheck with leader ss
-map <leader>ss :setlocal spell!<cr>
-
-"ly$O#{{{ "lpjjj_%A#}}}jjzajj
-
 "}}}
 "{{{Look and Feel
 
@@ -249,23 +229,13 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 
 " }}}
-" Abbreviations {{{
+"{{{ Abbreviations
 iabbrev teh the
 iabbrev wghat what
 iabbrev waht what
 iabbrev tehn then
 " }}}
-"{{{ Functions
-
-"{{{ Open URL in browser
-
-function! Browser ()
-    let line = getline (".")
-    let line = matchstr (line, "http[^   ]*")
-    exec "!konqueror ".line
-endfunction
-
-"}}}
+" {{{ Functions
 
 "{{{ AutoIndent upon saving
 " Restore cursor position, window position, and last search after running a
@@ -302,12 +272,12 @@ function! Indent()
 endfunction
 "}}}
 
-"{{{Theme Rotating
+"{{{ Theme Rotating
 let themeindex=0
 function! RotateColorTheme()
     let y = -1
     while y == -1
-        let colorstring = "placeholder#darkeclipse#hybrid#hybrid-dark#SolarizedDark#Tomorrow-Night#"
+        let colorstring = "placeholder#darkeclipse#hybrid#SolarizedDark#Tomorrow-Night#"
         let x = match( colorstring, "#", g:themeindex )
         let y = match( colorstring, "#", x + 1 )
         let g:themeindex = x + 1
@@ -328,39 +298,14 @@ func! Paste_on_off()
     if g:paste_mode == 0
         set paste
         let g:paste_mode = 1
+        echo "Paste mode on"
     else
         set nopaste
         let g:paste_mode = 0
+        echo "Paste mode off"
     endif
     return
 endfunc
-"}}}
+" }}}
 
-"{{{ Todo List Mode
-
-function! TodoListMode()
-    e ~/.todo.otl
-    Calendar
-    wincmd l
-    set foldlevel=1
-    tabnew ~/.notes.txt
-    tabfirst
-    " or 'norm! zMzr'
-endfunction
-
-"}}}
-
-"}}}
-"{{{Taglist configuration
-let Tlist_Use_Right_Window = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Use_SingleClick = 1
-let Tlist_Inc_Winwidth = 0
-"}}}
-
-let g:rct_completion_use_fri = 1
-"let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_ViewRule_pdf = "kpdf"
-
-filetype plugin indent on
+" }}}
