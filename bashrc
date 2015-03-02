@@ -159,25 +159,25 @@ function Period {
 function EndPeriod {
     period="$(Period)"
 
-    if [[ $period == 'Period 1' ]]; then
+    if [[ $period == '[Period 1 | ' ]]; then
         echo 'Ends at 8:41]'
-    elif [[ $period == 'Period 2' ]]; then
+    elif [[ $period == '[Period 2 | ' ]]; then
         echo 'Ends at 9:26]'
-    elif [[ $period == 'Period 3' ]]; then
+    elif [[ $period == '[Period 3 | ' ]]; then
         echo 'Ends at 10:15]'
-    elif [[ $period == 'Period 4' ]]; then
+    elif [[ $period == '[Period 4 | ' ]]; then
         echo 'Ends at 11:01]'
-    elif [[ $period == 'Period 5' ]]; then
+    elif [[ $period == '[Period 5 | ' ]]; then
         echo 'Ends at 11:47]'
-    elif [[ $period == 'Period 6' ]]; then
+    elif [[ $period == '[Period 6 | ' ]]; then
         echo 'Ends at 12:33]'
-    elif [[ $period == 'Period 7' ]]; then
+    elif [[ $period == '[Period 7 | ' ]]; then
         echo 'Ends at 1:19]'
-    elif [[ $period == 'Period 8' ]]; then
+    elif [[ $period == '[Period 8 | ' ]]; then
         echo 'Ends at 2:05]'
-    elif [[ $period == 'Period 9' ]]; then
+    elif [[ $period == '[Period 9 | ' ]]; then
         echo 'Ends at 2:50]'
-    elif [[ $period == 'Period 10' ]]; then
+    elif [[ $period == '[Period 10 | ' ]]; then
         echo 'Ends at 3:35]'
     else
         return
@@ -218,7 +218,7 @@ status=0
 
 PROMPT_COMMAND="ExitCode"
 
-prompt1="${BGREEN}\$(Time)\$(Period)\$(EndPeriod) ${BRED}\$(User)${BRED}\$(Pulse)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) \n>> "
+prompt1="${BGREEN}\$(Time) \$(Period)\$(EndPeriod) ${BRED}\$(User)${BRED}\$(Pulse)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) \n>> "
 PS1=$prompt1
 
 # Configuration options
