@@ -268,6 +268,15 @@ function cppcompile {
     fi
 }
 
+# Copy a folder into another directory
+function cpdir {
+    if [[ "$#" != "2" ]]; then
+        echo "Usage: cpdir [source] [destination]"
+    else
+        cp -arv $1 $2
+    fi
+}
+
 # Extracts any compressed file
 function extract {
     if [-f $1] ; then
