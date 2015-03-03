@@ -228,8 +228,6 @@ showHostname=false
 showTeam=true
 showUsername=true
 showPulse=true
-showPeriod=true
-showEnd=true
 
 # Configuration aliases
 alias timeon="export showTime=true"
@@ -242,14 +240,8 @@ alias teamon="export showTeam=true"
 alias teamoff="export showTeam=false"
 alias hoston="export showHostname=true"
 alias hostoff="export showHostname=false"
-alias periodon="export showPeriod=true"
-alias periodoff="export showPeriod=false"
-alias endon="export showEnd=true"
-alias endoff="export showEnd=false"
 alias useron="export showUsername=true"
 alias useroff="export showUsername=false"
-alias short="timeoff; shorton; pulseoff; teamoff; useroff; endoff; periodoff"
-alias default="timeon; shortoff; hostoff; teamon; useron; pulseon; periodon; endon"
 
 # }}}
 # Functions {{{
@@ -351,6 +343,9 @@ alias remove='sudo apt-get remove'
 alias root='sudo su'
 alias reload='source ~/.bashrc'
 alias ibrokesudo='pkexec visudo'
+alias bashtime='time . ~/.bashrc'
+alias debugon='set -x'
+alias debugoff='set +x'
 
 # git aliases
 alias pulse-cv='git clone https://github.com/team694/pulse-cv'
@@ -361,12 +356,6 @@ alias cslab='ssh james.wang@149.89.151.101'
 
 # stuff
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
-
-# telnet
-alias starwars='telnet towel.blinkenlights.nl'
-alias excuse='telnet towel.blinkenlights.nl 666'
-alias telehack='telnet telehack.com '
-alias chess='telnet freechess.org'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
