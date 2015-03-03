@@ -121,7 +121,7 @@ function Time {
 
 # Shows the current period
 function Period {
-    hour=$(date +%H) # 0 - 60
+    hour=$(date +%H | sed 's/^0*//') # 0 - 60
     minute=$(date +%M) # 0 - 60
     day=$(date +%w) # 0 is Sunday, 6 is Saturday
 
@@ -279,7 +279,7 @@ function cpdir {
 
 # Extracts any compressed file
 function extract {
-    if [-f $1] ; then
+    if [ -f $1 ] ; then
         case $1 in
             *.tar.bz2)      tar xjf $1;;
             *tar.gz)        tar xzf $1;;
@@ -289,6 +289,7 @@ function extract {
             *.tar)          tar xf $1;;
             *.tbz2)         tar xzf $1;;
             *.tgz)          unzip $1;;
+            *.zip)          unzip $1;;
             *.Z)            uncompress $1;;
             *)              echo "'$1' cannot be extracted via extract"
         esac
@@ -310,7 +311,7 @@ function reminder {
 
 # Unzips a file and removes it
 function ziprm {
-    if [-f $1] ; then
+    if [ -f $1 ] ; then
         extract $1
         rm $1
     fi
