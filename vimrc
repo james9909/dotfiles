@@ -47,6 +47,7 @@ Plugin 'gmarik/vundle'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'ervandew/supertab'
@@ -54,6 +55,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'SirVer/UltiSnips'
 Plugin 'zirrostig/vim-schlepp'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'gioele/vim-autoswap'
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -97,7 +99,6 @@ call vundle#end()
 "{{{Misc Settings
 
 set nocompatible " Disable Vi-compatibility settings
-set noswapfile " No swap files
 set showcmd " Shows what you are typing as a command
 set t_Co=256 " Enable 256 color
 set foldmethod=marker " Folds are neat
