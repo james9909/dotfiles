@@ -277,7 +277,7 @@ let themeindex=0
 function! RotateColorTheme()
     let y = -1
     while y == -1
-        let colorstring = "placeholder#darkeclipse#hybrid#SolarizedDark#Tomorrow-Night#"
+        let colorstring = "placeholder#github#google#codeschool#hybrid#Tomorrow-Night#"
         let x = match( colorstring, "#", g:themeindex )
         let y = match( colorstring, "#", x + 1 )
         let g:themeindex = x + 1
