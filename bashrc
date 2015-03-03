@@ -122,7 +122,7 @@ function Time {
 # Shows the current period
 function Period {
     hour=$(date +%H | sed 's/^0*//') # 0 - 60
-    minute=$(date +%M) # 0 - 60
+    minute=$(date +%M | sed 's/^0*//') # 0 - 60
     day=$(date +%w) # 0 is Sunday, 6 is Saturday
 
     if [ "$day" -ne 0 ] && [ $day -ne 6 ]; then
