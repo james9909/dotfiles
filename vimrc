@@ -181,7 +181,11 @@ nnoremap <CR> :noh<CR><CR>
 
 " Convenient leader maps
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>W :w!<CR>
+" Save with sudo
+nnoremap <Leader>W! :w !sudo tee %
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>i =ip
 nnoremap <Leader>f :CtrlP<CR>
 nnoremap <Leader>c :SyntasticCheck<CR>
