@@ -1,8 +1,5 @@
 "{{{Auto Commands
 
-" Automagically cd into the directory that the file is in
-autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-
 " Automagically Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
@@ -79,6 +76,7 @@ let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/UltiSnips/'
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " Syntastic
+let g:syntastic_mode_map = {'mode': 'passive'}
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
