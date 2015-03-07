@@ -50,3 +50,7 @@
     path = vim/bundle/vim-commentary
     url = https://github.com/tpope/vim-commentary
     ignore = dirty
+[submodule "vim/bundle/vim-colors-solarized"]
+    path = vim/bundle/vim-colors-solarized
+    url = https://github.com/alercation/vim-colors-solarized
+    ignore = dirty 
