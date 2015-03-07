@@ -334,12 +334,6 @@ alias lh='ls -ahl'
 alias l='ls -CF'
 alias rm='rm -I'
 
-# movement aliases
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-
 # admin aliases
 alias install='sudo apt-get install'
 alias remove='sudo apt-get remove'
@@ -350,12 +344,8 @@ alias bashtime='time . ~/.bashrc'
 alias debugon='set -x'
 alias debugoff='set +x'
 
-# git aliases
-alias pulse-cv='git clone https://github.com/team694/pulse-cv'
-alias wallflower='git clone https://github.com/team694/wallflower'
-
 # ssh aliases
-alias cslab='ssh james.wang@149.89.151.101'
+alias school='ssh james.wang@149.89.151.101'
 
 # stuff
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
