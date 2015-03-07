@@ -65,7 +65,7 @@ function GitPrompt {
 
 # Acquires the current working branch in a repo
 function GitBranch {
-    echo "$(git branch | grep '*' | grep -o '[^* ]*')" # Extracts current git branch using grep and regexes
+    echo "$(git branch | grep '* ' | cut -c3-)" # Extracts current git branch using grep and regexes
 }
 
 # If the local git repo is up to date with online one

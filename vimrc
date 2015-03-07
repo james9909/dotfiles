@@ -163,6 +163,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+nnoremap <F8> :execute RotateColorTheme()<CR>
+
 " Vim-schlepp bindings
 vmap K  <Plug>SchleppUp
 vmap J  <Plug>SchleppDown
@@ -200,7 +202,6 @@ nnoremap <silent> <Leader>p :call Paste_on_off()<CR>
 nnoremap <silent> <C-Right> :tabnext<CR>
 nnoremap <silent> <C-Left> :tabprevious<CR>
 nnoremap <silent> <C-t> :tabnew<CR>
-nnoremap <silent> <F8> :execute RotateColorTheme()<CR>
 
 " WHITESPACE
 nnoremap <silent> <F9> :%s/$//g<CR>:%s// /g<CR>
