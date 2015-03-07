@@ -53,6 +53,7 @@ Plugin 'SirVer/UltiSnips'
 Plugin 'zirrostig/vim-schlepp'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'gioele/vim-autoswap'
+Plugin 'altercation/vim-colors-solarized.git'
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -291,6 +292,21 @@ function! RotateColorTheme()
             let g:themeindex = 0
         else
             let themestring = strpart(colorstring, x + 1, y - x - 1)
+            " Solarized light or dark based on time
+            let hour = strftime("%H")
+            if 6 <= hour && hour < 18 && g:colors_name == "Tomorrow-Night"
+                set background=light
+                let g:solarized_termcolors=256
+                highlight Folded term=NONE cterm=NONE gui=NONE
+                colorscheme solarized
+                return
+            elseif g:colors_name == "Tomorrow-Night"
+                set background=dark
+                let g:solarized_termcolors=256
+                highlight Folded term=NONE cterm=NONE gui=NONE
+                colorscheme solarized
+                return
+            endif
             return "colorscheme ".themestring
         endif
     endwhile
