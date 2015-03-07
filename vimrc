@@ -1,32 +1,32 @@
 "{{{Auto Commands
 
-" Automagically Remove any trailing whitespace that is in the file
+" Automagically remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
-  au!
-   autocmd BufReadPost *
-            \ if expand("<afile>:p:h") !=? $TEMP |
-            \   if line("'\"") > 1 && line("'\"") <= line("$") |
-            \     let JumpCursorOnEdit_foo = line("'\"") |
-            \     let b:doopenfold = 1 |
-            \     if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
-            \        let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
-            \        let b:doopenfold = 2 |
-            \     endif |
-            \     exe JumpCursorOnEdit_foo |
-            \   endif |
-            \ endif
-   " Need to postpone using "zv" until after reading the modelines.
-   autocmd BufWinEnter *
-            \ if exists("b:doopenfold") |
-            \   exe "normal zv" |
-            \   if(b:doopenfold > 1) |
-            \       exe  "+".1 |
-            \   endif |
-            \   unlet b:doopenfold |
-            \ endif
+    au!
+    autocmd BufReadPost *
+                \ if expand("<afile>:p:h") !=? $TEMP |
+                \   if line("'\"") > 1 && line("'\"") <= line("$") |
+                \      let JumpCursorOnEdit_foo = line("'\"") |
+                \     let b:doopenfold = 1 |
+                \     if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
+                \        let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
+                \        let b:doopenfold = 2 |
+                \     endif |
+                \     exe JumpCursorOnEdit_foo |
+                \   endif |
+                \ endif
+    " Need to postpone using "zv" until after reading the modelines.
+    autocmd BufWinEnter *
+                \ if exists("b:doopenfold") |
+                \   exe "normal zv" |
+                \   if(b:doopenfold > 1) |
+                \       exe  "+".1 |
+                \   endif |
+                \   unlet b:doopenfold |
+                \ endif
 augroup END
 
 "}}}
@@ -38,7 +38,7 @@ call vundle#begin()
 filetype off
 
 " Let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " My Plugins
 Plugin 'scrooloose/syntastic'
@@ -241,12 +241,6 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 
 " }}}
-"{{{ Abbreviations
-iabbrev teh the
-iabbrev wghat what
-iabbrev waht what
-iabbrev tehn then
-" }}}
 " {{{ Functions
 
 "{{{ AutoIndent upon saving
@@ -289,7 +283,7 @@ let themeindex=0
 function! RotateColorTheme()
     let y = -1
     while y == -1
-        let colorstring = "placeholder#github#google#codeschool#hybrid#Tomorrow-Night#"
+        let colorstring = "placeholder#Tomorrow-Night#solarized#"
         let x = match( colorstring, "#", g:themeindex )
         let y = match( colorstring, "#", x + 1 )
         let g:themeindex = x + 1
@@ -297,7 +291,7 @@ function! RotateColorTheme()
             let g:themeindex = 0
         else
             let themestring = strpart(colorstring, x + 1, y - x - 1)
-            return ":colorscheme ".themestring
+            return "colorscheme ".themestring
         endif
     endwhile
 endfunction
