@@ -60,12 +60,12 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 " Make faster
 if exists("g:ctrl_user_command")
-  unlet g:ctrlp_user_command
+    unlet g:ctrlp_user_command
 endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
 " Better key bindings for UltiSnipsExpandTrigger
@@ -187,7 +187,7 @@ nnoremap <Leader>W :w!<CR>
 nnoremap <Leader>W! :w !sudo tee %
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
-nnoremap <Leader>i =ip
+nnoremap <Leader>i :call Indent()<CR>
 nnoremap <Leader>f :CtrlP<CR>
 nnoremap <Leader>c :SyntasticCheck<CR>
 nnoremap <Leader>rn :set relativenumber!<CR>
@@ -248,34 +248,34 @@ set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 " Restore cursor position, window position, and last search after running a
 " command.
 function! Preserve(command)
-  " Save the last search.
-  let search = @/
+    " Save the last search.
+    let search = @/
 
-  " Save the current cursor position.
-  let cursor_position = getpos('.')
+    " Save the current cursor position.
+    let cursor_position = getpos('.')
 
-  " Save the current window position.
-  normal! H
-  let window_position = getpos('.')
-  call setpos('.', cursor_position)
+    " Save the current window position.
+    normal! H
+    let window_position = getpos('.')
+    call setpos('.', cursor_position)
 
-  " Execute the command.
-  execute a:command
+    " Execute the command.
+    execute a:command
 
-  " Restore the last search.
-  let @/ = search
+    " Restore the last search.
+    let @/ = search
 
-  " Restore the previous window position.
-  call setpos('.', window_position)
-  normal! zt
+    " Restore the previous window position.
+    call setpos('.', window_position)
+    normal! zt
 
-  " Restore the previous cursor position.
-  call setpos('.', cursor_position)
+    " Restore the previous cursor position.
+    call setpos('.', cursor_position)
 endfunction
 
 " Re-indent the whole buffer.
 function! Indent()
-  call Preserve('normal gg=G')
+    call Preserve('normal gg=G')
 endfunction
 "}}}
 
