@@ -345,7 +345,7 @@ alias debugon='set -x'
 alias debugoff='set +x'
 
 # ssh aliases
-alias school='ssh james.wang@149.89.151.101'
+alias school='ssh james.wang@149.89.161.101'
 
 # stuff
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
