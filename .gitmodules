@@ -1,3 +1,4 @@
+# Regular modules
 [submodule "vim/bundle/syntastic"]
     path = vim/bundle/syntastic
     url = https://github.com/scrooloose/syntastic
@@ -53,4 +54,34 @@
 [submodule "vim/bundle/vim-colors-solarized"]
     path = vim/bundle/vim-colors-solarized
     url = https://github.com/alercation/vim-colors-solarized
-    ignore = dirty 
+    ignore = dirty
+
+# School modules
+[submodule "School/vim/bundle/auto-pairs"]
+    path = School/vim/bundle/auto-pairs
+    url = https://github.com/jiangmiao/auto-pairs
+    ignore = dirty
+[submodule "School/vim/bundle/ctrlp.vim"]
+    path = School/vim/bundle/ctrlp.vim
+    url = https://github.com/kien/ctrlp.vim
+    ignore = dirty
+[submodule "School/vim/bundle/MatchTagAlways"]
+    path = School/vim/bundle/MatchTagAlways
+    url = https://github.com/Valloric/MatchTagAlways
+    ignore = dirty
+[submodule "School/vim/bundle/supertab"]
+    path = School/vim/bundle/supertab
+    url = https://github.com/ervandew/supertab
+    ignore = dirty
+[submodule "School/vim/bundle/UltiSnips"]
+    path = School/vim/bundle/UltiSnips
+    url = https://github.com/SirVer/UltiSnips
+    ignore = dirty
+[submodule "School/vim/bundle/vim-autoswap"]
+    path = School/vim/bundle/vim-autoswap
+    url = https://github.com/gioele/vim-autoswap
+    ignore = dirty
+[submodule "School/vim/bundle/Vundle.vim"]
+    path = School/vim/bundle/Vundle.vim
+    url = https://github.com/gmarik/Vundle.vim
+    ignore = dirty
