@@ -135,6 +135,7 @@ set formatoptions-=cro " Remove auto comment
 set completeopt=longest,menuone,preview
 set pastetoggle=<Leader>p " If this changes, change the paste leader
 set backup " Allow for a backup directory
+set directory=~/.vim/_swap " Set swap directory
 set backupdir=~/.vim/_backup " This is the backup directory
 set undofile " Allows for undos after saving
 set undodir=~/.vim/_undo " This is the undo directory
