@@ -88,13 +88,13 @@ snip.rv = snip.basename or "untitled"` {
 args = getArgs(t[1])
 if len(args) == 0: snip.rv = ""
 for i in args:
-    snip.rv += "\n\tprivate " + i[0] + " " + i[1]+ ";"
+    snip.rv += "\n    private " + i[0] + " " + i[1]+ ";"
 if len(args) > 0:
     snip.rv += "\n"`
     public `!p snip.rv = snip.basename or "unknown"`($1) { `!p
 args = getArgs(t[1])
 for i in args:
-    snip.rv += "\n\t\tthis." + i[1] + " = " + i[1] + ";"
+    snip.rv += "\n        this." + i[1] + " = " + i[1] + ";"
 if len(args) == 0:
     snip.rv += "\n"`
     }$0
@@ -102,11 +102,11 @@ if len(args) == 0:
 args = getArgs(t[1])
 if len(args) == 0: snip.rv = ""
 for i in args:
-    snip.rv += "\n\tpublic void set" + camel(i[1]) + "(" + i[0] + " " + i[1] + ") {\n" + "\
-    \tthis." + i[1] + " = " + i[1] + ";\n\t}\n"
+    snip.rv += "\n    public void set" + camel(i[1]) + "(" + i[0] + " " + i[1] + ") {\n" + "\
+    \tthis." + i[1] + " = " + i[1] + ";\n    }\n"
 
-    snip.rv += "\n\tpublic " + i[0] + " get" + camel(i[1]) + "() {\
-    \n\t\treturn " + i[1] + ";\n\t}\n"
+    snip.rv += "\n    public " + i[0] + " get" + camel(i[1]) + "() {\
+    \n        return " + i[1] + ";\n    }\n"
 `
 }
 endsnippet
@@ -117,13 +117,13 @@ snip.rv = snip.basename or "untitled"` {
 `!p
 args = getArgs(t[1])
 for i in args:
-    snip.rv += "\n\tprivate " + i[0] + " " + i[1]+ ";"
+    snip.rv += "\n    private " + i[0] + " " + i[1]+ ";"
 if len(args) > 0:
     snip.rv += "\n"`
     public `!p snip.rv = snip.basename or "unknown"`($1) { `!p
 args = getArgs(t[1])
 for i in args:
-    snip.rv += "\n\t\tthis.%s = %s;" % (i[1], i[1])
+    snip.rv += "\n        this.%s = %s;" % (i[1], i[1])
 if len(args) == 0:
     snip.rv += "\n"`
     }
