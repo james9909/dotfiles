@@ -182,6 +182,10 @@ vmap i  <Plug>SchleppToggleReindent
 noremap $ ^
 noremap ^ $
 
+" Copy and paste to/from clipboard
+noremap <C-c> "+y<CR>
+noremap <C-p> "+p<CR>
+
 " Remove search highlights
 nnoremap <CR> :noh<CR><CR>
 
