@@ -54,6 +54,7 @@ Plugin 'zirrostig/vim-schlepp'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'gioele/vim-autoswap'
 Plugin 'altercation/vim-colors-solarized.git'
+Plugin 'bling/vim-airline'
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'

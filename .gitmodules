@@ -55,6 +55,10 @@
     path = vim/bundle/vim-colors-solarized
     url = https://github.com/alercation/vim-colors-solarized
     ignore = dirty
+[submodule "vim/bundle/vim-airline"]
+    path = vim/bundle/vim-airline
+    url = https://github.com/bling/vim-airline
+    ignore = dirty
 
 # School modules
 [submodule "School/vim/bundle/auto-pairs"]
