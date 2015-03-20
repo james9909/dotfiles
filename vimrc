@@ -185,8 +185,8 @@ noremap $ ^
 noremap ^ $
 
 " Copy and paste to/from clipboard
-noremap <C-c> "+y<CR>
-noremap <C-p> "+p<CR>
+vnoremap <C-c> "+y<CR>
+inoremap <C-v> <C-r>+
 
 " Remove search highlights
 nnoremap <CR> :noh<CR><CR>
