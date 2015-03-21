@@ -1,7 +1,8 @@
 # General Settings {{{
 
+# Autostart tmux in 256 color upon starting terminal
 if [[ ! $TERM =~ screen ]]; then
-    exec tmux
+    exec tmux -2
 fi
 
 # Control the history file
