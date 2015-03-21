@@ -199,6 +199,7 @@ nnoremap <Leader>W :w!<CR>
 nnoremap <Leader>W! :w !sudo tee %
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
+nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>i :call Indent()<CR>
 nnoremap <Leader>f :CtrlP<CR>
 nnoremap <Leader>c :SyntasticCheck<CR>
