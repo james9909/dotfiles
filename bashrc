@@ -1,5 +1,9 @@
 # General Settings {{{
 
+if [[ ! $TERM =~ screen ]]; then
+    exec tmux
+fi
+
 # Control the history file
 HISTCONTROL=ignoreboth
 HISTCONTROL=ignoredups
