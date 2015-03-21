@@ -178,17 +178,18 @@ for ($1 : $2)`!p nl(snip)`{
 }
 endsnippet
 
-snippet fori "for" b
-for (int ${1:i} = 0; $1 < ${2:10}; $1++)`!p nl(snip)`{
-    $0
-}
-endsnippet
-
 snippet for "for" b
 for ($1; $2; $3)`!p nl(snip)`{
     $0
 }
 endsnippet
+
+snippet fori "for i" b
+for (int ${1:i} = 0; $1 < ${2:10}; $1++)`!p nl(snip)`{
+    $0
+}
+endsnippet
+
 
 snippet if "if" b
 if ($1)`!p nl(snip)`{
@@ -200,7 +201,11 @@ snippet im "import"  b
 import ${1:java}.${2:util}.$0;
 endsnippet
 
-snippet in "interface" b
+snippet im "import static"  b
+import ${1:java}.${2:util}.$0;
+endsnippet
+
+snippet in "Interface" b
 interface ${1:`!p snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }{
     $0
 }
@@ -210,19 +215,19 @@ snippet cc "constructor call or setter body"
 this.${1:var} = $1;
 endsnippet
 
-snippet list "Collections List" b
+snippet list "collections List" b
 List<${1:String}> ${2:list} = new ${3:Array}List<$1>();
 endsnippet
 
-snippet map "Collections Map" b
+snippet map "collections Map" b
 Map<${1:String}, ${2:String}> ${3:map} = new ${4:Hash}Map<$1, $2>();
 endsnippet
 
-snippet set "Collections Set" b
+snippet set "collections Set" b
 Set<${1:String}> ${2:set} = new ${3:Hash}Set<$1>();
 endsnippet
 
-snippet cn "Constructor" b
+snippet cn "constructor" b
 public `!p snip.rv = snip.basename or "untitled"`(${1:}) {
     $0
 }
@@ -282,7 +287,7 @@ ${1:private} ${2:void} ${3:method}(${4}) {
 }
 endsnippet
 
-snippet md "Method With javadoc" b
+snippet md "method With javadoc" b
 /**
  * ${7:Short Description}`!p
 for i in getArgs(t[4]):
@@ -365,7 +370,6 @@ endsnippet
 snippet sy "synchronized"
 synchronized $0
 endsnippet
-
 
 snippet test "test" b
 `!p junit(snip)`public void test${1:Name}() {

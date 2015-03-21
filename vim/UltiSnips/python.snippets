@@ -8,7 +8,7 @@ snippet heading "Heading"
 # James Wang
 # IntroCS2 pd 8
 # HW #${1:Number} ${2:Title}
-# ${3:Date}
+# `!v strftime("%Y-%m-%d")`
 
 $0
 endsnippet
@@ -240,7 +240,6 @@ write_init_body(args, t[2], snip)
 		$0
 endsnippet
 
-
 snippet slotclass "class with slots and docstrings" b
 class ${1:MyClass}(${2:object}):
 
@@ -266,30 +265,6 @@ if args:
 write_init_body(args, t[2], snip)
 `
 		$0
-endsnippet
-
-
-snippet contain "methods for emulating a container type" b
-def __len__(self):
-	${1:pass}
-
-def __getitem__(self, key):
-	${2:pass}
-
-def __setitem__(self, key, value):
-	${3:pass}
-
-def __delitem__(self, key):
-	${4:pass}
-
-def __iter__(self):
-	${5:pass}
-
-def __reversed__(self):
-	${6:pass}
-
-def __contains__(self, item):
-	${7:pass}
 endsnippet
 
 snippet def "basic function" b
