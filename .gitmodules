@@ -67,6 +67,10 @@
     path = vim/bundle/molokai
     url = https://github.com/tomasr/molokai
     ignore = all
+[submodule "vim/bundle/vim-easymotion"]
+    path = vim/bundle/vim-easymotion
+    url = https://github.com/Lokaltog/vim-easymotion
+    ignore = all
 
 # School modules
 [submodule "School/vim/bundle/auto-pairs"]
