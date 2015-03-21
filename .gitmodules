@@ -2,94 +2,98 @@
 [submodule "vim/bundle/syntastic"]
     path = vim/bundle/syntastic
     url = https://github.com/scrooloose/syntastic
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/YouCompleteMe"]
     path = vim/bundle/YouCompleteMe
     url = https://github.com/Valloric/YouCompleteMe
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/MatchTagAlways"]
     path = vim/bundle/MatchTagAlways
     url = https://github.com/Valloric/MatchTagAlways
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/ctrlp.vim"]
     path = vim/bundle/ctrlp.vim
     url = https://github.com/kien/ctrlp.vim
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/UltiSnips"]
     path = vim/bundle/UltiSnips
     url = https://github.com/SirVer/UltiSnips
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/vim-surround"]
     path = vim/bundle/vim-surround
     url = https://github.com/tpope/vim-surround
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/nerdtree"]
     path = vim/bundle/nerdtree
     url = https://github.com/scrooloose/nerdtree
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/Vundle.vim"]
     path = vim/bundle/Vundle.vim
     url = https://github.com/gmarik/Vundle.vim
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/supertab"]
     path = vim/bundle/supertab
     url = https://github.com/ervandew/supertab
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/vim-schlepp"]
     path = vim/bundle/vim-schlepp
     url = https://github.com/zirrostig/vim-schlepp
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/auto-pairs"]
     path = vim/bundle/auto-pairs
     url = https://github.com/jiangmiao/auto-pairs
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/vim-autoswap"]
     path = vim/bundle/vim-autoswap
     url = https://github.com/gioele/vim-autoswap
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/vim-commentary"]
     path = vim/bundle/vim-commentary
     url = https://github.com/tpope/vim-commentary
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/vim-colors-solarized"]
     path = vim/bundle/vim-colors-solarized
     url = https://github.com/alercation/vim-colors-solarized
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/vim-airline"]
     path = vim/bundle/vim-airline
     url = https://github.com/bling/vim-airline
-    ignore = dirty
+    ignore = all
 [submodule "vim/bundle/vim-fugitive"]
     path = vim/bundle/vim-fugitive
     url = https://github.com/tpope/vim-fugitive
-    ignore = dirty
+    ignore = all
+[submodule "vim/bundle/molokai"]
+    path = vim/bundle/molokai
+    url = https://github.com/tomasr/molokai
+    ignore = all
 
 # School modules
 [submodule "School/vim/bundle/auto-pairs"]
     path = School/vim/bundle/auto-pairs
     url = https://github.com/jiangmiao/auto-pairs
-    ignore = dirty
+    ignore = all
 [submodule "School/vim/bundle/ctrlp.vim"]
     path = School/vim/bundle/ctrlp.vim
     url = https://github.com/kien/ctrlp.vim
-    ignore = dirty
+    ignore = all
 [submodule "School/vim/bundle/MatchTagAlways"]
     path = School/vim/bundle/MatchTagAlways
     url = https://github.com/Valloric/MatchTagAlways
-    ignore = dirty
+    ignore = all
 [submodule "School/vim/bundle/supertab"]
     path = School/vim/bundle/supertab
     url = https://github.com/ervandew/supertab
-    ignore = dirty
+    ignore = all
 [submodule "School/vim/bundle/UltiSnips"]
     path = School/vim/bundle/UltiSnips
     url = https://github.com/SirVer/UltiSnips
-    ignore = dirty
+    ignore = all
 [submodule "School/vim/bundle/vim-autoswap"]
     path = School/vim/bundle/vim-autoswap
     url = https://github.com/gioele/vim-autoswap
-    ignore = dirty
+    ignore = all
 [submodule "School/vim/bundle/Vundle.vim"]
     path = School/vim/bundle/Vundle.vim
     url = https://github.com/gmarik/Vundle.vim
-    ignore = dirty
+    ignore = all

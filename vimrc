@@ -56,6 +56,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'gioele/vim-autoswap'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'bling/vim-airline'
+Plugin 'tomasr/molokai'
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -295,7 +296,7 @@ let themeindex=0
 function! RotateColorTheme()
     let y = -1
     while y == -1
-        let colorstring = "placeholder#Tomorrow-Night#solarized#"
+        let colorstring = "placeholder#Tomorrow-Night#solarized#molokai#"
         let x = match( colorstring, "#", g:themeindex )
         let y = match( colorstring, "#", x + 1 )
         let g:themeindex = x + 1
