@@ -47,6 +47,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'gioele/vim-autoswap'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kien/ctrlp.vim'
@@ -104,6 +105,10 @@ let g:mta_use_match_paren_group = 1
 let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" Jedi-vim
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
 
 call vundle#end()
 "}}}
