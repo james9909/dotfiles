@@ -42,8 +42,13 @@ Plugin 'gmarik/Vundle.vim'
 
 " My Plugins
 Plugin 'SirVer/UltiSnips'
+" If vim has lua, use neocomplete otherwise, use YCM
+if has('lua')
+    Plugin 'Shougo/neocomplete.vim'
+else
+    Plugin 'Valloric/YouCompleteMe'
+endif
 Plugin 'Valloric/MatchTagAlways'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
@@ -101,14 +106,34 @@ let g:Schlepp#dupTrimWS = 1
 " MatchTagAlways
 let g:mta_use_match_paren_group = 1
 
-" Make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
 " Jedi-vim
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
+
+" SuperTab
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" Neocomplete and YCM
+if has('lua')
+    let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
+    let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
+    let g:neocomplete#sources#syntax#min_keyword_length = 2 " Only show completions longer than 2 chars
+    let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
+    let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
+    let g:neocomplete#cursor_hold_i_time = 300 " Time to delay generation of autocompletions
+    inoremap <expr><C-g> neocomplete#undo_completion()
+    inoremap <expr><C-l> neocomplete#complete_common_string()
+    nnoremap <Leader>a :NeoCompleteToggle<CR>
+    " <CR>: close popup and save indent.
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+        return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+    endfunction
+else
+    " Make YCM compatible with UltiSnips (using supertab)
+    let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
+endif
 
 call vundle#end()
 "}}}

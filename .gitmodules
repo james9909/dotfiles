@@ -75,6 +75,10 @@
     path = vim/bundle/jedi-vim
     url = https://github.com/davidhalter/jedi-vim
     ignore = all
+[submodule "vim/bundle/neocomplete.vim"]
+    path = vim/bundle/neocomplete.vim
+    url = https://github.com/Shougo/neocomplete.vim
+    ignore = all
 
 # School modules
 [submodule "School/vim/bundle/auto-pairs"]
