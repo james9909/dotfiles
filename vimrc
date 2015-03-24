@@ -3,6 +3,8 @@
 " Automagically remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
     au!
@@ -225,6 +227,16 @@ vmap J  <Plug>SchleppDown
 vmap H  <Plug>SchleppLeft
 vmap L  <Plug>SchleppRight
 vmap i  <Plug>SchleppToggleReindent
+
+" Vim-fugitive mappings
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>gr :Gremove<CR>
 
 " Swap $ and ^
 noremap $ ^
