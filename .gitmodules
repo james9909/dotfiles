@@ -79,6 +79,10 @@
     path = vim/bundle/neocomplete.vim
     url = https://github.com/Shougo/neocomplete.vim
     ignore = all
+[submodule "vim/bundle/tabular"]
+    path = vim/bundle/tabular
+    url = https://github.com/godlygeek/tabular
+    ignore = all
 
 # School modules
 [submodule "School/vim/bundle/auto-pairs"]
