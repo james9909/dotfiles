@@ -113,7 +113,6 @@ function Sign {
             echo "${TPUTGREEN} :)${TPUTNORMAL}"
         else
             echo "${TPUTRED} :(${TPUTNORMAL}"
-
         fi
     fi
 }
@@ -323,17 +322,17 @@ function updatevim {
     version=$(vim --version | grep Vi\ IMproved)
     patches=$(vim --version | grep patches)
     currDir=$(pwd)
-    justCloned=false # So we still build vim after cloning the repo (This is because after cloning, it will be up to date)
+    notCloned=true # So we still build vim after cloning the repo (This is because after cloning, it will be up to date)
     # If the vim repo doesn't exist, then clone it
     if [[ ! -d "~/vim" ]]; then
         cd $HOME
         hg clone http://code.google.com/p/vim $HOME/vim
         echo "Cloned vim"
-        justCloned=true
+        notCloned=false
     fi
     cd $HOME/vim
     # Local repo is up to date and we are up to date
-    if [[ $(hg pull) =~ "no changes found" && ! $justCloned ]]; then
+    if [[ $(hg pull) =~ "no changes found" && $notCloned ]]; then
         echo "Vim is up to date"
         echo $version
         echo $patches
