@@ -318,6 +318,30 @@ function ziprm {
     fi
 }
 
+# Build the latest version of vim
+function updatevim {
+    version=$(vim --version | grep Vi\ IMproved)
+    patches=$(vim --version | grep patches)
+    currDir=$(pwd)
+    cd ~/vim
+    if [[ $(hg pull) =~ "no changes found" ]]; then
+        echo "Vim is up to date"
+        echo $version
+        echo $patches
+        cd $currDir
+        return
+    else
+        hg update
+        ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
+        make
+        sudo make install
+        echo "Vim is now updated"
+        echo $version
+        echo $patches
+        cd $currDir
+    fi
+}
+
 # boreeeddddd
 function imbored {
     echo "fortune"
