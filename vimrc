@@ -250,6 +250,7 @@ nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
 " Swap $ and ^
 noremap $ ^
 noremap ^ $
@@ -313,6 +314,14 @@ nnoremap JJJJ <Nop>
 " Go to the end of the line pasted
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
+
+" Change inside (ci) mappings
+nnoremap <silent> c( f(ci(
+nnoremap <silent> c[ f[ci[
+nnoremap <silent> c< f<ci<
+nnoremap <silent> c{ f{ci{
+nnoremap <silent> c' f'ci'
+nnoremap <silent> c" f"ci"
 
 "}}}
 "{{{Look and Feel
