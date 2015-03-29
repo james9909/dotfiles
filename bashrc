@@ -326,13 +326,13 @@ function updatevim {
     # If the vim repo doesn't exist, then clone it
     if [[ ! -d "~/vim" ]]; then
         cd $HOME
-        hg clone http://code.google.com/p/vim $HOME/vim
+        git clone https://github.com/vim/vim $HOME/vim
         echo "Cloned vim"
         notCloned=false
     fi
     cd $HOME/vim
     # Local repo is up to date and we are up to date
-    if [[ $(hg pull) =~ "no changes found" && $notCloned ]]; then
+    if [[ $(git pull) =~ "up to date" && $notCloned ]]; then
         echo "Vim is up to date"
         echo $version
         echo $patches
@@ -340,7 +340,7 @@ function updatevim {
         return
     # Local repo needs to be updated and vim needs to be rebuilt
     else
-        hg update
+        git pull
         ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
         make
         sudo make install
