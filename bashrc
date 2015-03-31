@@ -1,9 +1,7 @@
 # General Settings {{{
 
-# Autostart tmux in 256 color upon starting terminal
-if [[ ! $TERM =~ screen ]]; then
-    exec tmux -2
-fi
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
 
 # Control the history file
 HISTCONTROL=ignoreboth
