@@ -1,5 +1,8 @@
 # General Settings {{{
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 # Control the history file
 HISTCONTROL=ignoreboth
 HISTCONTROL=ignoredups
@@ -15,6 +18,8 @@ bind TAB:menu-complete
 
 # Auto update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+export EDITOR=vim
 
 # }}}
 # Color{{{
@@ -41,8 +46,15 @@ export LS_COLORS
 # BASH COLORS
 # Ensures no weird invisible colors
 BGREEN='\[\033[1;32m\]'
+GREEN='\[\033[0;32m\]'
+BRED='\[\033[1;31m\]'
+RED='\[\033[0;31m\]'
 BBLUE='\[\033[1;34m\]'
+BLUE='\[\033[0;34m\]'
 BWHITE='\[\033[1;37m\]'
+TPUTGREEN=$(tput setaf 2)
+TPUTRED=$(tput setaf 1)
+TPUTNORMAL=$(tput sgr0)
 
 # Generates the git prompt
 function GitPrompt {
@@ -88,16 +100,11 @@ function ExitCode {
 
 # Changes the sign of the user based on various conditions
 function Sign {
-    if [[ $UID == 0 ]]; then
-        echo " #"
+    # The sign changes based on whether or not the user inputted a valid command
+    if [[ $status == 0 ]]; then
+        echo "${TPUTGREEN} :)${TPUTNORMAL}"
     else
-	# The sign changes based on whether or not the user inputted a valid command
-        if [[ $status == 0 ]]; then
-            echo " :)"
-        else
-            echo " :("
-
-        fi
+        echo "${TPUTRED} :(${TPUTNORMAL}"
     fi
 }
 
@@ -192,17 +199,13 @@ status=0
 
 PROMPT_COMMAND="ExitCode"
 
-prompt1="${BGREEN}\$(Time)\$(Period)\$(EndPeriod) ${BWHITE}\$(User)${BBLUE} [\$(Pwd)]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) >> " 
+prompt1="${BGREEN}\$(Time)\$(Period)\$(EndPeriod) ${BWHITE}\$(User)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) \n>> "
 PS1=$prompt1
 
 # Configuration options
 shortenPath=false
-showHostname=false
-showUsername=true
 
 # Configuration aliases
-alias timeon="export showTime=true"
-alias timeoff="export showTime=false"
 alias shorton="export shortenPath=true"
 alias shortoff="export shortenPath=false"
 
@@ -237,6 +240,7 @@ function extract {
             *.tgz)          unzip $1;;
             *.zip)          unzip $1;;
             *.Z)            uncompress $1;;
+            *.7z)           7z e $1;;
             *)              echo "'$1' cannot be extracted via extract"
         esac
     else
@@ -255,6 +259,14 @@ function reminder {
     echo "Reminder set: $@"
 }
 
+# Unzips a file and removes it
+function ziprm {
+    if [ -f $1 ] ; then
+        extract $1
+        rm $1
+    fi
+}
+
 # }}}
 # Aliases {{{
 
@@ -265,13 +277,7 @@ alias lh='ls -ahl'
 alias l='ls -CF'
 alias rm='rm -I'
 
-# movement aliases
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-
-alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
+alias pico='echo "Password: f748bf" && ssh pico49524@shell2014.picoctf.com '
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
