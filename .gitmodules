@@ -83,6 +83,10 @@
     path = vim/bundle/tabular
     url = https://github.com/godlygeek/tabular
     ignore = all
+[submodule "zsh/zsh-syntax-highlighting"]
+    path = zsh/zsh-syntax-highlighting
+    url = https://github.com/zsh-users/zsh-syntax-highlighting
+    ignore = all
 
 # School modules
 [submodule "School/vim/bundle/auto-pairs"]
