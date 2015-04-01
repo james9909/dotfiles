@@ -205,10 +205,6 @@ function EndPeriod {
     fi
 }
 
-function Schedule {
-    echo %{%F{green}%}$Period$EndPeriod
-}
-
 # Alters the display of the user
 function User {
     if [[ $showUsername == true ]]; then
@@ -245,7 +241,7 @@ exitCode=0
 setopt prompt_subst
 function precmd() { # zsh equivalent of PROMPT_COMMAND in bash
     GetExitCode
-    prompt1="$(tput bold)$(Time)$(Schedule) $(User)$(Pulse) $(Pwd)$(GitPrompt)$(Sign)
+    prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(GitPrompt)$(Sign)
 %{%F{white}%}>> "
     PS1=$prompt1
 }
@@ -256,7 +252,7 @@ else
     is256ColorTerm=false
 fi
 
-prompt1="$(tput bold)$(Time)$(Schedule) $(User)$(Pulse) $(Pwd)$(GitPrompt)$(Sign)
+prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(GitPrompt)$(Sign)
 %{%F{white}%}>> "
 PS1=$prompt1
 
