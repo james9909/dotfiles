@@ -106,7 +106,11 @@ function GitUpToDate {
     fi
     if [[ $GitStatus =~ "Your branch is ahead of" ]]; then
         # Local repo is ahead of online repo
-        echo " | Ahead by $(git status -sb | sed 's|[^0-9]*\([0-9\.]*\)|\1|g') commits"
+        echo " | Ahead by $(git status -sb | sed 's|[^0-9]*\([0-9\.]*\)|\1|g')"
+    fi
+    if [[ $GitStatus =~ "Your branch is behind" ]]; then
+        # Local repo is ahead of online repo
+        echo " | Behind by $(git status -sb | sed 's|[^0-9]*\([0-9\.]*\)|\1|g')"
     fi
 
     echo -ne "\n"
@@ -140,6 +144,7 @@ function Time {
     echo "%{%F{green}%}[$date]"
 }
 
+# Schedule {{{
 # Shows the current period
 function Period {
     hour=$(date +%H | sed 's/^0*//') # 0 - 60 (The sed removes leading 0s)
@@ -204,6 +209,7 @@ function EndPeriod {
         return
     fi
 }
+# }}}
 
 # Alters the display of the user
 function User {
@@ -241,9 +247,10 @@ exitCode=0
 setopt prompt_subst
 function precmd() { # zsh equivalent of PROMPT_COMMAND in bash
     GetExitCode
-    prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(GitPrompt)$(Sign)
+    prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(Sign)
 %{%F{white}%}>> "
     PS1=$prompt1
+    RPROMPT="$(GitPrompt)"
 }
 
 if [[ "$TERM" =~ "256color" ]]; then
@@ -252,9 +259,10 @@ else
     is256ColorTerm=false
 fi
 
-prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(GitPrompt)$(Sign)
+prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(Sign)
 %{%F{white}%}>> "
 PS1=$prompt1
+RPROMPT="$(GitPrompt)"
 
 # Configuration options
 showTime=true
