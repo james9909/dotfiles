@@ -6,10 +6,10 @@ priority -50
 
 global !p
 def x(snip):
-	if snip.ft.startswith("x"):
-		snip.rv = '/'
-	else:
-		snip.rv = ""
+    if snip.ft.startswith("x"):
+	snip.rv = '/'
+    else:
+	snip.rv = ""
 endglobal
 
 ############
@@ -17,25 +17,25 @@ endglobal
 ############
 snippet doctype "DocType XHTML 1.0 Strict" b
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 endsnippet
 
 snippet doctype "DocType XHTML 1.0 Transitional" b
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 endsnippet
 
 snippet doctype "DocType XHTML 1.1" b
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
 endsnippet
 
 snippet doctype "HTML - 4.0 Transitional (doctype)" b
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 endsnippet
 
@@ -106,9 +106,9 @@ endsnippet
 
 snippet select "Select Box" w
 <select name="${1:some_name}" id="${2:$1}"${3:${4: multiple}${5: onchange="${6:}"}${7: size="${8:1}"}}>
-	<option${9: value="${10:option1}"}>${11:$10}</option>
-	<option${12: value="${13:option2}"}>${14:$13}</option>${15:}
-	$0
+    <option${9: value="${10:option1}"}>${11:$10}</option>
+    <option${12: value="${13:option2}"}>${14:$13}</option>${15:}
+    $0
 </select>
 endsnippet
 
@@ -129,19 +129,19 @@ snippet body "XHTML <body>"
 <body id="${1:`!p
 snip.rv = snip.fn and 'Hallo' or 'Nothin'
 `}"${2: onload="$3"}>
-	$0
+    $0
 </body>
 endsnippet
 
 snippet div. "<div> with class" w
 <div`!p snip.rv=' class="' if t[1] else ""`${1:name}`!p snip.rv = '"' if t[1] else ""`>
-	$0
+    $0
 </div>
 endsnippet
 
 snippet div# "<div> with ID & class" w
 <div`!p snip.rv=' id="' if t[1] else ""`${1:name}`!p snip.rv = '"' if t[1] else ""``!p snip.rv=' class="' if t[2] else ""`${2:name}`!p snip.rv = '"' if t[2] else ""`>
-	$0
+    $0
 </div>
 endsnippet
 
@@ -149,9 +149,9 @@ snippet form "XHTML <form>" w
 <form action="${1:`!p
 snip.rv = (snip.basename or 'unnamed') + '_submit'
 `}" method="${2:get}" accept-charset="utf-8">
-	$0
+    $0
 
-	<p><input type="submit" value="Continue →"`!p x(snip)`></p>
+    <p><input type="submit" value="Continue →"`!p x(snip)`></p>
 </form>
 endsnippet
 
@@ -161,9 +161,9 @@ endsnippet
 
 snippet head "XHTML <head>"
 <head>
-	<meta charset="utf-8">
-	<title>${1:`!p snip.rv = snip.basename or "Page Title"`}</title>
-	$0
+    <meta charset="utf-8">
+    <title>${1:`!p snip.rv = snip.basename or "Page Title"`}</title>
+    $0
 </head>
 endsnippet
 
@@ -181,20 +181,20 @@ endsnippet
 
 snippet script "XHTML <script>" w
 <script type="text/javascript" charset="utf-8">
-	$0
+    $0
 </script>
 endsnippet
 
 snippet style "XHTML <style>" w
 <style type="text/css" media="screen">
-	$0
+    $0
 </style>
 endsnippet
 
 snippet table "XHTML <table>" w
 <table border="${1:0}"${2: cellspacing="${3:5}" cellpadding="${4:5}"}>
-	<tr><th>${5:Header}</th></tr>
-	<tr><td>${0:Data}</td></tr>
+    <tr><th>${5:Header}</th></tr>
+    <tr><td>${0:Data}</td></tr>
 </table>
 endsnippet
 
@@ -278,8 +278,8 @@ endsnippet
 
 snippet fieldset "Fieldset" w
 <fieldset id="${1/[\w\d]+|( )/(?1:_:\L$0\E)/g}" ${2:class="${3:}"}>
-	<legend>$1</legend>
-	$0
+    <legend>$1</legend>
+    $0
 </fieldset>
 endsnippet
 
