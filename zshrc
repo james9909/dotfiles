@@ -50,12 +50,14 @@ ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 # }}}
 # Color support {{{
+
 # Force color in terminal
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 elif [ "$TERM" == "screen" ]; then
     export TERM=screen-256color
 fi
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -129,7 +131,7 @@ function Sign {
     if [[ $UID == 0 ]]; then
         echo " #"
     else
-	# The sign changes based on whether or not the user inputted a valid command
+        # The sign changes based on whether or not the user inputted a valid command
         if [[ $exitCode == 0 ]]; then
             echo "%{%F{green}%} :)"
         else
@@ -218,9 +220,9 @@ function EndPeriod {
 function User {
     if [[ $showUsername == true ]]; then
         echo -n "%{%F{red}%}James"
-    if [[ $showHostname == true ]]; then
-        echo -n "%{%F{red}%}@$(hostname)"
-    fi
+        if [[ $showHostname == true ]]; then
+            echo -n "%{%F{red}%}@$(hostname)"
+        fi
         if [[ $showTeam == true ]]; then
             echo -n "@Team694"
         fi
@@ -336,17 +338,6 @@ function extract {
     fi
 }
 
-# Handy reminder that reminds user about a task
-function reminder {
-    PS1="$PS1$WHITE(Reminder: " # Add space to PS1, change text color
-    for word in "$@"
-    do
-        PS1="$PS1$word "
-    done
-    PS1="${PS1:0:$[${#PS1}-1]})$BWHITE "
-    echo "Reminder set: $@"
-}
-
 # Unzips a file and removes it
 function ziprm {
     if [ -f $1 ] ; then
@@ -360,51 +351,41 @@ function updatevim {
     version=$(vim --version | grep Vi\ IMproved)
     patches=$(vim --version | grep patches)
     currDir=$(pwd)
-    notCloned=true # So we still build vim after cloning the repo (This is because after cloning, it will be up to date)
     # If the vim repo doesn't exist, then clone it
     if [[ ! -d "~/vim" ]]; then
         cd $HOME
         git clone https://github.com/vim/vim $HOME/vim
         echo "Cloned vim"
+        cd vim
         ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
         make
         sudo make install
         echo "Vim is now updated"
-        echo $version
-        echo $patches
-        cd $currDir
-    fi
-    cd $HOME/vim
-    # Local repo is up to date and we are up to date
-    if [[ $(git pull) =~ "up to date" ]]; then
-        echo "Vim is up to date"
         echo $version
         echo $patches
         cd $currDir
         return
-    # Local repo needs to be updated and vim needs to be rebuilt
     else
-        git pull
-        ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
-        make
-        sudo make install
-        echo "Vim is now updated"
-        echo $version
-        echo $patches
-        cd $currDir
+        cd $HOME/vim
+        # Local repo is up to date and we are up to date
+        if [[ $(git pull) =~ "up to date" ]]; then
+            echo "Vim is up to date"
+            echo $version
+            echo $patches
+            cd $currDir
+            return
+            # Local repo needs to be updated and vim needs to be rebuilt
+        else
+            git pull
+            ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
+            make
+            sudo make install
+            echo "Vim is now updated"
+            echo $version
+            echo $patches
+            cd $currDir
+        fi
     fi
-}
-
-# boreeeddddd
-function imbored {
-    echo "fortune"
-    echo "cowsay"
-    echo "sl"
-    echo "asciiquarium"
-    echo "espeak"
-    echo "starwars"
-    echo "rig"
-    echo "sudo woodo"
 }
 
 # }}}
