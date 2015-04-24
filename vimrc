@@ -54,6 +54,7 @@ Plugin 'Valloric/MatchTagAlways'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
+Plugin 'chrisbra/unicode.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'gioele/vim-autoswap'
 Plugin 'godlygeek/tabular'
@@ -69,8 +70,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'zirrostig/vim-schlepp'
 
 " CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 " Make faster
 if exists("g:ctrl_user_command")
     unlet g:ctrlp_user_command
@@ -156,8 +155,9 @@ set copyindent " Copies the indentation of the previous line
 set smartindent " Enable smart indents
 set number " Enable line numbers
 set wildmode=list:longest,full
-set wildignore=*.class,*.swp,*.pyc " Ignore class and swp files
-set wildignore+=*.png,*.jpg,*.jpeg,*.gif " Ignore picture files
+set wildignore=*.class,*.swp,*.pyc,*.jar,*.cmake,*.tar.* " Ignore compiled things
+set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.mp3 " Ignore picture and media files
+set wildignore+=*.odt,*.doc,*.docx,*.pdf " Ignore formatted documents that will not render in plaintext"
 set mouse=a " Enable the mouse to set cursor position
 set backspace=indent,eol,start " Backspace is great
 set hlsearch " Highlight search term in text
@@ -204,16 +204,6 @@ syntax enable " Enable syntax highlighting
 " Map leader to space
 let mapleader = "\<Space>"
 
-" Get rid of that arrow key habit
-inoremap  <Up>     <NOP>
-inoremap  <Down>   <NOP>
-inoremap  <Left>   <NOP>
-inoremap  <Right>  <NOP>
-noremap   <Up>     <NOP>
-noremap   <Down>   <NOP>
-noremap   <Left>   <NOP>
-noremap   <Right>  <NOP>
-
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -221,6 +211,9 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 nnoremap <F8> :execute RotateColorTheme()<CR>
+
+" CtrlP
+noremap <C-p> :CtrlP ~<CR>
 
 " Vim-schlepp bindings
 vmap K  <Plug>SchleppUp
@@ -230,22 +223,24 @@ vmap L  <Plug>SchleppRight
 vmap i  <Plug>SchleppToggleReindent
 
 " Vim-fugitive mappings
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>gr :Gremove<CR>
+nnoremap <silent> <Leader>gs :Gstatus<CR>
+nnoremap <silent> <Leader>gd :Gdiff<CR>
+nnoremap <silent> <Leader>gc :Gcommit<CR>
+nnoremap <silent> <Leader>gb :Gblame<CR>
+nnoremap <silent> <Leader>gl :Glog<CR>
+nnoremap <silent> <Leader>gp :Git push<CR>
+nnoremap <silent> <Leader>gw :Gwrite<CR>
+nnoremap <silent> <Leader>gr :Gremove<CR>
 
 " Tabularize mappings
 nmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a& :Tabularize /&<CR>
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
 nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
@@ -266,7 +261,7 @@ nnoremap <CR> :noh<CR><CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>W :w!<CR>
 " Save with sudo
-nnoremap <Leader>W! :w !sudo tee %
+nnoremap <Leader>W! :w !sudo tee %<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
@@ -309,7 +304,6 @@ nnoremap : ;
 
 " Remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <Esc>
-nnoremap JJJJ <Nop>
 
 " Go to the end of the line pasted
 vnoremap <silent> p p`]
