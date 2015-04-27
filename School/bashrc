@@ -51,7 +51,10 @@ BRED='\[\033[1;31m\]'
 RED='\[\033[0;31m\]'
 BBLUE='\[\033[1;34m\]'
 BLUE='\[\033[0;34m\]'
+RESET='\[\033[0m\]'
 BWHITE='\[\033[1;37m\]'
+WHITE='\[\033[0;37m\]'
+TPUTWHITE=$(tput setaf 7)
 TPUTGREEN=$(tput setaf 2)
 TPUTRED=$(tput setaf 1)
 TPUTNORMAL=$(tput sgr0)
@@ -100,16 +103,23 @@ function ExitCode {
 
 # Changes the sign of the user based on various conditions
 function Sign {
-    # The sign changes based on whether or not the user inputted a valid command
-    if [[ $status == 0 ]]; then
-        echo "${TPUTGREEN} :)${TPUTNORMAL}"
+    if [[ $UID == 0 ]]; then
+        echo " #"
     else
-        echo "${TPUTRED} :(${TPUTNORMAL}"
+	# The sign changes based on whether or not the user inputted a valid command
+        if [[ $status == 0 ]]; then
+            echo "${TPUTGREEN} :)${TPUTNORMAL}"
+        else
+            echo "${TPUTRED} :(${TPUTNORMAL}"
+        fi
     fi
 }
 
 # Shows the current time
 function Time {
+    if [[ $showTime != true ]]; then
+        return
+    fi
     date=$(date "+%I:%M")
     echo "[$date]"
 }
@@ -181,8 +191,12 @@ function EndPeriod {
 
 # Alters the display of the user
 function User {
-    echo -n "James"
-    echo -n "@$(hostname)"
+    if [[ $showUsername == true ]]; then
+        echo -n "James"
+    fi
+    if [[ $showHostname == true ]]; then
+        echo -n "@$(hostname)"
+    fi
 }
 
 # Shows the present working directory
@@ -199,15 +213,24 @@ status=0
 
 PROMPT_COMMAND="ExitCode"
 
-prompt1="${BGREEN}\$(Time)\$(Period)\$(EndPeriod) ${BWHITE}\$(User)${BBLUE} [\$(Pwd)${BBLUE}]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) \n>> "
+prompt1="${BGREEN}\$(Time)\$(Period)\$(EndPeriod) ${BWHITE}\$(User)${BBLUE} [\$(Pwd)]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) \n>> "
 PS1=$prompt1
 
 # Configuration options
+showTime=true
 shortenPath=false
+showHostname=true
+showUsername=true
 
 # Configuration aliases
+alias timeon="export showTime=true"
+alias timeoff="export showTime=false"
 alias shorton="export shortenPath=true"
 alias shortoff="export shortenPath=false"
+alias hoston="export showHostname=true"
+alias hostoff="export showHostname=false"
+alias useron="export showUsername=true"
+alias useroff="export showUsername=false"
 
 # }}}
 # Functions {{{
@@ -277,6 +300,11 @@ alias lh='ls -ahl'
 alias l='ls -CF'
 alias rm='rm -I'
 
+# debug aliases
+alias bashtime='time . ~/.bashrc'
+alias reload='source ~/.bashrc'
+
+# ssh aliases
 alias pico='echo "Password: f748bf" && ssh pico49524@shell2014.picoctf.com '
 
 if [ -f ~/.bash_aliases ]; then
