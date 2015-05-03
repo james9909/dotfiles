@@ -320,25 +320,12 @@ function updatevim {
     version=$(vim --version | grep Vi\ IMproved)
     patches=$(vim --version | grep patches)
     currDir=$(pwd)
-    notCloned=true # So we still build vim after cloning the repo (This is because after cloning, it will be up to date)
     # If the vim repo doesn't exist, then clone it
     if [[ ! -d "~/vim" ]]; then
         cd $HOME
         git clone https://github.com/vim/vim $HOME/vim
         echo "Cloned vim"
-        notCloned=false
-    fi
-    cd $HOME/vim
-    # Local repo is up to date and we are up to date
-    if [[ $(git pull) =~ "up to date" && $notCloned ]]; then
-        echo "Vim is up to date"
-        echo $version
-        echo $patches
-        cd $currDir
-        return
-    # Local repo needs to be updated and vim needs to be rebuilt
-    else
-        git pull
+        cd vim
         ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
         make
         sudo make install
@@ -346,19 +333,28 @@ function updatevim {
         echo $version
         echo $patches
         cd $currDir
+        return
+    else
+        cd $HOME/vim
+        # Local repo is up to date and we are up to date
+        if [[ $(git pull) =~ "up to date" ]]; then
+            echo "Vim is up to date"
+            echo $version
+            echo $patches
+            cd $currDir
+            return
+            # Local repo needs to be updated and vim needs to be rebuilt
+        else
+            git pull
+            ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
+            make
+            sudo make install
+            echo "Vim is now updated"
+            echo $version
+            echo $patches
+            cd $currDir
+        fi
     fi
-}
-
-# boreeeddddd
-function imbored {
-    echo "fortune"
-    echo "cowsay"
-    echo "sl"
-    echo "asciiquarium"
-    echo "espeak"
-    echo "starwars"
-    echo "rig"
-    echo "sudo woodo"
 }
 
 # }}}
@@ -378,8 +374,7 @@ alias root='sudo su'
 alias reload='source ~/.bashrc'
 alias ibrokesudo='pkexec visudo'
 alias bashtime='time . ~/.bashrc'
-alias debugon='set -x'
-alias debugoff='set +x'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ssh aliases
 alias school='ssh james.wang@149.89.161.101'

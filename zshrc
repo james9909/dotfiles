@@ -265,7 +265,7 @@ else
 fi
 
 prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(Sign)
-%{%F{white}%}>> "
+{%F{white}%}>> "
 PS1=$prompt1
 RPROMPT="$(GitPrompt)"
 
