@@ -378,7 +378,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # ssh aliases
 alias school='ssh james.wang@149.89.161.101'
-alias pico='echo "Password: f748bf" && ssh pico49524@shell2014.picoctf.com '
+alias pico='ssh pico49524@shell2014.picoctf.com '
 
 # stuff
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
