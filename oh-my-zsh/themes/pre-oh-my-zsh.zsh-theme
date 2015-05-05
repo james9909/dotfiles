@@ -22,11 +22,12 @@ setopt AUTO_PUSHD
 setopt EXTENDED_GLOB
 setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
-setopt CORRECT
 setopt COMPLETE_IN_WORD
 setopt ZLE
 setopt VI
 unsetopt EQUALS
+unsetopt correct_all
+unsetopt correct
 
 # use cache when auto-completing
 zstyle ':completion::complete:*' use-cache 1
