@@ -20,6 +20,22 @@ snippet #! "Shebang header for python scripts" b
 $0
 endsnippet
 
+# Html
+snippet html "Html heading" b
+#!/usr/bin/python
+print "Content-Type: text/html\n"
+print ""
+print "<!DOCTYPE html>"
+print "<html>"
+print "<head>"
+print "<title> ${1:Title} </title>"
+print "</head>"
+print "<body>"
+    $0
+print "</body>"
+print "</html>"
+endsnippet
+
 snippet ifmain "ifmain" b
 if __name__ == '__main__':
 	${1:main()}$0
