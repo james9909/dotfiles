@@ -333,7 +333,7 @@ function updatevim {
     patches=$(vim --version | grep patches)
     currDir=$(pwd)
     # If the vim repo doesn't exist, then clone it
-    if [[ ! -d "~/vim" ]]; then
+    if [[ ! -d "$HOME/vim" ]]; then
         cd $HOME
         git clone https://github.com/vim/vim $HOME/vim
         echo "Cloned vim"
