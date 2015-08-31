@@ -49,6 +49,7 @@ ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 
+. /etc/zsh_command_not_found
 # }}}
 # Color support {{{
 
