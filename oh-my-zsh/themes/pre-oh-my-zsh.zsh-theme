@@ -277,7 +277,7 @@ alias hostoff="export showHostname=false"
 # Functions {{{
 # Go back to your previous directory (not the same as cd ..)
 function back {
-    eval cd $(echo $OLDPWD | sed -r 's/[ ]+/\\ /g')
+    cd -
 }
 
 # Compile a cpp file with opencv because lazy
@@ -286,15 +286,6 @@ function cppcompile {
         echo "Usage: cppcompile [cpp file] [name]"
     else
         eval g++ $1 -o $2 `pkg-config --libs opencv --cflags` -O2 # For some of that optimization
-    fi
-}
-
-# Copy a folder into another directory
-function cpdir {
-    if [[ "$#" != "2" ]]; then
-        echo "Usage: cpdir [source] [destination]"
-    else
-        cp -arv $1 $2
     fi
 }
 
@@ -317,14 +308,6 @@ function extract {
         esac
     else
         echo "'$1' is not a valid file"
-    fi
-}
-
-# Unzips a file and removes it
-function ziprm {
-    if [ -f $1 ] ; then
-        extract $1
-        rm $1
     fi
 }
 
