@@ -246,10 +246,6 @@ vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
-" Swap $ and ^
-noremap $ ^
-noremap ^ $
-
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>
 inoremap <C-v> <C-r>+
