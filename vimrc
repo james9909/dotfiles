@@ -129,7 +129,7 @@ if has('lua')
     " <CR>: close popup and save indent.
     inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
     function! s:my_cr_function()
-        return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+        return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
     endfunction
 else
     " Make YCM compatible with UltiSnips (using supertab)
@@ -316,6 +316,9 @@ nnoremap <silent> c< f<ci<
 nnoremap <silent> c{ f{ci{
 nnoremap <silent> c' f'ci'
 nnoremap <silent> c" f"ci"
+
+" No more Control-Space problems
+imap <Nul> <Space>
 
 "}}}
 "{{{Look and Feel
