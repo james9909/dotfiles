@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/students/2017/james.wang/public_html/IntroCTF/accounts'
+let g:netrw_dirhist_2='/home/students/2017/james.wang/public_html/IntroCTF/scripts'
+let g:netrw_dirhist_3='/home/students/2017/james.wang/public_html/IntroCTF/accounts'
+let g:netrw_dirhist_4='/home/students/2017/joel.ye/public_html'
