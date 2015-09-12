@@ -204,11 +204,11 @@ syntax enable " Enable syntax highlighting
 " Map leader to space
 let mapleader = "\<Space>"
 
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" Move between windows using alt
+map <A-j> <C-W>j
+map <A-k> <C-W>k
+map <A-h> <C-W>h
+map <A-l> <C-W>l
 
 nnoremap <F8> :execute RotateColorTheme()<CR>
 
