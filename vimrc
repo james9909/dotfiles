@@ -50,25 +50,26 @@ if has('lua')
 else
     Plugin 'Valloric/YouCompleteMe'
 endif
-Plugin 'Valloric/MatchTagAlways'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'bling/vim-airline'
-Plugin 'ervandew/supertab'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'ervandew/supertab'
 Plugin 'gioele/vim-autoswap'
 Plugin 'godlygeek/tabular'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'zirrostig/vim-schlepp'
+Plugin 'Valloric/MatchTagAlways'
 Plugin 'Yggdroot/indentLine'
-Plugin 'Raimondi/delimitMate'
+Plugin 'zirrostig/vim-schlepp'
 
 " CtrlP
 " Make faster
