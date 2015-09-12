@@ -127,7 +127,7 @@ if has('lua')
     inoremap <expr><C-l> neocomplete#complete_common_string()
     nnoremap <Leader>a :NeoCompleteToggle<CR>
     " <CR>: close popup and save indent.
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
     function! s:my_cr_function()
         return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
     endfunction
@@ -313,8 +313,16 @@ nnoremap <silent> c{ f{ci{
 nnoremap <silent> c' f'ci'
 nnoremap <silent> c" f"ci"
 
-" No more Control-Space problems
+" Turn off Control-Space
 imap <Nul> <Space>
+
+" Easier page up/down
+nnoremap <C-Up> <C-u>
+nnoremap <C-Down> <C-d>
+nnoremap <C-k> 3k
+nnoremap <C-j> 3j
+vnoremap <C-k> 3k
+vnoremap <C-j> 3j
 
 "}}}
 "{{{Look and Feel
