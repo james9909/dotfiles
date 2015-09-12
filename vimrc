@@ -58,7 +58,6 @@ Plugin 'chrisbra/unicode.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'gioele/vim-autoswap'
 Plugin 'godlygeek/tabular'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
@@ -68,6 +67,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'zirrostig/vim-schlepp'
+Plugin 'Yggdroot/indentLine'
+Plugin 'Raimondi/delimitMate'
 
 " CtrlP
 " Make faster
@@ -136,6 +137,9 @@ else
     let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
     let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
 endif
+
+" indentLine
+let g:indentLine_char = '┆'
 
 call vundle#end()
 "}}}

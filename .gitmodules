@@ -39,10 +39,6 @@
     path = vim/bundle/vim-schlepp
     url = https://github.com/zirrostig/vim-schlepp
 
-[submodule "vim/bundle/auto-pairs"]
-    path = vim/bundle/auto-pairs
-    url = https://github.com/jiangmiao/auto-pairs
-
 [submodule "vim/bundle/vim-autoswap"]
     path = vim/bundle/vim-autoswap
     url = https://github.com/gioele/vim-autoswap
@@ -83,14 +79,17 @@
     path = vim/bundle/tabular
     url = https://github.com/godlygeek/tabular
 
-[submodule "vim/bundle/unicode.vim"]
-    path = vim/bundle/unicode.vim
-    url = https://github.com/chrisbra/unicode.vim
+[submodule "vim/bundle/delimitMate"]
+    path = vim/bundle/delimitMate
+    url = https://github.com/Raimondi/delimitMate
+
+[submodule "vim/bundle/indentLine"]
+    path = vim/bundle/indentLine
+    url = https://github.com/Yggdroot/indentLine
 
 [submodule "zsh/zsh-syntax-highlighting"]
     path = zsh/zsh-syntax-highlighting
     url = https://github.com/zsh-users/zsh-syntax-highlighting
-
 
 # School modules
 [submodule "School/vim/bundle/auto-pairs"]
