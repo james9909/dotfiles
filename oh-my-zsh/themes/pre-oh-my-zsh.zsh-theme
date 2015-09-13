@@ -383,7 +383,16 @@ zstyle ':completion:tmux-pane-words-anywhere:*' matcher-list 'b:=* m:{A-Za-z}={a
 # }}}
 # Aliases {{{
 
-alias zshreload='source ~/.zshrc'
+alias zshreload="source ~/.zshrc"
+alias news="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls" # MPR News
+alias current="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls" # The Current
+alias classical="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls" # Classical MPR
+alias localcurrent="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/local.pls" # Local Current
+alias sleepbot="mplayer -playlist http://sleepbot.com/ambience/cgi/listen.cgi/listen.pls" # Sleepbot Environmental Broadcast 56K MP3
+alias groovesalad="mplayer -playlist http://somafm.com/groovesalad130.pls" # Soma FM Groove Salad iTunes AAC 128K
+alias check-space='du -h ~/ | grep "^[0-9]*.[0-9]G"'
+eval $(thefuck --alias) # Use thefuck
+
 # import aliases from bash
 if [[ -e $HOME/.bash_aliases ]]; then
     . $HOME/.bash_aliases
