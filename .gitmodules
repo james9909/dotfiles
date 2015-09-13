@@ -136,8 +136,8 @@
     path = School/vim/bundle/vim-surround
     url = https://github.com/tpope/vim-surround
 
-[submodule "vim/bundle/vim-schlepp"]
-    path = vim/bundle/vim-schlepp
+[submodule "School/vim/bundle/vim-schlepp"]
+    path = School/vim/bundle/vim-schlepp
     url = https://github.com/zirrostig/vim-schlepp
 
 [submodule "School/vim/bundle/vim-autoswap"]

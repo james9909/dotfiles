@@ -56,7 +56,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'zirrostig/vim-schlepp'
 Plugin 'Raimondi/delimitMate'
-Plugin 'othree/html5.vim'
 
 " Use git@ instead of https
 let g:vundle_default_git_proto = 'git'
