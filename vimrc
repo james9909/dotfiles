@@ -71,6 +71,9 @@ Plugin 'Valloric/MatchTagAlways'
 Plugin 'Yggdroot/indentLine'
 Plugin 'zirrostig/vim-schlepp'
 
+" Use git@ instead of https
+let g:vundle_default_git_proto = 'git'
+
 " CtrlP
 " Make faster
 if exists("g:ctrl_user_command")
