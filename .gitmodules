@@ -91,6 +91,10 @@
     path = vim/bundle/vim-repeat
     url = https://github.com/tpope/vim-repeat
 
+[submodule "vim/bundle/tmux-complete.vim"]
+    path = vim/bundle/tmux-complete.vim
+    url = https://github.com/wellle/tmux-complete.vim
+
 [submodule "zsh/zsh-syntax-highlighting"]
     path = zsh/zsh-syntax-highlighting
     url = https://github.com/zsh-users/zsh-syntax-highlighting

@@ -68,6 +68,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/MatchTagAlways'
+Plugin 'wellle/tmux-complete.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'zirrostig/vim-schlepp'
 
@@ -127,7 +128,11 @@ if has('lua')
     let g:neocomplete#sources#syntax#min_keyword_length = 2 " Only show completions longer than 2 chars
     let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
     let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
-    let g:neocomplete#cursor_hold_i_time = 300 " Time to delay generation of autocompletions
+    let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     inoremap <expr><C-g> neocomplete#undo_completion()
     inoremap <expr><C-l> neocomplete#complete_common_string()
     nnoremap <Leader>a :NeoCompleteToggle<CR>
@@ -136,10 +141,12 @@ if has('lua')
     function! s:my_cr_function()
         return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
     endfunction
+    let g:tmuxcomplete#trigger  = 'omnifunc' " Integrate into neocomplete
 else
     " Make YCM compatible with UltiSnips (using supertab)
     let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
     let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
+    " let g:tmuxcomplete#trigger = 'omnifunc'
 endif
 
 " indentLine
