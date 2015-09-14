@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cents=0
+# trap ctrl-c and call ctrl_c()
+trap ctrl_c INT
+
+function ctrl_c() {
+    dollars=$(python -c "print($cents/100.0 - .01)")
+    printf "\n\033[1;32mMade \$$dollars!\n"
+    exit $?
+}
+
+while [ 1 ]; do
+    xdotool mousemove 81 521 click 1 &
+    (( cents++ ))
+    sleep 35
+done
