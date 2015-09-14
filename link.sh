@@ -1,28 +1,39 @@
 #!/bin/bash
 
-dir=~/Path/to/repo # Change with path to repo
+dir=~/Dev/dotfiles # Change with path to repo
 backup=~/backup # For backup
-files="vim vimrc zshrc oh-my-zsh tmux.conf" # list of files/folders to symlink
+files="vimrc zshrc oh-my-zsh tmux.conf" # list of files/folders to symlink
+                                        # Do not recommend syncing vim folder due to plugins being submodules
+YELLOW="\E[1;33m"
+GREEN="\E[1;32m"
+RED="\E[1;31m"
+
+function run_with_status {
+    "$@" &> /dev/null
+    local status=$?
+    if [ $status -ne 0 ]; then
+        echo -e "${RED}Error with $@" >&2
+    else
+        echo -e "${GREEN}Successfully ran $@"
+    fi
+}
 
 # create dotfiles_old in homedir
-echo "Creating $backup for backup of any existing dotfiles in ~"
-mkdir -p $backup
-echo "...done"
+echo -e "${YELLOW}Creating $backup for backup of any existing dotfiles in ~"
+run_with_status mkdir -p $backup
 
 # change to the dotfiles directory
-echo "Changing to the $dir directory"
-cd $dir
-echo "...done"
+echo -e "\n${YELLOW}Changing to the $dir directory"
+run_with_status cd $dir
 
 # move any existing dotfiles in homedir to dotfiles_old directory
-echo "Moving any existing dotfiles from ~ to $backup"
+echo -e "\n${YELLOW}Moving any existing dotfiles from ~ to $backup"
 for file in $files; do
-    mv ~/.$file $backup/
+    run_with_status mv ~/.$file $backup/
 done
-mv ~/.bashrc $backup/
 
 # Create symlinks
 for file in $files; do
-    echo "Creating symlink: ~/.$file -> $dir/$file"
-    ln -s $dir/$file ~/.$file
+    echo -e "\n${YELLOW}Creating symlink: ~/.$file -> $dir/$file"
+    run_with_status ln -s $dir/$file ~/.$file
 done
