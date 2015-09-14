@@ -205,12 +205,28 @@ function Pwd {
     fi
 }
 
+# Shows current ram usage
+function RamUsage {
+    if [[ $showSysInfo == true ]]; then
+        echo "<$(free -m | grep -Eo '[0-9]*' | head -7 | tail -1) MB | "
+    fi
+}
+
+
+function SensorTemp {
+# Note on usage 1: you must prepend an escape character onto $(SensorTemp) so the prompt dynamically updates the temperature
+# Note on usage 2: modify the arguments for head and tail to select a specific temperature in the output
+    if [ $showSysInfo == true ]; then
+        echo "$(sensors | grep -Eo '[0-9][0-9]\.[0-9]°C' | head -1)> "
+    fi
+}
+
 exitCode=0
 #Note: the prompt function is not allowed to globally change any variable values; only the PROMPT_COMMAND / precmd() is able
 setopt prompt_subst
 function precmd() { # zsh equivalent of PROMPT_COMMAND in bash
     GetExitCode
-    prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(Sign)
+    prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(RamUsage)$(SensorTemp)$(User)$(Pulse) $(Pwd)$(Sign)
 %{%F{white}%}>> "
     PS1=$prompt1
 
@@ -224,7 +240,7 @@ else
     is256ColorTerm=false
 fi
 
-prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(User)$(Pulse) $(Pwd)$(Sign)
+prompt1="$(tput bold)$(Time)$(Period)$(EndPeriod) $(RamUsage)$(SensorTemp) $(User)$(Pulse) $(Pwd)$(Sign)
 {%F{white}%}>> "
 PS1=$prompt1
 
@@ -262,6 +278,7 @@ showHostname=false
 showTeam=true
 showUsername=true
 showPulse=true
+showSysInfo=true
 
 # Configuration aliases
 alias timeon="export showTime=true"
@@ -272,6 +289,8 @@ alias pulseon="export showPulse=true"
 alias pulseoff="export showPulse=false"
 alias hoston="export showHostname=true"
 alias hostoff="export showHostname=false"
+alias syson="export showSysInfo=true"
+alias sysoff="export showSysInfo=false"
 
 # }}}
 # Functions {{{
