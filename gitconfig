@@ -1,4 +1,6 @@
 [user]
+    name = James Wang
+    email = jameswang9909@hotmail.com
 
 [branch]
     autosetuprebase = always
@@ -53,4 +55,4 @@
     enabled = true
 
 [push]
-	default = simple
+    default = simple
