@@ -216,7 +216,7 @@ function RamUsage {
 function SensorTemp {
 # Note on usage 1: you must prepend an escape character onto $(SensorTemp) so the prompt dynamically updates the temperature
 # Note on usage 2: modify the arguments for head and tail to select a specific temperature in the output
-    if [ $showSysInfo == true ]; then
+    if [[ $showSysInfo == true ]]; then
         echo "$(sensors | grep -Eo '[0-9][0-9]\.[0-9]°C' | head -1)> "
     fi
 }
