@@ -262,8 +262,8 @@ nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 " Copy and paste to/from clipboard
-vnoremap <C-c> "*y<CR>
-inoremap <C-v> <esc>:set paste<CR>"*]p`]:set nopaste<cr>A
+vnoremap <C-c> "+y<CR>
+inoremap <C-v> <esc>:set paste<CR>"+]p`]:set nopaste<cr>A
 
 " Remove search highlights
 nnoremap <CR> :noh<CR><CR>
