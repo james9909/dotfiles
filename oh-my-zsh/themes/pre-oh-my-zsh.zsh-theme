@@ -336,11 +336,31 @@ function updatevim {
     currDir=$(pwd)
     # If the vim repo doesn't exist, then clone it
     if [[ ! -d "$HOME/vim" ]]; then
+
+        sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
+        sudo apt-get build-dep vim-gnome
+        sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev mercurial libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+        sudo mkdir /usr/include/lua5.1/include
+        sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
+        sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
         cd $HOME
         git clone https://github.com/vim/vim $HOME/vim
         echo "Cloned vim"
-        cd vim
-        ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu --enable-luainterp --with-luajit
+        cd vim/src
+        make distclean
+        ./configure --with-features=huge \
+        --enable-rubyinterp \
+        --enable-largefile \
+        --disable-netbeans \
+        --enable-pythoninterp \
+        --with-python-config-dir=/usr/lib/python2.7/config \
+        --enable-perlinterp \
+        --enable-luainterp \
+        --with-luajit \
+        --enable-gui=auto \
+        --enable-fail-if-missing \
+        --with-lua-prefix=/usr/include/lua5.1 \
+        --enable-cscope
         make
         sudo make install
         echo "Vim is now updated"
@@ -349,18 +369,33 @@ function updatevim {
         cd $currDir
         return
     else
-        cd $HOME/vim
-        # Local repo is up to date and we are up to date
-        if [[ $(git pull) =~ "up to date" ]]; then
+        cd $HOME/vim/src
+        LOCAL=$(git rev-parse @)
+        REMOTE=$(git rev-parse @{u})
+
+        if [ $LOCAL = $REMOTE ]; then
             echo "Vim is up to date"
             echo $version
             echo $patches
             cd $currDir
             return
-            # Local repo needs to be updated and vim needs to be rebuilt
+        # Local repo needs to be updated and vim needs to be rebuilt
         else
             git pull
-            ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu --enable-luainterp --with-luajit
+            make distclean
+            ./configure --with-features=huge \
+                        --enable-rubyinterp \
+                        --enable-largefile \
+                        --disable-netbeans \
+                        --enable-pythoninterp \
+                        --with-python-config-dir=/usr/lib/python2.7/config \
+                        --enable-perlinterp \
+                        --enable-luainterp \
+                        --with-luajit \
+                        --enable-gui=auto \
+                        --enable-fail-if-missing \
+                        --with-lua-prefix=/usr/include/lua5.1 \
+                        --enable-cscope
             make
             sudo make install
             echo "Vim is now updated"
