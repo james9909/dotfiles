@@ -277,7 +277,6 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>i :call Indent()<CR>
-nnoremap <Leader>f :CtrlP<CR>
 nnoremap <Leader>c :SyntasticCheck<CR>
 nnoremap <Leader>rn :set relativenumber!<CR>
 nnoremap <Leader>ss :setlocal spell!<CR>"
