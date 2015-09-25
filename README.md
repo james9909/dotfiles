@@ -6,10 +6,5 @@ Installation
 --------------
 For easy installation, modify `link.sh` to link files that you want, and run the script.
 
-Regarding `vim`, since plugins are submoduled, [Vundle](https://github.com/VundleVim/Vundle.vim) will not be cloned.
-
-To install [Vundle](https://github.com/VundleVim/Vundle.vim), run:
-
-`$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
-
-Then you can open up `vim` and run `:PluginInstall` to install the rest of the plugins.
+If you want to link the `vim` folder, make sure to add `--recursive` when cloning the repo.
+Otherwise, submodules won't be cloned and you'll have to manually clone [Vundle](https://github.com/VundleVim/Vundle.vim).
