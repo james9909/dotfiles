@@ -6,5 +6,18 @@ Installation
 --------------
 For easy installation, modify `link.sh` to link files that you want, and run the script.
 
-If you want to link the `vim` folder, make sure to add `--recursive` when cloning the repo.
-Otherwise, submodules won't be cloned and you'll have to manually clone [Vundle](https://github.com/VundleVim/Vundle.vim).
+There are two ways to be able to use my `vim` folder, manually or automatically.
+Unless you want a +200MB repo, do not clone recursively, because [YCM](https://github.com/Valloric/YouCompleteMe) has a ton of submodules.
+If you do not care about this, use method #2. Otherwise, use method #1.
+
+#### Method #1
+Since plugins are submoduled, [Vundle](https://github.com/VundleVim/Vundle.vim) will not be cloned by default.
+
+To install [Vundle](https://github.com/VundleVim/Vundle.vim), run:
+
+`$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+
+Then you can open up `vim` and run `:PluginInstall` to install the rest of the plugins.
+
+#### Method #2
+`$ git clone --recursive https://github.com:james9909/dotfiles`
