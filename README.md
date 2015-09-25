@@ -21,3 +21,7 @@ Then you can open up `vim` and run `:PluginInstall` to install the rest of the p
 
 #### Method #2
 `$ git clone --recursive https://github.com:james9909/dotfiles`
+
+If using oh-my-zsh, make sure to clone the [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) repository into oh-my-zsh/custom/plugins
+
+`$ git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins`
