@@ -69,6 +69,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'wellle/tmux-complete.vim'
+Plugin 'xolox/vim-notes'
+Plugin 'xolox/vim-misc'
 Plugin 'Yggdroot/indentLine'
 Plugin 'zirrostig/vim-schlepp'
 
@@ -85,6 +87,11 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" Vim notes
+let g:notes_suffix = '.txt'
+let g:notes_word_boundaries = 1
+let g:notes_directories = ['~/Documents/vim-notes']
 
 " Better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
