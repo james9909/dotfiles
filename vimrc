@@ -310,11 +310,6 @@ nnoremap <silent> j gj
 nnoremap <silent> zj o<Esc>
 nnoremap <silent> zk O<Esc>
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-map N Nzz
-map n nzz
-
 " Swap ; and :
 nnoremap ; :
 nnoremap : ;
