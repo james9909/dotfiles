@@ -89,9 +89,9 @@ if executable('ag')
 endif
 
 " Vim notes
-let g:notes_suffix = '.txt'
 let g:notes_word_boundaries = 1
 let g:notes_directories = ['~/Documents/vim-notes']
+nnoremap <Leader>n :Note
 
 " Better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
