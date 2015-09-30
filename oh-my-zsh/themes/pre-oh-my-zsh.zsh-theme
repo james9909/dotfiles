@@ -370,6 +370,7 @@ function updatevim {
         return
     else
         cd $HOME/vim/src
+        git fetch
         LOCAL=$(git rev-parse @)
         REMOTE=$(git rev-parse @{u})
 
