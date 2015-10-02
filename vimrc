@@ -39,126 +39,131 @@ set rtp+=~/.vim/bundle/snippets
 call vundle#begin()
 filetype off
 
-" Let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
 
-" My Plugins
-Plugin 'SirVer/UltiSnips'
-" If vim has lua, use neocomplete otherwise, use YCM
-if has('lua')
-    Plugin 'Shougo/neocomplete.vim'
-else
-    Plugin 'Valloric/YouCompleteMe'
-endif
-Plugin 'altercation/vim-colors-solarized.git'
-Plugin 'bling/vim-airline'
-Plugin 'chrisbra/unicode.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'ervandew/supertab'
-Plugin 'gioele/vim-autoswap'
-Plugin 'godlygeek/tabular'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Raimondi/delimitMate'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'tomasr/molokai'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'wellle/tmux-complete.vim'
-Plugin 'xolox/vim-notes'
-Plugin 'xolox/vim-misc'
-Plugin 'Yggdroot/indentLine'
-Plugin 'zirrostig/vim-schlepp'
+try
+    " Let Vundle manage Vundle
+    Plugin 'gmarik/Vundle.vim'
 
-" Use git@ instead of https
-let g:vundle_default_git_proto = 'git'
+    " My Plugins
+    Plugin 'SirVer/UltiSnips'
+    " If vim has lua, use neocomplete otherwise, use YCM
+    if has('lua')
+        Plugin 'Shougo/neocomplete.vim'
+    else
+        Plugin 'Valloric/YouCompleteMe'
+    endif
+    Plugin 'altercation/vim-colors-solarized.git'
+    Plugin 'bling/vim-airline'
+    Plugin 'chrisbra/unicode.vim'
+    Plugin 'davidhalter/jedi-vim'
+    Plugin 'ervandew/supertab'
+    Plugin 'gioele/vim-autoswap'
+    Plugin 'godlygeek/tabular'
+    Plugin 'kien/ctrlp.vim'
+    Plugin 'Lokaltog/vim-easymotion'
+    Plugin 'Raimondi/delimitMate'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'scrooloose/syntastic'
+    Plugin 'tomasr/molokai'
+    Plugin 'tpope/vim-commentary'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-repeat'
+    Plugin 'tpope/vim-surround'
+    Plugin 'Valloric/MatchTagAlways'
+    Plugin 'wellle/tmux-complete.vim'
+    Plugin 'xolox/vim-notes'
+    Plugin 'xolox/vim-misc'
+    Plugin 'Yggdroot/indentLine'
+    Plugin 'zirrostig/vim-schlepp'
 
-" CtrlP
-" Make faster
-if exists("g:ctrl_user_command")
-    unlet g:ctrlp_user_command
-endif
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+    " Use git@ instead of https
+    let g:vundle_default_git_proto = 'git'
 
-" Vim notes
-let g:notes_word_boundaries = 1
-let g:notes_directories = ['~/Documents/vim-notes']
+    " CtrlP
+    " Make faster
+    if exists("g:ctrl_user_command")
+        unlet g:ctrlp_user_command
+    endif
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
+    let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+    if executable('ag')
+        let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    endif
 
-" Better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/UltiSnips/'
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+    " Vim notes
+    let g:notes_word_boundaries = 1
+    let g:notes_directories = ['~/Documents/vim-notes']
 
-" Syntastic
-let g:syntastic_mode_map = {'mode': 'passive'}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let python_highlight_all = 1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
+    " Better key bindings for UltiSnipsExpandTrigger
+    let g:UltiSnipsExpandTrigger = "<tab>"
+    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+    let g:UltiSnipsEditSplit="vertical"
+    let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/UltiSnips/'
+    let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
-" Vim-schlepp
-let g:Schlepp#allowSquishingLines = 1
-let g:Schlepp#allowSquishingBlocks = 1
-let g:Schlepp#dupTrimWS = 1
+    " Syntastic
+    let g:syntastic_mode_map = {'mode': 'passive'}
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 1
+    let python_highlight_all = 1
+    let g:syntastic_error_symbol='✗'
+    let g:syntastic_warning_symbol='⚠'
+    let g:syntastic_style_error_symbol = '✗'
+    let g:syntastic_style_warning_symbol = '⚠'
 
-" MatchTagAlways
-let g:mta_use_match_paren_group = 1
+    " Vim-schlepp
+    let g:Schlepp#allowSquishingLines = 1
+    let g:Schlepp#allowSquishingBlocks = 1
+    let g:Schlepp#dupTrimWS = 1
 
-" Jedi-vim
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
+    " MatchTagAlways
+    let g:mta_use_match_paren_group = 1
 
-" SuperTab
-let g:SuperTabDefaultCompletionType = '<C-n>'
+    " Jedi-vim
+    let g:jedi#popup_on_dot = 0
+    let g:jedi#popup_select_first = 0
 
-" Neocomplete and YCM
-if has('lua')
-    let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
-    let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
-    let g:neocomplete#sources#syntax#min_keyword_length = 2 " Only show completions longer than 2 chars
-    let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
-    let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
-    let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    inoremap <expr><C-g> neocomplete#undo_completion()
-    inoremap <expr><C-l> neocomplete#complete_common_string()
-    nnoremap <Leader>a :NeoCompleteToggle<CR>
-    " <CR>: close popup and save indent.
-    inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-        return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
-    endfunction
-    let g:tmuxcomplete#trigger  = 'omnifunc' " Integrate into neocomplete
-else
-    " Make YCM compatible with UltiSnips (using supertab)
-    let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
-    let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
-    " let g:tmuxcomplete#trigger = 'omnifunc'
-endif
+    " SuperTab
+    let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" indentLine
-let g:indentLine_char = '┆'
+    " Neocomplete and YCM
+    if has('lua')
+        let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
+        let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
+        let g:neocomplete#sources#syntax#min_keyword_length = 2 " Only show completions longer than 2 chars
+        let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
+        let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
+        let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        inoremap <expr><C-g> neocomplete#undo_completion()
+        inoremap <expr><C-l> neocomplete#complete_common_string()
+        nnoremap <Leader>a :NeoCompleteToggle<CR>
+        " <CR>: close popup and save indent.
+        inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
+        function! s:my_cr_function()
+            return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
+        endfunction
+        let g:tmuxcomplete#trigger  = 'omnifunc' " Integrate into neocomplete
+    else
+        " Make YCM compatible with UltiSnips (using supertab)
+        let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
+        let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
+        " let g:tmuxcomplete#trigger = 'omnifunc'
+    endif
 
-call vundle#end()
+    " indentLine
+    let g:indentLine_char = '┆'
+
+    call vundle#end()
+catch /:E117:/
+    echom "Vundle not installed!"
+endtry
 "}}}
 "{{{Misc Settings
 
