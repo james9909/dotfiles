@@ -37,9 +37,6 @@ try
     else
         Plugin 'Valloric/YouCompleteMe'
     endif
-    Plugin 'altercation/vim-colors-solarized.git'
-    Plugin 'bling/vim-airline'
-    Plugin 'chrisbra/unicode.vim'
     Plugin 'davidhalter/jedi-vim'
     Plugin 'ervandew/supertab'
     Plugin 'gioele/vim-autoswap'
@@ -49,7 +46,6 @@ try
     Plugin 'Raimondi/delimitMate'
     Plugin 'scrooloose/nerdtree'
     Plugin 'scrooloose/syntastic'
-    Plugin 'tomasr/molokai'
     Plugin 'tpope/vim-commentary'
     Plugin 'tpope/vim-fugitive'
     Plugin 'tpope/vim-repeat'
