@@ -1,35 +1,21 @@
 "{{{Auto Commands
 
+augroup defaults
+    autocmd!
+    autocmd VimResized * call SetStatusline()
+    autocmd WinEnter * call SetStatusline()
+    autocmd BufEnter * call SetStatusline()
+    " Refresh git information when file is changed
+    autocmd BufWritePost * call RefreshGitInfo()
+augroup END
+
 " Automagically remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+" Remove fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
-" Restore cursor position to where it was before
-augroup JumpCursorOnEdit
-    au!
-    autocmd BufReadPost *
-                \ if expand("<afile>:p:h") !=? $TEMP |
-                \   if line("'\"") > 1 && line("'\"") <= line("$") |
-                \      let JumpCursorOnEdit_foo = line("'\"") |
-                \     let b:doopenfold = 1 |
-                \     if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
-                \        let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
-                \        let b:doopenfold = 2 |
-                \     endif |
-                \     exe JumpCursorOnEdit_foo |
-                \   endif |
-                \ endif
-    " Need to postpone using "zv" until after reading the modelines.
-    autocmd BufWinEnter *
-                \ if exists("b:doopenfold") |
-                \   exe "normal zv" |
-                \   if(b:doopenfold > 1) |
-                \       exe  "+".1 |
-                \   endif |
-                \   unlet b:doopenfold |
-                \ endif
-augroup END
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 "}}}
 "{{{Vundle and Plugins
@@ -38,7 +24,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/snippets
 call vundle#begin()
 filetype off
-
 
 try
     " Let Vundle manage Vundle
@@ -165,8 +150,15 @@ catch /:E117:/
     echom "Vundle not installed!"
 endtry
 "}}}
+"{{{ Variables
+let g:showGitInfo = 1 " This determines whether to show git info in statusline
+let g:inGitRepo = 0
+let g:gitInfo = "" " Placeholder value to initialize variable
+"}}}
 "{{{Misc Settings
 
+colorscheme Tomorrow-Night
+set laststatus=2 " Always show statusline on last window
 set nocompatible " Disable Vi-compatibility settings
 set showcmd " Shows what you are typing as a command
 set t_Co=256 " Enable 256 color
@@ -180,6 +172,7 @@ set autoindent " Autoindent
 set copyindent " Copies the indentation of the previous line
 set smartindent " Enable smart indents
 set number " Enable line numbers
+set wrap " Wrap lines
 set wildmode=list:longest,full
 set wildignore=*.class,*.swp,*.pyc,*.jar,*.cmake,*.tar.* " Ignore compiled things
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.mp3 " Ignore picture and media files
@@ -192,12 +185,17 @@ set nohidden " When I close a tab, remove the buffer
 set ignorecase " Ignore cases in search
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
-set wrap " Allow wrapping
 set colorcolumn=80 " Highlight 80th column as guideline
 set formatoptions-=cro " Remove auto comment
 set completeopt=longest,menuone,preview
 set pastetoggle=<Leader>p " If this changes, change the paste leader
 set backup " Allow for a backup directory
+set wrapscan " Automatically wrap search when hitting bottom
+set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
+set linebreak " Break line on word
+set timeoutlen=300 " Timeout for entering key combinations
+set synmaxcol=150 " Limit syntax highlight parsing to first 150 columns
+set hidden " Hides buffers instead of closing them, allows opening new buffers when current has unsaved changes
 
 " If the backup directories do not exist, then make them
 if !isdirectory($HOME . '/.vim/_backup')
@@ -216,8 +214,12 @@ set directory=~/.vim/_swap " Set swap directory
 set backupdir=~/.vim/_backup " This is the backup directory
 set undofile " Allows for undos after saving
 set undodir=~/.vim/_undo " This is the undo directory
+set undolevels=1000 " Save a maximum of 1000 undos
+set undoreload=10000 " Save undo history when reloading a file
 
-let g:clipbrdDefaultReg = '+'
+set sessionoptions-=folds      " Do not save folds
+
+let g:clipbrdDefaultReg = '+' " Default register for clipboard
 
 filetype plugin on
 filetype plugin indent on
@@ -345,15 +347,134 @@ vnoremap <C-k> 3k
 vnoremap <C-j> 3j
 
 "}}}
-"{{{Look and Feel
+"{{{ Custom Status Line
 
-colorscheme Tomorrow-Night
+" Source: https://github.com/ChesleyTan/linuxrc/blob/master/vimrc
+"{{{ Git
+function! GitBranch()
+    let output=system("git branch | grep '*' | grep -o '[^* ]*'")
+    if output=="" || output=~?"fatal"
+        return ""
+    else
+        let g:inGitRepo=1
+        return "[Git][" . output[0 : strlen(output)-2] . " " " Strip newline ^@
+    endif
+endfunction
 
-" Status line
-set laststatus=2
-set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
+function! GitStatus()
+    if g:inGitRepo == 0
+        return ""
+    endif
+    let output=system('git status')
+    let retStr=""
+    if output=~?"Changes to be committed"
+        let retStr.="\u2718"
+    else
+        let retStr.="\u2714"
+    endif
+    if output=~?"modified"
+        let retStr.=" \u0394"
+    endif
+    let retStr.=GitStashLength() . "]"
+    return retStr
+endfunction
 
-" }}}
+function! GitRemote(branch) " Note: this function takes a while to execute
+    if g:inGitRepo == 0
+        return ""
+    endif
+    let remotes=split(system("git remote")) " Get names of remotes
+    if remotes==[] " End if no remotes found or error
+        return ""
+    else
+        let remotename=remotes[0] " Get name of first remote
+    endif
+    let output=system("git remote show " . remotename . " | grep \"" . a:branch . "\"")
+    if output =~? "local out of date"
+        return " (!)Local repo out of date"
+    else
+        return ""
+    endif
+endfunction
+
+function! GitStashLength()
+    if g:inGitRepo == 0
+        return ""
+    endif
+    let stashLength=system("git stash list | wc -l")
+    if stashLength=="0\n" || stashLength=="" || stashLength=~?"fatal"
+        return ""
+    else
+        return " \u26c1 " . stashLength[0 : strlen(stashLength)-2] " Strip trailing newline
+    endif
+endfunction
+
+function! RefreshGitInfo()
+    if g:showGitInfo == 1
+        " If nvim, use asynchronous msgpack-rpc method
+        if has('nvim')
+            call Git()
+            " Otherwise, use standard synchronous method
+        else
+            let gitBranch=GitBranch()
+            let g:gitInfo=gitBranch . GitStatus() . GitRemote(gitBranch)
+        endif
+    else
+        let g:gitInfo = "" " Clear old git info
+    endif
+endfunction
+function! ToggleGitInfo()
+    if g:showGitInfo == 1
+        let g:showGitInfo = 0
+    else
+        let g:showGitInfo = 1
+    endif
+endfunction
+command! ToggleGitInfo call ToggleGitInfo()
+call RefreshGitInfo()
+"}}}
+" {{{ Status Line
+function! SetStatusline()
+    let bufName = bufname('%')
+    " Do not modify the statusline for NERDTree
+    if bufName =~# "NERD"
+        return
+    endif
+    let winWidth = winwidth(0)
+    setlocal statusline=""
+    if winWidth > 50
+        setlocal statusline+=%t " Tail of the filename
+    endif
+    if winWidth > 40
+        setlocal statusline+=%y " Filetype
+    endif
+    if winWidth > 80
+        setlocal statusline+=[%{strlen(&fenc)?&fenc:'none'}\|  " File encoding
+        setlocal statusline+=%{&ff}]                           " File format
+    endif
+    setlocal statusline+=%r%##      " Read only flag
+    setlocal statusline+=%m\%##        " Modified flag
+    setlocal statusline+=%h                      " Help file flag
+    setlocal statusline+=\ [B:%n/%{bufnr('$')}%##                  " Buffer number
+    setlocal statusline+=\ #T:%{tabpagenr()}/%{tabpagenr('$')}]%##  " Tab number
+    if winWidth > 100
+        setlocal statusline+=\ %{g:gitInfo}%## " Git info
+    endif
+    setlocal statusline+=%=                                        " Left/right separator
+    if exists("*SyntasticStatuslineFlag()")
+        setlocal statusline+=%{SyntasticStatuslineFlag()}%## " Syntastic plugin flag
+    endif
+    "setlocal statusline+=%3*%F%*\ %4*\|%*\                        " File path with full names
+    setlocal statusline+=%{pathshorten(fnamemodify(expand('%:p'),':~'))}%##\|%##  " File path with truncated names
+    setlocal statusline+=C:%2c\                  " Cursor column, reserve 2 spaces
+    setlocal statusline+=R:%3l/%3L               " Cursor line/total lines, reserve 3 spaces for each
+    setlocal statusline+=\|%##%3p     " Percent through file, reserve 3 spaces
+    setlocal statusline+=%%                      " Percent symbol
+endfunction
+call SetStatusline()
+"}}}
+"
+"}}}
 " {{{ Functions
 
 "{{{ AutoIndent upon saving
@@ -390,40 +511,6 @@ function! Indent()
     call Preserve('normal gg=G')
 endfunction
 "}}}
-
-"{{{ Theme Rotating
-let themeindex=0
-function! RotateColorTheme()
-    let y = -1
-    while y == -1
-        let colorstring = "placeholder#Tomorrow-Night#solarized#molokai#"
-        let x = match( colorstring, "#", g:themeindex )
-        let y = match( colorstring, "#", x + 1 )
-        let g:themeindex = x + 1
-        if y == -1
-            let g:themeindex = 0
-        else
-            let themestring = strpart(colorstring, x + 1, y - x - 1)
-            " Solarized light or dark based on time
-            let hour = strftime("%H")
-            if 6 <= hour && hour < 18 && g:colors_name == "Tomorrow-Night"
-                set background=light
-                let g:solarized_termcolors=256
-                highlight Folded term=NONE cterm=NONE gui=NONE
-                colorscheme solarized
-                return
-            elseif g:colors_name == "Tomorrow-Night"
-                set background=dark
-                let g:solarized_termcolors=256
-                highlight Folded term=NONE cterm=NONE gui=NONE
-                colorscheme solarized
-                return
-            endif
-            return "colorscheme ".themestring
-        endif
-    endwhile
-endfunction
-" }}}
 
 "{{{ Paste Toggle
 let paste_mode = 0 " 0 = normal, 1 = paste
