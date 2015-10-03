@@ -482,20 +482,24 @@ call SetStatusline()
 " {{{ Java plugin config
 
 function! PluginConfig()
-    if &filetype ==? "java"
-        if exists(":PingEclim") && !(eclim#PingEclim(0))
-            echom "Eclimd not started"
+    try
+        if &filetype ==? "java"
+            if exists(":PingEclim") && !(eclim#PingEclim(0))
+                echom "Eclimd not started"
+            endif
+            if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
+                augroup javacomplete
+                    let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
+                    let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
+                    set omnifunc=javacomplete#Complete
+                augroup END
+            else
+                echom "Eclim enabled"
+            endif
         endif
-        if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
-            augroup javacomplete
-                let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
-                let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
-                set omnifunc=javacomplete#Complete
-            augroup END
-        else
-            echom "Eclim enabled"
-        endif
-    endif
+    catch
+        echom "Eclim or javacomplete2 is not installed!"
+    endtry
 endfunction
 
 " }}}
