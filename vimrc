@@ -2,6 +2,7 @@
 
 augroup defaults
     autocmd!
+    autocmd VimEnter * call PluginConfig()
     autocmd VimResized * call SetStatusline()
     autocmd WinEnter * call SetStatusline()
     autocmd BufEnter * call SetStatusline()
@@ -37,6 +38,7 @@ try
     else
         Plugin 'Valloric/YouCompleteMe'
     endif
+    Plugin 'artur-shaik/vim-javacomplete2'
     Plugin 'davidhalter/jedi-vim'
     Plugin 'ervandew/supertab'
     Plugin 'gioele/vim-autoswap'
@@ -108,7 +110,11 @@ try
     let g:jedi#popup_select_first = 0
 
     " SuperTab
-    let g:SuperTabDefaultCompletionType = '<C-n>'
+    " let g:SuperTabDefaultCompletionType = '<C-n>'
+    let g:SuperTabDefaultCompletionType = 'context'
+
+    " Eclim
+    let g:EclimCompletionMethod = 'omnifunc'
 
     " Neocomplete and YCM
     if has('lua')
@@ -472,6 +478,27 @@ call SetStatusline()
 "
 "}}}
 " {{{ Functions
+
+" {{{ Java plugin config
+
+function! PluginConfig()
+    if &filetype ==? "java"
+        if exists(":PingEclim") && !(eclim#PingEclim(0))
+            echom "Eclimd not started"
+        endif
+        if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
+            augroup javacomplete
+                let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
+                let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
+                set omnifunc=javacomplete#Complete
+            augroup END
+        else
+            echom "Eclim enabled"
+        endif
+    endif
+endfunction
+
+" }}}
 
 "{{{ AutoIndent upon saving
 " Restore cursor position, window position, and last search after running a
