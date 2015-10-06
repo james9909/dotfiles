@@ -351,14 +351,15 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("javaStatement", s:red, "", "")
     call <SID>X("javaType", s:red, "", "")
     call <SID>X("javaTypedef", s:blue, "", "")
-    call <SID>X("javaBoolean", s:orange, "", "")
+    call <SID>X("javaBoolean", s:red, "", "")
     call <SID>X("javaScopeDecl", s:red, "", "")
     call <SID>X("javaClassDecl", s:red, "", "")
     call <SID>X("javaStorageClass", s:red, "", "")
-    call <SID>X("javaRepeat", s:red, "", "")
+    call <SID>X("javaRepeat", s:purple, "", "")
     call <SID>X("javaExternal", s:red, "", "")
     call <SID>X("javaExceptions", s:red, "", "")
     call <SID>X("javaIdentifier", s:blue, "", "")
+    call <SID>X("javaConditional", s:purple, "", "")
 
     " HTML Highlighting
     call <SID>X("htmlTag", s:red, "", "")
