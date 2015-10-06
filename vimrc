@@ -110,7 +110,7 @@ try
     let g:jedi#popup_select_first = 0
 
     " SuperTab
-    " let g:SuperTabDefaultCompletionType = '<C-n>'
+    let g:SuperTabDefaultCompletionType = '<C-n>'
     let g:SuperTabDefaultCompletionType = 'context'
 
     " Eclim
