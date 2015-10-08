@@ -560,4 +560,17 @@ func! Paste_on_off()
 endfunc
 " }}}
 
+" {{{ Transparent background
+function! TransparentBackground()
+    highlight clear CursorLine
+    highlight Normal ctermbg=none
+    highlight LineNr ctermbg=none
+    highlight Folded ctermbg=none
+    highlight NonText ctermbg=none
+    highlight SpecialKey ctermbg=none
+    highlight VertSplit ctermbg=none
+    highlight SignColumn ctermbg=none
+endfunction
+" }}}
+
 " }}}
