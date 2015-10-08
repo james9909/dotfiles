@@ -14,7 +14,7 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE
 
 # User configuration
-export PATH="/bin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/games"
+export PATH="/bin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/games:/usr/sbin"
 export EDITOR="vim"
 
 setopt AUTO_CD
