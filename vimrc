@@ -73,6 +73,10 @@ try
         let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     endif
 
+    " DelimitMate
+    let g:delimitMate_expand_inside_quotes = 1
+    let g:delimitMate_expand_cr = 1
+
     " Vim notes
     let g:notes_word_boundaries = 1
     let g:notes_directories = ['~/Documents/vim-notes']
