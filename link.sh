@@ -8,14 +8,15 @@ files="vimrc zshrc oh-my-zsh tmux.conf" # list of files/folders to symlink
 YELLOW="\E[1;33m"
 GREEN="\E[1;32m"
 RED="\E[1;31m"
+RESET="\E[m"
 
 function run_with_status {
     "$@" &> /dev/null
     local status=$?
     if [ $status -ne 0 ]; then
-        echo -e "${RED}Error with $@" >&2
+        echo -e "${RED}Error with $@${RESET}" >&2
     else
-        echo -e "${GREEN}Successfully ran $@"
+        echo -e "${GREEN}Successfully ran $@${RESET}"
     fi
 }
 
