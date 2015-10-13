@@ -52,6 +52,7 @@ sudo -v
 sudo apt-add-repository ppa:diesch/testing
 sudo apt-get update
 sudo apt-get install classicmenu-indicator
+sudo -v
 
 chsh -s /bin/zsh
 
@@ -62,5 +63,9 @@ cd dotfiles
 cp -rfv vim ~/.vim
 updatevim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+sudo -v
+
+# Misc stuff
+sudo apt-get install -y sl fortune-mod espeak cowsay
 
 sudo -k
