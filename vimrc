@@ -238,8 +238,6 @@ map <A-k> <C-W>k
 map <A-h> <C-W>h
 map <A-l> <C-W>l
 
-nnoremap <F8> :execute RotateColorTheme()<CR>
-
 " Vim-schlepp bindings
 vmap K  <Plug>SchleppUp
 vmap J  <Plug>SchleppDown
@@ -358,24 +356,6 @@ function! GitStatus()
     return retStr
 endfunction
 
-function! GitRemote(branch) " Note: this function takes a while to execute
-    if g:inGitRepo == 0
-        return ""
-    endif
-    let remotes=split(system("git remote")) " Get names of remotes
-    if remotes==[] " End if no remotes found or error
-        return ""
-    else
-        let remotename=remotes[0] " Get name of first remote
-    endif
-    let output=system("git remote show " . remotename . " | grep \"" . a:branch . "\"")
-    if output =~? "local out of date"
-        return " (!)Local repo out of date"
-    else
-        return ""
-    endif
-endfunction
-
 function! GitStashLength()
     if g:inGitRepo == 0
         return ""
@@ -396,7 +376,7 @@ function! RefreshGitInfo()
             " Otherwise, use standard synchronous method
         else
             let gitBranch=GitBranch()
-            let g:gitInfo=gitBranch . GitStatus() . GitRemote(gitBranch)
+            let g:gitInfo=gitBranch . GitStatus()
         endif
     else
         let g:gitInfo = "" " Clear old git info
