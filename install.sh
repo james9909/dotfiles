@@ -62,7 +62,9 @@ cd dotfiles
 ./link.sh
 cp -rfv vim ~/.vim
 updatevim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
+sh ./install.sh
+rm install.sh
 sudo -v
 
 # Misc stuff
