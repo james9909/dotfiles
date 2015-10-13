@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Set proxies for school server so you can use wget, git clone, etc.
+# Note that you need to either source the file or run it with .
 proxy="149.89.1.30:3128"
 export http_proxy=$proxy
 export https_proxy=$proxy

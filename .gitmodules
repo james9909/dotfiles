@@ -27,9 +27,9 @@
     path = vim/bundle/nerdtree
     url = https://github.com/scrooloose/nerdtree
 
-[submodule "vim/bundle/Vundle.vim"]
-    path = vim/bundle/Vundle.vim
-    url = https://github.com/gmarik/Vundle.vim
+[submodule "vim/bundle/neobundle.vim"]
+    path = vim/bundle/neobundle.vim
+    url = https://github.com/Shougo/neobundle.vim
 
 [submodule "vim/bundle/supertab"]
     path = vim/bundle/supertab
@@ -98,60 +98,3 @@
 [submodule "zsh/zsh-syntax-highlighting"]
     path = zsh/zsh-syntax-highlighting
     url = https://github.com/zsh-users/zsh-syntax-highlighting
-
-# School modules
-[submodule "School/vim/bundle/MatchTagAlways"]
-    path = School/vim/bundle/MatchTagAlways
-    url = https://github.com/Valloric/MatchTagAlways
-
-[submodule "School/vim/bundle/supertab"]
-    path = School/vim/bundle/supertab
-    url = https://github.com/ervandew/supertab
-
-[submodule "School/vim/bundle/Vundle.vim"]
-    path = School/vim/bundle/Vundle.vim
-    url = https://github.com/gmarik/Vundle.vim
-
-[submodule "School/vim/bundle/delimitMate"]
-    path = School/vim/bundle/delimitMate
-    url = https://github.com/Raimondi/delimitMate
-
-[submodule "School/vim/bundle/tabular"]
-    path = School/vim/bundle/tabular
-    url = https://github.com/godlygeek/tabular
-
-[submodule "School/vim/bundle/vim-colors-solarized"]
-    path = School/vim/bundle/vim-colors-solarized
-    url = https://github.com/altercation/vim-colors-solarized
-
-[submodule "School/vim/bundle/jedi-vim"]
-    path = School/vim/bundle/jedi-vim
-    url = https://github.com/davidhalter/jedi-vim
-
-[submodule "School/vim/bundle/vim-easymotion"]
-    path = School/vim/bundle/vim-easymotion
-    url = https://github.com/Lokaltog/vim-easymotion
-
-[submodule "School/vim/bundle/syntastic"]
-    path = School/vim/bundle/syntastic
-    url = https://github.com/scrooloose/syntastic
-
-[submodule "School/vim/bundle/vim-surround"]
-    path = School/vim/bundle/vim-surround
-    url = https://github.com/tpope/vim-surround
-
-[submodule "School/vim/bundle/vim-schlepp"]
-    path = School/vim/bundle/vim-schlepp
-    url = https://github.com/zirrostig/vim-schlepp
-
-[submodule "School/vim/bundle/vim-autoswap"]
-    path = School/vim/bundle/vim-autoswap
-    url = https://github.com/gioele/vim-autoswap
-
-[submodule "School/vim/bundle/vim-commentary"]
-    path = School/vim/bundle/vim-commentary
-    url = https://github.com/tpope/vim-commentary
-
-[submodule "School/vim/bundle/vim-airline"]
-    path = School/vim/bundle/vim-airline
-    url = https://github.com/bling/vim-airline
