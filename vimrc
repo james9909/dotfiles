@@ -6,6 +6,7 @@ augroup defaults
     autocmd VimResized * call SetStatusline()
     autocmd WinEnter * call SetStatusline()
     autocmd BufEnter * call SetStatusline()
+    autocmd BufEnter * silent! lcd %:p:h
     " Refresh git information when file is changed
     autocmd BufWritePost * call RefreshGitInfo()
 augroup END
