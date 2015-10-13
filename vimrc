@@ -2,7 +2,7 @@
 
 augroup defaults
     autocmd!
-    autocmd VimEnter * call PluginConfig()
+    " autocmd VimEnter * call PluginConfig()
     autocmd VimResized * call SetStatusline()
     autocmd WinEnter * call SetStatusline()
     autocmd BufEnter * call SetStatusline()
@@ -19,59 +19,59 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 "}}}
-"{{{Vundle and Plugins
+"{{{NeoBundle and Plugins
 
-set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/snippets
-call vundle#begin()
 filetype off
 
 try
-    " Let Vundle manage Vundle
-    Plugin 'gmarik/Vundle.vim'
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#begin(expand('~/.vim/bundle'))
 
-    " My Plugins
-    Plugin 'SirVer/UltiSnips'
-    " If vim has lua, use neocomplete otherwise, use YCM
+    " Let Neobundle manage NeoBundle
+    NeoBundleFetch 'Shougo/neobundle.vim'
+
     if has('lua')
-        Plugin 'Shougo/neocomplete.vim'
-    else
-        Plugin 'Valloric/YouCompleteMe'
+        NeoBundle 'Shougo/neocomplete.vim'
     endif
-    Plugin 'artur-shaik/vim-javacomplete2'
-    Plugin 'davidhalter/jedi-vim'
-    Plugin 'ervandew/supertab'
-    Plugin 'gioele/vim-autoswap'
-    Plugin 'godlygeek/tabular'
-    Plugin 'kien/ctrlp.vim'
-    Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'Raimondi/delimitMate'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/syntastic'
-    Plugin 'tpope/vim-commentary'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'tpope/vim-repeat'
-    Plugin 'tpope/vim-surround'
-    Plugin 'Valloric/MatchTagAlways'
-    Plugin 'wellle/tmux-complete.vim'
-    Plugin 'xolox/vim-notes'
-    Plugin 'xolox/vim-misc'
-    Plugin 'Yggdroot/indentLine'
-    Plugin 'zirrostig/vim-schlepp'
+    NeoBundle 'gioele/vim-autoswap'
+    NeoBundle 'ervandew/supertab'
 
-    " Use git@ instead of https
-    let g:vundle_default_git_proto = 'git'
-
-    " CtrlP
-    " Make faster
-    if exists("g:ctrl_user_command")
-        unlet g:ctrlp_user_command
-    endif
-    set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
-    let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-    if executable('ag')
-        let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    endif
+    NeoBundleLazy 'Lokaltog/vim-easymotion', {
+        \'autoload': {
+            \'mappings': '<Leader><Leader>'
+        \}
+    \}
+    NeoBundleLazy 'davidhalter/jedi-vim', {
+        \'autoload': {
+            \'filetypes': 'python'
+        \}
+    \}
+    NeoBundleLazy 'artur-shaik/vim-javacomplete2', {
+        \'autoload': {
+            \'filetypes': 'java'
+        \}
+    \}
+    NeoBundleLazy 'scrooloose/nerdtree', {
+        \'autoload': {
+            \'commands': 'NERDTreeToggle'
+        \}
+    \}
+    NeoBundleLazy 'scrooloose/syntastic', {
+        \'autoload': {
+            \'commands': 'SyntasticCheck'
+        \}
+    \}
+    NeoBundle 'Raimondi/delimitMate'
+    NeoBundle 'SirVer/UltiSnips'
+    NeoBundle 'tpope/vim-commentary'
+    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'tpope/vim-surround'
+    NeoBundle 'Valloric/MatchTagAlways'
+    NeoBundle 'wellle/tmux-complete.vim'
+    NeoBundle 'xolox/vim-notes'
+    NeoBundle 'xolox/vim-misc'
+    NeoBundle 'Yggdroot/indentLine'
+    NeoBundle 'zirrostig/vim-schlepp'
 
     " DelimitMate
     let g:delimitMate_expand_inside_quotes = 1
@@ -117,10 +117,9 @@ try
     let g:SuperTabDefaultCompletionType = '<C-n>'
     let g:SuperTabDefaultCompletionType = 'context'
 
-    " Eclim
-    let g:EclimCompletionMethod = 'omnifunc'
+    " " Eclim
+    " let g:EclimCompletionMethod = 'omnifunc'
 
-    " Neocomplete and YCM
     if has('lua')
         let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
         let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
@@ -141,19 +140,14 @@ try
             return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
         endfunction
         let g:tmuxcomplete#trigger  = 'omnifunc' " Integrate into neocomplete
-    else
-        " Make YCM compatible with UltiSnips (using supertab)
-        let g:ycm_key_list_select_completion = ['<C-n>', '<NOP>']
-        let g:ycm_key_list_previous_completion = ['<C-p>', '<NOP>']
-        " let g:tmuxcomplete#trigger = 'omnifunc'
     endif
 
     " indentLine
     let g:indentLine_char = '┆'
 
-    call vundle#end()
+    call neobundle#end()
 catch /:E117:/
-    echom "Vundle not installed!"
+    echom "NeoBundle is not installed!"
 endtry
 "}}}
 "{{{ Variables
@@ -223,7 +217,7 @@ set undodir=~/.vim/_undo " This is the undo directory
 set undolevels=1000 " Save a maximum of 1000 undos
 set undoreload=10000 " Save undo history when reloading a file
 
-set sessionoptions-=folds      " Do not save folds
+set sessionoptions-=folds " Do not save folds
 
 let g:clipbrdDefaultReg = '+' " Default register for clipboard
 
@@ -246,9 +240,6 @@ map <A-l> <C-W>l
 
 nnoremap <F8> :execute RotateColorTheme()<CR>
 
-" CtrlP
-noremap <C-p> :CtrlP ~<CR>
-
 " Vim-schlepp bindings
 vmap K  <Plug>SchleppUp
 vmap J  <Plug>SchleppDown
@@ -264,20 +255,13 @@ nnoremap <silent> <Leader>gb :Gblame<CR>
 nnoremap <silent> <Leader>gl :Glog<CR>
 nnoremap <silent> <Leader>gp :Git push<CR>
 nnoremap <silent> <Leader>gw :Gwrite<CR>
-nnoremap <silent> <Leader>gr :Gremove<CR>
 
 " Tabularize mappings
-nmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
 vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 " Copy and paste to/from clipboard
@@ -311,9 +295,6 @@ nnoremap <silent> <C-Right> :tabnext<CR>
 nnoremap <silent> <C-Left> :tabprevious<CR>
 nnoremap <silent> <C-t> :tabnew<CR>
 
-" WHITESPACE
-nnoremap <silent> <F9> :%s/$//g<CR>:%s// /g<CR>
-
 " Better k and j movement
 nnoremap <silent> k gk
 nnoremap <silent> j gj
@@ -332,14 +313,6 @@ inoremap jj <Esc>
 " Go to the end of the line pasted
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
-
-" Change inside (ci) mappings
-nnoremap <silent> c( f(ci(
-nnoremap <silent> c[ f[ci[
-nnoremap <silent> c< f<ci<
-nnoremap <silent> c{ f{ci{
-nnoremap <silent> c' f'ci'
-nnoremap <silent> c" f"ci"
 
 " Turn off Control-Space
 imap <Nul> <Space>
@@ -455,27 +428,24 @@ function! SetStatusline()
         setlocal statusline+=%y " Filetype
     endif
     if winWidth > 80
-        setlocal statusline+=[%{strlen(&fenc)?&fenc:'none'}\|  " File encoding
-        setlocal statusline+=%{&ff}]                           " File format
+        setlocal statusline+=[%{&ff}] " File format
     endif
-    setlocal statusline+=%r%##      " Read only flag
-    setlocal statusline+=%m\%##        " Modified flag
-    setlocal statusline+=%h                      " Help file flag
-    setlocal statusline+=\ [B:%n/%{bufnr('$')}%##                  " Buffer number
-    setlocal statusline+=\ #T:%{tabpagenr()}/%{tabpagenr('$')}]%##  " Tab number
+    setlocal statusline+=%r%## " Read only flag
+    setlocal statusline+=%m\%## " Modified flag
+    setlocal statusline+=%h " Help file flag
     if winWidth > 100
         setlocal statusline+=\ %{g:gitInfo}%## " Git info
     endif
-    setlocal statusline+=%=                                        " Left/right separator
+    setlocal statusline+=%= " Left/right separator
     if exists("*SyntasticStatuslineFlag()")
         setlocal statusline+=%{SyntasticStatuslineFlag()}%## " Syntastic plugin flag
     endif
     "setlocal statusline+=%3*%F%*\ %4*\|%*\                        " File path with full names
     setlocal statusline+=%{pathshorten(fnamemodify(expand('%:p'),':~'))}%##\|%##  " File path with truncated names
-    setlocal statusline+=C:%2c\                  " Cursor column, reserve 2 spaces
-    setlocal statusline+=R:%3l/%3L               " Cursor line/total lines, reserve 3 spaces for each
-    setlocal statusline+=\|%##%3p     " Percent through file, reserve 3 spaces
-    setlocal statusline+=%%                      " Percent symbol
+    setlocal statusline+=C:%2c\  " Cursor column, reserve 2 spaces
+    setlocal statusline+=R:%3l/%3L " Cursor line/total lines, reserve 3 spaces for each
+    setlocal statusline+=\|%##%3p " Percent through file, reserve 3 spaces
+    setlocal statusline+=%% " Percent symbol
 endfunction
 call SetStatusline()
 "}}}
@@ -485,26 +455,26 @@ call SetStatusline()
 
 " {{{ Java plugin config
 
-function! PluginConfig()
-    try
-        if &filetype ==? "java"
-            " if exists(":PingEclim") && !(eclim#PingEclim(0))
-            "     echom "Eclimd not started"
-            " endif
-            " if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
-            augroup javacomplete
-                let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
-                let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
-                set omnifunc=javacomplete#Complete
-            augroup END
-            " else
-                " echom "Eclim enabled"
-            " endif
-        endif
-    catch
-        echom "javacomplete2 is not installed!"
-    endtry
-endfunction
+" function! PluginConfig()
+"     try
+"         if &filetype ==? "java"
+"             " if exists(":PingEclim") && !(eclim#PingEclim(0))
+"             "     echom "Eclimd not started"
+"             " endif
+"             " if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
+"             augroup javacomplete
+"                 let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
+"                 let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
+"                 set omnifunc=javacomplete#Complete
+"             augroup END
+"             " else
+"                 " echom "Eclim enabled"
+"             " endif
+"         endif
+"     catch
+"         echom "javacomplete2 is not installed!"
+"     endtry
+" endfunction
 
 " }}}
 
