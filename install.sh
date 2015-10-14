@@ -69,5 +69,10 @@ sudo -v
 
 # Misc stuff
 sudo apt-get install -y sl fortune-mod espeak cowsay
+sudo -v
+
+# CTF tools
+sudo apt-get install -y gimp bless binwalk
+sudo pip install xortool
 
 sudo -k
