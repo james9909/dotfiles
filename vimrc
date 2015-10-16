@@ -62,6 +62,11 @@ try
             \'commands': 'SyntasticCheck'
         \}
     \}
+    NeoBundleLazy 'godlygeek/tabular', {
+        \'autoload': {
+            \'commands': 'Tabularize'
+        \}
+    \}
     NeoBundle 'Raimondi/delimitMate'
     NeoBundle 'SirVer/UltiSnips'
     NeoBundle 'tpope/vim-commentary'
