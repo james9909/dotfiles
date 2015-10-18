@@ -4,7 +4,8 @@ Dotfiles
 These are my dotfiles. There are many like them, but these are mine.
 Installation
 --------------
-For easy installation, modify `link.sh` to link files that you want, and run the script.
+If you only want to use some of my dotfiles, modify `link.sh` to link files that you want.
+Otherwise, if you want to install everything that I have, run `install.sh`.
 
 ### NeoBundle
 
