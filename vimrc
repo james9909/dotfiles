@@ -38,11 +38,7 @@ try
     NeoBundle 'gioele/vim-autoswap'
     NeoBundle 'ervandew/supertab'
 
-    NeoBundleLazy 'Lokaltog/vim-easymotion', {
-        \'autoload': {
-            \'mappings': '<Leader><Leader>'
-        \}
-    \}
+    NeoBundle 'Lokaltog/vim-easymotion'
     NeoBundleLazy 'davidhalter/jedi-vim', {
         \'autoload': {
             \'filetypes': 'python'
@@ -68,7 +64,17 @@ try
             \'commands': 'Tabularize'
         \}
     \}
-    NeoBundle 'Raimondi/delimitMate'
+    NeoBundleLazy 'Raimondi/delimitMate', {
+        \'autoload': {
+            \'insert': 1,
+            \'filetypes': 'all'
+        \}
+    \}
+    NeoBundleLazy 'sjl/gundo.vim', {
+        \'autoload': {
+            \'commands': 'GundoToggle'
+        \}
+    \}
     NeoBundle 'SirVer/UltiSnips'
     NeoBundle 'tpope/vim-commentary'
     NeoBundle 'tpope/vim-fugitive'
@@ -79,6 +85,11 @@ try
     NeoBundle 'xolox/vim-misc'
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'zirrostig/vim-schlepp'
+
+    " Gundo
+    let g:gundo_width = 30
+    let g:gundo_preview_height = 15
+    let g:gundo_preview_bottom = 1
 
     " DelimitMate
     let g:delimitMate_expand_inside_quotes = 1
@@ -329,6 +340,9 @@ nnoremap <C-k> 3k
 nnoremap <C-j> 3j
 vnoremap <C-k> 3k
 vnoremap <C-j> 3j
+
+" Gundo
+nnoremap <Leader>u :GundoToggle<CR>
 
 "}}}
 "{{{ Custom Status Line

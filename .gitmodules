@@ -95,6 +95,10 @@
     path = vim/bundle/vim-javacomplete2
     url = https://github.com/artur-shaik/vim-javacomplete2
 
+[submodule "vim/bundle/gundo.vim"]
+    path = vim/bundle/gundo.vim
+    url = https://github.com/sjl/gundo.vim
+
 [submodule "zsh/zsh-syntax-highlighting"]
     path = zsh/zsh-syntax-highlighting
     url = https://github.com/zsh-users/zsh-syntax-highlighting
