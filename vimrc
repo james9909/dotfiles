@@ -2,6 +2,7 @@
 
 augroup defaults
     autocmd!
+    autocmd BufReadPost * call MyFollowSymlink(expand('<afile>'))
     " autocmd VimEnter * call PluginConfig()
     autocmd VimResized * call SetStatusline()
     autocmd WinEnter * call SetStatusline()
@@ -199,7 +200,7 @@ set backup " Allow for a backup directory
 set wrapscan " Automatically wrap search when hitting bottom
 set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
 set linebreak " Break line on word
-set timeoutlen=300 " Timeout for entering key combinations
+set timeoutlen=500 " Timeout for entering key combinations
 set synmaxcol=150 " Limit syntax highlight parsing to first 150 columns
 set hidden " Hides buffers instead of closing them, allows opening new buffers when current has unsaved changes
 
@@ -527,6 +528,32 @@ function! TransparentBackground()
     highlight VertSplit ctermbg=none
     highlight SignColumn ctermbg=none
 endfunction
+" }}}
+
+" {{{ Follow symlinks
+" Credits to https://github.com/blueyed/dotfiles/commit/1287a5897a15c11b6c05ca428c4a5e6322bd55e8
+function! MyFollowSymlink(...)
+    if exists('w:no_resolve_symlink') && w:no_resolve_symlink
+        return
+    endif
+    let fname = a:0 ? a:1 : expand('%')
+    if fname =~ '^\w\+:/'
+        " Do not mess with 'fugitive://' etc
+        return
+    endif
+    let fname = simplify(fname)
+
+    let resolvedfile = resolve(fname)
+    if resolvedfile == fname
+        return
+    endif
+    let resolvedfile = fnameescape(resolvedfile)
+    echohl WarningMsg | echomsg 'Resolving symlink' fname '=>' resolvedfile | echohl None
+    " Use file, since edit doesn't work
+    exec 'file ' . resolvedfile
+endfunction
+command! FollowSymlink call MyFollowSymlink()
+command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
 " }}}
 
 " }}}
