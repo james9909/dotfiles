@@ -75,6 +75,7 @@ try
             \'commands': 'GundoToggle'
         \}
     \}
+    NeoBundle 'osyo-manga/vim-over'
     NeoBundle 'SirVer/UltiSnips'
     NeoBundle 'tpope/vim-commentary'
     NeoBundle 'tpope/vim-fugitive'
