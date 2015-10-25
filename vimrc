@@ -21,6 +21,30 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 "}}}
+"{{{ NeoVim
+if has('nvim')
+    let g:scriptsDirectory = expand("$HOME/.vim/scripts/")
+
+    if has('clipboard')
+        function! ClipboardYank()
+            call system('xclip -i -selection clipboard', @@)
+        endfunction
+
+        function! ClipboardPaste()
+            let @@ = system('xclip -o -selection clipboard')
+        endfunction
+        vnoremap <silent> y y:call ClipboardYank()<cr>
+        vnoremap <silent> d d:call ClipboardYank()<cr>
+        nnoremap <silent> p :call ClipboardPaste()<cr>p
+    endif
+
+    tnoremap <Esc> <C-\><C-n>   " Escape to exit terminal insert mode
+    tnoremap jj <C-\><C-n>      " jj to exit terminal insert mode
+    " Use :terminal to execute shell command
+    nnoremap <Leader>c :terminal
+
+endif
+"}}}
 "{{{NeoBundle and Plugins
 
 filetype off
@@ -245,7 +269,7 @@ filetype plugin indent on
 
 syntax enable " Enable syntax highlighting
 
-" }}}
+"}}}
 "{{{ Mappings
 
 " Map leader to space
@@ -350,6 +374,13 @@ nnoremap <Leader>u :GundoToggle<CR>
 
 " Source: https://github.com/ChesleyTan/linuxrc/blob/master/vimrc
 "{{{ Git
+"
+function! Git()
+    if exists('$NVIM_LISTEN_ADDRESS')
+        call system('python ' . g:scriptsDirectory . 'git.py $NVIM_LISTEN_ADDRESS $PWD &')
+    endif
+endfunction
+
 function! GitBranch()
     let output=system("git branch | grep '*' | grep -o '[^* ]*'")
     if output=="" || output=~?"fatal"
@@ -414,7 +445,7 @@ endfunction
 command! ToggleGitInfo call ToggleGitInfo()
 call RefreshGitInfo()
 "}}}
-" {{{ Status Line
+"{{{ Status Line
 function! SetStatusline()
     let bufName = bufname('%')
     " Do not modify the statusline for NERDTree
@@ -453,9 +484,9 @@ call SetStatusline()
 "}}}
 "
 "}}}
-" {{{ Functions
+"{{{ Functions
 
-" {{{ Java plugin config
+"{{{ Java plugin config
 
 " function! PluginConfig()
 "     try
@@ -478,7 +509,7 @@ call SetStatusline()
 "     endtry
 " endfunction
 
-" }}}
+"}}}
 
 "{{{ AutoIndent upon saving
 " Restore cursor position, window position, and last search after running a
@@ -530,9 +561,9 @@ func! Paste_on_off()
     endif
     return
 endfunc
-" }}}
+"}}}
 
-" {{{ Transparent background
+"{{{ Transparent background
 function! TransparentBackground()
     highlight clear CursorLine
     highlight Normal ctermbg=none
@@ -543,9 +574,9 @@ function! TransparentBackground()
     highlight VertSplit ctermbg=none
     highlight SignColumn ctermbg=none
 endfunction
-" }}}
+"}}}
 
-" {{{ Follow symlinks
+"{{{ Follow symlinks
 " Credits to https://github.com/blueyed/dotfiles/commit/1287a5897a15c11b6c05ca428c4a5e6322bd55e8
 function! MyFollowSymlink(...)
     if exists('w:no_resolve_symlink') && w:no_resolve_symlink
@@ -569,6 +600,6 @@ function! MyFollowSymlink(...)
 endfunction
 command! FollowSymlink call MyFollowSymlink()
 command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
-" }}}
+"}}}
 
-" }}}
+"}}}
