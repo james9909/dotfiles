@@ -94,11 +94,19 @@ try
             \'filetypes': 'all'
         \}
     \}
-    NeoBundleLazy 'sjl/gundo.vim', {
-        \'autoload': {
-            \'commands': 'GundoToggle'
+    if has('nvim')
+        NeoBundleLazy 'simnalamburt/vim-mundo', {
+            \'autoload': {
+                \'commands': 'GundoToggle'
+            \}
         \}
-    \}
+    else
+        NeoBundleLazy 'sjl/gundo.vim', {
+            \'autoload': {
+                \'commands': 'GundoToggle'
+            \}
+        \}
+    endif
     NeoBundle 'osyo-manga/vim-over'
     NeoBundle 'SirVer/UltiSnips'
     NeoBundle 'tpope/vim-commentary'

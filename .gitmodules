@@ -99,6 +99,10 @@
     path = vim/bundle/gundo.vim
     url = https://github.com/sjl/gundo.vim
 
+[submodule "vim/bundle/vim-mundo"]
+    path = vim/bundle/vim-mundo
+    url = https://github.com/simnalamburt/vim-mundo
+
 [submodule "vim/plugin/vim-over"]
     path = vim/plugin/vim-over
     url = https://github.com/osyo-manga/vim-over
