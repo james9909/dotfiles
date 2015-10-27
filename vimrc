@@ -63,6 +63,11 @@ try
     NeoBundle 'ervandew/supertab'
 
     NeoBundle 'Lokaltog/vim-easymotion'
+    NeoBundleLazy 'james9909/stackanswers.vim', {
+        \'autoload': {
+            \'commands': 'StackAnswers'
+        \}
+    \}
     NeoBundleLazy 'davidhalter/jedi-vim', {
         \'autoload': {
             \'filetypes': 'python'
@@ -457,7 +462,7 @@ call RefreshGitInfo()
 function! SetStatusline()
     let bufName = bufname('%')
     " Do not modify the statusline for NERDTree
-    if bufName =~# "NERD"
+    if bufName =~# "NERD" || bufName =~# "Answer"
         return
     endif
     let winWidth = winwidth(0)
