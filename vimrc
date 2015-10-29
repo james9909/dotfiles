@@ -462,7 +462,7 @@ call RefreshGitInfo()
 function! SetStatusline()
     let bufName = bufname('%')
     " Do not modify the statusline for NERDTree
-    if bufName =~# "NERD" || bufName =~# "Answer"
+    if bufName =~# "NERD" || bufName =~# "Answer" || bufName =~# "Gundo"
         return
     endif
     let winWidth = winwidth(0)
