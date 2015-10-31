@@ -329,7 +329,7 @@ nnoremap <CR> :noh<CR><CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>W :w!<CR>
 " Save with sudo
-nnoremap <Leader>W! :w !sudo tee %<CR>
+nnoremap <silent ><Leader>W! :w !sudo tee %>/dev/null<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
