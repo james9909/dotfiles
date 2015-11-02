@@ -49,30 +49,88 @@ sudo ln -s /opt/wget/bin/wget /usr/bin/wget
 sudo -v
 
 # Classic menu
-sudo apt-add-repository ppa:diesch/testing
-sudo apt-get update
-sudo apt-get install classicmenu-indicator
-sudo -v
+echo "Using classic menu? [y/n]"
+read ans
+if [[ $ans == "y" ]]; then
+    sudo apt-add-repository ppa:diesch/testing
+    sudo apt-get update
+    sudo apt-get install classicmenu-indicator
+    sudo -v
+fi
 
 chsh -s /bin/zsh
 
-# Vim <3
-git clone https://github.com/james9909/dotfiles
-cd dotfiles
-./link.sh
-cp -rfv vim ~/.vim
-updatevim
-curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
-sh ./install.sh
-rm install.sh
-sudo -v
+echo "Using these dotfiles? [y/n]"
+read ans
+if [[ $ans == "y" ]]; then
+    git clone https://github.com/james9909/dotfiles
+    cd dotfiles
+    ./link.sh
+    sudo -v
+fi
+
+echo "Using vim? [y/n]"
+read ans
+if [[ $ans == "y" ]]; then
+    sudo apt-get -y remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
+    sudo apt-get -y build-dep vim-gnome
+    sudo apt-get -y install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev mercurial libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+    sudo mkdir /usr/include/lua5.1/include
+    sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
+    sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
+    cd "$HOME"
+    git clone https://github.com/vim/vim "$HOME/vim"
+    cd vim/src
+    make distclean
+    ./configure --with-features=huge \
+        --enable-rubyinterp \
+        --enable-largefile \
+        --disable-netbeans \
+        --enable-pythoninterp \
+        --with-python-config-dir=/usr/lib/python2.7/config \
+        --enable-perlinterp \
+        --enable-luainterp \
+        --with-luajit \
+        --enable-gui=auto \
+        --enable-fail-if-missing \
+        --with-lua-prefix=/usr/include/lua5.1 \
+        --enable-cscope
+    make
+    sudo make install
+    cp -rfv vim ~/.vim
+    curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
+    sh ./install.sh
+    rm install.sh
+    sudo -v
+fi
+
+echo "Using neovim? [y/n]"
+read ans
+if [[ $ans == "y" ]]; then
+    git clone https://github.com/neovim/neovim ~/neovim
+    cd ~/neovim
+    make
+    sudo make install
+    sudo pip install neovim
+    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+    ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+    ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+    sudo -v
+fi
+
+echo "Using i3? [y/n]"
+read ans
+if [[ $ans == "y" ]]; then
+    sudo apt-get install -y i3 i3status
+    sudo -v
+fi
 
 # Misc stuff
 sudo apt-get install -y sl fortune-mod espeak cowsay
 sudo -v
 
 # CTF tools
-sudo apt-get install -y gimp bless binwalk
+sudo apt-get install -y gimp bless binwalk audacity
 sudo pip install xortool
 
 sudo -k
