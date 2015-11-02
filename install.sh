@@ -107,6 +107,7 @@ fi
 echo "Using neovim? [y/n]"
 read ans
 if [[ $ans == "y" ]]; then
+    sudo apt-get install xclip
     git clone https://github.com/neovim/neovim ~/neovim
     cd ~/neovim
     make
