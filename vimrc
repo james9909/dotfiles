@@ -41,7 +41,7 @@ if has('nvim')
     tnoremap <Esc> <C-\><C-n>   " Escape to exit terminal insert mode
     tnoremap jj <C-\><C-n>      " jj to exit terminal insert mode
     " Use :terminal to execute shell command
-    nnoremap <Leader>c :terminal
+    nnoremap <Leader>T ;terminal<CR>
 
 endif
 "}}}
