@@ -58,6 +58,26 @@ try
 
     if has('lua')
         NeoBundle 'Shougo/neocomplete.vim'
+
+        let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
+        let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
+        let g:neocomplete#sources#syntax#min_keyword_length = 2 " Only show completions longer than 2 chars
+        let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
+        let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
+        let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        inoremap <expr><C-g> neocomplete#undo_completion()
+        inoremap <expr><C-l> neocomplete#complete_common_string()
+        nnoremap <Leader>a :NeoCompleteToggle<CR>
+        " <CR>: close popup and save indent.
+        inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
+        function! s:my_cr_function()
+            return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
+        endfunction
+        let g:tmuxcomplete#trigger  = 'omnifunc' " Integrate into neocomplete
     endif
     NeoBundle 'gioele/vim-autoswap'
     NeoBundle 'ervandew/supertab'
@@ -83,11 +103,6 @@ try
             \'commands': 'NERDTreeToggle'
         \}
     \}
-    NeoBundleLazy 'scrooloose/syntastic', {
-        \'autoload': {
-            \'commands': 'SyntasticCheck'
-        \}
-    \}
     NeoBundleLazy 'godlygeek/tabular', {
         \'autoload': {
             \'commands': 'Tabularize'
@@ -105,12 +120,33 @@ try
                 \'commands': 'GundoToggle'
             \}
         \}
+        NeoBundleLazy 'benekastah/neomake', {
+            \'autoload': {
+                \'commands': 'Neomake'
+            \}
+        \}
     else
         NeoBundleLazy 'sjl/gundo.vim', {
             \'autoload': {
                 \'commands': 'GundoToggle'
             \}
         \}
+        NeoBundleLazy 'scrooloose/syntastic', {
+            \'autoload': {
+                \'commands': 'SyntasticCheck'
+            \}
+        \}
+
+        let g:syntastic_mode_map = {'mode': 'passive'}
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+        let g:syntastic_check_on_open = 1
+        let g:syntastic_check_on_wq = 1
+        let python_highlight_all = 1
+        let g:syntastic_error_symbol='✗'
+        let g:syntastic_warning_symbol='⚠'
+        let g:syntastic_style_error_symbol = '✗'
+        let g:syntastic_style_warning_symbol = '⚠'
     endif
     NeoBundle 'osyo-manga/vim-over'
     NeoBundle 'SirVer/UltiSnips'
@@ -145,18 +181,6 @@ try
     let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/UltiSnips/'
     let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
-    " Syntastic
-    let g:syntastic_mode_map = {'mode': 'passive'}
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 1
-    let python_highlight_all = 1
-    let g:syntastic_error_symbol='✗'
-    let g:syntastic_warning_symbol='⚠'
-    let g:syntastic_style_error_symbol = '✗'
-    let g:syntastic_style_warning_symbol = '⚠'
-
     " Vim-schlepp
     let g:Schlepp#allowSquishingLines = 1
     let g:Schlepp#allowSquishingBlocks = 1
@@ -175,28 +199,6 @@ try
 
     " " Eclim
     " let g:EclimCompletionMethod = 'omnifunc'
-
-    if has('lua')
-        let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
-        let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
-        let g:neocomplete#sources#syntax#min_keyword_length = 2 " Only show completions longer than 2 chars
-        let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
-        let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
-        let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-        inoremap <expr><C-g> neocomplete#undo_completion()
-        inoremap <expr><C-l> neocomplete#complete_common_string()
-        nnoremap <Leader>a :NeoCompleteToggle<CR>
-        " <CR>: close popup and save indent.
-        inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
-        function! s:my_cr_function()
-            return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
-        endfunction
-        let g:tmuxcomplete#trigger  = 'omnifunc' " Integrate into neocomplete
-    endif
 
     " indentLine
     let g:indentLine_char = '┆'
@@ -334,7 +336,11 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>i :call Indent()<CR>
-nnoremap <Leader>c :SyntasticCheck<CR>
+if has("nvim")
+    nnoremap <Leader>c :Neomake<CR>
+else
+    nnoremap <Leader>c :SyntasticCheck<CR>
+endif
 nnoremap <Leader>rn :set relativenumber!<CR>
 nnoremap <Leader>ss :setlocal spell!<CR>"
 nnoremap <Leader>t :NERDTreeToggle<CR>
