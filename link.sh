@@ -2,7 +2,7 @@
 
 dir=~/Dev/dotfiles # Change with path to repo
 backup=~/backup # For backup
-files="vimrc zshrc oh-my-zsh tmux.conf" # list of files/folders to symlink
+files=".vimrc .zshrc .oh-my-zsh .tmux.conf" # list of files/folders to symlink
                                         # Do not recommend syncing vim folder due to plugins being submodules,
                                         # unless --recursive was called during the clone
 YELLOW="\E[1;33m"
@@ -31,11 +31,11 @@ run_with_status cd $dir
 # move any existing dotfiles in homedir to dotfiles_old directory
 echo -e "\n${YELLOW}Moving any existing dotfiles from ~ to $backup"
 for file in $files; do
-    run_with_status mv ~/.$file $backup/
+    run_with_status mv ~/$file $backup/
 done
 
 # Create symlinks
 for file in $files; do
-    echo -e "\n${YELLOW}Creating symlink: ~/.$file -> $dir/$file"
-    run_with_status ln -s $dir/$file ~/.$file
+    echo -e "\n${YELLOW}Creating symlink: ~/$file -> $dir/$file"
+    run_with_status ln -s $dir/$file ~/$file
 done
