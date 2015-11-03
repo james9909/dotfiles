@@ -111,8 +111,8 @@
     path = .vim/bundle/stackanswers.vim
     url = https://github.com/james9909/stackanswers.vim
 
-[submodule ".oh-my-zsh/custom/plugin/zsh-syntax-highlighting"]
-    path = .oh-my-zsh/custom/plugin/zsh-syntax-highlighting
+[submodule ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+    path = .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     url = https://github.com/zsh-users/zsh-syntax-highlighting
 
 [submodule ".vim/bundle/neomake"]
