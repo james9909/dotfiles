@@ -44,6 +44,8 @@ bindsym $mod+d exec dmenu_run
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+exec --no-startup-id nm-applet
+exec --no-startup-id indicator-cpu-freq
 
 # change focus
 bindsym $mod+j focus left
