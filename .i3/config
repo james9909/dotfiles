@@ -45,7 +45,11 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 exec --no-startup-id nm-applet
-exec --no-startup-id indicator-cpu-freq
+exec --no-startup-id indicator-cpufreq
+
+# Dunst
+exec killall -q notify-osd
+exec --no-startup-id dunst -config ~/.i3/config_dunst
 
 # change focus
 bindsym $mod+j focus left
