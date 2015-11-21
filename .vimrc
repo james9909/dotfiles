@@ -488,6 +488,8 @@ function! SetStatusline()
     if winWidth > 100
         setlocal statusline+=\ %{g:gitInfo}%## " Git info
     endif
+    setlocal statusline+=\ Char:\ 0x%04B  " current character
+
     setlocal statusline+=%= " Left/right separator
     if exists("*SyntasticStatuslineFlag()")
         setlocal statusline+=%{SyntasticStatuslineFlag()}%## " Syntastic plugin flag
