@@ -228,7 +228,6 @@ set shiftwidth=4 " Tab size for auto indent
 set softtabstop=4 " A tab is 4 spaces
 set autoindent " Autoindent
 set copyindent " Copies the indentation of the previous line
-set smartindent " Enable smart indents
 set number " Enable line numbers
 set wrap " Wrap lines
 set wildmode=list:longest,full
@@ -254,6 +253,9 @@ set linebreak " Break line on word
 set timeoutlen=500 " Timeout for entering key combinations
 set synmaxcol=150 " Limit syntax highlight parsing to first 150 columns
 set hidden " Hides buffers instead of closing them, allows opening new buffers when current has unsaved changes
+set cindent " Enable C like indentation
+set cinkeys-=0# " Prevent # from removing indents from a line
+set indentkeys-=0# " Prevent # from removing indents from a line
 
 " If the backup directories do not exist, then make them
 if !isdirectory($HOME . '/.vim/_backup')
