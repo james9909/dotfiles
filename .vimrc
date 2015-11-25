@@ -81,53 +81,53 @@ try
 
     NeoBundle 'Lokaltog/vim-easymotion'
     NeoBundleLazy 'james9909/stackanswers.vim', {
-                \'autoload': {
-                \'commands': 'StackAnswers'
-                \}
-                \}
+        \'autoload': {
+            \'commands': 'StackAnswers'
+        \}
+    \}
     NeoBundleLazy 'davidhalter/jedi-vim', {
-                \'autoload': {
-                \'filetypes': 'python'
-                \}
-                \}
+        \'autoload': {
+            \'filetypes': 'python'
+        \}
+    \}
     NeoBundleLazy 'artur-shaik/vim-javacomplete2', {
-                \'autoload': {
-                \'filetypes': 'java'
-                \}
-                \}
+        \'autoload': {
+            \'filetypes': 'java'
+        \}
+    \}
     NeoBundleLazy 'scrooloose/nerdtree', {
-                \'autoload': {
-                \'commands': 'NERDTreeToggle'
-                \}
-                \}
+        \'autoload': {
+            \'commands': 'NERDTreeToggle'
+        \}
+    \}
     NeoBundleLazy 'godlygeek/tabular', {
-                \'autoload': {
-                \'commands': 'Tabularize'
-                \}
-                \}
+        \'autoload': {
+            \'commands': 'Tabularize'
+        \}
+    \}
     NeoBundleLazy 'Raimondi/delimitMate', {
-                \'autoload': {
-                \'insert': 1,
-                \'filetypes': 'all'
-                \}
-                \}
+        \'autoload': {
+            \'insert': 1,
+            \'filetypes': 'all'
+        \}
+    \}
     if has('nvim')
         NeoBundleLazy 'simnalamburt/vim-mundo', {
-                    \'autoload': {
-                    \'commands': 'GundoToggle'
-                    \}
-                    \}
+            \'autoload': {
+                \'commands': 'GundoToggle'
+            \}
+        \}
         NeoBundleLazy 'benekastah/neomake', {
-                    \'autoload': {
-                    \'commands': 'Neomake'
-                    \}
-                    \}
+            \'autoload': {
+                \'commands': 'Neomake'
+            \}
+        \}
     else
         NeoBundleLazy 'sjl/gundo.vim', {
-                    \'autoload': {
-                    \'commands': 'GundoToggle'
-                    \}
-                    \}
+            \'autoload': {
+                \'commands': 'GundoToggle'
+            \}
+        \}
         NeoBundle 'scrooloose/syntastic'
 
         let g:syntastic_mode_map = {'mode': 'passive'}
@@ -141,6 +141,7 @@ try
         let g:syntastic_style_error_symbol = '✗'
         let g:syntastic_style_warning_symbol = '⚠'
     endif
+    NeoBundle 'airblade/vim-gitgutter'
     NeoBundle 'osyo-manga/vim-over'
     NeoBundle 'SirVer/UltiSnips'
     NeoBundle 'tpope/vim-commentary'
@@ -155,6 +156,14 @@ try
 
     " Airline
     let g:airline_powerline_fonts = 1
+    let g:airline#extensions#hunks#enabled = 1
+    let g:airline#extensions#hunks#hunk_symbols = ['+', 'Δ', '-']
+    let g:airline#extensions#hunks#non_zero_only = 1
+
+    " Git Gutter
+    let g:gitgutter_sign_added = "+"
+    let g:gitgutter_sign_modified = "Δ"
+    let g:gitgutter_sign_removed = "-"
 
     " Gundo
     let g:gundo_width = 30
@@ -504,7 +513,7 @@ command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_sym
 "{{{ Initialize statusline
 function! AirlineInit()
     let g:airline_section_a = airline#section#create(["mode", " ", "paste"])
-    let g:airline_section_b = airline#section#create(["branch"])
+    let g:airline_section_b = airline#section#create(["branch", " ", "hunks"])
     let g:airline_section_c = airline#section#create_left(["file", "readonly"])
 endfunction
 "}}}
