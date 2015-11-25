@@ -3,13 +3,9 @@
 augroup defaults
     autocmd!
     autocmd BufReadPost * call MyFollowSymlink(expand('<afile>'))
+    autocmd VimEnter * call AirlineInit()
     " autocmd VimEnter * call PluginConfig()
-    autocmd VimResized * call SetStatusline()
-    autocmd WinEnter * call SetStatusline()
-    autocmd BufEnter * call SetStatusline()
     autocmd BufEnter * silent! lcd %:p:h
-    " Refresh git information when file is changed
-    autocmd BufWritePost * call RefreshGitInfo()
 augroup END
 
 " Automagically remove any trailing whitespace that is in the file
@@ -79,63 +75,60 @@ try
         endfunction
         let g:tmuxcomplete#trigger  = 'omnifunc' " Integrate into neocomplete
     endif
+    NeoBundle 'bling/vim-airline'
     NeoBundle 'gioele/vim-autoswap'
     NeoBundle 'ervandew/supertab'
 
     NeoBundle 'Lokaltog/vim-easymotion'
     NeoBundleLazy 'james9909/stackanswers.vim', {
-        \'autoload': {
-            \'commands': 'StackAnswers'
-        \}
-    \}
+                \'autoload': {
+                \'commands': 'StackAnswers'
+                \}
+                \}
     NeoBundleLazy 'davidhalter/jedi-vim', {
-        \'autoload': {
-            \'filetypes': 'python'
-        \}
-    \}
+                \'autoload': {
+                \'filetypes': 'python'
+                \}
+                \}
     NeoBundleLazy 'artur-shaik/vim-javacomplete2', {
-        \'autoload': {
-            \'filetypes': 'java'
-        \}
-    \}
+                \'autoload': {
+                \'filetypes': 'java'
+                \}
+                \}
     NeoBundleLazy 'scrooloose/nerdtree', {
-        \'autoload': {
-            \'commands': 'NERDTreeToggle'
-        \}
-    \}
+                \'autoload': {
+                \'commands': 'NERDTreeToggle'
+                \}
+                \}
     NeoBundleLazy 'godlygeek/tabular', {
-        \'autoload': {
-            \'commands': 'Tabularize'
-        \}
-    \}
+                \'autoload': {
+                \'commands': 'Tabularize'
+                \}
+                \}
     NeoBundleLazy 'Raimondi/delimitMate', {
-        \'autoload': {
-            \'insert': 1,
-            \'filetypes': 'all'
-        \}
-    \}
+                \'autoload': {
+                \'insert': 1,
+                \'filetypes': 'all'
+                \}
+                \}
     if has('nvim')
         NeoBundleLazy 'simnalamburt/vim-mundo', {
-            \'autoload': {
-                \'commands': 'GundoToggle'
-            \}
-        \}
+                    \'autoload': {
+                    \'commands': 'GundoToggle'
+                    \}
+                    \}
         NeoBundleLazy 'benekastah/neomake', {
-            \'autoload': {
-                \'commands': 'Neomake'
-            \}
-        \}
+                    \'autoload': {
+                    \'commands': 'Neomake'
+                    \}
+                    \}
     else
         NeoBundleLazy 'sjl/gundo.vim', {
-            \'autoload': {
-                \'commands': 'GundoToggle'
-            \}
-        \}
-        NeoBundleLazy 'scrooloose/syntastic', {
-            \'autoload': {
-                \'commands': 'SyntasticCheck'
-            \}
-        \}
+                    \'autoload': {
+                    \'commands': 'GundoToggle'
+                    \}
+                    \}
+        NeoBundle 'scrooloose/syntastic'
 
         let g:syntastic_mode_map = {'mode': 'passive'}
         let g:syntastic_always_populate_loc_list = 1
@@ -159,6 +152,9 @@ try
     NeoBundle 'xolox/vim-misc'
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'zirrostig/vim-schlepp'
+
+    " Airline
+    let g:airline_powerline_fonts = 1
 
     " Gundo
     let g:gundo_width = 30
@@ -208,14 +204,10 @@ catch /:E117:/
     echom "NeoBundle is not installed!"
 endtry
 "}}}
-"{{{ Variables
-let g:showGitInfo = 1 " This determines whether to show git info in statusline
-let g:inGitRepo = 0
-let g:gitInfo = "" " Placeholder value to initialize variable
-"}}}
 "{{{Misc Settings
 
 colorscheme Tomorrow-Night
+set guifont=Roboto\ Mono\ for\ Powerline
 set laststatus=2 " Always show statusline on last window
 set nocompatible " Disable Vi-compatibility settings
 set showcmd " Shows what you are typing as a command
@@ -391,122 +383,6 @@ vnoremap <C-j> 3j
 nnoremap <Leader>u :GundoToggle<CR>
 
 "}}}
-"{{{ Custom Status Line
-
-" Source: https://github.com/ChesleyTan/linuxrc/blob/master/vimrc
-"{{{ Git
-"
-function! Git()
-    if exists('$NVIM_LISTEN_ADDRESS')
-        call system('python ' . g:scriptsDirectory . 'git.py $NVIM_LISTEN_ADDRESS $PWD &')
-    endif
-endfunction
-
-function! GitBranch()
-    let output=system("git branch | grep '*' | grep -o '[^* ]*'")
-    if output=="" || output=~?"fatal"
-        return ""
-    else
-        let g:inGitRepo=1
-        return "[Git][" . output[0 : strlen(output)-2] . " " " Strip newline ^@
-    endif
-endfunction
-
-function! GitStatus()
-    if g:inGitRepo == 0
-        return ""
-    endif
-    let output=system('git status')
-    let retStr=""
-    if output=~?"Changes to be committed"
-        let retStr.="\u2718"
-    else
-        let retStr.="\u2714"
-    endif
-    if output=~?"modified"
-        let retStr.=" \u0394"
-    endif
-    let retStr.=GitStashLength() . "]"
-    return retStr
-endfunction
-
-function! GitStashLength()
-    if g:inGitRepo == 0
-        return ""
-    endif
-    let stashLength=system("git stash list | wc -l")
-    if stashLength=="0\n" || stashLength=="" || stashLength=~?"fatal"
-        return ""
-    else
-        return " \u26c1 " . stashLength[0 : strlen(stashLength)-2] " Strip trailing newline
-    endif
-endfunction
-
-function! RefreshGitInfo()
-    if g:showGitInfo == 1
-        " If nvim, use asynchronous msgpack-rpc method
-        if has('nvim')
-            call Git()
-            " Otherwise, use standard synchronous method
-        else
-            let gitBranch=GitBranch()
-            let g:gitInfo=gitBranch . GitStatus()
-        endif
-    else
-        let g:gitInfo = "" " Clear old git info
-    endif
-endfunction
-function! ToggleGitInfo()
-    if g:showGitInfo == 1
-        let g:showGitInfo = 0
-    else
-        let g:showGitInfo = 1
-    endif
-endfunction
-command! ToggleGitInfo call ToggleGitInfo()
-call RefreshGitInfo()
-"}}}
-"{{{ Status Line
-function! SetStatusline()
-    let bufName = bufname('%')
-    " Do not modify the statusline for NERDTree
-    if bufName =~# "NERD" || bufName =~# "Answer" || bufName =~# "Gundo"
-        return
-    endif
-    let winWidth = winwidth(0)
-    setlocal statusline=""
-    if winWidth > 50
-        setlocal statusline+=%t " Tail of the filename
-    endif
-    if winWidth > 40
-        setlocal statusline+=%y " Filetype
-    endif
-    if winWidth > 80
-        setlocal statusline+=[%{&ff}] " File format
-    endif
-    setlocal statusline+=%r%## " Read only flag
-    setlocal statusline+=%m\%## " Modified flag
-    setlocal statusline+=%h " Help file flag
-    if winWidth > 100
-        setlocal statusline+=\ %{g:gitInfo}%## " Git info
-    endif
-    setlocal statusline+=\ Char:\ 0x%04B  " current character
-
-    setlocal statusline+=%= " Left/right separator
-    if exists("*SyntasticStatuslineFlag()")
-        setlocal statusline+=%{SyntasticStatuslineFlag()}%## " Syntastic plugin flag
-    endif
-    "setlocal statusline+=%3*%F%*\ %4*\|%*\                        " File path with full names
-    setlocal statusline+=%{pathshorten(fnamemodify(expand('%:p'),':~'))}%##\|%##  " File path with truncated names
-    setlocal statusline+=C:%2c\  " Cursor column, reserve 2 spaces
-    setlocal statusline+=R:%3l/%3L " Cursor line/total lines, reserve 3 spaces for each
-    setlocal statusline+=\|%##%3p " Percent through file, reserve 3 spaces
-    setlocal statusline+=%% " Percent symbol
-endfunction
-call SetStatusline()
-"}}}
-"
-"}}}
 "{{{ Functions
 
 "{{{ Java plugin config
@@ -623,6 +499,14 @@ function! MyFollowSymlink(...)
 endfunction
 command! FollowSymlink call MyFollowSymlink()
 command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
+"}}}
+
+"{{{ Initialize statusline
+function! AirlineInit()
+    let g:airline_section_a = airline#section#create(["mode", " ", "paste"])
+    let g:airline_section_b = airline#section#create(["branch"])
+    let g:airline_section_c = airline#section#create_left(["file", "readonly"])
+endfunction
 "}}}
 
 "}}}

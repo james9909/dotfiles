@@ -118,3 +118,7 @@
 [submodule ".vim/bundle/neomake"]
     path = .vim/bundle/neomake
     url = https://github.com/benekastah/neomake
+
+[submodule ".vim/bundle/vim-airline"]
+    path = .vim/bundle/vim-airline
+    url = https://github.com/bling/vim-airline
