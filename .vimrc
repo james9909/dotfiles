@@ -181,7 +181,7 @@ try
     let g:mta_use_match_paren_group = 1
 
     " Jedi-vim
-    let g:jedi#popup_on_dot = 1
+    let g:jedi#popup_on_dot = 0
     let g:jedi#popup_select_first = 0
 
     " SuperTab
