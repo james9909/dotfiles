@@ -63,8 +63,6 @@ chsh -s /bin/zsh
 echo "Using these dotfiles? [y/n]"
 read ans
 if [[ $ans == "y" ]]; then
-    git clone https://github.com/james9909/dotfiles
-    cd dotfiles
     ./link.sh
     sudo -v
 fi
@@ -97,7 +95,6 @@ if [[ $ans == "y" ]]; then
         --enable-cscope
     make
     sudo make install
-    cp -rfv vim ~/.vim
     curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
     sh ./install.sh
     rm install.sh
@@ -107,10 +104,11 @@ fi
 echo "Using neovim? [y/n]"
 read ans
 if [[ $ans == "y" ]]; then
-    sudo apt-get install xclip
+    sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja xclip
     git clone https://github.com/neovim/neovim ~/neovim
     cd ~/neovim
-    make
+    make clean
+    make CMAKE_BUILD_TYPE=Release # Optimized build
     sudo make install
     sudo pip install neovim
     mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
