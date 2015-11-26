@@ -212,6 +212,7 @@ set grepprg=grep\ -nH\ $*
 set expandtab " Tabs are spaces
 set smarttab " Enable smart tabbing
 set shiftwidth=4 " Tab size for auto indent
+set tabstop=4 " A tab is 4 columns
 set softtabstop=4 " A tab is 4 spaces
 set autoindent " Autoindent
 set copyindent " Copies the indentation of the previous line
