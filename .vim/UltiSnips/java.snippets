@@ -10,9 +10,9 @@ priority -50
 global !p
 def nl(snip):
     if snip.opt("g:ultisnips_java_brace_style", "") == "nl":
-    snip += ""
+        snip += ""
     else:
-    snip.rv += " "
+        snip.rv += " "
 def getArgs(group):
     import re
     word = re.compile('[a-zA-Z><.]+ \w+')
