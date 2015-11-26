@@ -158,6 +158,7 @@ try
     " DelimitMate
     let g:delimitMate_expand_inside_quotes = 1
     let g:delimitMate_expand_cr = 1
+    let g:delimitMate_nesting_quotes = ['"', '`', '"']
 
     " Vim notes
     let g:notes_word_boundaries = 1
@@ -188,7 +189,8 @@ try
     let g:SuperTabDefaultCompletionType = 'context'
 
     " indentLine
-    let g:indentLine_char = '┆'
+    let g:indentLine_char = '¦'
+    let g:indentLine_color_term = 239
 
     call neobundle#end()
 catch /:E117:/
@@ -197,6 +199,7 @@ endtry
 "}}}
 "{{{Misc Settings
 syntax enable " Enable syntax highlighting
+syntax sync minlines=256 " Check the first 256 lines to guess syntax highlighting to use
 filetype indent on " Enable filetype-specific indentation
 filetype plugin on " Enable filetype-specific plugins
 colorscheme Tomorrow-Night
@@ -367,35 +370,21 @@ endfunction
 
 "}}}
 
-"{{{ AutoIndent upon saving
-" Restore cursor position, window position, and last search after running a
-" command.
+"{{{ Preserve cursor position
 function! Preserve(command)
-    " Save the last search.
-    let search = @/
-
-    " Save the current cursor position.
-    let cursor_position = getpos('.')
-
-    " Save the current window position.
-    normal! H
-    let window_position = getpos('.')
-    call setpos('.', cursor_position)
-
-    " Execute the command.
-    execute a:command
-
-    " Restore the last search.
-    let @/ = search
-
-    " Restore the previous window position.
-    call setpos('.', window_position)
-    normal! zt
-
-    " Restore the previous cursor position.
-    call setpos('.', cursor_position)
+  " preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " do the business:
+  execute a:command
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
 endfunction
+"}}}
 
+"{{{ Indent file and preserve cursor position
 " Re-indent the whole buffer.
 function! Indent()
     call Preserve('normal gg=G')
