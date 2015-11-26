@@ -54,6 +54,9 @@ exec --no-startup-id indicator-cpufreq
 exec killall -q notify-osd
 exec --no-startup-id dunst -config ~/.i3/config_dunst
 
+# Lock
+exec xautolock -time 10 -locker "/home/james/.i3/lock"
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
