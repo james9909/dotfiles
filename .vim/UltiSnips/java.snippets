@@ -8,17 +8,11 @@ priority -50
 # @Test annotation from the method
 
 global !p
-def junit(snip):
-    if snip.opt("g:ultisnips_java_junit", "") == "3":
-	snip += ""
-    else:
-	snip.rv += "@Test\n\t"
-
 def nl(snip):
     if snip.opt("g:ultisnips_java_brace_style", "") == "nl":
-	snip += ""
+    snip += ""
     else:
-	snip.rv += " "
+    snip.rv += " "
 def getArgs(group):
     import re
     word = re.compile('[a-zA-Z><.]+ \w+')
@@ -48,45 +42,6 @@ try {
     Thread.sleep(${1:1000});
 } catch (InterruptedException e){
     e.printStackTrace();
-}
-endsnippet
-
-snippet f "field" b
-${1:private} ${2:String} ${3:`!p snip.rv = t[2].lower()`};
-endsnippet
-
-snippet as "assert" b
-assert ${1:test}${2/(.+)/(?1: \: ")/}${2:Failure message}${2/(.+)/(?1:")/};
-endsnippet
-
-snippet at "assert true" b
-assertTrue(${1:actual});
-endsnippet
-
-snippet af "assert false" b
-assertFalse(${1:actual});
-endsnippet
-
-snippet ae "assert equals" b
-assertEquals(${1:expected}, ${2:actual});
-endsnippet
-
-snippet cs "case" b
-case $1:
-    $2
-$0
-endsnippet
-
-snippet ca "catch" b
-catch (${1:Exception} ${2:e})`!p nl(snip)`{
-    $0
-}
-endsnippet
-
-snippet cle "class extends" b
-public class ${1:`!p
-snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }${4:implements ${5:Interface} }{
-    $0
 }
 endsnippet
 
@@ -144,84 +99,9 @@ public class `!p
 snip.rv = snip.basename or "untitled"` {
 
     public `!p snip.rv = snip.basename or "untitled"`($2) {
-	$0
+    $0
     }
 }
-endsnippet
-
-snippet cl "class" b
-public class ${1:`!p
-snip.rv = snip.basename or "untitled"`} {
-    $0
-}
-endsnippet
-
-snippet cos "constant string" b
-public static final String ${1:var} = "$2";$0
-endsnippet
-
-snippet constant "constant" b
-public static final ${1:String} ${2:var} = $3;$0
-endsnippet
-
-snippet de "default" b
-default:
-    $0
-endsnippet
-
-snippet elif "else if"
-else if ($1)`!p nl(snip)`{
-    $0${VISUAL}
-}
-endsnippet
-
-snippet el "else" w
-else`!p nl(snip)`{
-    $0${VISUAL}
-}
-endsnippet
-
-snippet fore "for (each)" b
-for ($1 : $2)`!p nl(snip)`{
-    $0
-}
-endsnippet
-
-snippet for "for" b
-for ($1; $2; $3)`!p nl(snip)`{
-    $0
-}
-endsnippet
-
-snippet fori "for i" b
-for (int ${1:i} = 0; $1 < ${2:10}; $1++)`!p nl(snip)`{
-    $0
-}
-endsnippet
-
-
-snippet if "if" b
-if ($1)`!p nl(snip)`{
-    $0${VISUAL}
-}
-endsnippet
-
-snippet im "import"  b
-import ${1:java}.${2:util}.$0;
-endsnippet
-
-snippet im "import static"  b
-import ${1:java}.${2:util}.$0;
-endsnippet
-
-snippet in "Interface" b
-interface ${1:`!p snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }{
-    $0
-}
-endsnippet
-
-snippet cc "constructor call or setter body"
-this.${1:var} = $1;
 endsnippet
 
 snippet list "collections List" b
@@ -258,34 +138,8 @@ if len(args) == 0:
 }
 endsnippet
 
-snippet j.i "java_io" i
-java.io.
-endsnippet
-
-snippet j.m "java_math" i
-java.math.
-endsnippet
-
-snippet j.u "java_util_"  i
-java.util.
-endsnippet
-
 snippet main "method (main)" b
 public static void main(String[] args)`!p nl(snip)`{
-    $0
-}
-endsnippet
-
-snippet try "try/catch" b
-try {
-    $1${VISUAL}
-} catch(${2:Exception} ${3:e}){
-    ${4:e.printStackTrace();}
-}
-endsnippet
-
-snippet mt "method throws" b
-${1:private} ${2:void} ${3:method}(${4}) ${5:throws $6 }{
     $0
 }
 endsnippet
@@ -324,7 +178,7 @@ endsnippet
 
 snippet /set(ter)?/ "setter" br
 public void set${1:Name}(${2:String} `!p snip.rv = mixedCase(t[1])`) {
-	this.`!p snip.rv = mixedCase(t[1])` = `!p snip.rv = mixedCase(t[1])`;
+    this.`!p snip.rv = mixedCase(t[1])` = `!p snip.rv = mixedCase(t[1])`;
 }
 endsnippet
 
@@ -338,68 +192,12 @@ public $2 get$1() {
 }
 endsnippet
 
-snippet pa "package" b
-package $0
-endsnippet
-
 snippet print "print" b
 System.out.print($1);$0
 endsnippet
 
 snippet println "println"  b
 System.out.println($1);$0
-endsnippet
-
-snippet pr "private" b
-private $0
-endsnippet
-
-snippet po "protected" b
-protected $0
-endsnippet
-
-snippet pu "public" b
-public $0
-endsnippet
-
-snippet re "return" b
-return $0
-endsnippet
-
-snippet st "static"
-static $0
-endsnippet
-
-snippet sw "switch" b
-switch ($1)`!p nl(snip)`{
-    case $2: $0
-}
-endsnippet
-
-snippet sy "synchronized"
-synchronized $0
-endsnippet
-
-snippet test "test" b
-`!p junit(snip)`public void test${1:Name}() {
-    $0
-}
-endsnippet
-
-snippet tt "test throws" b
-`!p junit(snip)`public void test${1:Name}() ${2:throws Exception }{
-    $0
-}
-endsnippet
-
-snippet th "throw" b
-throw new $0
-endsnippet
-
-snippet wh "while" b
-while ($1)`!p nl(snip)`{
-    $0
-}
 endsnippet
 
 # vim:ft=snippets:

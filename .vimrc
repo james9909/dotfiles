@@ -4,23 +4,17 @@ augroup defaults
     autocmd!
     autocmd BufReadPost * call MyFollowSymlink(expand('<afile>'))
     autocmd VimEnter * call AirlineInit()
-    " autocmd VimEnter * call PluginConfig()
-    autocmd BufEnter * silent! lcd %:p:h
+    autocmd FileType java call JavaConfig()
+    " Restore cursor location
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
 " Automagically remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
-
-" Remove fugitive buffers
-autocmd BufReadPost fugitive://* set bufhidden=delete
-
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 "}}}
 "{{{ NeoVim
 if has('nvim')
-    let g:scriptsDirectory = expand("$HOME/.vim/scripts/")
-
     if has('clipboard')
         function! ClipboardYank()
             call system('xclip -i -selection clipboard', @@)
@@ -42,9 +36,6 @@ if has('nvim')
 endif
 "}}}
 "{{{NeoBundle and Plugins
-
-filetype off
-
 try
     set runtimepath+=~/.vim/bundle/neobundle.vim/
     call neobundle#begin(expand('~/.vim/bundle'))
@@ -57,23 +48,18 @@ try
 
         let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
         let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
-        let g:neocomplete#sources#syntax#min_keyword_length = 2 " Only show completions longer than 2 chars
+        let g:neocomplete#sources#syntax#min_keyword_length = 1 " Only show completions longer than 1 chars
         let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
         let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
         let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
         autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-        inoremap <expr><C-g> neocomplete#undo_completion()
-        inoremap <expr><C-l> neocomplete#complete_common_string()
-        nnoremap <Leader>a :NeoCompleteToggle<CR>
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
         " <CR>: close popup and save indent.
         inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
         function! s:my_cr_function()
             return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
         endfunction
-        let g:tmuxcomplete#trigger  = 'omnifunc' " Integrate into neocomplete
     endif
     NeoBundle 'bling/vim-airline'
     NeoBundle 'gioele/vim-autoswap'
@@ -130,12 +116,10 @@ try
         \}
         NeoBundle 'scrooloose/syntastic'
 
-        let g:syntastic_mode_map = {'mode': 'passive'}
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 1
         let g:syntastic_check_on_open = 1
-        let g:syntastic_check_on_wq = 1
-        let python_highlight_all = 1
+        let g:syntastic_check_on_wq = 0
         let g:syntastic_error_symbol='✗'
         let g:syntastic_warning_symbol='⚠'
         let g:syntastic_style_error_symbol = '✗'
@@ -148,7 +132,6 @@ try
     NeoBundle 'tpope/vim-fugitive'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'Valloric/MatchTagAlways'
-    NeoBundle 'wellle/tmux-complete.vim'
     NeoBundle 'xolox/vim-notes'
     NeoBundle 'xolox/vim-misc'
     NeoBundle 'Yggdroot/indentLine'
@@ -164,6 +147,8 @@ try
     let g:gitgutter_sign_added = "+"
     let g:gitgutter_sign_modified = "Δ"
     let g:gitgutter_sign_removed = "-"
+    let g:gitgutter_sign_removed_first_line = '^'
+    let g:gitgutter_sign_modified_removed = 'Δ-'
 
     " Gundo
     let g:gundo_width = 30
@@ -182,9 +167,9 @@ try
     let g:UltiSnipsExpandTrigger = "<tab>"
     let g:UltiSnipsJumpForwardTrigger = "<tab>"
     let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-    let g:UltiSnipsEditSplit="vertical"
-    let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/UltiSnips/'
-    let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+    let g:UltiSnipsEditSplit = "vertical"
+    let g:UltiSnipsSnippetsDir = $HOME.'/.vim/UltiSnips/'
+    let g:UltiSnipsSnippetDirectories = ["UltiSnips"]
 
     " Vim-schlepp
     let g:Schlepp#allowSquishingLines = 1
@@ -195,15 +180,12 @@ try
     let g:mta_use_match_paren_group = 1
 
     " Jedi-vim
-    let g:jedi#popup_on_dot = 0
+    let g:jedi#popup_on_dot = 1
     let g:jedi#popup_select_first = 0
 
     " SuperTab
     let g:SuperTabDefaultCompletionType = '<C-n>'
     let g:SuperTabDefaultCompletionType = 'context'
-
-    " " Eclim
-    " let g:EclimCompletionMethod = 'omnifunc'
 
     " indentLine
     let g:indentLine_char = '┆'
@@ -214,9 +196,10 @@ catch /:E117:/
 endtry
 "}}}
 "{{{Misc Settings
-
+syntax enable " Enable syntax highlighting
+filetype indent on " Enable filetype-specific indentation
+filetype plugin on " Enable filetype-specific plugins
 colorscheme Tomorrow-Night
-set guifont=Roboto\ Mono\ for\ Powerline
 set laststatus=2 " Always show statusline on last window
 set nocompatible " Disable Vi-compatibility settings
 set showcmd " Shows what you are typing as a command
@@ -240,19 +223,18 @@ set backspace=indent,eol,start " Backspace is great
 set hlsearch " Highlight search term in text
 set incsearch " Show search matches as you type
 set nohidden " When I close a tab, remove the buffer
-set ignorecase " Ignore cases in search
+set ignorecase "Ignore case when searching
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
 set colorcolumn=80 " Highlight 80th column as guideline
-set formatoptions-=cro " Remove auto comment
 set completeopt=longest,menuone,preview
-set pastetoggle=<Leader>p " If this changes, change the paste leader
+set pastetoggle=<F2> " If this changes, change the paste leader above
 set backup " Allow for a backup directory
 set wrapscan " Automatically wrap search when hitting bottom
 set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
 set linebreak " Break line on word
 set timeoutlen=500 " Timeout for entering key combinations
-set synmaxcol=150 " Limit syntax highlight parsing to first 150 columns
+set synmaxcol=200 " Limit syntax highlight parsing to first 200 columns
 set hidden " Hides buffers instead of closing them, allows opening new buffers when current has unsaved changes
 set cindent " Enable C like indentation
 set cinkeys-=0# " Prevent # from removing indents from a line
@@ -281,30 +263,17 @@ set undoreload=10000 " Save undo history when reloading a file
 set sessionoptions-=folds " Do not save folds
 
 let g:clipbrdDefaultReg = '+' " Default register for clipboard
-
-filetype plugin on
-filetype plugin indent on
-
-syntax enable " Enable syntax highlighting
-
 "}}}
 "{{{ Mappings
 
 " Map leader to space
 let mapleader = "\<Space>"
 
-" Move between windows using alt
-map <A-j> <C-W>j
-map <A-k> <C-W>k
-map <A-h> <C-W>h
-map <A-l> <C-W>l
-
 " Vim-schlepp bindings
 vmap K  <Plug>SchleppUp
 vmap J  <Plug>SchleppDown
 vmap H  <Plug>SchleppLeft
 vmap L  <Plug>SchleppRight
-vmap i  <Plug>SchleppToggleReindent
 
 " Vim-fugitive mappings
 nnoremap <silent> <Leader>gs :Gstatus<CR>
@@ -316,7 +285,6 @@ nnoremap <silent> <Leader>gp :Git push<CR>
 nnoremap <silent> <Leader>gw :Gwrite<CR>
 
 " Tabularize mappings
-vmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>a:: :Tabularize /:\zs<CR>
@@ -349,22 +317,15 @@ nnoremap <Leader>ss :setlocal spell!<CR>"
 nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>h :split<CR>
 nnoremap <Leader>v :vsplit<CR>
-nnoremap <silent> <Leader>ev :tabnew<CR>:e ~/.vimrc<CR>
-" If this changes, change the pastetoggle mapping above
-nnoremap <silent> <Leader>p :call Paste_on_off()<CR>
 
 " Tab Mappings
-nnoremap <silent> <C-Right> :tabnext<CR>
-nnoremap <silent> <C-Left> :tabprevious<CR>
+nnoremap <silent> <C-l> :tabnext<CR>
+nnoremap <silent> <C-h> :tabprevious<CR>
 nnoremap <silent> <C-t> :tabnew<CR>
 
 " Better k and j movement
 nnoremap <silent> k gk
 nnoremap <silent> j gj
-
-" Create Blank Newlines and stay in Normal mode
-nnoremap <silent> zj o<Esc>
-nnoremap <silent> zk O<Esc>
 
 " Swap ; and :
 nnoremap ; :
@@ -381,8 +342,6 @@ nnoremap <silent> p p`]
 imap <Nul> <Space>
 
 " Easier page up/down
-nnoremap <C-Up> <C-u>
-nnoremap <C-Down> <C-d>
 nnoremap <C-k> 3k
 nnoremap <C-j> 3j
 vnoremap <C-k> 3k
@@ -396,26 +355,15 @@ nnoremap <Leader>u :GundoToggle<CR>
 
 "{{{ Java plugin config
 
-" function! PluginConfig()
-"     try
-"         if &filetype ==? "java"
-"             " if exists(":PingEclim") && !(eclim#PingEclim(0))
-"             "     echom "Eclimd not started"
-"             " endif
-"             " if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
-"             augroup javacomplete
-"                 let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
-"                 let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
-"                 set omnifunc=javacomplete#Complete
-"             augroup END
-"             " else
-"                 " echom "Eclim enabled"
-"             " endif
-"         endif
-"     catch
-"         echom "javacomplete2 is not installed!"
-"     endtry
-" endfunction
+function! JavaConfig()
+    try
+        let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
+        let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
+        set omnifunc=javacomplete#Complete
+    catch
+        echom "javacomplete2 is not installed!"
+    endtry
+endfunction
 
 "}}}
 
@@ -454,23 +402,6 @@ function! Indent()
 endfunction
 "}}}
 
-"{{{ Paste Toggle
-let paste_mode = 0 " 0 = normal, 1 = paste
-
-func! Paste_on_off()
-    if g:paste_mode == 0
-        set paste
-        let g:paste_mode = 1
-        echo "Paste mode on"
-    else
-        set nopaste
-        let g:paste_mode = 0
-        echo "Paste mode off"
-    endif
-    return
-endfunc
-"}}}
-
 "{{{ Transparent background
 function! TransparentBackground()
     highlight clear CursorLine
@@ -482,6 +413,7 @@ function! TransparentBackground()
     highlight VertSplit ctermbg=none
     highlight SignColumn ctermbg=none
 endfunction
+command! TransparentBackground call TransparentBackground()
 "}}}
 
 "{{{ Follow symlinks
@@ -507,7 +439,6 @@ function! MyFollowSymlink(...)
     exec 'file ' . resolvedfile
 endfunction
 command! FollowSymlink call MyFollowSymlink()
-command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
 "}}}
 
 "{{{ Initialize statusline

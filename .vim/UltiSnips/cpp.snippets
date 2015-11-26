@@ -34,21 +34,9 @@ std::vector<char> v;
 if (FILE *fp = fopen(${1:"filename"}, "r")) {
     char buf[1024];
     while(size_t len = fread(buf, 1, sizeof(buf), fp))
-	v.insert(v.end(), buf, buf + len);
-	fclose(fp);
+    v.insert(v.end(), buf, buf + len);
+    fclose(fp);
 }
-endsnippet
-
-snippet map "std::map (map)"
-std::map<${1:key}, ${2:value}> map$0;
-endsnippet
-
-snippet vector "std::vector (v)"
-std::vector<${1:char}> v$0;
-endsnippet
-
-snippet tp "template <typename ..> (template)"
-template <typename ${1:_InputIter}>
 endsnippet
 
 # vim:ft=snippets:

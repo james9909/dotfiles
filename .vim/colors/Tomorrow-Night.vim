@@ -26,10 +26,12 @@ if !has("gui_running")
     let s:selection = "585858"
 end
 
+set background=dark	" or light
 hi clear
-syntax reset
+if exists("syntax_on")
+    syntax reset
+endif
 
-set t_Co=256
 let g:colors_name = "Tomorrow-Night"
 
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
@@ -401,5 +403,3 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     delf <SID>grey_level
     delf <SID>grey_number
 endif
-
-set background=dark
