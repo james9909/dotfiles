@@ -108,6 +108,7 @@ try
                 \'commands': 'Neomake'
             \}
         \}
+        autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
     else
         NeoBundleLazy 'sjl/gundo.vim', {
             \'autoload': {
@@ -116,10 +117,9 @@ try
         \}
         NeoBundle 'scrooloose/syntastic'
 
+        let g:syntastic_mode_map = {'mode': 'passive'}
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 1
-        let g:syntastic_check_on_open = 1
-        let g:syntastic_check_on_wq = 0
         let g:syntastic_error_symbol='✗'
         let g:syntastic_warning_symbol='⚠'
         let g:syntastic_style_error_symbol = '✗'
