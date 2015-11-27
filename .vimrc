@@ -15,6 +15,7 @@ autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 "}}}
 "{{{ NeoVim
 if has('nvim')
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     if has('clipboard')
         function! ClipboardYank()
             call system('xclip -i -selection clipboard', @@)
@@ -192,6 +193,7 @@ try
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
 
+    NeoBundleCheck
     call neobundle#end()
 catch /:E117:/
     echom "NeoBundle is not installed!"
@@ -212,13 +214,13 @@ set grepprg=grep\ -nH\ $*
 set expandtab " Tabs are spaces
 set smarttab " Enable smart tabbing
 set shiftwidth=4 " Tab size for auto indent
+set shiftround " Round indent to multiple of shiftwidth when using > or <
 set tabstop=4 " A tab is 4 columns
 set softtabstop=4 " A tab is 4 spaces
 set autoindent " Autoindent
 set copyindent " Copies the indentation of the previous line
 set number " Enable line numbers
 set wrap " Wrap lines
-set wildmode=list:longest,full
 set wildignore=*.class,*.swp,*.pyc,*.jar,*.cmake,*.tar.* " Ignore compiled things
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.mp3 " Ignore picture and media files
 set wildignore+=*.odt,*.doc,*.docx,*.pdf " Ignore formatted documents that will not render in plaintext"
@@ -244,6 +246,7 @@ set cindent " Enable C like indentation
 set cinkeys-=0# " Prevent # from removing indents from a line
 set indentkeys-=0# " Prevent # from removing indents from a line
 set wildmenu " Tab-like completion similar to zsh
+set gdefault " g flag is on by default
 
 " Press % on 'if' to jump to its corresponding 'else'
 runtime macros/matchit.vim
@@ -357,6 +360,11 @@ vnoremap <C-j> 3j
 
 " Gundo
 nnoremap <Leader>u :GundoToggle<CR>
+
+" View highlight group under cursor
+nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 "}}}
 "{{{ Functions

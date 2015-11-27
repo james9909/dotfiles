@@ -348,6 +348,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("javascriptNull", s:orange, "", "")
     call <SID>X("javascriptGlobal", s:blue, "", "")
     call <SID>X("javascriptStatement", s:red, "", "")
+    call <SID>X("javaScriptException", s:red, "", "")
 
     " Java Highlighting
     call <SID>X("javaStatement", s:red, "", "")
