@@ -118,3 +118,6 @@
 [submodule ".vim/bundle/gruvbox"]
     path = .vim/bundle/gruvbox
     url = https://github.com/morhetz/gruvbox
+[submodule ".vim/bundle/DrawIt"]
+	path = .vim/bundle/DrawIt
+	url = https://github.com/vim-scripts/DrawIt

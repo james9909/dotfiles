@@ -59,6 +59,7 @@ try
         endfunction
     endif
 
+    Plug 'vim-scripts/DrawIt'
     Plug 'morhetz/gruvbox'
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
