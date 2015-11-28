@@ -60,6 +60,7 @@ try
         endfunction
     endif
 
+    Plug 'morhetz/gruvbox'
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
     Plug 'ervandew/supertab'
@@ -166,7 +167,9 @@ syntax enable " Enable syntax highlighting
 syntax sync minlines=256 " Check the first 256 lines to guess syntax highlighting to use
 filetype indent on " Enable filetype-specific indentation
 filetype plugin on " Enable filetype-specific plugins
-colorscheme Tomorrow-Night
+let g:gruvbox_italic=1 " Enable italics
+set background=dark
+colorscheme gruvbox
 set laststatus=2 " Always show statusline on last window
 set nocompatible " Disable Vi-compatibility settings
 set showcmd " Shows what you are typing as a command
@@ -341,6 +344,7 @@ nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+nnoremap <silent> <F8> :execute RotateColorTheme()<CR> " Rotate colorschemes
 
 "}}}
 "{{{ Functions
@@ -466,6 +470,26 @@ function! ToggleVExplorer()
         let t:expl_buf_num = bufnr("%")
         exe "vertical resize 30"
     endif
+endfunction
+"}}}
+
+"{{{ Rotate colorschemes
+let themeindex=0
+function! RotateColorTheme()
+	let y = -1
+	while y == -1
+		let colorstring = "placeholder#gruvbox#Tomorrow-Night#"
+		let x = match( colorstring, "#", g:themeindex )
+		let y = match( colorstring, "#", x + 1 )
+		let g:themeindex = x + 1
+		if y == -1
+			let g:themeindex = 0
+		else
+			let themestring = strpart(colorstring, x + 1, y - x - 1)
+			hi clear
+			return ":colorscheme ".themestring
+		endif
+	endwhile
 endfunction
 "}}}
 

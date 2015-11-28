@@ -114,3 +114,7 @@
 [submodule ".vim/bundle/vim-instant-markdown"]
     path = .vim/bundle/vim-instant-markdown
     url = https://github.com/suan/vim-instant-markdown
+
+[submodule ".vim/bundle/gruvbox"]
+    path = .vim/bundle/gruvbox
+    url = https://github.com/morhetz/gruvbox
