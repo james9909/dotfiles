@@ -70,6 +70,7 @@ try
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
     Plug 'SirVer/UltiSnips'
     Plug 'Raimondi/delimitMate'
+    Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     if has('nvim')
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
         Plug 'benekastah/neomake', { 'on': 'Neomake' }
@@ -96,6 +97,9 @@ try
     Plug 'xolox/vim-misc'
     Plug 'Yggdroot/indentLine'
     Plug 'zirrostig/vim-schlepp'
+
+    " Instant markdown preview
+    let g:instant_markdown_slow = 1
 
     " Airline
     let g:airline_powerline_fonts = 1
@@ -424,7 +428,7 @@ endfunction
 "}}}
 
 "{{{ Detect binary files
-function DetectEOL()
+function! DetectEOL()
     if &endofline == 0
         set noendofline
         set binary
