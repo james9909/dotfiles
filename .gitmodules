@@ -3,17 +3,9 @@
     path = .vim/bundle/syntastic
     url = https://github.com/scrooloose/syntastic
 
-[submodule ".vim/bundle/YouCompleteMe"]
-    path = .vim/bundle/YouCompleteMe
-    url = https://github.com/Valloric/YouCompleteMe
-
 [submodule ".vim/bundle/MatchTagAlways"]
     path = .vim/bundle/MatchTagAlways
     url = https://github.com/Valloric/MatchTagAlways
-
-[submodule ".vim/bundle/ctrlp.vim"]
-    path = .vim/bundle/ctrlp.vim
-    url = https://github.com/kien/ctrlp.vim
 
 [submodule ".vim/bundle/UltiSnips"]
     path = .vim/bundle/UltiSnips
@@ -22,14 +14,6 @@
 [submodule ".vim/bundle/vim-surround"]
     path = .vim/bundle/vim-surround
     url = https://github.com/tpope/vim-surround
-
-[submodule ".vim/bundle/nerdtree"]
-    path = .vim/bundle/nerdtree
-    url = https://github.com/scrooloose/nerdtree
-
-[submodule ".vim/bundle/neobundle.vim"]
-    path = .vim/bundle/neobundle.vim
-    url = https://github.com/Shougo/neobundle.vim
 
 [submodule ".vim/bundle/supertab"]
     path = .vim/bundle/supertab
@@ -75,10 +59,6 @@
     path = .vim/bundle/indentLine
     url = https://github.com/Yggdroot/indentLine
 
-[submodule ".vim/bundle/vim-repeat"]
-    path = .vim/bundle/vim-repeat
-    url = https://github.com/tpope/vim-repeat
-
 [submodule ".vim/bundle/vim-misc"]
     path = .vim/bundle/vim-misc
     url = https://github.com/xolox/vim-misc
@@ -86,10 +66,6 @@
 [submodule ".vim/bundle/vim-notes"]
     path = .vim/bundle/vim-notes
     url = https://github.com/xolox/vim-notes
-
-[submodule ".vim/bundle/tmux-complete.vim"]
-    path = .vim/bundle/tmux-complete.vim
-    url = https://github.com/wellle/tmux-complete.vim
 
 [submodule ".vim/bundle/vim-javacomplete2"]
     path = .vim/bundle/vim-javacomplete2
@@ -122,12 +98,15 @@
 [submodule ".vim/bundle/vim-airline"]
     path = .vim/bundle/vim-airline
     url = https://github.com/bling/vim-airline
+
 [submodule ".vim/bundle/vim-gitgutter"]
-	path = .vim/bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter
+    path = .vim/bundle/vim-gitgutter
+    url = https://github.com/airblade/vim-gitgutter
+
 [submodule ".vim/bundle/vim-plug"]
-	path = .vim/bundle/vim-plug
-	url = https://github.com/junegunn/vim-plug
+    path = .vim/bundle/vim-plug
+    url = https://github.com/junegunn/vim-plug
+
 [submodule ".vim/bundle/vim-over"]
-	path = .vim/bundle/vim-over
-	url = https://github.com/osyo-manga/vim-over
+    path = .vim/bundle/vim-over
+    url = https://github.com/osyo-manga/vim-over

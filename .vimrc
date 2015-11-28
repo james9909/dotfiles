@@ -37,9 +37,9 @@ if has('nvim')
 
 endif
 "}}}
-"{{{NeoBundle and Plugins
+"{{{Plugins
 try
-    call plug#begin('~/.vim/plugged')
+    call plug#begin('~/.vim/bundle')
 
     if has("lua")
         Plug 'Shougo/neocomplete.vim'
