@@ -275,6 +275,13 @@ set undoreload=10000 " Save undo history when reloading a file
 set sessionoptions-=folds " Do not save folds
 
 let g:clipbrdDefaultReg = '+' " Default register for clipboard
+
+" Use different cursor for insert and normal modes
+if &term =~ "rxvt"
+    let &t_SI = "\<Esc>[6 q"
+    let &t_SR = "\<Esc>[4 q"
+    let &t_EI = "\<Esc>[2 q"
+endif
 "}}}
 "{{{ Mappings
 
