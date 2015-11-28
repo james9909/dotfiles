@@ -39,14 +39,10 @@ endif
 "}}}
 "{{{NeoBundle and Plugins
 try
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-    call neobundle#begin(expand('~/.vim/bundle'))
+    call plug#begin('~/.vim/plugged')
 
-    " Let Neobundle manage NeoBundle
-    NeoBundleFetch 'Shougo/neobundle.vim'
-
-    if has('lua')
-        NeoBundle 'Shougo/neocomplete.vim'
+    if has("lua")
+        Plug 'Shougo/neocomplete.vim'
 
         let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
         let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
@@ -63,56 +59,24 @@ try
             return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
         endfunction
     endif
-    NeoBundle 'bling/vim-airline'
-    NeoBundle 'gioele/vim-autoswap'
-    NeoBundle 'ervandew/supertab'
 
-    NeoBundle 'Lokaltog/vim-easymotion'
-    NeoBundleLazy 'james9909/stackanswers.vim', {
-        \'autoload': {
-            \'commands': 'StackAnswers'
-        \}
-    \}
-    NeoBundleLazy 'davidhalter/jedi-vim', {
-        \'autoload': {
-            \'filetypes': 'python'
-        \}
-    \}
-    NeoBundleLazy 'artur-shaik/vim-javacomplete2', {
-        \'autoload': {
-            \'filetypes': 'java'
-        \}
-    \}
-    NeoBundleLazy 'godlygeek/tabular', {
-        \'autoload': {
-            \'commands': 'Tabularize'
-        \}
-    \}
-    NeoBundleLazy 'Raimondi/delimitMate', {
-        \'autoload': {
-            \'insert': 1,
-            \'filetypes': 'all'
-        \}
-    \}
+    Plug 'bling/vim-airline'
+    Plug 'gioele/vim-autoswap'
+    Plug 'ervandew/supertab'
+    Plug 'Lokaltog/vim-easymotion'
+    Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
+    Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+    Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+    Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+    Plug 'SirVer/UltiSnips'
+    Plug 'Raimondi/delimitMate'
     if has('nvim')
-        NeoBundleLazy 'simnalamburt/vim-mundo', {
-            \'autoload': {
-                \'commands': 'GundoToggle'
-            \}
-        \}
-        NeoBundleLazy 'benekastah/neomake', {
-            \'autoload': {
-                \'commands': 'Neomake'
-            \}
-        \}
+        Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
+        Plug 'benekastah/neomake', { 'on': 'Neomake' }
         autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
     else
-        NeoBundleLazy 'sjl/gundo.vim', {
-            \'autoload': {
-                \'commands': 'GundoToggle'
-            \}
-        \}
-        NeoBundle 'scrooloose/syntastic'
+        Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+        Plug 'scrooloose/syntastic'
 
         let g:syntastic_mode_map = {'mode': 'passive'}
         let g:syntastic_always_populate_loc_list = 1
@@ -122,17 +86,16 @@ try
         let g:syntastic_style_error_symbol = '✗'
         let g:syntastic_style_warning_symbol = '⚠'
     endif
-    NeoBundle 'airblade/vim-gitgutter'
-    NeoBundle 'osyo-manga/vim-over'
-    NeoBundle 'SirVer/UltiSnips'
-    NeoBundle 'tpope/vim-commentary'
-    NeoBundle 'tpope/vim-fugitive'
-    NeoBundle 'tpope/vim-surround'
-    NeoBundle 'Valloric/MatchTagAlways'
-    NeoBundle 'xolox/vim-notes'
-    NeoBundle 'xolox/vim-misc'
-    NeoBundle 'Yggdroot/indentLine'
-    NeoBundle 'zirrostig/vim-schlepp'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'osyo-manga/vim-over'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'Valloric/MatchTagAlways'
+    Plug 'xolox/vim-notes'
+    Plug 'xolox/vim-misc'
+    Plug 'Yggdroot/indentLine'
+    Plug 'zirrostig/vim-schlepp'
 
     " Airline
     let g:airline_powerline_fonts = 1
@@ -189,10 +152,9 @@ try
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
 
-    NeoBundleCheck
-    call neobundle#end()
+	call plug#end()
 catch /:E117:/
-    echom "NeoBundle is not installed!"
+    echom "Vim-Plug is not installed!"
 endtry
 "}}}
 "{{{Misc Settings
