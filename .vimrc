@@ -4,6 +4,7 @@ augroup defaults
     autocmd!
     autocmd BufReadPost * call MyFollowSymlink(expand('<afile>'))
     autocmd VimEnter * call AirlineInit()
+    autocmd VimEnter * call DetectEOL()
     autocmd FileType java call JavaConfig()
     " Restore cursor location
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -280,6 +281,8 @@ let g:clipbrdDefaultReg = '+' " Default register for clipboard
 " Map leader to space
 let mapleader = "\<Space>"
 
+nnoremap <expr> i SmartInsertModeEnter()
+
 " Vim-schlepp bindings
 vmap K  <Plug>SchleppUp
 vmap J  <Plug>SchleppDown
@@ -448,6 +451,25 @@ function! AirlineInit()
     let g:airline_section_a = airline#section#create(["mode", " ", "paste"])
     let g:airline_section_b = airline#section#create(["branch", " ", "hunks"])
     let g:airline_section_c = airline#section#create_left(["file", "readonly"])
+endfunction
+"}}}
+
+"{{{ Detect binary files
+function DetectEOL()
+    if &endofline == 0
+        set noendofline
+        set binary
+    endif
+endfunction
+"}}}
+
+"{{{ Insert with appropriate indent on empty line
+function! SmartInsertModeEnter()
+    if len(getline('.')) == 0
+        return "cc"
+    else
+        return "i"
+    endif
 endfunction
 "}}}
 
