@@ -83,11 +83,6 @@ try
             \'filetypes': 'java'
         \}
     \}
-    NeoBundleLazy 'scrooloose/nerdtree', {
-        \'autoload': {
-            \'commands': 'NERDTreeToggle'
-        \}
-    \}
     NeoBundleLazy 'godlygeek/tabular', {
         \'autoload': {
             \'commands': 'Tabularize'
@@ -276,6 +271,11 @@ set sessionoptions-=folds " Do not save folds
 
 let g:clipbrdDefaultReg = '+' " Default register for clipboard
 
+" File browsing
+let g:netrw_liststyle=3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+
 " Use different cursor for insert and normal modes
 if &term =~ "rxvt"
     let &t_SI = "\<Esc>[6 q"
@@ -323,7 +323,7 @@ nnoremap <CR> :noh<CR><CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>W :w!<CR>
 " Save with sudo
-nnoremap <silent ><Leader>W! :w !sudo tee %>/dev/null<CR>
+nnoremap <silent><Leader>W! :w !sudo tee %>/dev/null<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
@@ -335,7 +335,7 @@ else
 endif
 nnoremap <Leader>rn :set relativenumber!<CR>
 nnoremap <Leader>ss :setlocal spell!<CR>"
-nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <silent><Leader>t :call ToggleVExplorer()<CR>
 nnoremap <Leader>h :split<CR>
 nnoremap <Leader>v :vsplit<CR>
 
@@ -476,6 +476,29 @@ function! SmartInsertModeEnter()
         return "cc"
     else
         return "i"
+    endif
+endfunction
+"}}}
+
+"{{{ NERDTree-like file browsing
+" http://stackoverflow.com/a/5636941
+function! ToggleVExplorer()
+    if exists("t:expl_buf_num")
+        let expl_win_num = bufwinnr(t:expl_buf_num)
+        if expl_win_num != -1
+            let cur_win_nr = winnr()
+            exec expl_win_num . 'wincmd w'
+            close
+            exec cur_win_nr . 'wincmd w'
+            unlet t:expl_buf_num
+        else
+            unlet t:expl_buf_num
+        endif
+    else
+        exec '1wincmd w'
+        Vexplore
+        let t:expl_buf_num = bufnr("%")
+        exe "vertical resize 30"
     endif
 endfunction
 "}}}
