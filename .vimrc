@@ -246,8 +246,9 @@ let g:netrw_liststyle=3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 
-" Use different cursor for insert and normal modes
-if &term =~ "rxvt"
+" Use different cursor for insert and normal modes depending on terminal
+" Not checking &term because of a weird bug with the zsh prompt if $TERM is rxvt*
+if $REALTERM =~ "rxvt"
     let &t_SI = "\<Esc>[6 q"
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
