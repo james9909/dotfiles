@@ -125,3 +125,9 @@
 [submodule ".vim/bundle/vim-gitgutter"]
 	path = .vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
+[submodule ".vim/bundle/vim-plug"]
+	path = .vim/bundle/vim-plug
+	url = https://github.com/junegunn/vim-plug
+[submodule ".vim/bundle/vim-over"]
+	path = .vim/bundle/vim-over
+	url = https://github.com/osyo-manga/vim-over
