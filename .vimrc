@@ -16,7 +16,6 @@ autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 "}}}
 "{{{ NeoVim
 if has('nvim')
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     if has('clipboard')
         function! ClipboardYank()
             call system('xclip -i -selection clipboard', @@)
