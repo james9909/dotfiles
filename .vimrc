@@ -59,6 +59,8 @@ try
         endfunction
     endif
 
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'vim-scripts/DrawIt'
     Plug 'morhetz/gruvbox'
     Plug 'bling/vim-airline'
@@ -100,6 +102,30 @@ try
     Plug 'xolox/vim-misc'
     Plug 'Yggdroot/indentLine'
     Plug 'zirrostig/vim-schlepp'
+
+    " CtrlP
+    let g:ctrlp_show_hidden = 1
+    let g:ctrlp_working_path_mode = 0 " Use vim's cwd"
+    let g:ctrlp_match_window = 'bottom,order:ttb'
+    " Use ag (AKA the_silver_searcher)
+    if executable('ag')
+        let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+                    \ --ignore .git
+                    \ --ignore .svn
+                    \ --ignore .hg
+                    \ --ignore .DS_Store
+                    \ --ignore "**/*.pyc"
+                    \ --ignore _backup
+                    \ --ignore _undo
+                    \ --ignore _swap
+                    \ --ignore .cache
+                    \ -g ""'
+    else
+        let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+        let g:ctrlp_custom_ignore = {
+                    \ 'dir':  '\v[\/](_backup|_undo|_swap|\.cache)$'
+                    \ }
+    endif
 
     " Instant markdown preview
     let g:instant_markdown_slow = 1
@@ -287,6 +313,9 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>
 inoremap <C-v> <esc>:set paste<CR>"+]p`]:set nopaste<cr>A
+
+" CtrlP
+nnoremap <C-p> :CtrlP<CR>
 
 " Remove search highlights
 nnoremap <CR> :noh<CR><CR>

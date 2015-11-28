@@ -118,6 +118,15 @@
 [submodule ".vim/bundle/gruvbox"]
     path = .vim/bundle/gruvbox
     url = https://github.com/morhetz/gruvbox
+
 [submodule ".vim/bundle/DrawIt"]
-	path = .vim/bundle/DrawIt
-	url = https://github.com/vim-scripts/DrawIt
+    path = .vim/bundle/DrawIt
+    url = https://github.com/vim-scripts/DrawIt
+
+[submodule ".vim/bundle/emmet-vim"]
+    path = .vim/bundle/emmet-vim
+    url = https://github.com/mattn/emmet-vim
+
+[submodule ".vim/bundle/ctrlp.vim"]
+    path = .vim/bundle/ctrlp.vim
+    url = https://github.com/ctrlpvim/ctrlp.vim
