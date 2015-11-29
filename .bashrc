@@ -196,10 +196,6 @@ function User {
     if [[ $showHostname == true ]]; then
         echo -n "@$(hostname)"
     fi
-        if [[ $showTeam == true ]]; then
-            echo -n "@Team694"
-        fi
-    fi
 }
 
 # Appends a pulse to the user name
@@ -241,8 +237,6 @@ alias shorton="export shortenPath=true"
 alias shortoff="export shortenPath=false"
 alias pulseon="export showPulse=true"
 alias pulseoff="export showPulse=false"
-alias teamon="export showTeam=true"
-alias teamoff="export showTeam=false"
 alias hoston="export showHostname=true"
 alias hostoff="export showHostname=false"
 alias useron="export showUsername=true"
@@ -251,48 +245,12 @@ alias useroff="export showUsername=false"
 # }}}
 # Functions {{{
 
-# Go back to your previous directory (not the same as cd ..)
-function back {
-    eval cd $(echo $OLDPWD | sed -r 's/[ ]+/\\ /g')
-}
-
 # Compile a cpp file with opencv because lazy
 function cppcompile {
     if [[ "$#" != "2" ]]; then
         echo "Usage: cppcompile [cpp file] [name]"
     else
         eval g++ $1 -o $2 `pkg-config --libs opencv --cflags` -O2 # For some of that optimization
-    fi
-}
-
-# Copy a folder into another directory
-function cpdir {
-    if [[ "$#" != "2" ]]; then
-        echo "Usage: cpdir [source] [destination]"
-    else
-        cp -arv $1 $2
-    fi
-}
-
-# Extracts any compressed file
-function extract {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)      tar xjf $1;;
-            *tar.gz)        tar xzf $1;;
-            *bz2)           bunzip2 $1;;
-            *.rar)          rar x $1;;
-            *.gz)           gunzip $1;;
-            *.tar)          tar xf $1;;
-            *.tbz2)         tar xzf $1;;
-            *.tgz)          unzip $1;;
-            *.zip)          unzip $1;;
-            *.Z)            uncompress $1;;
-            *.7z)           7z e $1;;
-            *)              echo "'$1' cannot be extracted via extract"
-        esac
-    else
-        echo "'$1' is not a valid file"
     fi
 }
 
@@ -307,56 +265,6 @@ function reminder {
     echo "Reminder set: $@"
 }
 
-# Unzips a file and removes it
-function ziprm {
-    if [ -f $1 ] ; then
-        extract $1
-        rm $1
-    fi
-}
-
-# Build the latest version of vim
-function updatevim {
-    version=$(vim --version | grep Vi\ IMproved)
-    patches=$(vim --version | grep patches)
-    currDir=$(pwd)
-    # If the vim repo doesn't exist, then clone it
-    if [[ ! -d "$HOME/vim" ]]; then
-        cd $HOME
-        git clone https://github.com/vim/vim $HOME/vim
-        echo "Cloned vim"
-        cd vim
-        ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu --enable-luainterp --with-luajit
-        make
-        sudo make install
-        echo "Vim is now updated"
-        echo $version
-        echo $patches
-        cd $currDir
-        return
-    else
-        cd $HOME/vim
-        # Local repo is up to date and we are up to date
-        if [[ $(git pull) =~ "up to date" ]]; then
-            echo "Vim is up to date"
-            echo $version
-            echo $patches
-            cd $currDir
-            return
-            # Local repo needs to be updated and vim needs to be rebuilt
-        else
-            git pull
-            ./configure --enable-perlinterp --enable-pythoninterp --enable-rubyinterp --enable-cscope --enable-gui=auto --enable-gtk2-check --enable-gnome-check --with-features=huge --enable-multibyte --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu --enable-luainterp --with-luajit
-            make
-            sudo make install
-            echo "Vim is now updated"
-            echo $version
-            echo $patches
-            cd $currDir
-        fi
-    fi
-}
-
 # }}}
 # Aliases {{{
 
@@ -367,18 +275,13 @@ alias lh='ls -ahl'
 alias l='ls -CF'
 alias rm='rm -I'
 
-# admin aliases
-alias install='sudo apt-get install'
-alias remove='sudo apt-get remove'
 alias root='sudo su'
 alias reload='source ~/.bashrc'
 alias ibrokesudo='pkexec visudo'
-alias bashtime='time . ~/.bashrc'
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ssh aliases
 alias school='ssh james.wang@149.89.161.101'
-alias pico='ssh pico49524@shell2014.picoctf.com '
+alias pico='ssh pico49524@shell2014.picoctf.com'
 
 # stuff
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
