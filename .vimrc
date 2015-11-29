@@ -64,7 +64,6 @@ try
     Plug 'vim-scripts/DrawIt'
     Plug 'morhetz/gruvbox'
     Plug 'bling/vim-airline'
-    Plug 'gioele/vim-autoswap'
     Plug 'ervandew/supertab'
     Plug 'Lokaltog/vim-easymotion'
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
@@ -97,7 +96,7 @@ try
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
-    Plug 'Valloric/MatchTagAlways'
+    Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
     Plug 'xolox/vim-notes'
     Plug 'xolox/vim-misc'
     Plug 'Yggdroot/indentLine'
@@ -221,7 +220,6 @@ set mouse=a " Enable the mouse to set cursor position
 set backspace=indent,eol,start " Backspace is great
 set hlsearch " Highlight search term in text
 set incsearch " Show search matches as you type
-set nohidden " When I close a tab, remove the buffer
 set ignorecase "Ignore case when searching
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
@@ -233,7 +231,7 @@ set wrapscan " Automatically wrap search when hitting bottom
 set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
 set linebreak " Break line on word
 set timeoutlen=500 " Timeout for entering key combinations
-set synmaxcol=200 " Limit syntax highlight parsing to first 200 columns
+set synmaxcol=300 " Limit syntax highlight parsing to first 300 columns
 set hidden " Hides buffers instead of closing them, allows opening new buffers when current has unsaved changes
 set cindent " Enable C like indentation
 set cinkeys-=0# " Prevent # from removing indents from a line
