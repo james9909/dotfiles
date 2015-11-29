@@ -70,7 +70,6 @@ try
     Plug 'davidhalter/jedi-vim', { 'for': 'python' }
     Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-    Plug 'SirVer/UltiSnips'
     Plug 'Raimondi/delimitMate'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     if has('nvim')
@@ -155,14 +154,6 @@ try
     " Vim notes
     let g:notes_word_boundaries = 1
     let g:notes_directories = ['~/Documents/vim-notes']
-
-    " Better key bindings for UltiSnipsExpandTrigger
-    let g:UltiSnipsExpandTrigger = "<tab>"
-    let g:UltiSnipsJumpForwardTrigger = "<tab>"
-    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-    let g:UltiSnipsEditSplit = "vertical"
-    let g:UltiSnipsSnippetsDir = $HOME.'/.vim/UltiSnips/'
-    let g:UltiSnipsSnippetDirectories = ["UltiSnips"]
 
     " Vim-schlepp
     let g:Schlepp#allowSquishingLines = 1
