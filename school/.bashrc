@@ -130,6 +130,7 @@ function Time {
 function User {
     if [[ $showUsername == true ]]; then
         echo -n "James"
+    fi
     if [[ $showHostname == true ]]; then
         echo -n "@$(hostname)"
     fi
@@ -149,13 +150,13 @@ status=0
 
 PROMPT_COMMAND="ExitCode"
 
-prompt1="${BGREEN}\$(Time) ${BRED}\$(User) ${BBLUE}[\$(Pwd)]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) \n>> "
+prompt1="${BGREEN}\$(Time) ${BWHITE}\$(User) ${BBLUE}[\$(Pwd)]${BGREEN}\$(GitPrompt)${BWHITE}\$(Sign) \n>> "
 PS1=$prompt1
 
 # Configuration options
 showTime=true
 shortenPath=false
-showHostname=false
+showHostname=true
 showUsername=true
 
 # Configuration aliases
