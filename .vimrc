@@ -166,6 +166,7 @@ try
     " Jedi-vim
     let g:jedi#popup_on_dot = 0
     let g:jedi#popup_select_first = 0
+    let g:jedi#smart_auto_mappings = 0 " Remove automatic addition of 'import' when doing 'from module<space>'
 
     " SuperTab
     let g:SuperTabDefaultCompletionType = '<C-n>'
