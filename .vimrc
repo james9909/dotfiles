@@ -207,8 +207,8 @@ set number " Enable line numbers
 set wrap " Wrap lines
 set wildignore=*.class,*.swp,*.pyc,*.jar,*.cmake,*.tar.* " Ignore compiled things
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.mp3 " Ignore picture and media files
-set wildignore+=*.odt,*.doc,*.docx,*.pdf " Ignore formatted documents that will not render in plaintext"
-set mouse=a " Enable the mouse to set cursor position
+set wildignore+=*.odt,*.doc,*.docx,*.pdf " Ignore formatted documents that will not render in plaintext
+set mouse=nvc " Enable the mouse for normal, visual, and command-line modes
 set backspace=indent,eol,start " Backspace is great
 set hlsearch " Highlight search term in text
 set incsearch " Show search matches as you type
