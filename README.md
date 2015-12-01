@@ -8,10 +8,11 @@ Installation
 If you only want to use some of my dotfiles, modify `link.sh` to link files that you want.
 Otherwise, if you want to install everything, run `install.sh`.
 
-#### Vim Plugins
+#### Vim
 
-Since [vim-plug](https://github.com/junegunn/vim-plug) is in `.vim/autoload`,
-installing the plugins is as simple as opening up `vim` and running `:PlugInstall`.
+Although [vim-plug](https://github.com/junegunn/vim-plug) is in `.vim/autoload`, cloning this repository wihout
+`--recursive` will leave in a bunch of empty folders in `.vim/bundle`. Remove those folders, and run
+`:PlugInstall` to install the plugins.
 
 ##### javacomplete2
 
@@ -26,7 +27,7 @@ $ mvn -f ~/.vim/bundle/vim-javacomplete2/libs/javavi/pom.xml compile
 
 #### Terminal
 
-These dotfiles are designed mainly for either `gnome-terminal` or `urxvt`.
+These dotfiles are meant to be used with either `gnome-terminal` or `urxvt`.
 The font used is `Droid Sans Mono for Powerline Regular`.
 
 If you are using [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), make sure
