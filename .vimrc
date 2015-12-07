@@ -34,6 +34,8 @@ if has('nvim')
     " Use :terminal to execute shell command
     nnoremap <Leader>T :terminal<CR>
 
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 endif
 "}}}
 "{{{Plugins
