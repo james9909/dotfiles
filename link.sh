@@ -2,9 +2,12 @@
 
 dir=~/Dev/dotfiles # Change with path to repo
 backup=~/backup # For backup
-files=".vimrc .zshrc .oh-my-zsh .tmux.conf scripts" # list of files/folders to symlink
-                                        # Do not recommend syncing vim folder due to plugins being submodules,
-                                        # unless --recursive was called during the clone
+
+# list of files/folders to symlink
+# Do not recommend syncing vim folder due to plugins being submodules,
+# unless --recursive was called during the clone
+files=".vimrc .zshrc .oh-my-zsh .tmux.conf scripts .bashrc .Xresources .i3 .i3status.conf .bash_aliases"
+
 YELLOW="\E[1;33m"
 GREEN="\E[1;32m"
 RED="\E[1;31m"
