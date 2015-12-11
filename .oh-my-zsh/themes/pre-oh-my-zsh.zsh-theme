@@ -83,7 +83,7 @@ fi
 # Prompt {{{
 
 # Get the exit code
-function GetExitCode()() {
+function GetExitCode() {
     exitCode=$?
 }
 
