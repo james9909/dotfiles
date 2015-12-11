@@ -83,12 +83,12 @@ fi
 # Prompt {{{
 
 # Get the exit code
-function GetExitCode {
+function GetExitCode()() {
     exitCode=$?
 }
 
 # Changes the sign of the user based on various conditions
-function Sign {
+function Sign() {
     if [[ $UID == 0 ]]; then
         echo " #"
     else
@@ -102,33 +102,28 @@ function Sign {
 }
 
 # Shows the current time
-function Time {
-    if [[ $showTime != true ]]; then
-        return
-    fi
+function Time() {
     date=$(date "+%I:%M")
     echo "%{%F{green}%}[$date]"
 }
 
 # Alters the display of the user
-function User {
-    if [[ $showUsername == true ]]; then
-        echo -n "%{%F{red}%}James"
-        if [[ $showHostname == true ]]; then
-            echo -n "%{%F{red}%}@$(hostname)"
-        fi
+function User() {
+    echo -n "%{%F{red}%}James"
+    if [[ $showHostname == true ]]; then
+        echo -n "%{%F{red}%}@$(hostname)"
     fi
 }
 
 # Appends a pulse to the user name
-function Pulse {
+function Pulse() {
     if [[ $showPulse == true ]]; then
         echo "[~^v~]"
     fi
 }
 
 # Shows the present working directory
-function Pwd {
+function Pwd() {
     if [[ $shortenPath == true ]]; then
         DIR=$(pwd | sed -r "s|$HOME|~|g" | sed -r "s|/(.)[^/]*|/\1|g") # (.) holds the first letter and \1 recalls it
         echo -n %{%F{blue}%}"[$DIR]"
@@ -139,16 +134,15 @@ function Pwd {
 }
 
 # Shows current ram usage
-function RamUsage {
+function RamUsage() {
     if [[ $showSysInfo == true ]]; then
         echo "<$(free -m | grep -Eo '[0-9]*' | head -7 | tail -1) MB | "
     fi
 }
 
 
-function SensorTemp {
-# Note on usage 1: you must prepend an escape character onto $(SensorTemp) so the prompt dynamically updates the temperature
-# Note on usage 2: modify the arguments for head and tail to select a specific temperature in the output
+function SensorTemp() {
+    # Note on usage 1: you must prepend an escape character onto $(SensorTemp) so the prompt dynamically updates the temperature
     if [[ $showSysInfo == true ]]; then
         echo "$(sensors | grep -Eo '[0-9][0-9]\.[0-9]°C' | head -1)> "
     fi
@@ -177,7 +171,7 @@ else
     is256ColorTerm=false
 fi
 
-prompt1="$(tput bold)$(Time) $(RamUsage)$(SensorTemp) $(User)$(Pulse) $(Pwd)$(Sign)
+prompt1="$(tput bold)$(Time) $(RamUsage)$(SensorTemp)$(User)$(Pulse) $(Pwd)$(Sign)
 {%F{white}%}>> "
 PS1=$prompt1
 
@@ -209,17 +203,12 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[190]%}✭%{$reset_color%}"
 # }}}
 
 # Configuration options
-showTime=true
 shortenPath=false
 showHostname=false
-showTeam=true
-showUsername=true
 showPulse=true
 showSysInfo=true
 
 # Configuration aliases
-alias timeon="export showTime=true"
-alias timeoff="export showTime=false"
 alias shorton="export shortenPath=true"
 alias shortoff="export shortenPath=false"
 alias pulseon="export showPulse=true"
@@ -228,43 +217,6 @@ alias hoston="export showHostname=true"
 alias hostoff="export showHostname=false"
 alias syson="export showSysInfo=true"
 alias sysoff="export showSysInfo=false"
-
-# }}}
-# Functions {{{
-# Go back to your previous directory (not the same as cd ..)
-function back {
-    cd -
-}
-# Compile a cpp file with opencv because lazy
-function cppcompile {
-    if [[ "$#" != "2" ]]; then
-        echo "Usage: cppcompile [cpp file] [name]"
-    else
-        eval g++ $1 -o $2 `pkg-config --libs opencv --cflags` -O2 # For some of that optimization
-    fi
-}
-
-# Extracts any compressed file
-function extract {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)      tar xjf $1;;
-            *tar.gz)        tar xzf $1;;
-            *bz2)           bunzip2 $1;;
-            *.rar)          rar x $1;;
-            *.gz)           gunzip $1;;
-            *.tar)          tar xf $1;;
-            *.tbz2)         tar xzf $1;;
-            *.tgz)          unzip $1;;
-            *.zip)          unzip $1;;
-            *.Z)            uncompress $1;;
-            *.7z)           7z e $1;;
-            *)              echo "'$1' cannot be extracted via extract"
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
 
 # }}}
 # Complete words from tmux pane(s) {{{
