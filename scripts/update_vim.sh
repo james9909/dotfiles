@@ -25,7 +25,7 @@ function update_vim() {
         return
     else
         # Local repo needs to be updated and vim needs to be rebuilt
-        git pull
+        git merge origin/master
         make distclean
         ./configure --with-features=huge \
             --enable-rubyinterp \

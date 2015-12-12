@@ -20,7 +20,7 @@ function update_neovim() {
         echo "Neovim is up to date"
     else
         # Update neovim to latest version
-        git pull
+        git merge origin/master
         make clean
         make CMAKE_BUILD_TYPE=Release # Optimized build
         sudo make install
