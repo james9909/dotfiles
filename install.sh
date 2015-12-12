@@ -49,7 +49,7 @@ sudo ln -s /opt/wget/bin/wget /usr/bin/wget
 sudo -v
 
 # Classic menu
-echo "Using classic menu? [y/n]"
+echo -n "Using classic menu? [y/n] "
 read ans
 if [[ $ans == "y" ]]; then
     sudo apt-add-repository ppa:diesch/testing
@@ -60,14 +60,35 @@ fi
 
 chsh -s /bin/zsh
 
-echo "Using these dotfiles? [y/n]"
+echo -n "Using these dotfiles? [y/n] "
 read ans
 if [[ $ans == "y" ]]; then
     ./link.sh
     sudo -v
 fi
 
-echo "Using vim? [y/n]"
+echo -n "Using urxvt? [y/n] "
+read ans
+if [[ $ans == "y" ]]; then
+    sudo apt-get -y install rxvt-unicode-256color
+    sudo -v
+fi
+
+echo -n "Custom font? [y/n] "
+read ans
+if [[ $ans == "y" ]]; then
+    font_dir="$HOME/.local/share/fonts"
+    mkdir -p "$font_dir"
+    wget "https://github.com/powerline/fonts/raw/master/DroidSansMono/Droid%20Sans%20Mono%20for%20Powerline.otf"
+    mv Droid\ Sans\ Mono\ for\ Powerline.otf $font_dir
+
+    if command -v fc-cache @>/dev/null ; then
+        echo -n "Resetting font cache, this may take a moment..."
+        fc-cache -f "$font_dir"
+    fi
+fi
+
+echo -n "Using vim? [y/n] "
 read ans
 if [[ $ans == "y" ]]; then
     sudo apt-get -y remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
@@ -101,7 +122,7 @@ if [[ $ans == "y" ]]; then
     sudo -v
 fi
 
-echo "Using neovim? [y/n]"
+echo -n "Using neovim? [y/n] "
 read ans
 if [[ $ans == "y" ]]; then
     sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja xclip
@@ -117,7 +138,7 @@ if [[ $ans == "y" ]]; then
     sudo -v
 fi
 
-echo "Using i3? [y/n]"
+echo -n "Using i3? [y/n] "
 read ans
 if [[ $ans == "y" ]]; then
     sudo apt-get install -y i3 i3status
