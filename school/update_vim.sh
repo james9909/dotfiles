@@ -19,7 +19,7 @@ function update_vim() {
     fi
 
     cd ~/vim/src
-    git fetch
+    git merge origin/master
     LOCAL=$(git rev-parse @)
     REMOTE=$(git rev-parse @{u})
 
