@@ -11,7 +11,7 @@ function update_neovim() {
     first_clone=0
     # Clone and build neovim if it doesn't already exist
     if [[ ! -d "$HOME/neovim" ]]; then
-        sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja
+        sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja-build
         git clone https://github.com/neovim/neovim "$HOME/neovim"
         first_clone=1
     fi
