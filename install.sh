@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e # Abort if any command exits with non-zero exit code
+
 sudo apt-get update
 sudo apt-get upgrade
 sudo -v

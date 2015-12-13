@@ -42,4 +42,5 @@ function update_vim() {
     cd $curr_dir
 }
 
+set -e # Abort if any command exits with non-zero exit code
 update_vim

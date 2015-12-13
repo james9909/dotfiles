@@ -29,4 +29,5 @@ function update_neovim() {
     cd $curr_dir
 }
 
+set -e # Abort if any command exits with non-zero exit code
 update_neovim
