@@ -76,7 +76,6 @@ try
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
         Plug 'benekastah/neomake', { 'on': 'Neomake' }
         autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
-        nnoremap <Leader>c :Neomake<CR>
     else
         if has("lua")
             Plug 'Shougo/neocomplete.vim'
@@ -98,7 +97,6 @@ try
 
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
         Plug 'scrooloose/syntastic'
-        nnoremap <Leader>c :SyntasticCheck<CR>
 
         let g:syntastic_python_checkers = ['flake8']
         let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
@@ -387,6 +385,13 @@ nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 nnoremap <silent> <F8> :execute RotateColorTheme()<CR> " Rotate colorschemes
+
+" Syntax checker
+if has("nvim")
+    nnoremap <Leader>c :Neomake<CR>
+else
+    nnoremap <Leader>c :SyntasticCheck<CR>
+endif
 
 "}}}
 "{{{ Functions
