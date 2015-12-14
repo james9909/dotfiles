@@ -14,30 +14,6 @@ augroup END
 autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 "}}}
-"{{{ NeoVim
-if has('nvim')
-    if has('clipboard')
-        function! ClipboardYank()
-            call system('xclip -i -selection clipboard', @@)
-        endfunction
-
-        function! ClipboardPaste()
-            let @@ = system('xclip -o -selection clipboard')
-        endfunction
-        vnoremap <silent> y y:call ClipboardYank()<cr>
-        vnoremap <silent> d d:call ClipboardYank()<cr>
-        nnoremap <silent> p :call ClipboardPaste()<cr>p
-    endif
-
-    " Highlight terminal cursor red
-	highlight TermCursor ctermfg=red guifg=red
-
-    " Preserves regular <Esc> if we want to use neovim/vim in neovim terminal
-    tnoremap <Leader><Esc> <C-\><C-n> " Exit terminal insert mode
-
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-endif
-"}}}
 "{{{Plugins
 try
     call plug#begin('~/.vim/bundle')
@@ -395,6 +371,30 @@ else
     nnoremap <Leader>c :SyntasticCheck<CR>
 endif
 
+"}}}
+"{{{ NeoVim
+if has('nvim')
+    if has('clipboard')
+        function! ClipboardYank()
+            call system('xclip -i -selection clipboard', @@)
+        endfunction
+
+        function! ClipboardPaste()
+            let @@ = system('xclip -o -selection clipboard')
+        endfunction
+        vnoremap <silent> y y:call ClipboardYank()<cr>
+        vnoremap <silent> d d:call ClipboardYank()<cr>
+        nnoremap <silent> p :call ClipboardPaste()<cr>p
+    endif
+
+    " Highlight terminal cursor red
+	highlight TermCursor ctermfg=red guifg=red
+
+    " Preserves regular <Esc> if we want to use neovim/vim in neovim terminal
+    tnoremap <Esc><Esc> <C-\><C-n> " Exit terminal insert mode
+
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+endif
 "}}}
 "{{{ Functions
 
