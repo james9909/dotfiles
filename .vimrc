@@ -29,13 +29,13 @@ if has('nvim')
         nnoremap <silent> p :call ClipboardPaste()<cr>p
     endif
 
-    tnoremap <Esc> <C-\><C-n>   " Escape to exit terminal insert mode
-    tnoremap jj <C-\><C-n>      " jj to exit terminal insert mode
-    " Use :terminal to execute shell command
-    nnoremap <Leader>T :terminal<CR>
+    " Highlight terminal cursor red
+	highlight TermCursor ctermfg=red guifg=red
+
+    " Preserves regular <Esc> if we want to use neovim/vim in neovim terminal
+    tnoremap <Leader><Esc> <C-\><C-n> " Exit terminal insert mode
 
     let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
 endif
 "}}}
 "{{{Plugins
@@ -389,6 +389,8 @@ nnoremap <silent> <F8> :execute RotateColorTheme()<CR> " Rotate colorschemes
 " Syntax checker
 if has("nvim")
     nnoremap <Leader>c :Neomake<CR>
+    " Use :terminal to execute shell command
+    nnoremap <Leader>T :terminal<CR>
 else
     nnoremap <Leader>c :SyntasticCheck<CR>
 endif
