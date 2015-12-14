@@ -42,7 +42,6 @@ endif
 try
     call plug#begin('~/.vim/bundle')
 
-    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'vim-scripts/DrawIt'
     Plug 'morhetz/gruvbox'
@@ -56,11 +55,28 @@ try
     Plug 'Raimondi/delimitMate'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     if has('nvim')
+        Plug 'junegunn/fzf'
+        if executable('ag')
+            let $FZF_DEFAULT_COMMAND = 'ag -i --nocolor --nogroup --hidden
+                        \ --ignore .git
+                        \ --ignore .DS_Store
+                        \ --ignore "**/*.pyc"
+                        \ --ignore "**/*.class"
+                        \ --ignore _backup
+                        \ --ignore _undo
+                        \ --ignore _swap
+                        \ --ignore .cache
+                        \ -g ""'
+        endif
+        nnoremap <C-p> :FZF<CR>
+
         Plug 'Shougo/deoplete.nvim'
         let g:deoplete#enable_at_startup = 1
+
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
         Plug 'benekastah/neomake', { 'on': 'Neomake' }
         autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
+        nnoremap <Leader>c :Neomake<CR>
     else
         if has("lua")
             Plug 'Shougo/neocomplete.vim'
@@ -82,6 +98,7 @@ try
 
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
         Plug 'scrooloose/syntastic'
+        nnoremap <Leader>c :SyntasticCheck<CR>
 
         let g:syntastic_python_checkers = ['flake8']
         let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
@@ -92,6 +109,31 @@ try
         let g:syntastic_warning_symbol='⚠'
         let g:syntastic_style_error_symbol = '✗'
         let g:syntastic_style_warning_symbol = '⚠'
+
+        Plug 'ctrlpvim/ctrlp.vim'
+        let g:ctrlp_show_hidden = 1
+        let g:ctrlp_working_path_mode = 0 " Use vim's cwd"
+        let g:ctrlp_match_window = 'bottom,order:ttb'
+        " Use ag (AKA the_silver_searcher)
+        if executable('ag')
+            let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+                        \ --ignore .git
+                        \ --ignore .svn
+                        \ --ignore .hg
+                        \ --ignore .DS_Store
+                        \ --ignore "**/*.pyc"
+                        \ --ignore _backup
+                        \ --ignore _undo
+                        \ --ignore _swap
+                        \ --ignore .cache
+                        \ -g ""'
+        else
+            let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+            let g:ctrlp_custom_ignore = {
+                        \ 'dir':  '\v[\/](_backup|_undo|_swap|\.cache)$'
+                        \ }
+        endif
+        nnoremap <C-p> :CtrlP<CR>
     endif
     Plug 'airblade/vim-gitgutter'
     Plug 'osyo-manga/vim-over'
@@ -103,30 +145,6 @@ try
     Plug 'xolox/vim-misc'
     Plug 'Yggdroot/indentLine'
     Plug 'zirrostig/vim-schlepp'
-
-    " CtrlP
-    let g:ctrlp_show_hidden = 1
-    let g:ctrlp_working_path_mode = 0 " Use vim's cwd"
-    let g:ctrlp_match_window = 'bottom,order:ttb'
-    " Use ag (AKA the_silver_searcher)
-    if executable('ag')
-        let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-                    \ --ignore .git
-                    \ --ignore .svn
-                    \ --ignore .hg
-                    \ --ignore .DS_Store
-                    \ --ignore "**/*.pyc"
-                    \ --ignore _backup
-                    \ --ignore _undo
-                    \ --ignore _swap
-                    \ --ignore .cache
-                    \ -g ""'
-    else
-        let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-        let g:ctrlp_custom_ignore = {
-                    \ 'dir':  '\v[\/](_backup|_undo|_swap|\.cache)$'
-                    \ }
-    endif
 
     " Instant markdown preview
     let g:instant_markdown_slow = 1
@@ -314,9 +332,6 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vnoremap <C-c> "+y<CR>
 inoremap <C-v> <esc>:set paste<CR>"+]p`]:set nopaste<cr>A
 
-" CtrlP
-nnoremap <C-p> :CtrlP<CR>
-
 " Remove search highlights
 nnoremap <CR> :noh<CR><CR>
 
@@ -329,11 +344,6 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>i :call Indent()<CR>
-if has("nvim")
-    nnoremap <Leader>c :Neomake<CR>
-else
-    nnoremap <Leader>c :SyntasticCheck<CR>
-endif
 nnoremap <Leader>rn :set relativenumber!<CR>
 nnoremap <Leader>ss :setlocal spell!<CR>"
 nnoremap <silent><Leader>t :call ToggleVExplorer()<CR>
