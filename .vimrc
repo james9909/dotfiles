@@ -42,25 +42,6 @@ endif
 try
     call plug#begin('~/.vim/bundle')
 
-    if has("lua")
-        Plug 'Shougo/neocomplete.vim'
-
-        let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
-        let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
-        let g:neocomplete#sources#syntax#min_keyword_length = 1 " Only show completions longer than 1 chars
-        let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
-        let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
-        let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        " <CR>: close popup and save indent.
-        inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
-        function! s:my_cr_function()
-            return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
-        endfunction
-    endif
-
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'vim-scripts/DrawIt'
@@ -75,10 +56,30 @@ try
     Plug 'Raimondi/delimitMate'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     if has('nvim')
+        Plug 'Shougo/deoplete.nvim'
+        let g:deoplete#enable_at_startup = 1
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
         Plug 'benekastah/neomake', { 'on': 'Neomake' }
         autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
     else
+        if has("lua")
+            Plug 'Shougo/neocomplete.vim'
+            let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
+            let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
+            let g:neocomplete#sources#syntax#min_keyword_length = 1 " Only show completions longer than 1 chars
+            let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
+            let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
+            let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
+            autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+            autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+            autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+            " <CR>: close popup and save indent.
+            inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
+            function! s:my_cr_function()
+                return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
+            endfunction
+        endif
+
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
         Plug 'scrooloose/syntastic'
 

@@ -130,3 +130,6 @@
 [submodule ".vim/bundle/ctrlp.vim"]
     path = .vim/bundle/ctrlp.vim
     url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule ".vim/bundle/deoplete.vim"]
+	path = .vim/bundle/deoplete.vim
+	url = https://github.com/Shougo/deoplete.nvim
