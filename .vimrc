@@ -18,6 +18,7 @@ autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 try
     call plug#begin('~/.vim/bundle')
 
+    Plug 'gioele/vim-autoswap'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'vim-scripts/DrawIt'
     Plug 'morhetz/gruvbox'
@@ -47,7 +48,17 @@ try
         nnoremap <C-p> :FZF<CR>
 
         Plug 'Shougo/deoplete.nvim'
-        let g:deoplete#enable_at_startup = 1
+        let g:deoplete#enable_at_startup = 1 " Enable deoplete
+        let g:deoplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
+        let g:deoplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
+        let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+        let g:deoplete#omni#input_patterns.java = [
+                    \'[^. \t0-9]\.\w*',
+                    \'[^. \t0-9]\->\w*',
+                    \'[^. \t0-9]\::\w*',
+                    \'\s[A-Z][a-z]',
+                    \'^\s*@[A-Z][a-z]'
+                    \]
 
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
         Plug 'benekastah/neomake', { 'on': 'Neomake' }
@@ -404,6 +415,8 @@ function! JavaConfig()
     try
         let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
         let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
+        let g:JavaComplete_UseFQN = 1
+        let g:JavaComplete_ServerAutoShutdownTime = 300
         set omnifunc=javacomplete#Complete
     catch
         echom "javacomplete2 is not installed!"
