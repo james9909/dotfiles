@@ -18,19 +18,6 @@ autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 try
     call plug#begin('~/.vim/bundle')
 
-    Plug 'gioele/vim-autoswap'
-    Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
-    Plug 'vim-scripts/DrawIt'
-    Plug 'morhetz/gruvbox'
-    Plug 'bling/vim-airline'
-    Plug 'ervandew/supertab'
-    Plug 'Lokaltog/vim-easymotion'
-    Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
-    Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-    Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-    Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-    Plug 'Raimondi/delimitMate'
-    Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     if has('nvim')
         Plug 'junegunn/fzf'
         if executable('ag')
@@ -120,15 +107,28 @@ try
         endif
         nnoremap <C-p> :CtrlP<CR>
     endif
+    Plug 'Lokaltog/vim-easymotion'
+    Plug 'Raimondi/delimitMate'
+    Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
+    Plug 'Yggdroot/indentLine'
     Plug 'airblade/vim-gitgutter'
+    Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+    Plug 'bling/vim-airline'
+    Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+    Plug 'ervandew/supertab'
+    Plug 'gioele/vim-autoswap'
+    Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+    Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
+    Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
+    Plug 'morhetz/gruvbox'
     Plug 'osyo-manga/vim-over'
+    Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
-    Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
-    Plug 'xolox/vim-notes'
+    Plug 'vim-scripts/DrawIt'
     Plug 'xolox/vim-misc'
-    Plug 'Yggdroot/indentLine'
+    Plug 'xolox/vim-notes'
     Plug 'zirrostig/vim-schlepp'
 
     " Instant markdown preview
@@ -302,9 +302,6 @@ nnoremap <silent> <Leader>gs :Gstatus<CR>
 nnoremap <silent> <Leader>gd :Gdiff<CR>
 nnoremap <silent> <Leader>gc :Gcommit<CR>
 nnoremap <silent> <Leader>gb :Gblame<CR>
-nnoremap <silent> <Leader>gl :Glog<CR>
-nnoremap <silent> <Leader>gp :Git push<CR>
-nnoremap <silent> <Leader>gw :Gwrite<CR>
 
 " Tabularize mappings
 vmap <Leader>a= :Tabularize /=<CR>
@@ -371,16 +368,6 @@ nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-nnoremap <silent> <F8> :execute RotateColorTheme()<CR> " Rotate colorschemes
-
-" Syntax checker
-if has("nvim")
-    nnoremap <Leader>c :Neomake<CR>
-    " Use :terminal to execute shell command
-    nnoremap <Leader>T :terminal<CR>
-else
-    nnoremap <Leader>c :SyntasticCheck<CR>
-endif
 
 "}}}
 "{{{ NeoVim
@@ -404,7 +391,14 @@ if has('nvim')
     " Preserves regular <Esc> if we want to use neovim/vim in neovim terminal
     tnoremap <Esc><Esc> <C-\><C-n> " Exit terminal insert mode
 
+    " Use :terminal to execute shell command
+    nnoremap <Leader>T :terminal<CR>
+
     let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+    nnoremap <Leader>c :Neomake<CR>
+else
+    nnoremap <Leader>c :SyntasticCheck<CR>
 endif
 "}}}
 "{{{ Functions
@@ -444,20 +438,6 @@ endfunction
 function! Indent()
     call Preserve('normal gg=G')
 endfunction
-"}}}
-
-"{{{ Transparent background
-function! TransparentBackground()
-    highlight clear CursorLine
-    highlight Normal ctermbg=none
-    highlight LineNr ctermbg=none
-    highlight Folded ctermbg=none
-    highlight NonText ctermbg=none
-    highlight SpecialKey ctermbg=none
-    highlight VertSplit ctermbg=none
-    highlight SignColumn ctermbg=none
-endfunction
-command! TransparentBackground call TransparentBackground()
 "}}}
 
 "{{{ Follow symlinks
@@ -532,26 +512,6 @@ function! ToggleVExplorer()
         let t:expl_buf_num = bufnr("%")
         exe "vertical resize 30"
     endif
-endfunction
-"}}}
-
-"{{{ Rotate colorschemes
-let themeindex=0
-function! RotateColorTheme()
-	let y = -1
-	while y == -1
-		let colorstring = "placeholder#gruvbox#Tomorrow-Night#"
-		let x = match( colorstring, "#", g:themeindex )
-		let y = match( colorstring, "#", x + 1 )
-		let g:themeindex = x + 1
-		if y == -1
-			let g:themeindex = 0
-		else
-			let themestring = strpart(colorstring, x + 1, y - x - 1)
-			hi clear
-			return ":colorscheme ".themestring
-		endif
-	endwhile
 endfunction
 "}}}
 
