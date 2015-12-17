@@ -8,6 +8,8 @@ augroup defaults
     autocmd FileType java call JavaConfig()
     " Restore cursor location
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    " Remove automatic docstring window popup
+    autocmd FileType python setlocal completeopt-=preview
 augroup END
 
 " Automagically remove any trailing whitespace that is in the file
