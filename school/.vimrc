@@ -171,8 +171,6 @@ nnoremap <C-j> 3j
 vnoremap <C-k> 3k
 vnoremap <C-j> 3j
 
-nnoremap <silent> <F8> :execute RotateColorTheme()<CR> " Rotate colorschemes
-
 "}}}
 "{{{ Functions
 
@@ -235,26 +233,6 @@ function! ToggleVExplorer()
         let t:expl_buf_num = bufnr("%")
         exe "vertical resize 30"
     endif
-endfunction
-"}}}
-
-"{{{ Rotate colorschemes
-let themeindex=0
-function! RotateColorTheme()
-	let y = -1
-	while y == -1
-		let colorstring = "placeholder#gruvbox#Tomorrow-Night#"
-		let x = match( colorstring, "#", g:themeindex )
-		let y = match( colorstring, "#", x + 1 )
-		let g:themeindex = x + 1
-		if y == -1
-			let g:themeindex = 0
-		else
-			let themestring = strpart(colorstring, x + 1, y - x - 1)
-			hi clear
-			return ":colorscheme ".themestring
-		endif
-	endwhile
 endfunction
 "}}}
 
