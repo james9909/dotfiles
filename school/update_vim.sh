@@ -3,7 +3,7 @@
 function build_vim() {
     cd "$HOME/vim/src"
     make distclean
-    LDFLAGS=-L$HOME/usr/local/lib ./configure  --prefix="$HOME/usr/local"
+    LDFLAGS=-L$HOME/usr/local/lib ./configure --prefix="$HOME/usr/local" --with-features=huge --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
     make
     make install
 }
