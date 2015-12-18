@@ -8,8 +8,6 @@ augroup defaults
     autocmd FileType java call JavaConfig()
     " Restore cursor location
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    " Remove automatic docstring window popup
-    autocmd FileType python setlocal completeopt-=preview
 augroup END
 
 " Automagically remove any trailing whitespace that is in the file
@@ -69,6 +67,8 @@ try
             function! s:my_cr_function()
                 return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
             endfunction
+        else
+            Plug 'ajh17/VimCompletesMe'
         endif
 
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -224,7 +224,7 @@ set ignorecase "Ignore case when searching
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
 set colorcolumn=80 " Highlight 80th column as guideline
-set completeopt=longest,menuone,preview
+set completeopt=longest,menuone
 set pastetoggle=<F2> " If this changes, change the paste leader above
 set backup " Allow for a backup directory
 set wrapscan " Automatically wrap search when hitting bottom

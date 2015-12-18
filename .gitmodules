@@ -137,3 +137,6 @@
 [submodule ".vim/bundle/fzf"]
 	path = .vim/bundle/fzf
 	url = https://github.com/junegunn/fzf
+[submodule ".vim/bundle/VimCompletesMe"]
+	path = .vim/bundle/VimCompletesMe
+	url = https://github.com/ajh17/VimCompletesMe

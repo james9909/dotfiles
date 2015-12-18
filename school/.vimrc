@@ -23,6 +23,7 @@ try
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
+    Plug 'ajh17/VimCompletesMe'
 
     " Airline
     let g:airline_powerline_fonts = 1
@@ -74,7 +75,7 @@ set ignorecase "Ignore case when searching
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
 set colorcolumn=80 " Highlight 80th column as guideline
-set completeopt=longest,menuone,preview
+set completeopt=longest,menuone
 set pastetoggle=<F2> " If this changes, change the paste leader above
 set backup " Allow for a backup directory
 set wrapscan " Automatically wrap search when hitting bottom
