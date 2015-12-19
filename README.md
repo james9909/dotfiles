@@ -24,6 +24,18 @@ $ sudo apt-get update
 $ sudo apt-get install oracle-java8-installer
 $ mvn -f ~/.vim/bundle/vim-javacomplete2/libs/javavi/pom.xml compile
 ```
+##### eclim
+
+[Eclim](http://eclim.org/) is a tool that essentially integrates [Eclipse](https://eclipse.org/)
+functionality within Vim, and can also allow gVim to be embedded within Eclipse.
+Installing eclim is as simple as running:
+
+```
+$ wget -O "eclim_2.5.0.jar" "http://sourceforge.net/projects/eclim/files/eclim/2.5.0/eclim_2.5.0.jar/download"
+$ java -Dvim.files=/path/to/.vim -Declipse.home=/path/to/eclipse -jar eclim_2.5.0.jar install
+```
+If you wish to be able to use gVim within Eclipse, make sure that gVim has the `+netbeans_intg` flag.
+Follow the guide [here](http://eclim.org/eclimd.html#gvim-embedded) for more instructions.
 
 #### Terminal
 
