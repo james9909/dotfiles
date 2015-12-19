@@ -1,0 +1,48 @@
+# General settings
+set realname = "James Wang"
+set imap_user = "jamesthewang99@gmail.com"
+set imap_pass = ""
+set smtp_url = "smtp://jamesthewang99@smtp.gmail.com:587/"
+set spoolfile = "imaps://imap.gmail.com:993/INBOX"
+set folder = "imaps://imap.gmail.com:993"
+set record = "+[Gmail]/Sent Mail"
+set postponed = "+[Gmail]/Drafts"
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+set sleep_time = 0 # be fast
+unset imap_passive # Allow Mutt to open new imap connection automatically.
+set imap_keepalive = 300 # Keep IMAP connection alive by polling intermittently (time in seconds).
+set mail_check = 120 # How often to check for new mail (time in seconds).
+set sort = reverse-date-received # Sort by most recent
+set sort_re # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+# These two lines appear to be needed on some Linux distros, like Arch Linux
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+# Keybindings
+bind index gg first-entry
+bind index G last-entry
+bind index R group-reply
+
+bind pager k previous-line
+bind pager j next-line
+bind pager gg top
+bind pager G bottom
+
+bind pager R group-reply
+
+# Pager view
+auto_view text/html # view html automatically
+alternative_order text/plain text/enriched text/html # Save html for last
+
+# New mail
+set edit_headers # show headers when composing
+set fast_reply # skip to compose when replying
+set fcc_attach # save attachments with the body
+
+# Contacts
+set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
+bind editor <Tab> complete-query

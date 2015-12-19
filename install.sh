@@ -84,6 +84,12 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo -v
 fi
 
+echo -n "Using mutt? [y/n] "
+if [[ $ans =~ ^[Yy]$ ]]; then
+    sudo apt-get -y install mutt
+    sudo -v
+fi
+
 echo -n "Custom font? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
