@@ -28,6 +28,8 @@ sudo -v
 sudo apt-get install -y zsh tmux
 sudo -v
 
+sudo apt-get install ranger
+
 # youtube-dl
 sudo apt-get install -y libav-tools id3v2
 sudo curl https://yt-dl.org/downloads/2015.09.03/youtube-dl -o /usr/local/bin/youtube-dl
