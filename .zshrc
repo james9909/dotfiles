@@ -63,6 +63,7 @@ alias zshreload="source ~/.zshrc"
 eval $(thefuck --alias)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # FZF
+export FZF_DEFAULT_COMMAND='ag -i --nocolor --nogroup --hidden --ignore .git --ignore .DS_Store --ignore "**/*.pyc" --ignore "**/*.class" --ignore _backup --ignore _undo --ignore _swap --ignore .cache -g ""'
 
 # use cache when auto-completing
 zstyle ':completion::complete:*' use-cache 1
