@@ -15,6 +15,7 @@ sudo apt-get install -y python-software-properties software-properties-common py
 sudo apt-get install -y make gparted curl
 sudo apt-get install -y openssh-server
 sudo apt-get install -y unity-tweak-tool
+sudo apt-get install -y ag
 sudo -v
 
 sudo pip install Flask BeautifulSoup4, lxml, Pillow
