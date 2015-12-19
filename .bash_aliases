@@ -15,11 +15,15 @@ alias localcurrent="mplayer -playlist http://minnesota.publicradio.org/tools/pla
 alias sleepbot="mplayer -playlist http://sleepbot.com/ambience/cgi/listen.cgi/listen.pls" # Sleepbot Environmental Broadcast 56K MP3
 alias groovesalad="mplayer -playlist http://somafm.com/groovesalad130.pls" # Soma FM Groove Salad iTunes AAC 128K
 
-# Other aliases
+# networking aliases
+alias tunnel="~/sshuttle/sshuttle 0/0 -r"
 alias school="ssh james.wang@marge.stuy.edu"
+alias picoctf="ssh pico49524@shell2014.picoctf.com"
+alias easyctf="ssh user04ce4@ssh.easyctf.com"
+
+# Other aliases
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
 alias homeworkserver='~/.homeworkserver/homeworkserver'
-alias easyctf="ssh user04ce4@ssh.easyctf.com"
 alias updatevim="~/scripts/update_vim.sh"
 alias updateneovim="~/scripts/update_neovim.sh"
 # For long running commands

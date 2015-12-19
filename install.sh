@@ -13,7 +13,6 @@ sudo -v
 sudo apt-get install -y openjdk-7-jdk icedtea-6-plugin git subversion python-dev python3
 sudo apt-get install -y python-software-properties software-properties-common python-pip
 sudo apt-get install -y make gparted curl
-sudo apt-get install -y openssh-server
 sudo apt-get install -y unity-tweak-tool
 sudo apt-get install -y ag
 sudo -v
@@ -54,32 +53,40 @@ sudo -v
 # Classic menu
 echo -n "Using classic menu? [y/n] "
 read ans
-if [[ $ans == "y" ]]; then
+if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-add-repository ppa:diesch/testing
     sudo apt-get update
     sudo apt-get install classicmenu-indicator
     sudo -v
 fi
 
+echo -n "Setup ssh tools? [y/n]"
+read ans
+if [[ $ans =~ ^[Yy]$ ]]; then
+    sudo apt-get install -y openssh-server
+    sudo -v
+    git clone https://github.com/apenwarr/sshuttle ~
+fi
+
 chsh -s /bin/zsh
 
 echo -n "Using these dotfiles? [y/n] "
 read ans
-if [[ $ans == "y" ]]; then
+if [[ $ans =~ ^[Yy]$ ]]; then
     ./link.sh
     sudo -v
 fi
 
 echo -n "Using urxvt? [y/n] "
 read ans
-if [[ $ans == "y" ]]; then
+if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y install rxvt-unicode-256color
     sudo -v
 fi
 
 echo -n "Custom font? [y/n] "
 read ans
-if [[ $ans == "y" ]]; then
+if [[ $ans =~ ^[Yy]$ ]]; then
     font_dir="$HOME/.local/share/fonts"
     mkdir -p "$font_dir"
     wget "https://github.com/powerline/fonts/raw/master/DroidSansMono/Droid%20Sans%20Mono%20for%20Powerline.otf"
@@ -93,7 +100,7 @@ fi
 
 echo -n "Using vim? [y/n] "
 read ans
-if [[ $ans == "y" ]]; then
+if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get -y build-dep vim-gnome
     sudo apt-get -y install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev mercurial libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
@@ -127,7 +134,7 @@ fi
 
 echo -n "Using neovim? [y/n] "
 read ans
-if [[ $ans == "y" ]]; then
+if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja xclip
     git clone https://github.com/neovim/neovim ~/neovim
     cd ~/neovim
@@ -143,7 +150,7 @@ fi
 
 echo -n "Using i3? [y/n] "
 read ans
-if [[ $ans == "y" ]]; then
+if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get install -y i3 i3status
     sudo -v
 fi
