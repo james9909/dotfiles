@@ -1,3 +1,11 @@
+# Git aliases
+alias g="git"
+alias gl="git pull"
+alias gp="git push"
+alias gst="git status"
+alias gcmsg="git commit -m"
+alias glog="git log --oneline --decorate --color --graph"
+
 alias school="ssh james.wang@marge.stuy.edu"
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
 alias homeworkserver='~/.homeworkserver/homeworkserver'
