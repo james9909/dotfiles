@@ -19,7 +19,7 @@ try
     call plug#begin('~/.vim/bundle')
 
     if has('nvim')
-        Plug 'junegunn/fzf'
+        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
         if executable('ag')
             let $FZF_DEFAULT_COMMAND = 'ag -i --nocolor --nogroup --hidden
                         \ --ignore .git
