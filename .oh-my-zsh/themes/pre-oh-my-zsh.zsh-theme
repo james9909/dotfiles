@@ -1,56 +1,4 @@
 #!/usr/bin/env zsh
-# General configuration {{{
-# vim:fdm=marker
-
-ZSH=~/.zsh
-
-HIST_STAMPS="mm/dd/yyyy"
-HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=5000
-setopt INC_APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt HIST_IGNORE_SPACE
-
-# User configuration
-export PATH="/bin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/games:/usr/sbin"
-export EDITOR="vim"
-
-setopt AUTO_CD
-setopt AUTO_PUSHD
-setopt EXTENDED_GLOB
-setopt PUSHD_SILENT
-setopt PUSHD_TO_HOME
-setopt COMPLETE_IN_WORD
-setopt ZLE
-setopt VI
-unsetopt EQUALS
-unsetopt correct_all
-unsetopt correct
-
-# use cache when auto-completing
-zstyle ':completion::complete:*' use-cache 1
-# use case-insensitive auto-completing
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# graphical auto-complete menu
-zstyle ':completion:*' menu select
-
-# use automatic path prediction
-# $predict-on to turn on and $predict-off to turn off
-autoload predict-on
-autoload predict-off
-# use advanced completion system
-autoload -U compinit && compinit
-# colors
-autoload -U colors && colors
-
-ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
-ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
-ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
-
-. /etc/zsh_command_not_found
-# }}}
 # Color support {{{
 
 # Force color in terminal
@@ -249,17 +197,6 @@ zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' menu yes select interac
 zstyle ':completion:tmux-pane-words-anywhere:*' matcher-list 'b:=* m:{A-Za-z}={a-zA-Z}'
 # }}}
 # Aliases {{{
-
-alias zshreload="source ~/.zshrc"
-alias news="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls" # MPR News
-alias current="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls" # The Current
-alias classical="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls" # Classical MPR
-alias localcurrent="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/local.pls" # Local Current
-alias sleepbot="mplayer -playlist http://sleepbot.com/ambience/cgi/listen.cgi/listen.pls" # Sleepbot Environmental Broadcast 56K MP3
-alias groovesalad="mplayer -playlist http://somafm.com/groovesalad130.pls" # Soma FM Groove Salad iTunes AAC 128K
-alias check-space='du -h ~/ | grep "^[0-9]*.[0-9]G"'
-eval $(thefuck --alias) # Use thefuck
-
 # import aliases from bash
 if [[ -e $HOME/.bash_aliases ]]; then
     . $HOME/.bash_aliases

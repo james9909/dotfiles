@@ -7,6 +7,15 @@ alias gst="git status"
 alias gcmsg="git commit -m"
 alias glog="git log --oneline --decorate --color --graph"
 
+# mplayer aliases
+alias news="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls" # MPR News
+alias current="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls" # The Current
+alias classical="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls" # Classical MPR
+alias localcurrent="mplayer -playlist http://minnesota.publicradio.org/tools/play/streams/local.pls" # Local Current
+alias sleepbot="mplayer -playlist http://sleepbot.com/ambience/cgi/listen.cgi/listen.pls" # Sleepbot Environmental Broadcast 56K MP3
+alias groovesalad="mplayer -playlist http://somafm.com/groovesalad130.pls" # Soma FM Groove Salad iTunes AAC 128K
+
+# Other aliases
 alias school="ssh james.wang@marge.stuy.edu"
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
 alias homeworkserver='~/.homeworkserver/homeworkserver'

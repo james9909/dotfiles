@@ -1,63 +1,45 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="pre-oh-my-zsh"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow zsh-syntax-highlighting tmux)
-
-ZSH_TMUX_FIXTERM_WITH_256COLOR="true"
+HIST_STAMPS="mm/dd/yyyy"
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
 
 # User configuration
+export PATH="/bin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/games:/usr/sbin"
+export EDITOR="vim"
 
-export PATH="/bin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/sbin"
-# export MANPATH="/usr/local/man:$MANPATH"
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt EXTENDED_GLOB
+setopt PUSHD_SILENT
+setopt PUSHD_TO_HOME
+setopt COMPLETE_IN_WORD
+setopt ZLE
+setopt VI
+unsetopt EQUALS
+unsetopt correct_all
+unsetopt correct
+
+ZSH_THEME="pre-oh-my-zsh" # Theme to be used
+
+COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
+
+DISABLE_UNTRACKED_FILES_DIRTY="true" # Mark untracked files under VCS as dirty
+
+plugins=(git git-flow zsh-syntax-highlighting) # Plugins
+
+# User configuration
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -65,9 +47,6 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
@@ -80,6 +59,29 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshreload="source ~/.zshrc"
 eval $(thefuck --alias)
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # FZF
+
+# use cache when auto-completing
+zstyle ':completion::complete:*' use-cache 1
+# use case-insensitive auto-completing
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# graphical auto-complete menu
+zstyle ':completion:*' menu select
+
+# use automatic path prediction
+# $predict-on to turn on and $predict-off to turn off
+autoload predict-off
+# use advanced completion system
+autoload -U compinit && compinit
+# colors
+autoload -U colors && colors
+
+# Override colors
+ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
+ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
+ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
+
+. /etc/zsh_command_not_found # Bash-like command not found
