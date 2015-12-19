@@ -6,13 +6,13 @@ function build_vim() {
     ./configure --with-features=huge \
         --enable-rubyinterp \
         --enable-largefile \
-        --disable-netbeans \
+        --enable-netbeans \
         --enable-pythoninterp \
         --with-python-config-dir=/usr/lib/python2.7/config \
         --enable-perlinterp \
         --enable-luainterp \
         --with-luajit \
-        --enable-gui=auto \
+        --enable-gui=gtk2 \
         --enable-fail-if-missing \
         --with-lua-prefix=/usr/include/lua5.1 \
         --enable-cscope
