@@ -45,4 +45,4 @@ The font used is `Droid Sans Mono for Powerline Regular`.
 If you are using [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), make sure
 to clone the [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) repository into `~/.oh-my-zsh/custom/plugins`.
 
-`$ git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins`
+`$ git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting`
