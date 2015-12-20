@@ -16,7 +16,7 @@ alias sleepbot="mplayer -playlist http://sleepbot.com/ambience/cgi/listen.cgi/li
 alias groovesalad="mplayer -playlist http://somafm.com/groovesalad130.pls" # Soma FM Groove Salad iTunes AAC 128K
 
 # networking aliases
-alias tunnel="sshuttle 0/0 -r"
+alias tunnel="~/scripts/tunnel.sh"
 alias school="ssh james.wang@marge.stuy.edu"
 alias picoctf="ssh pico49524@shell2014.picoctf.com"
 alias easyctf="ssh user04ce4@ssh.easyctf.com"
