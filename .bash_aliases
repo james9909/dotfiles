@@ -28,3 +28,4 @@ alias updatevim="~/scripts/update_vim.sh"
 alias updateneovim="~/scripts/update_neovim.sh"
 # For long running commands
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias dropbox='python ~/scripts/dropbox.py'

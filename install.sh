@@ -164,6 +164,9 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo -v
 fi
 
+# Dropbox
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+
 # Misc stuff
 sudo apt-get install -y sl fortune-mod espeak cowsay
 sudo -v

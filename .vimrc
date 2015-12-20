@@ -161,7 +161,7 @@ try
 
     " Vim notes
     let g:notes_word_boundaries = 1
-    let g:notes_directories = ['~/Documents/vim-notes']
+    let g:notes_directories = ['~/Documents/Dropbox/vim-notes']
 
     " Vim-schlepp
     let g:Schlepp#allowSquishingLines = 1
