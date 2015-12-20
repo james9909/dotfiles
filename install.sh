@@ -10,14 +10,15 @@ sudo apt-get remove --purge thunderbird -y
 sudo apt-get install -y indicator-cpufreq lm-sensors
 sudo -v
 
-sudo apt-get install -y openjdk-7-jdk icedtea-6-plugin git subversion python-dev python3
+sudo apt-get install -y openjdk-7-jdk git python-dev python3
 sudo apt-get install -y python-software-properties software-properties-common python-pip
 sudo apt-get install -y make gparted curl
 sudo apt-get install -y unity-tweak-tool
-sudo apt-get install -y ag
+sudo apt-get install -y silversearcher-ag
+
 sudo -v
 
-sudo pip install Flask BeautifulSoup4, lxml, Pillow
+sudo pip install Flask BeautifulSoup4 Pillow
 sudo -v
 
 sudo apt-get autoclean -y
@@ -69,15 +70,6 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo -v
 fi
 
-chsh -s /bin/zsh
-
-echo -n "Using these dotfiles? [y/n] "
-read ans
-if [[ $ans =~ ^[Yy]$ ]]; then
-    ./link.sh
-    sudo -v
-fi
-
 echo -n "Using urxvt? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
@@ -86,6 +78,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
 fi
 
 echo -n "Using mutt? [y/n] "
+read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y install mutt
     sudo -v
@@ -111,13 +104,16 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get -y build-dep vim-gnome
     sudo apt-get -y install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev mercurial libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
-    sudo mkdir /usr/include/lua5.1/include
-    sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
-    sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
+    if [[ ! -d /usr/include/lua5.1/include ]]; then
+        sudo mkdir -p /usr/include/lua5.1/include
+        sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
+    fi
+    if [[ ! -f /usr/bin/luajit ]]; then
+        sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
+    fi
     cd "$HOME"
     git clone https://github.com/vim/vim "$HOME/vim"
     cd vim/src
-    make distclean
     ./configure --with-features=huge \
         --enable-rubyinterp \
         --enable-largefile \
@@ -142,9 +138,10 @@ fi
 echo -n "Using neovim? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja xclip
+    sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja-build xclip
     git clone https://github.com/neovim/neovim ~/neovim
     cd ~/neovim
+    sudo cp /usr/bin/ninja /usr/sbin/ninja
     make clean
     make CMAKE_BUILD_TYPE=Release # Optimized build
     sudo make install
@@ -169,5 +166,7 @@ sudo -v
 # CTF tools
 sudo apt-get install -y gimp bless binwalk audacity
 sudo pip install xortool
+
+chsh -s /bin/zsh
 
 sudo -k
