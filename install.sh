@@ -65,9 +65,8 @@ fi
 echo -n "Setup ssh tools? [y/n]"
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get install -y openssh-server
+    sudo apt-get install -y openssh-server sshuttle
     sudo -v
-    git clone https://github.com/apenwarr/sshuttle ~
 fi
 
 chsh -s /bin/zsh
