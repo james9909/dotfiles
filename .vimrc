@@ -422,6 +422,8 @@ function! JavaConfig()
         set guioptions-=T " Remove toolbar
         set ruler " Show line/column numbers
         set laststatus=0 " Disable statusline
+    elseif eclim#PingEclim(0)
+        echom "Eclim is running"
     else
         echom "Neither eclim nor javacomplete2 is installed"
     endif
