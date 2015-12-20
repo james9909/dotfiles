@@ -6,7 +6,7 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo -v
 
-sudo apt-get remove --purge thunderbird -y
+sudo apt-get remove -y --purge thunderbird
 sudo apt-get install -y indicator-cpufreq lm-sensors
 sudo -v
 
@@ -29,7 +29,7 @@ sudo -v
 sudo apt-get install -y zsh tmux
 sudo -v
 
-sudo apt-get install ranger
+sudo apt-get install -y ranger
 
 # youtube-dl
 sudo apt-get install -y libav-tools id3v2
@@ -155,7 +155,12 @@ fi
 echo -n "Using i3? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get install -y i3 i3status
+    sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
+    sudo apt-get install -y i3status
+    git clone https://github.com/Airblader/i3 ~/i3-gaps
+    cd ~/i3-gaps
+    make
+    sudo make install
     sudo -v
 fi
 
