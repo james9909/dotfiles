@@ -2,7 +2,7 @@
 
 function build_vim() {
     cd "$HOME/vim/src"
-    make distclean
+    make distclean &&
     ./configure --with-features=huge \
         --enable-rubyinterp \
         --enable-largefile \
@@ -35,6 +35,7 @@ function update_vim() {
             sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
         fi
         git clone https://github.com/vim/vim "$HOME/vim"
+        first_clone=1
     fi
     cd "$HOME/vim/src"
     git fetch
