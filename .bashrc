@@ -94,7 +94,7 @@ function Time() {
 
 # Alters the display of the user
 function User() {
-    echo -n "${USER^}"
+    echo -n "${USER}"
     if [[ $showHostname == true ]]; then
         echo -n "@$(hostname)"
     fi

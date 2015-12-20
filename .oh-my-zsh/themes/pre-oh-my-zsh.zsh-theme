@@ -57,7 +57,7 @@ function Time() {
 
 # Alters the display of the user
 function User() {
-    echo -n "%{%F{red}%}James"
+    echo -n "%{%F{red}%}$USER"
     if [[ $showHostname == true ]]; then
         echo -n "%{%F{red}%}@$(hostname)"
     fi
