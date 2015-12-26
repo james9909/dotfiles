@@ -34,7 +34,9 @@ run_with_status cd $dir
 # move any existing dotfiles in homedir to dotfiles_old directory
 echo -e "\n${YELLOW}Moving any existing dotfiles from ~ to $backup"
 for file in $files; do
-    run_with_status mv ~/$file $backup/
+    if [[ -f $file || -d $file ]]; then
+        run_with_status mv ~/$file $backup/
+    fi
 done
 
 # Create symlinks
