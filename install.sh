@@ -48,20 +48,14 @@ cd wget-1.16/
 make
 sudo -v
 sudo make install
-sudo mkdir /opt/wget/WGET_REAL_1_15
-sudo mv /usr/bin/wget /opt/wget/WGET_REAL_1_15/wget_1_15
-sudo ln -s /opt/wget/bin/wget /usr/bin/wget
-sudo -v
-
-# Classic menu
-echo -n "Using classic menu? [y/n] "
-read ans
-if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-add-repository ppa:diesch/testing
-    sudo apt-get update
-    sudo apt-get install classicmenu-indicator
-    sudo -v
+if [[ ! -d /opt/wget/WGET_REAL_1_15 ]]; then
+    sudo mkdir /opt/wget/WGET_REAL_1_15
 fi
+sudo mv /usr/bin/wget /opt/wget/WGET_REAL_1_15/wget_1_15
+if [[ ! -f /usr/bin/wget ]]; then
+    sudo ln -s /opt/wget/bin/wget /usr/bin/wget
+fi
+sudo -v
 
 echo -n "Setup ssh tools? [y/n]"
 read ans
@@ -77,18 +71,13 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo -v
 fi
 
-echo -n "Using mutt? [y/n] "
-read ans
-if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get -y install mutt
-    sudo -v
-fi
-
-echo -n "Custom font? [y/n] "
+echo -n "Custom font for urxvt? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
     font_dir="$HOME/.local/share/fonts"
-    mkdir -p "$font_dir"
+    if [[ ! -d $font_dir ]]; then
+        mkdir -p "$font_dir"
+    fi
     wget "https://github.com/powerline/fonts/raw/master/DroidSansMono/Droid%20Sans%20Mono%20for%20Powerline.otf"
     mv Droid\ Sans\ Mono\ for\ Powerline.otf $font_dir
 
@@ -96,6 +85,13 @@ if [[ $ans =~ ^[Yy]$ ]]; then
         echo -n "Resetting font cache, this may take a moment..."
         fc-cache -f "$font_dir"
     fi
+fi
+
+echo -n "Using mutt? [y/n] "
+read ans
+if [[ $ans =~ ^[Yy]$ ]]; then
+    sudo apt-get -y install mutt
+    sudo -v
 fi
 
 echo -n "Using vim? [y/n] "
@@ -139,7 +135,9 @@ echo -n "Using neovim? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja-build xclip
-    git clone https://github.com/neovim/neovim ~/neovim
+    if [[ ! -d ~/neovim ]]; then
+        git clone https://github.com/neovim/neovim ~/neovim
+    fi
     cd ~/neovim
     sudo cp /usr/bin/ninja /usr/sbin/ninja
     make clean
@@ -147,8 +145,12 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo make install
     sudo pip install neovim
     mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-    ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-    ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+    if [[ ! -d $XDG_CONFIG_HOME/nvim ]]; then
+        ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+    fi
+    if [[ ! -f $XDG_CONFIG_HOME/nvim/init.vim ]]; then
+        ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+    fi
     sudo -v
 fi
 
@@ -158,7 +160,9 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
     sudo apt-get install -y i3status
     sudo apt-get install -y rofi
-    git clone https://github.com/Airblader/i3 ~/i3-gaps
+    if [[ ! -d ~/i3-gaps ]]; then
+        git clone https://github.com/Airblader/i3 ~/i3-gaps
+    fi
     cd ~/i3-gaps
     make
     sudo make install
