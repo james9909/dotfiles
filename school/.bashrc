@@ -92,7 +92,8 @@ function GitUpToDate {
     fi
     if [[ $status =~ "Your branch is ahead of" ]]; then
         # Local repo is ahead of online repo
-        echo " | Ahead by $(git status -sb | sed 's|[^0-9]*\([0-9\.]*\)|\1|g') commits"
+        num_ahead=$(git status -sb | sed 's|[^0-9]*\([0-9\.]*\)|\1|g')
+        if [[ $num_ahead == 1 ]]; then echo " | Ahead by 1 commit"; else echo " | Ahead by $num_ahead commits"; fi
     fi
 
     echo -ne "\n"
