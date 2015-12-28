@@ -1,13 +1,5 @@
 #!/bin/bash
 
-dir=~/Dev/dotfiles # Change with path to repo
-backup=~/backup # For backup
-
-# list of files/folders to symlink
-# Do not recommend syncing vim folder due to plugins being submodules,
-# unless --recursive was called during the clone
-files=".vimrc .zshrc .oh-my-zsh .tmux.conf scripts .bashrc .Xresources .i3 .i3status.conf .bash_aliases"
-
 YELLOW="\E[1;33m"
 GREEN="\E[1;32m"
 RED="\E[1;31m"
@@ -23,24 +15,23 @@ function run_with_status {
     fi
 }
 
-# create dotfiles_old in homedir
-echo -e "${YELLOW}Creating $backup for backup of any existing dotfiles in ~"
-run_with_status mkdir -p $backup
+if [[ ! "$PWD" =~ .*dotfiles ]]; then
+    echo -e "${RED}Please run this script from the root dotfiles directory"
+    exit 1
+fi
 
-# change to the dotfiles directory
-echo -e "\n${YELLOW}Changing to the $dir directory"
-run_with_status cd $dir
-
-# move any existing dotfiles in homedir to dotfiles_old directory
-echo -e "\n${YELLOW}Moving any existing dotfiles from ~ to $backup"
-for file in $files; do
-    if [[ -f $file || -d $file ]]; then
-        run_with_status mv ~/$file $backup/
+while :; do
+    ls -a
+    echo -n "What file/folder would you like to link? >> "
+    read file
+    if [[ -f "$file" || -d "$file" ]]; then
+        if [[ -f "$HOME/$file" ]]; then
+            echo -e "${YELLOW}Backing up $HOME/$file...${RESET}"
+            run_with_status mv "$HOME/$file" "$backup/"
+        fi
+        echo -e "${YELLOW}Creating symlink: $PWD/$file -> $HOME/$file"
+        run_with_status ln -s "$PWD/$file" "$HOME/$file"
+    else
+        echo -e "${RED}Not a valid file!${RESET}"
     fi
-done
-
-# Create symlinks
-for file in $files; do
-    echo -e "\n${YELLOW}Creating symlink: ~/$file -> $dir/$file"
-    run_with_status ln -s $dir/$file ~/$file
 done
