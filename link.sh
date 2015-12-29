@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BACKUP="$HOME/backup"
+
 YELLOW="\E[1;33m"
 GREEN="\E[1;32m"
 RED="\E[1;31m"
@@ -18,6 +20,10 @@ function run_with_status {
 if [[ ! "$PWD" =~ .*dotfiles ]]; then
     echo -e "${RED}Please run this script from the root dotfiles directory"
     exit 1
+fi
+
+if [[ ! -d "$BACKUP" ]]; then
+    mkdir -p "$BACKUP"
 fi
 
 while :; do
