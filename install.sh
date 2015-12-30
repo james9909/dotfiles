@@ -68,6 +68,7 @@ echo -n "Using urxvt? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y install rxvt-unicode-256color
+    curl -L http://db.tt/JjlLYd5A | sudo tar -xz -C /usr/lib/urxvt/perl/ && sudo mv /usr/lib/urxvt/perl/urxvtclip /usr/lib/urxvt/perl/clipboard
     sudo -v
 fi
 
