@@ -105,7 +105,7 @@ function precmd() { # zsh equivalent of PROMPT_COMMAND in bash
 %{%F{white}%}>> "
     PS1=$prompt1
 
-    RPROMPT='%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)'
+    RPROMPT="%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)"
     RPS1="${RPROMPT}"
 }
 
@@ -143,11 +143,15 @@ ZSH_THEME_GIT_PROMPT_DIRTY=" %{$GIT_DIRTY_COLOR%}✘"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$GIT_CLEAN_COLOR%}✔"
 
 ZSH_THEME_GIT_PROMPT_ADDED="%{$FG[082]%}✚%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$FG[166]%}✹%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$FG[190]%}∆%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DELETED="%{$FG[160]%}✖%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$FG[220]%}➜%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$FG[082]%}═%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[190]%}✭%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$FG[050]%}↑%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$FG[160]%}↓%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_STASHED="⛁"
+ZSH_THEME_GIT_PROMPT_DIVERGED="⑂"
 # }}}
 
 # Configuration options
