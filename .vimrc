@@ -120,11 +120,13 @@ try
     Plug 'ervandew/supertab'
     Plug 'gioele/vim-autoswap'
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+    Plug 'hynek/vim-python-pep8-indent'
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
     Plug 'osyo-manga/vim-over'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
+    Plug 'tpope/vim-abolish'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'

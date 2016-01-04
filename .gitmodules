@@ -140,3 +140,9 @@
 [submodule ".vim/bundle/VimCompletesMe"]
 	path = .vim/bundle/VimCompletesMe
 	url = https://github.com/ajh17/VimCompletesMe
+[submodule ".vim/bundle/vim-python-pep8-indent"]
+	path = .vim/bundle/vim-python-pep8-indent
+	url = https://github.com/hynek/vim-python-pep8-indent
+[submodule ".vim/bundle/vim-abolish"]
+	path = .vim/bundle/vim-abolish
+	url = https://github.com/tpope/vim-abolish
