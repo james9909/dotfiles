@@ -10,7 +10,7 @@ augroup defaults
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-" Automagically remove any trailing whitespace that is in the file
+" Automagically remove any trailing whitespace upon saving
 autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 "}}}
@@ -18,6 +18,7 @@ autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 try
     call plug#begin('~/.vim/bundle')
 
+    " We are using neovim
     if has('nvim')
         Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
         if executable('ag')
@@ -50,7 +51,11 @@ try
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
         Plug 'benekastah/neomake', { 'on': 'Neomake' }
         autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
+
+    " We are using vim
     else
+
+        " Use neocomplete as preferred completion plugin if vim was built with lua support
         if has("lua")
             Plug 'Shougo/neocomplete.vim'
             let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
@@ -67,6 +72,8 @@ try
             function! s:my_cr_function()
                 return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
             endfunction
+
+        " Lua is not available, so use lightweight completion plugin instead
         else
             Plug 'ajh17/VimCompletesMe'
         endif
@@ -88,7 +95,7 @@ try
         let g:ctrlp_show_hidden = 1
         let g:ctrlp_working_path_mode = 0 " Use vim's cwd"
         let g:ctrlp_match_window = 'bottom,order:ttb'
-        " Use ag (AKA the_silver_searcher)
+        " Use ag (AKA the_silver_searcher) if available
         if executable('ag')
             let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
                         \ --ignore .git
@@ -101,6 +108,8 @@ try
                         \ --ignore _swap
                         \ --ignore .cache
                         \ -g ""'
+
+        " Ag is not available, so customize what we have already
         else
             let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
             let g:ctrlp_custom_ignore = {
@@ -136,7 +145,7 @@ try
     Plug 'zirrostig/vim-schlepp'
 
     " Instant markdown preview
-    let g:instant_markdown_slow = 1
+    let g:instant_markdown_slow = 1 " Only update after saving
 
     " Airline
     let g:airline_powerline_fonts = 1
@@ -239,7 +248,6 @@ set cindent " Enable C like indentation
 set cinkeys-=0# " Prevent # from removing indents from a line
 set indentkeys-=0# " Prevent # from removing indents from a line
 set wildmenu " Tab-like completion similar to zsh
-set gdefault " g flag is on by default
 
 " Press % on 'if' to jump to its corresponding 'else'
 runtime macros/matchit.vim
@@ -398,7 +406,7 @@ if has('nvim')
     " Use :terminal to execute shell command
     nnoremap <Leader>T :terminal<CR>
 
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Change cursor shape based on current mode
 
     nnoremap <Leader>c :Neomake<CR>
 else
