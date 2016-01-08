@@ -9,7 +9,7 @@ function build_neovim() {
 
 function update_neovim() {
     # Check if neovim exists as a command
-    if [[ $(command -v neovim) ]]; then
+    if [[ $(command -v nvim) ]]; then
         cd "$HOME/neovim"
         git fetch
         LOCAL=$(git rev-parse @)
