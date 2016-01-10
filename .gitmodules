@@ -146,3 +146,9 @@
 [submodule ".vim/bundle/vim-abolish"]
 	path = .vim/bundle/vim-abolish
 	url = https://github.com/tpope/vim-abolish
+[submodule ".vim/bundle/vim-pandoc"]
+	path = .vim/bundle/vim-pandoc
+	url = git@github.com:vim-pandoc/vim-pandoc
+[submodule ".vim/bundle/vim-pandoc-syntax"]
+	path = .vim/bundle/vim-pandoc-syntax
+	url = git@github.com:vim-pandoc/vim-pandoc-syntax

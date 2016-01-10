@@ -139,6 +139,8 @@ try
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
     Plug 'vim-scripts/DrawIt'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-notes'
