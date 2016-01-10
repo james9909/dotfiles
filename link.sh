@@ -33,7 +33,7 @@ while :; do
     if [[ -f "$file" || -d "$file" ]]; then
         if [[ -f "$HOME/$file" ]]; then
             echo -e "${YELLOW}Backing up $HOME/$file...${RESET}"
-            run_with_status mv "$HOME/$file" "$backup/"
+            run_with_status mv "$HOME/$file" "$BACKUP/"
         fi
         echo -e "${YELLOW}Creating symlink: $PWD/$file -> $HOME/$file"
         run_with_status ln -s "$PWD/$file" "$HOME/$file"
