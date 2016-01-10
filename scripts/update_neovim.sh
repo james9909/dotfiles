@@ -27,7 +27,7 @@ function update_neovim() {
         echo "Neovim is now updated"
     else
         if [[ ! -d "$HOME/neovim" ]]; then
-            sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja-build
+            sudo apt-get -y install libtool cpp:i386 libtool:i386 autoconf automake cmake g++ pkg-config unzip ninja-build
             git clone https://github.com/neovim/neovim "$HOME/neovim"
         fi
         cd "$HOME/neovim"
