@@ -75,6 +75,7 @@ fi
 echo -n "Custom font for urxvt? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
+    sudo apt-get install -y x11-xserver-utils
     font_dir="$HOME/.local/share/fonts"
     if [[ ! -d $font_dir ]]; then
         mkdir -p "$font_dir"
@@ -86,6 +87,8 @@ if [[ $ans =~ ^[Yy]$ ]]; then
         echo -n "Resetting font cache, this may take a moment..."
         fc-cache -f "$font_dir"
     fi
+    cp .Xresources ~/.Xresources
+    xrdb -merge ~/.Xresources
 fi
 
 echo -n "Using mutt? [y/n] "
