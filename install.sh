@@ -15,6 +15,7 @@ sudo apt-get install -y python-software-properties software-properties-common py
 sudo apt-get install -y make gparted curl
 sudo apt-get install -y unity-tweak-tool
 sudo apt-get install -y silversearcher-ag
+sudo apt-get install -y mpd ncmpcpp irssi
 
 sudo -v
 
@@ -161,11 +162,14 @@ fi
 echo -n "Using i3? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
-    sudo apt-get install -y i3status
+    sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev dunst
+    # i3status
+    git clone https://github.com/i3/i3status ~/i3status
+    sudo apt-get install -y libconfuse-dev libyajl-dev libasound2-dev libiw-dev asciidoc libcap2-bin libpulse-dev libnl-genl-3-dev
+    make && sudo make install
 
     # rofi
-    apt-get install -y sudo apt-get install libxft-dev libxinerama-dev libpango1.0-dev
+    sudo apt-get install -y sudo apt-get install libxft-dev libxinerama-dev libpango1.0-dev
 
     wget -c https://github.com/DaveDavenport/rofi/releases/download/0.15.4/rofi-0.15.4.tar.gz
     tar -xzvf rofi-0.15.4.tar.gz
@@ -173,7 +177,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
 
     autoreconf -i
     ./configure
-    make && make install
+    make && sudo make install
 
     if [[ ! -d ~/i3-gaps ]]; then
         git clone https://github.com/Airblader/i3 ~/i3-gaps
