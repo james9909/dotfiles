@@ -203,16 +203,14 @@ catch /:E117:/
 endtry
 "}}}
 "{{{Misc Settings
-syntax enable " Enable syntax highlighting
-syntax sync minlines=256 " Check the first 256 lines to guess syntax highlighting to use
+set nocompatible " Disable Vi-compatibility settings
 filetype indent on " Enable filetype-specific indentation
 filetype plugin on " Enable filetype-specific plugins
 let g:gruvbox_italic=1 " Enable italics
 set background=dark
-colorscheme gruvbox
+colorscheme gruvbox " Gruvbox runs 'syntax reset' anyways
 set cursorline " Highlight current line
 set laststatus=2 " Always show statusline on last window
-set nocompatible " Disable Vi-compatibility settings
 set showcmd " Shows what you are typing as a command
 set t_Co=256 " Enable 256 color
 set foldmethod=marker " Folds are neat
@@ -239,7 +237,7 @@ set smartcase " When using an upper case letter in search, search becomes case-s
 set lazyredraw " Don't redraw when executing macros
 set colorcolumn=80 " Highlight 80th column as guideline
 set completeopt=longest,menuone
-set pastetoggle=<F2> " If this changes, change the paste leader above
+set pastetoggle=<F2> " Toggle paste mode
 set backup " Allow for a backup directory
 set wrapscan " Automatically wrap search when hitting bottom
 set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
@@ -309,21 +307,11 @@ nnoremap <expr> i SmartInsertModeEnter()
 " Vim-schlepp bindings
 vmap K  <Plug>SchleppUp
 vmap J  <Plug>SchleppDown
-vmap H  <Plug>SchleppLeft
-vmap L  <Plug>SchleppRight
 
 " Vim-fugitive mappings
 nnoremap <silent> <Leader>gs :Gstatus<CR>
 nnoremap <silent> <Leader>gd :Gdiff<CR>
-nnoremap <silent> <Leader>gc :Gcommit<CR>
 nnoremap <silent> <Leader>gb :Gblame<CR>
-
-" Tabularize mappings
-vmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>
@@ -341,8 +329,6 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>i :call Preserve('normal gg=G')<CR>
-nnoremap <Leader>rn :set relativenumber!<CR>
-nnoremap <Leader>ss :setlocal spell!<CR>"
 nnoremap <silent><Leader>t :call ToggleVExplorer()<CR>
 nnoremap <Leader>h :split<CR>
 nnoremap <Leader>v :vsplit<CR>
@@ -387,7 +373,7 @@ nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 "}}}
 "{{{ NeoVim
 if has('nvim')
-    if has('clipboard')
+    if has('clipboard') && executable('xclip')
         function! ClipboardYank()
             call system('xclip -i -selection clipboard', @@)
         endfunction
