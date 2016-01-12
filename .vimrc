@@ -210,12 +210,13 @@ filetype plugin on " Enable filetype-specific plugins
 let g:gruvbox_italic=1 " Enable italics
 set background=dark
 colorscheme gruvbox
+set cursorline " Highlight current line
 set laststatus=2 " Always show statusline on last window
 set nocompatible " Disable Vi-compatibility settings
 set showcmd " Shows what you are typing as a command
 set t_Co=256 " Enable 256 color
 set foldmethod=marker " Folds are neat
-set grepprg=grep\ -nH\ $*
+set grepprg=grep\ -nH\ $* " Set command for :grep
 set expandtab " Tabs are spaces
 set smarttab " Enable smart tabbing
 set shiftwidth=4 " Tab size for auto indent
@@ -339,7 +340,7 @@ nnoremap <silent><Leader>W! :w !sudo tee %>/dev/null<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
-nnoremap <Leader>i :call Indent()<CR>
+nnoremap <Leader>i :call Preserve('normal gg=G')<CR>
 nnoremap <Leader>rn :set relativenumber!<CR>
 nnoremap <Leader>ss :setlocal spell!<CR>"
 nnoremap <silent><Leader>t :call ToggleVExplorer()<CR>
@@ -443,7 +444,7 @@ endfunction
 
 "}}}
 
-"{{{ Preserve cursor position
+"{{{ Preserve cursor position while executing a command
 function! Preserve(command)
   " preparation: save last search, and cursor position.
   let _s=@/
@@ -454,13 +455,6 @@ function! Preserve(command)
   " clean up: restore previous search history, and cursor position
   let @/=_s
   call cursor(l, c)
-endfunction
-"}}}
-
-"{{{ Indent file and preserve cursor position
-" Re-indent the whole buffer.
-function! Indent()
-    call Preserve('normal gg=G')
 endfunction
 "}}}
 
