@@ -21,7 +21,7 @@ If you want to install [javacomplete2](https://github.com/artur-shaik/vim-javaco
 ```
 $ sudo add-apt-repository ppa:webupd8team/java
 $ sudo apt-get update
-$ sudo apt-get install oracle-java8-installer
+$ sudo apt-get install oracle-java8-installer maven
 $ mvn -f ~/.vim/bundle/vim-javacomplete2/libs/javavi/pom.xml compile
 ```
 ##### eclim
