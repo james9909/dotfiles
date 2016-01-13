@@ -11,7 +11,7 @@ function build_vim() {
 function update_vim() {
     if [[ $(command -v vim) ]]; then
         cd "$HOME/vim/src"
-        git checkout -- .
+        git stash
         git fetch
         LOCAL=$(git rev-parse @)
         REMOTE=$(git rev-parse "@{u}")
