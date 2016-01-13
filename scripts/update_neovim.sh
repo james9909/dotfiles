@@ -11,6 +11,7 @@ function update_neovim() {
     # Check if neovim exists as a command
     if [[ $(command -v nvim) ]]; then
         cd "$HOME/neovim"
+        git checkout -- .
         git fetch
         LOCAL=$(git rev-parse @)
         REMOTE=$(git rev-parse "@{u}")
