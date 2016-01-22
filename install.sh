@@ -27,7 +27,7 @@ sudo apt-get autoremove -y
 sudo -v
 
 # Disable search suggestions
-gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"
+gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope', 'reference.scope', 'reference-dictionary.scope', 'reference-wikipedia.scope']"
 sudo sh -c "echo \"OFFERS_URI=\"https://localhost:0/\" >> /etc/environment"
 
 # zsh + tmux <3
