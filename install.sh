@@ -146,7 +146,7 @@ fi
 echo -n "Using neovim? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja-build xclip
+    sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja-build xclip python3-pip
     if [[ ! -d ~/neovim ]]; then
         git clone https://github.com/neovim/neovim ~/neovim
     fi
@@ -155,6 +155,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     make clean
     make CMAKE_BUILD_TYPE=Release # Optimized build
     sudo make install
+    sudo pip3 install neovim
     sudo pip install neovim
     mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
     if [[ ! -d $XDG_CONFIG_HOME/nvim ]]; then
