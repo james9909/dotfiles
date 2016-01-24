@@ -37,6 +37,7 @@ function update_neovim() {
 }
 
 set -e # Abort if any command exits with non-zero exit code
+sudo -v
 
 # Build override
 if [[ "$1" == "--build" ]]; then
