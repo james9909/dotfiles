@@ -18,10 +18,6 @@ alias groovesalad="mplayer -playlist http://somafm.com/groovesalad130.pls" # Som
 
 # networking aliases
 alias tunnel="~/scripts/tunnel.sh"
-alias school="ssh james.wang@marge.stuy.edu"
-alias picoctf="ssh pico49524@shell2014.picoctf.com"
-alias easyctf="ssh user04ce4@ssh.easyctf.com"
-alias home="ssh pi@24.102.91.82"
 
 # Other aliases
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
