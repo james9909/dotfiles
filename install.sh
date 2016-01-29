@@ -28,7 +28,13 @@ sudo -v
 
 # Disable search suggestions
 gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope', 'reference.scope', 'reference-dictionary.scope', 'reference-wikipedia.scope']"
-sudo sh -c "echo \"OFFERS_URI=\"https://localhost:0/\" >> /etc/environment"
+gsettings set com.canonical.Unity.Lenses remote-content-search none
+gsettings set com.canonical.Unity.Dash scopes "['home.scope', 'applications.scope', 'files.scope']"
+gsettings set com.canonical.Unity.Lenses always-search "['applications.scope']"
+
+# Remove all useless scopes/lenses
+# Not required for disabling web results
+sudo apt-get remove $(dpkg --get-selections | cut -f1 | grep -P "^unity-(lens|scope)-" | grep -vP "unity-(lens|scope)-(home|applications|files)" | tr "\n" " ");
 
 # zsh + tmux <3
 sudo apt-get install -y zsh tmux
