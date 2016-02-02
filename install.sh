@@ -19,7 +19,7 @@ sudo apt-get install -y mpd ncmpcpp irssi
 
 sudo -v
 
-sudo pip install Flask BeautifulSoup4 Pillow
+sudo pip install Flask Pillow
 sudo -v
 
 sudo apt-get autoclean -y
@@ -49,24 +49,25 @@ sudo chmod a+rx /usr/local/bin/youtube-dl
 sudo -v
 
 # update wget
-sudo apt-get update
-sudo apt-get -y build-dep wget
-cd /tmp
-wget http://ftp.gnu.org/gnu/wget/wget-1.16.tar.gz
-tar -xvf wget-1.16.tar.gz
-cd wget-1.16/
-./configure --with-ssl=openssl --prefix=/opt/wget
-make
-sudo -v
-sudo make install
-if [[ ! -d /opt/wget/WGET_REAL_1_15 ]]; then
-    sudo mkdir /opt/wget/WGET_REAL_1_15
+if [[ $(wget --version | grep "1.15") ]]; then
+    sudo apt-get -y build-dep wget
+    cd /tmp
+    wget http://ftp.gnu.org/gnu/wget/wget-1.16.tar.gz
+    tar -xvf wget-1.16.tar.gz
+    cd wget-1.16/
+    ./configure --with-ssl=openssl --prefix=/opt/wget
+    make
+    sudo -v
+    sudo make install
+    if [[ ! -d /opt/wget/WGET_REAL_1_15 ]]; then
+        sudo mkdir /opt/wget/WGET_REAL_1_15
+    fi
+    sudo mv /usr/bin/wget /opt/wget/WGET_REAL_1_15/wget_1_15
+    if [[ ! -f /usr/bin/wget ]]; then
+        sudo ln -s /opt/wget/bin/wget /usr/bin/wget
+    fi
+    sudo -v
 fi
-sudo mv /usr/bin/wget /opt/wget/WGET_REAL_1_15/wget_1_15
-if [[ ! -f /usr/bin/wget ]]; then
-    sudo ln -s /opt/wget/bin/wget /usr/bin/wget
-fi
-sudo -v
 
 echo -n "Setup ssh tools? [y/n]"
 read ans
@@ -131,7 +132,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     ./configure --with-features=huge \
         --enable-rubyinterp \
         --enable-largefile \
-        --disable-netbeans \
+        --enable-netbeans \
         --enable-pythoninterp \
         --with-python-config-dir=/usr/lib/python2.7/config \
         --enable-perlinterp \
