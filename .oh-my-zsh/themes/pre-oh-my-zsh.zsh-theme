@@ -111,10 +111,6 @@ function precmd() { # zsh equivalent of PROMPT_COMMAND in bash
 
 if [[ "$TERM" =~ "256color" ]]; then
     is256ColorTerm=true
-    if [[ "$TERM" =~ "rxvt" ]]; then
-        export REALTERM=$TERM
-        export TERM="xterm"
-    fi
 else
     is256ColorTerm=false
 fi

@@ -284,7 +284,7 @@ let g:netrw_altv = 1
 
 " Use different cursor for insert and normal modes depending on terminal
 " Not checking &term because of a weird bug with the zsh prompt if $TERM is rxvt*
-if $REALTERM =~ "rxvt"
+if $TERM =~ "rxvt"
     " 1 or 0 -> blinking block
     " 2 -> solid block
     " 3 -> blinking underscore
