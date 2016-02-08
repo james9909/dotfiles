@@ -35,10 +35,6 @@
     path = .vim/bundle/vim-fugitive
     url = https://github.com/tpope/vim-fugitive
 
-[submodule ".vim/bundle/vim-easymotion"]
-    path = .vim/bundle/vim-easymotion
-    url = https://github.com/Lokaltog/vim-easymotion
-
 [submodule ".vim/bundle/jedi-vim"]
     path = .vim/bundle/jedi-vim
     url = https://github.com/davidhalter/jedi-vim
@@ -119,10 +115,6 @@
     path = .vim/bundle/gruvbox
     url = https://github.com/morhetz/gruvbox
 
-[submodule ".vim/bundle/DrawIt"]
-    path = .vim/bundle/DrawIt
-    url = https://github.com/vim-scripts/DrawIt
-
 [submodule ".vim/bundle/emmet-vim"]
     path = .vim/bundle/emmet-vim
     url = https://github.com/mattn/emmet-vim
@@ -132,23 +124,17 @@
     url = https://github.com/ctrlpvim/ctrlp.vim
 
 [submodule ".vim/bundle/deoplete.nvim"]
-	path = .vim/bundle/deoplete.nvim
-	url = https://github.com/Shougo/deoplete.nvim
+    path = .vim/bundle/deoplete.nvim
+    url = https://github.com/Shougo/deoplete.nvim
 [submodule ".vim/bundle/fzf"]
-	path = .vim/bundle/fzf
-	url = https://github.com/junegunn/fzf
+    path = .vim/bundle/fzf
+    url = https://github.com/junegunn/fzf
 [submodule ".vim/bundle/VimCompletesMe"]
-	path = .vim/bundle/VimCompletesMe
-	url = https://github.com/ajh17/VimCompletesMe
+    path = .vim/bundle/VimCompletesMe
+    url = https://github.com/ajh17/VimCompletesMe
 [submodule ".vim/bundle/vim-python-pep8-indent"]
-	path = .vim/bundle/vim-python-pep8-indent
-	url = https://github.com/hynek/vim-python-pep8-indent
+    path = .vim/bundle/vim-python-pep8-indent
+    url = https://github.com/hynek/vim-python-pep8-indent
 [submodule ".vim/bundle/vim-abolish"]
-	path = .vim/bundle/vim-abolish
-	url = https://github.com/tpope/vim-abolish
-[submodule ".vim/bundle/vim-pandoc"]
-	path = .vim/bundle/vim-pandoc
-	url = git@github.com:vim-pandoc/vim-pandoc
-[submodule ".vim/bundle/vim-pandoc-syntax"]
-	path = .vim/bundle/vim-pandoc-syntax
-	url = git@github.com:vim-pandoc/vim-pandoc-syntax
+    path = .vim/bundle/vim-abolish
+    url = https://github.com/tpope/vim-abolish

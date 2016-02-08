@@ -118,7 +118,6 @@ try
         endif
         nnoremap <C-p> :CtrlP<CR>
     endif
-    Plug 'Lokaltog/vim-easymotion'
     Plug 'Raimondi/delimitMate'
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
     Plug 'Yggdroot/indentLine'
@@ -129,7 +128,7 @@ try
     Plug 'ervandew/supertab'
     Plug 'gioele/vim-autoswap'
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-    Plug 'hynek/vim-python-pep8-indent'
+    Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
@@ -139,9 +138,6 @@ try
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
-    Plug 'vim-pandoc/vim-pandoc'
-    Plug 'vim-pandoc/vim-pandoc-syntax'
-    Plug 'vim-scripts/DrawIt'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-notes'
     Plug 'zirrostig/vim-schlepp'
@@ -197,7 +193,7 @@ try
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
 
-	call plug#end()
+    call plug#end()
 catch /:E117:/
     echom "Vim-Plug is not installed!"
 endtry
@@ -387,7 +383,7 @@ if has('nvim')
     endif
 
     " Highlight terminal cursor red
-	highlight TermCursor ctermfg=red guifg=red
+    highlight TermCursor ctermfg=red guifg=red
 
     " Preserves regular <Esc> if we want to use neovim/vim in neovim terminal
     tnoremap <Esc><Esc> <C-\><C-n> " Exit terminal insert mode
