@@ -20,6 +20,7 @@ sudo apt-get install -y mpd ncmpcpp irssi
 sudo -v
 
 sudo pip install Flask Pillow
+sudo pip install gcalcli vobject parsedatetime
 sudo -v
 
 sudo apt-get autoclean -y
