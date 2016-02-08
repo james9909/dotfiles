@@ -52,7 +52,7 @@ try
         Plug 'benekastah/neomake', { 'on': 'Neomake' }
         autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
 
-    " We are using vim
+        " We are using vim
     else
 
         " Use neocomplete as preferred completion plugin if vim was built with lua support
@@ -73,7 +73,7 @@ try
                 return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
             endfunction
 
-        " Lua is not available, so use lightweight completion plugin instead
+            " Lua is not available, so use lightweight completion plugin instead
         else
             Plug 'ajh17/VimCompletesMe'
         endif
@@ -109,7 +109,7 @@ try
                         \ --ignore .cache
                         \ -g ""'
 
-        " Ag is not available, so customize what we have already
+            " Ag is not available, so customize what we have already
         else
             let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
             let g:ctrlp_custom_ignore = {
@@ -138,6 +138,7 @@ try
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
+    Plug 'xolox/vim-easytags'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-notes'
     Plug 'zirrostig/vim-schlepp'
@@ -192,6 +193,11 @@ try
     " indentLine
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
+
+    " easytags
+    let g:easytags_updatetime_warn = 0
+    let g:easytags_async = 1
+    let g:easytags_always_enabled = 1
 
     call plug#end()
 catch /:E117:/
@@ -363,8 +369,8 @@ nnoremap <Leader>u :GundoToggle<CR>
 
 " View highlight group under cursor
 nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 "}}}
 "{{{ NeoVim
@@ -411,7 +417,7 @@ function! JavaConfig()
         let g:JavaComplete_ServerAutoShutdownTime = 300
         setlocal omnifunc=javacomplete#Complete
 
-    " Running gvim embedded within eclipse
+        " Running gvim embedded within eclipse
     elseif eclim#PingEclim(0) && has("gui_running")
         set guioptions-=m " Remove menu bar
         set guioptions-=T " Remove toolbar
@@ -428,15 +434,15 @@ endfunction
 
 "{{{ Preserve cursor position while executing a command
 function! Preserve(command)
-  " preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " do the business:
-  execute a:command
-  " clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
+    " preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " do the business:
+    execute a:command
+    " clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
 endfunction
 "}}}
 
