@@ -209,6 +209,12 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo -v
 fi
 
+# Screenfetch
+sudo apt-get install -y lsb-release scrot
+sudo wget -O /usr/bin/screenfetch "https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev"
+sudo chmod +x /usr/bin/screenfetch
+sudo -v
+
 # Dropbox
 cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 
