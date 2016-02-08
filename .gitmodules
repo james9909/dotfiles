@@ -7,10 +7,6 @@
     path = .vim/bundle/MatchTagAlways
     url = https://github.com/Valloric/MatchTagAlways
 
-[submodule ".vim/bundle/UltiSnips"]
-    path = .vim/bundle/UltiSnips
-    url = https://github.com/SirVer/UltiSnips
-
 [submodule ".vim/bundle/vim-surround"]
     path = .vim/bundle/vim-surround
     url = https://github.com/tpope/vim-surround
