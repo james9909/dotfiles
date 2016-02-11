@@ -298,6 +298,9 @@ if $TERM =~ "rxvt"
     let &t_SR = "\<Esc>[4 q" " Replace mode
     let &t_EI = "\<Esc>[1 q" " Normal mode
 endif
+
+" Highlight trailing whitespace
+match ErrorMsg '\s\+$'
 "}}}
 "{{{ Mappings
 
