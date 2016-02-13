@@ -199,6 +199,8 @@ try
     let g:easytags_async = 1
     let g:easytags_always_enabled = 1
 
+    let g:easytags_by_filetype = "~/.vim/tags"
+
     call plug#end()
 catch /:E117:/
     echom "Vim-Plug is not installed!"
