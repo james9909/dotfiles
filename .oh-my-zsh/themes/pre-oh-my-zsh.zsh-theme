@@ -96,15 +96,53 @@ function SensorTemp() {
     fi
 }
 
-exitCode=0
-#Note: the prompt function is not allowed to globally change any variable values; only the PROMPT_COMMAND / precmd() is able
-setopt prompt_subst
-function precmd() { # zsh equivalent of PROMPT_COMMAND in bash
+function prompt_cmd() {
     GetExitCode
-    PROMPT="$(tput bold)$(Time) $(RamUsage)$(SensorTemp)$(User)$(Pulse) $(Pwd)$(Sign)
+    echo "$(tput bold)$(Time) $(RamUsage)$(SensorTemp)$(User)$(Pulse) $(Pwd)$(Sign)
 %{%F{white}%}>> "
+}
 
-    RPROMPT="%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)"
+function rprompt_cmd() {
+    echo "%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)"
+}
+
+PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
+RPROMPT='' # set asynchronously and dynamically
+
+exitCode=0
+ASYNC_PROC=0
+
+setopt prompt_subst
+function precmd() {
+    function async() {
+        # save to temp file
+        printf "%s" "$(rprompt_cmd)" > "${HOME}/.zsh_tmp_prompt"
+
+        # signal parent
+        kill -s USR1 $$
+    }
+
+    # do not clear RPROMPT, let it persist
+
+    # kill child if necessary
+    if [[ "${ASYNC_PROC}" != 0 ]]; then
+        kill -s HUP $ASYNC_PROC >/dev/null 2>&1 || :
+    fi
+
+    # start background computation
+    async &!
+    ASYNC_PROC=$!
+}
+
+function TRAPUSR1() {
+    # read from temp file
+    RPROMPT="$(cat ${HOME}/.zsh_tmp_prompt)"
+
+    # reset proc number
+    ASYNC_PROC=0
+
+    # redisplay
+    zle && zle reset-prompt
 }
 
 if [[ "$TERM" =~ "256color" ]]; then
