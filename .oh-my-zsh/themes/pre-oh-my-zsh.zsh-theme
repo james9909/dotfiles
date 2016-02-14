@@ -142,7 +142,8 @@ function TRAPUSR1() {
     ASYNC_PROC=0
 
     # redisplay
-    zle && zle reset-prompt
+    # https://github.com/zsh-users/zsh-syntax-highlighting/issues/230
+    zle && zle .reset-prompt
 }
 
 if [[ "$TERM" =~ "256color" ]]; then
