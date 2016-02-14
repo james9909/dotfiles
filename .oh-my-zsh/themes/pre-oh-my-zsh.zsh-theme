@@ -101,12 +101,10 @@ exitCode=0
 setopt prompt_subst
 function precmd() { # zsh equivalent of PROMPT_COMMAND in bash
     GetExitCode
-    prompt1="$(tput bold)$(Time) $(RamUsage)$(SensorTemp)$(User)$(Pulse) $(Pwd)$(Sign)
+    PROMPT="$(tput bold)$(Time) $(RamUsage)$(SensorTemp)$(User)$(Pulse) $(Pwd)$(Sign)
 %{%F{white}%}>> "
-    PS1=$prompt1
 
     RPROMPT="%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)"
-    RPS1="${RPROMPT}"
 }
 
 if [[ "$TERM" =~ "256color" ]]; then
@@ -114,10 +112,6 @@ if [[ "$TERM" =~ "256color" ]]; then
 else
     is256ColorTerm=false
 fi
-
-prompt1="$(tput bold)$(Time) $(RamUsage)$(SensorTemp)$(User)$(Pulse) $(Pwd)$(Sign)
-{%F{white}%}>> "
-PS1=$prompt1
 
 # {{{ Git Prompt
 
@@ -128,10 +122,6 @@ PROMPT_PROMPT=$FG[077]
 GIT_DIRTY_COLOR=$FG[133]
 GIT_CLEAN_COLOR=$FG[118]
 GIT_PROMPT_INFO=$FG[012]
-
-RPROMPT='%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)'
-
-RPS1="${RPROMPT}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$GIT_PROMPT_INFO%})"
