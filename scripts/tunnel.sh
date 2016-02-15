@@ -9,6 +9,8 @@ TUNNELS_DIR="$HOME/.sshuttle"
 TUNNELS="tunnels"
 TUNNELS_PATH="$TUNNELS_DIR/$TUNNELS"
 
+pidfile="/tmp/tunnel.pid"
+
 function add_tunnel() {
     NAME=$1
     IP=$2
@@ -52,9 +54,9 @@ function connect() {
     found=$(grep "$tunnel" "$TUNNELS_PATH")
     if [[ $found != "" ]]; then
         IP=$(echo $found | cut -d"=" -f2)
-        sshuttle 0/0 -r "$IP"
+        sshuttle --pidfile "$pidfile" --daemon 0/0 -r "$IP"
     else
-        sshuttle 0/0 -r "$tunnel"
+        sshuttle --pidfile "$pidfile" --daemon 0/0 -r "$tunnel"
     fi
 }
 
