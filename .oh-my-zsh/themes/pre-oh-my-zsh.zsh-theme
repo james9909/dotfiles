@@ -49,7 +49,7 @@ function get_sign() {
 }
 
 # Shows the current time
-function time() {
+function get_time() {
     date=$(date "+%I:%M")
     echo "%{%F{green}%}[$date]"
 }
@@ -96,7 +96,7 @@ function get_sensor_temp() {
 
 function prompt_cmd() {
     get_exit_code
-    echo "$(tput bold)$(time) $(get_ram_usage)$(get_sensor_temp)$(user)$(pulse) $(get_pwd)$(get_sign)
+    echo "$(tput bold)$(get_time) $(get_ram_usage)$(get_sensor_temp)$(user)$(pulse) $(get_pwd)$(get_sign)
 %{%F{white}%}>> "
 }
 
