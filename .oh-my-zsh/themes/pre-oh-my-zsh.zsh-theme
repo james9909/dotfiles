@@ -14,7 +14,6 @@ else
     is256ColorTerm=false
 fi
 
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -31,12 +30,12 @@ export LS_COLORS
 # Prompt {{{
 
 # Get the exit code
-function GetExitCode() {
+function get_exit_code() {
     exitCode=$?
 }
 
 # Changes the sign of the user based on various conditions
-function Sign() {
+function get_sign() {
     if [[ $UID == 0 ]]; then
         echo " #"
     else
@@ -50,13 +49,13 @@ function Sign() {
 }
 
 # Shows the current time
-function Time() {
+function time() {
     date=$(date "+%I:%M")
     echo "%{%F{green}%}[$date]"
 }
 
 # Alters the display of the user
-function User() {
+function user() {
     echo -n "%{%F{red}%}$USER"
     if [[ $showHostname == true ]]; then
         echo -n "%{%F{red}%}@$(hostname)"
@@ -64,14 +63,14 @@ function User() {
 }
 
 # Appends a pulse to the user name
-function Pulse() {
+function pulse() {
     if [[ $showPulse == true ]]; then
         echo "[~^v~]"
     fi
 }
 
 # Shows the present working directory
-function Pwd() {
+function get_pwd() {
     if [[ $shortenPath == true ]]; then
         DIR=$(pwd | sed -r "s|$HOME|~|g" | sed -r "s|/(.)[^/]*|/\1|g") # (.) holds the first letter and \1 recalls it
         echo -n %{%F{blue}%}"[$DIR]"
@@ -82,23 +81,22 @@ function Pwd() {
 }
 
 # Shows current ram usage
-function RamUsage() {
+function get_ram_usage() {
     if [[ $showSysInfo == true ]]; then
         echo "<$(free -m | grep -Eo '[0-9]*' | head -7 | tail -1) MB | "
     fi
 }
 
 
-function SensorTemp() {
-    # Note on usage 1: you must prepend an escape character onto $(SensorTemp) so the prompt dynamically updates the temperature
+function get_sensor_temp() {
     if [[ $showSysInfo == true ]]; then
         echo "$(sensors | grep -Eo '[0-9][0-9]\.[0-9]°C' | head -1)> "
     fi
 }
 
 function prompt_cmd() {
-    GetExitCode
-    echo "$(tput bold)$(Time) $(RamUsage)$(SensorTemp)$(User)$(Pulse) $(Pwd)$(Sign)
+    get_exit_code
+    echo "$(tput bold)$(time) $(get_ram_usage)$(get_sensor_temp)$(user)$(pulse) $(get_pwd)$(get_sign)
 %{%F{white}%}>> "
 }
 
