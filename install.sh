@@ -226,6 +226,11 @@ sudo -v
 # CTF tools
 sudo apt-get install -y gimp bless binwalk audacity
 sudo pip install xortool
+sudo -v
+
+# Network hooks
+sudo cp scripts/wifi-connect /etc/network/if-up.d/wifi-connect
+sudo cp scripts/wifi-disconnect /etc/network/if-down.d/wifi-disconnect
 
 chsh -s /bin/zsh
 

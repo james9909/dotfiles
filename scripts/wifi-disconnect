@@ -1,0 +1,7 @@
+#!/bin/bash
+
+proxy="/etc/apt/apt.conf.d/01proxy"
+
+if [[ -e "$proxy" ]]; then
+    rm "$proxy"
+fi

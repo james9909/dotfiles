@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ssid=$(iwgetid -s)
+
+proxy="Acquire::http::Proxy \"http://filtr.nycboe.org:8002\";"
+
+if [[ $ssid == "ncpsp" ]]; then
+    echo $proxy > /etc/apt/apt.conf.d/01proxy
+fi
+
+/usr/local/bin/himawaripy
