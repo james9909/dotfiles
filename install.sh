@@ -2,6 +2,10 @@
 
 set -e # Abort if any command exits with non-zero exit code
 
+if [[ ! $(pwd) =~ .*dotfiles ]]; then
+    echo "Please run from the root directory of the repository"
+fi
+
 sudo apt-get update
 sudo apt-get upgrade
 sudo -v
