@@ -53,11 +53,19 @@ function connect() {
     tunnel=$1
     found=$(grep "$tunnel" "$TUNNELS_PATH")
     if [[ $found != "" ]]; then
-        IP=$(echo $found | cut -d"=" -f2)
+        IP=$(echo "$found" | cut -d"=" -f2)
         sshuttle --pidfile "$pidfile" --daemon 0/0 -r "$IP"
     else
         sshuttle --pidfile "$pidfile" --daemon 0/0 -r "$tunnel"
     fi
+}
+
+function kill() {
+    if [[ ! -f "$pidfile" ]]; then #|| $(pgrep "sshuttle") == "" ]]; then
+        printf "${RED}No connection found.${RESET}\n"
+        exit 1
+    fi
+    sudo kill "$(cat "$pidfile")"
 }
 
 function help() {
@@ -67,6 +75,7 @@ function help() {
     echo -e "\t-d, --delete \t\tRemove a tunnel"
     echo -e "\t-c, --connect \t\tConnect to a tunnel"
     echo -e "\t-h, --help \t\tDisplay this help message"
+    echo -e "\t-k --kill \t\tKill current connection"
 }
 
 if [ ! -d "$TUNNELS_DIR" ]; then
@@ -99,6 +108,8 @@ if [[ $# -gt 0 ]]; then
         else
             connect "$2"
         fi
+    elif [[ $1 == "-k" || $1 == "--kill" ]]; then
+        kill
     else
         help
     fi
