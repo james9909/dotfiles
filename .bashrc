@@ -77,7 +77,7 @@ function Sign() {
     if [[ $UID == 0 ]]; then
         echo " #"
     else
-	# The sign changes based on whether or not the user inputted a valid command
+    # The sign changes based on whether or not the user inputted a valid command
         if [[ $status == 0 ]]; then
             printf "${GREEN} :)${RESET}"
         else
