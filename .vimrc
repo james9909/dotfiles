@@ -13,6 +13,14 @@ augroup END
 " Automagically remove any trailing whitespace upon saving
 autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+augroup whitespace
+    autocmd BufWinEnter * match ErrorMsg /\s\+$/
+    " Match whitespace except when typing
+    autocmd InsertEnter * match ErrorMsg /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ErrorMsg /\s\+$/
+    autocmd BufWinLeave * call clearmatches()
+augroup end
+
 "}}}
 "{{{Plugins
 try
@@ -300,9 +308,6 @@ if $TERM =~ "rxvt"
     let &t_SR = "\<Esc>[4 q" " Replace mode
     let &t_EI = "\<Esc>[1 q" " Normal mode
 endif
-
-" Highlight trailing whitespace
-match ErrorMsg '\s\+$'
 "}}}
 "{{{ Mappings
 
