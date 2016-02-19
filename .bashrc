@@ -32,38 +32,35 @@ GREEN="\033[1;32m"
 BLUE="\033[1;34m"
 RESET="\033[m"
 
-# Generates the git prompt
 function GitPrompt() {
     if [[ ! $(git status 2>&1) =~ fatal ]]; then
-        echo " ($(GitBranch) $(GitUpToDate))"
+        echo " ($(GitBranch) $(GitUpToDate))$(GitStatus) "
     fi
 }
 
-# Acquires the current working branch in a repo
 function GitBranch() {
-    git branch | grep '\* ' | cut -c3- # Extracts current git branch using grep and regexes
+    git branch | grep '\* ' | cut -c3-
 }
 
-# If the local git repo is up to date with online one
 function GitUpToDate() {
     status=$(git status)
     if [[ $status =~ .*Changes\ to\ be\ committed.* ]]; then
-        # There is something that needs to be committed
-        echo -ne "\u2718" # Cross
+        echo -ne "\u2718"
     else
-        # There is nothing that needs to be commited
-        echo -ne "\u2714" # Check
+        echo -ne "\u2714"
     fi
+}
+
+function GitStatus() {
+    status=$(git status)
     if [[ $status =~ Untracked ]]; then
-        echo -ne " +"
+        echo -ne "+"
     fi
     if [[ $status =~ .*not\ staged.* ]]; then
-        # There is something that needs to be added
-        echo -ne " \u0394" # Delta
+        echo -ne "\u0394"
     fi
     if [[ $status =~ .*ahead.* ]]; then
-        # Local repo is ahead of online repo
-        echo " | Ahead by $(git status -sb | sed 's|[^0-9]*\([0-9\.]*\)|\1|g') commit(s)"
+        echo -ne "↑"
     fi
 }
 
