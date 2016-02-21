@@ -354,10 +354,6 @@ nnoremap <silent> <C-t> :tabnew<CR>
 nnoremap <silent> k gk
 nnoremap <silent> j gj
 
-" Swap ; and :
-nnoremap ; :
-nnoremap : ;
-
 " Remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <Esc>
 
