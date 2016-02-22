@@ -98,33 +98,6 @@ try
         let g:syntastic_warning_symbol='⚠'
         let g:syntastic_style_error_symbol = '✗'
         let g:syntastic_style_warning_symbol = '⚠'
-
-        Plug 'ctrlpvim/ctrlp.vim'
-        let g:ctrlp_show_hidden = 1
-        let g:ctrlp_working_path_mode = 0 " Use vim's cwd"
-        let g:ctrlp_match_window = 'bottom,order:ttb'
-        " Use ag (AKA the_silver_searcher) if available
-        if executable('ag')
-            let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-                        \ --ignore .git
-                        \ --ignore .svn
-                        \ --ignore .hg
-                        \ --ignore .DS_Store
-                        \ --ignore "**/*.pyc"
-                        \ --ignore _backup
-                        \ --ignore _undo
-                        \ --ignore _swap
-                        \ --ignore .cache
-                        \ -g ""'
-
-            " Ag is not available, so customize what we have already
-        else
-            let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-            let g:ctrlp_custom_ignore = {
-                        \ 'dir':  '\v[\/](_backup|_undo|_swap|\.cache)$'
-                        \ }
-        endif
-        nnoremap <C-p> :CtrlP<CR>
     endif
     Plug 'Raimondi/delimitMate'
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
@@ -149,7 +122,6 @@ try
     Plug 'xolox/vim-easytags'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-notes'
-    Plug 'zirrostig/vim-schlepp'
 
     " Instant markdown preview
     let g:instant_markdown_slow = 1 " Only update after saving
@@ -180,11 +152,6 @@ try
     " Vim notes
     let g:notes_word_boundaries = 1
     let g:notes_directories = ['~/Documents/Dropbox/vim-notes']
-
-    " Vim-schlepp
-    let g:Schlepp#allowSquishingLines = 1
-    let g:Schlepp#allowSquishingBlocks = 1
-    let g:Schlepp#dupTrimWS = 1
 
     " MatchTagAlways
     let g:mta_use_match_paren_group = 1
@@ -315,10 +282,6 @@ endif
 let mapleader = "\<Space>"
 
 nnoremap <expr> i SmartInsertModeEnter()
-
-" Vim-schlepp bindings
-vmap K  <Plug>SchleppUp
-vmap J  <Plug>SchleppDown
 
 " Vim-fugitive mappings
 nnoremap <silent> <Leader>gs :Gstatus<CR>

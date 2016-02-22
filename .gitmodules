@@ -15,10 +15,6 @@
     path = .vim/bundle/supertab
     url = https://github.com/ervandew/supertab
 
-[submodule ".vim/bundle/vim-schlepp"]
-    path = .vim/bundle/vim-schlepp
-    url = https://github.com/zirrostig/vim-schlepp
-
 [submodule ".vim/bundle/vim-autoswap"]
     path = .vim/bundle/vim-autoswap
     url = https://github.com/gioele/vim-autoswap
@@ -99,10 +95,6 @@
     path = .vim/bundle/vim-plug
     url = https://github.com/junegunn/vim-plug
 
-[submodule ".vim/bundle/vim-over"]
-    path = .vim/bundle/vim-over
-    url = https://github.com/osyo-manga/vim-over
-
 [submodule ".vim/bundle/vim-instant-markdown"]
     path = .vim/bundle/vim-instant-markdown
     url = https://github.com/suan/vim-instant-markdown
@@ -114,10 +106,6 @@
 [submodule ".vim/bundle/emmet-vim"]
     path = .vim/bundle/emmet-vim
     url = https://github.com/mattn/emmet-vim
-
-[submodule ".vim/bundle/ctrlp.vim"]
-    path = .vim/bundle/ctrlp.vim
-    url = https://github.com/ctrlpvim/ctrlp.vim
 
 [submodule ".vim/bundle/deoplete.nvim"]
     path = .vim/bundle/deoplete.nvim
@@ -135,5 +123,5 @@
     path = .vim/bundle/vim-abolish
     url = https://github.com/tpope/vim-abolish
 [submodule ".vim/bundle/vim-easytags"]
-	path = .vim/bundle/vim-easytags
-	url = https://github.com/xolox/vim-easytags
+    path = .vim/bundle/vim-easytags
+    url = https://github.com/xolox/vim-easytags
