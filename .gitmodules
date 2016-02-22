@@ -67,8 +67,8 @@
     path = .vim/bundle/vim-mundo
     url = https://github.com/simnalamburt/vim-mundo
 
-[submodule ".vim/plugin/vim-over"]
-    path = .vim/plugin/vim-over
+[submodule ".vim/bundle/vim-over"]
+    path = .vim/bundle/vim-over
     url = https://github.com/osyo-manga/vim-over
 
 [submodule ".vim/bundle/stackanswers.vim"]

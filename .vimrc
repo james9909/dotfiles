@@ -2,7 +2,7 @@
 
 augroup defaults
     autocmd!
-    autocmd BufReadPost * call MyFollowSymlink(expand('<afile>'))
+    autocmd BufReadPost * call FollowSymLink()
     autocmd VimEnter * call AirlineInit()
     autocmd VimEnter * call DetectEOL()
     autocmd FileType java call JavaConfig()
@@ -416,28 +416,15 @@ endfunction
 "}}}
 
 "{{{ Follow symlinks
-" Credits to https://github.com/blueyed/dotfiles/commit/1287a5897a15c11b6c05ca428c4a5e6322bd55e8
-function! MyFollowSymlink(...)
-    if exists('w:no_resolve_symlink') && w:no_resolve_symlink
-        return
+" https://www.reddit.com/r/vim/comments/yhsn6/is_it_possible_to_work_around_the_symlink_bug/c5w91qw
+function! FollowSymLink()
+    let b:orig_file = fnameescape(expand('<afile>:p'))
+    if getftype(b:orig_file) == 'link'
+        let b:target_file = fnamemodify(resolve(b:orig_file), ':p')
+        execute 'silent! file ' . fnameescape(b:target_file)
     endif
-    let fname = a:0 ? a:1 : expand('%')
-    if fname =~ '^\w\+:/'
-        " Do not mess with 'fugitive://' etc
-        return
-    endif
-    let fname = simplify(fname)
-
-    let resolvedfile = resolve(fname)
-    if resolvedfile == fname
-        return
-    endif
-    let resolvedfile = fnameescape(resolvedfile)
-    echohl WarningMsg | echomsg 'Resolving symlink' fname '=>' resolvedfile | echohl None
-    " Use file, since edit doesn't work
-    exec 'file ' . resolvedfile
 endfunction
-command! FollowSymlink call MyFollowSymlink()
+command! FollowSymlink call FollowSymLink()
 "}}}
 
 "{{{ Initialize statusline
