@@ -283,14 +283,9 @@ let mapleader = "\<Space>"
 
 nnoremap <expr> i SmartInsertModeEnter()
 
-" Vim-fugitive mappings
-nnoremap <silent> <Leader>gs :Gstatus<CR>
-nnoremap <silent> <Leader>gd :Gdiff<CR>
-nnoremap <silent> <Leader>gb :Gblame<CR>
-
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>
-inoremap <C-v> <esc>:set paste<CR>"+]p`]:set nopaste<cr>A
+inoremap <C-v> <esc>:set paste<CR>"+]p`]:set nopaste<cr>a
 
 " Remove search highlights
 nnoremap <CR> :noh<CR><CR>
@@ -302,7 +297,6 @@ nnoremap <Leader>W :w!<CR>
 nnoremap <silent><Leader>W! :w !sudo tee %>/dev/null<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
-nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>i :call Preserve('normal gg=G')<CR>
 nnoremap <silent><Leader>t :call ToggleVExplorer()<CR>
 nnoremap <Leader>h :split<CR>
@@ -319,10 +313,6 @@ nnoremap <silent> j gj
 
 " Remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <Esc>
-
-" Go to the end of the line pasted
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
 
 " Turn off Control-Space
 imap <Nul> <Space>
