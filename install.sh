@@ -236,6 +236,9 @@ sudo -v
 sudo cp scripts/wifi-connect /etc/network/if-up.d/wifi-connect
 sudo cp scripts/wifi-disconnect /etc/network/if-down.d/wifi-disconnect
 
+sudo sed -i "s/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash intel_pstate=disable\"" /etc/
+sudo update-grub
+
 chsh -s /bin/zsh
 
 sudo -k
