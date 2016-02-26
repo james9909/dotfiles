@@ -228,7 +228,7 @@ sudo apt-get install -y sl fortune-mod espeak cowsay
 sudo -v
 
 # CTF tools
-sudo apt-get install -y gimp bless binwalk audacity
+sudo apt-get install -y gimp bless binwalk audacity tshark wireshark
 sudo pip install xortool
 sudo -v
 
