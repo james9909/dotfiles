@@ -50,8 +50,8 @@ function get_sign() {
 
 # Shows the current time
 function get_time() {
-    date=$(date "+%I:%M")
-    echo "%{%F{green}%}[$date]"
+    now=$(date "+%I:%M")
+    echo "%{%F{green}%}[$now]"
 }
 
 # Alters the display of the user
