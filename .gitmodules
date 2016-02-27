@@ -125,3 +125,6 @@
 [submodule ".vim/bundle/vim-easytags"]
     path = .vim/bundle/vim-easytags
     url = https://github.com/xolox/vim-easytags
+[submodule ".vim/bundle/vim-clang"]
+	path = .vim/bundle/vim-clang
+	url = https://github.com/justmao945/vim-clang

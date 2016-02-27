@@ -72,9 +72,18 @@ try
             let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
             let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
             let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
+
+            if !exists('g:neocomplete#sources#omni#input_patterns')
+              let g:neocomplete#sources#omni#input_patterns = {}
+            endif
+
+            let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+            let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
             autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
             autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
             " <CR>: close popup and save indent.
             inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
             function! s:my_cr_function()
@@ -111,6 +120,7 @@ try
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
+    Plug 'justmao945/vim-clang', { 'for': [ 'c', 'cpp' ] }
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
     Plug 'osyo-manga/vim-over'
@@ -162,8 +172,10 @@ try
     let g:jedi#smart_auto_mappings = 0 " Remove automatic addition of 'import' when doing 'from module<space>'
 
     " SuperTab
-    let g:SuperTabDefaultCompletionType = '<C-n>'
     let g:SuperTabDefaultCompletionType = 'context'
+    let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+    let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
+    autocmd FileType c,cpp call SuperTabChain('ClangComplete', '<c-p>') | let g:SuperTabDefaultCompletionType = '<c-x><c-u>'
 
     " indentLine
     let g:indentLine_char = '¦'
@@ -175,6 +187,15 @@ try
     let g:easytags_always_enabled = 1
 
     let g:easytags_by_filetype = "~/.vim/tags"
+
+    " vim-clang
+    let g:clang_auto = 0
+    " default 'longest' can not work with neocomplete
+    let g:clang_c_completeopt = 'menuone,preview'
+    let g:clang_cpp_completeopt = 'menuone,preview'
+
+    let g:clang_c_options = '-std=c11'
+    let g:clang_cpp_options = '-std=c++1z -stdlib=libc++ --pedantic-errors'
 
     call plug#end()
 catch /:E117:/
