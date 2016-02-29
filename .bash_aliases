@@ -21,6 +21,7 @@ alias tunnel="~/scripts/tunnel.sh"
 
 # Other aliases
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
+alias emacs="echo 'nice try'; sleep .5; vim"
 alias homeworkserver='~/.homeworkserver/homeworkserver'
 alias updatevim="~/scripts/update_vim.sh"
 alias updateneovim="~/scripts/update_neovim.sh"
