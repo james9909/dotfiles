@@ -31,7 +31,10 @@ while :; do
     echo -n "What file/folder would you like to link? >> "
     read file
     if [[ -f "$file" || -d "$file" ]]; then
-        if [[ -f "$HOME/$file" || -d "$HOME/$file" ]]; then
+        if [[ -d "$HOME/$file" ]]; then
+            rm -r "$HOME/$file"
+        fi
+        if [[ -e "$HOME/$file" ]]; then
             echo -e "${YELLOW}Backing up $HOME/$file...${RESET}"
             run_with_status mv "$HOME/$file" "$BACKUP/"
         fi
