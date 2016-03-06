@@ -191,7 +191,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev dunst
     # i3status
     git clone https://github.com/i3/i3status ~/i3status
-    sudo apt-get install -y libconfuse-dev libyajl-dev libasound2-dev libiw-dev asciidoc libcap2-bin libpulse-dev libnl-genl-3-dev
+    sudo apt-get install -y libconfuse-dev libyajl-dev libasound2-dev libiw-dev asciidoc libcap2-bin libpulse-dev libnl-genl-3-dev feh xautolock
     make && sudo make install
 
     # rofi
