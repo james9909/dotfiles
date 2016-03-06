@@ -80,6 +80,10 @@ autoload -U compinit && compinit
 # colors
 autoload -U colors && colors
 
+# Set xterm because of urxvt backspace bugs
+export TERM="xterm"
+export REALTERM="rxvt-unicode-256color"
+
 # Override colors
 ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
