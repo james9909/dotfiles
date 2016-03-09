@@ -203,7 +203,6 @@ catch /:E117:/
 endtry
 "}}}
 "{{{Misc Settings
-set nocompatible " Disable Vi-compatibility settings
 filetype indent on " Enable filetype-specific indentation
 filetype plugin on " Enable filetype-specific plugins
 let g:gruvbox_italic=1 " Enable italics
