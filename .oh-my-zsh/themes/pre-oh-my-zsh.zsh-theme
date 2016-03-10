@@ -43,7 +43,7 @@ function get_sign() {
         if [[ $exitCode == 0 ]]; then
             echo "%{%F{green}%} :)"
         else
-            echo "%{%F{red}%} :("
+            echo "%{%F{red}%} :( [$exitCode]"
         fi
     fi
 }
