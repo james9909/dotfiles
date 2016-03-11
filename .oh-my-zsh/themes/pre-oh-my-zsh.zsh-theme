@@ -56,21 +56,21 @@ function get_time() {
 # Alters the display of the user
 function user() {
     echo -n "%{%F{red}%}$USER"
-    if [[ $showHostname == true ]]; then
+    if $showHostname; then
         echo -n "%{%F{red}%}@$(hostname)"
     fi
 }
 
 # Appends a pulse to the user name
 function pulse() {
-    if [[ $showPulse == true ]]; then
+    if $showPulse; then
         echo "[~^v~]"
     fi
 }
 
 # Shows the present working directory
 function get_pwd() {
-    if [[ $shortenPath == true ]]; then
+    if $shortenPath; then
         DIR=$(pwd | sed -r "s|$HOME|~|g" | sed -r "s|/(.)[^/]*|/\1|g") # (.) holds the first letter and \1 recalls it
         echo -n %{%F{blue}%}"[$DIR]"
     else
@@ -81,14 +81,14 @@ function get_pwd() {
 
 # Shows current ram usage
 function get_ram_usage() {
-    if [[ $showSysInfo == true ]]; then
+    if $showSysInfo; then
         echo "<$(free -m | grep -Eo '[0-9]*' | head -7 | tail -1) MB | "
     fi
 }
 
 
 function get_sensor_temp() {
-    if [[ $showSysInfo == true ]]; then
+    if $showSysInfo; then
         echo "$(sensors | grep -Eo '[0-9][0-9]\.[0-9]°C' | head -1)> "
     fi
 }
