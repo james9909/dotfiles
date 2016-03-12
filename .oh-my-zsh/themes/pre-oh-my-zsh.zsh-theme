@@ -37,7 +37,12 @@ function get_exit_code() {
 # Changes the sign of the user based on various conditions
 function get_sign() {
     if [[ $UID == 0 ]]; then
-        echo " #"
+        # The sign changes based on whether or not the user inputted a valid command
+        if [[ $exitCode == 0 ]]; then
+            echo "%{%F{green}%} #"
+        else
+            echo "%{%F{red}%} # [$exitCode]"
+        fi
     else
         # The sign changes based on whether or not the user inputted a valid command
         if [[ $exitCode == 0 ]]; then
