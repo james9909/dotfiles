@@ -41,6 +41,9 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+# Uncomment to change how often before auto-updates occur? (in days)
+export UPDATE_ZSH_DAYS=2
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -80,7 +83,7 @@ autoload -U compinit && compinit
 autoload -U colors && colors
 
 # Set xterm because of urxvt backspace bugs
-export TERM="xterm"
+export TERM="xterm-256color"
 export REALTERM="rxvt-unicode-256color"
 
 # Override colors
