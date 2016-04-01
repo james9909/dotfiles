@@ -5,7 +5,7 @@
 
 max_brightness=$(cat /sys/class/backlight/intel_backlight/max_brightness)
 
-function increase_brightness() {
+function increase() {
     brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
     if [[ $brightness -lt $max_brightness ]]; then
         let brightness=$brightness+100
@@ -13,7 +13,7 @@ function increase_brightness() {
     fi
 }
 
-function decrease_brightness() {
+function decrease() {
     brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
     if [[ $brightness -gt 0 ]]; then
         let brightness=$brightness-100
@@ -23,10 +23,10 @@ function decrease_brightness() {
 
 if [[ $# -gt 0 ]]; then
     if [[ $1 == "increase" ]]; then
-        increase_brightness
+        increase
     elif [[ $1 == "decrease" ]]; then
-        decrease_brightness
+        decrease
     fi
 else
-    echo "Usage: screen_brightness.sh [increase | decrease]"
+    echo "Usage: $0 [increase | decrease]"
 fi

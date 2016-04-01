@@ -16,16 +16,10 @@ alias localcurrent="mplayer -playlist http://minnesota.publicradio.org/tools/pla
 alias sleepbot="mplayer -playlist http://sleepbot.com/ambience/cgi/listen.cgi/listen.pls" # Sleepbot Environmental Broadcast 56K MP3
 alias groovesalad="mplayer -playlist http://somafm.com/groovesalad130.pls" # Soma FM Groove Salad iTunes AAC 128K
 
-# networking aliases
-alias tunnel="~/scripts/tunnel.sh"
-
 # Other aliases
 alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
 alias emacs="echo 'nice try'; sleep .5; vim"
 alias homeworkserver='~/.homeworkserver/homeworkserver'
-alias updatevim="~/scripts/update_vim.sh"
-alias updateneovim="~/scripts/update_neovim.sh"
 # For long running commands
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-alias dropbox='python ~/scripts/dropbox.py'
 alias weather='curl -s wttr.in | head -n 7'
