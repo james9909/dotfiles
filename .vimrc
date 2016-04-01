@@ -127,7 +127,6 @@ try
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     Plug 'tpope/vim-abolish'
     Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'xolox/vim-easytags'
     Plug 'xolox/vim-misc'
