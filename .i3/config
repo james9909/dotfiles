@@ -135,12 +135,12 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Make sure to add
 # username ALL=(ALL) NOPASSWD: /path/to/keyboard_brightness.sh
 # username ALL=(ALL) NOPASSWD: /path/to/screen_brightness.sh
-bindsym XF86KbdBrightnessUp exec "sudo ~/scripts/keyboard_brightness.sh increase"
-bindsym XF86KbdBrightnessDown exec "sudo ~/scripts/keyboard_brightness.sh decrease"
+bindsym XF86KbdBrightnessUp exec "sudo backlight increase"
+bindsym XF86KbdBrightnessDown exec "sudo backlight decrease"
 
 # Control brightness
-bindsym XF86MonBrightnessUp exec "sudo ~/scripts/screen_brightness.sh increase"
-bindsym XF86MonBrightnessDown exec "sudo ~/scripts/screen_brightness.sh decrease"
+bindsym XF86MonBrightnessUp exec "sudo brightness increase"
+bindsym XF86MonBrightnessDown exec "sudo brightness decrease"
 
 # Audio controls
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'
