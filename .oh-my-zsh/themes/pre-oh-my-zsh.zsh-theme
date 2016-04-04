@@ -34,7 +34,7 @@ GREEN="\033[1;32m"
 YELLOW="\033[1;33m"
 BLUE="\033[1;34m"
 MAGENTA="\033[1;35m"
-RESET="\033[m"
+WHITE="\033[1;37m"
 
 # Get the exit code
 function get_exit_code() {
@@ -97,9 +97,21 @@ function show_sys_info() {
     fi
 }
 
+function count_jobs() {
+    stopped=$(jobs -sp | wc -l)
+    running=$(jobs -rp | wc -l)
+    ((running+stopped)) && echo "${MAGENTA}[${running}r/${stopped}s]"
+}
+
+function is_tunnel_active() {
+    if [[ $(pgrep -f tunnel | wc -l) > 0 ]]; then
+        echo "${GREEN}⇅"
+    fi
+}
+
 function prompt_cmd() {
     get_exit_code
-    echo "$(tput bold)$(get_time) $(show_sys_info) $(user)$(pulse) $(get_pwd)$(count_jobs) $(get_sign)
+    echo "$(tput bold)$(get_time) $(show_sys_info) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
 ${WHITE}>> "
 }
 
@@ -107,11 +119,6 @@ function rprompt_cmd() {
     echo "%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)"
 }
 
-function count_jobs() {
-    stopped=$(jobs -sp | wc -l)
-    running=$(jobs -rp | wc -l)
-    ((running+stopped)) && echo "${MAGENTA}[${running}r/${stopped}s]"
-}
 
 PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
 RPROMPT='' # set asynchronously and dynamically
