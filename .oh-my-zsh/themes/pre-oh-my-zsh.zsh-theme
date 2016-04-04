@@ -29,6 +29,13 @@ export LS_COLORS
 # }}}
 # Prompt {{{
 
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+YELLOW="\033[1;33m"
+BLUE="\033[1;34m"
+MAGENTA="\033[1;35m"
+RESET="\033[m"
+
 # Get the exit code
 function get_exit_code() {
     exitCode=$?
@@ -39,37 +46,37 @@ function get_sign() {
     if [[ $UID == 0 ]]; then
         # The sign changes based on whether or not the user inputted a valid command
         if [[ $exitCode == 0 ]]; then
-            echo "%{%F{green}%} #"
+            echo "${GREEN}#"
         else
-            echo "%{%F{red}%} # [$exitCode]"
+            echo "${RED}# [$exitCode]"
         fi
     else
         # The sign changes based on whether or not the user inputted a valid command
         if [[ $exitCode == 0 ]]; then
-            echo "%{%F{green}%} :)"
+            echo "${GREEN}:)"
         else
-            echo "%{%F{red}%} :( [$exitCode]"
+            echo "${RED}:( [$exitCode]"
         fi
     fi
 }
 
 # Shows the current time
 function get_time() {
-    echo "%{%F{green}%}[$(date '+%I:%M')]"
+    echo "${GREEN}[$(date '+%I:%M')]"
 }
 
 # Alters the display of the user
 function user() {
-    echo -n "%{%F{red}%}$USER"
+    echo -n "${RED}$USER"
     if $showHostname; then
-        echo -n "%{%F{red}%}@$(hostname)"
+        echo -n "${RED}@$(hostname)"
     fi
 }
 
 # Appends a pulse to the user name
 function pulse() {
     if $showPulse; then
-        echo "[~^v~]"
+        echo "${RED}[~^v~]"
     fi
 }
 
@@ -77,31 +84,23 @@ function pulse() {
 function get_pwd() {
     if $shortenPath; then
         DIR=$(pwd | sed -r "s|$HOME|~|g" | sed -r "s|/(.)[^/]*|/\1|g") # (.) holds the first letter and \1 recalls it
-        echo -n %{%F{blue}%}"[$DIR]"
     else
         DIR=$(pwd | sed -r "s|$HOME|~|g")
-        echo -n %{%F{blue}%}"[$DIR]"
     fi
+    echo -n "${BLUE}[$DIR]"
 }
 
 # Shows current ram usage
-function get_ram_usage() {
+function show_sys_info() {
     if $showSysInfo; then
-        echo "<$(free -m | grep -Eo '[0-9]*' | head -7 | tail -1) MB | "
-    fi
-}
-
-
-function get_sensor_temp() {
-    if $showSysInfo; then
-        echo "$(sensors | grep -Eo '[0-9][0-9]\.[0-9]°C' | head -1)> "
+        echo "${GREEN}<$(free -m | grep -Eo '[0-9]*' | head -7 | tail -1) MB | $(sensors | grep -Eo '[0-9][0-9]\.[0-9]°C' | head -1)>"
     fi
 }
 
 function prompt_cmd() {
     get_exit_code
-    echo "$(tput bold)$(get_time) $(get_ram_usage)$(get_sensor_temp)$(user)$(pulse) $(get_pwd)$(count_jobs)$(get_sign)
-%{%F{white}%}>> "
+    echo "$(tput bold)$(get_time) $(show_sys_info) $(user)$(pulse) $(get_pwd)$(count_jobs) $(get_sign)
+${WHITE}>> "
 }
 
 function rprompt_cmd() {
@@ -111,7 +110,7 @@ function rprompt_cmd() {
 function count_jobs() {
     stopped=$(jobs -sp | wc -l)
     running=$(jobs -rp | wc -l)
-    ((running+stopped)) && echo " [${running}r/${stopped}s]"
+    ((running+stopped)) && echo "${MAGENTA}[${running}r/${stopped}s]"
 }
 
 PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
