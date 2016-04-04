@@ -29,12 +29,12 @@ export LS_COLORS
 # }}}
 # Prompt {{{
 
-RED="\033[1;31m"
-GREEN="\033[1;32m"
-YELLOW="\033[1;33m"
-BLUE="\033[1;34m"
-MAGENTA="\033[1;35m"
-WHITE="\033[1;37m"
+RED="%{%F{red}%}"
+GREEN="%{%F{green}%}"
+YELLOW="%{%F{yellow}%}"
+BLUE="%{%F{blue}%}"
+MAGENTA="%{%F{magenta}%}"
+WHITE="%{%F{white}%}"
 
 # Get the exit code
 function get_exit_code() {
