@@ -100,12 +100,18 @@ function get_sensor_temp() {
 
 function prompt_cmd() {
     get_exit_code
-    echo "$(tput bold)$(get_time) $(get_ram_usage)$(get_sensor_temp)$(user)$(pulse) $(get_pwd)$(get_sign)
+    echo "$(tput bold)$(get_time) $(get_ram_usage)$(get_sensor_temp)$(user)$(pulse) $(get_pwd)$(count_jobs)$(get_sign)
 %{%F{white}%}>> "
 }
 
 function rprompt_cmd() {
     echo "%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)"
+}
+
+function count_jobs() {
+    stopped=$(jobs -sp | wc -l)
+    running=$(jobs -rp | wc -l)
+    ((running+stopped)) && echo " [${running}r/${stopped}s]"
 }
 
 PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
