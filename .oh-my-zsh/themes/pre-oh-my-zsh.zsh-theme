@@ -105,13 +105,13 @@ function count_jobs() {
 
 function is_tunnel_active() {
     if [[ $(pgrep -f tunnel | wc -l) > 0 ]]; then
-        echo "${GREEN}⇅"
+        echo "${GREEN} ⇅"
     fi
 }
 
 function prompt_cmd() {
     get_exit_code
-    echo "$(tput bold)$(get_time) $(show_sys_info) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
+    echo "$(tput bold)$(get_time) $(show_sys_info) $(user)$(pulse) $(get_pwd) $(count_jobs)$(is_tunnel_active) $(get_sign)
 ${WHITE}>> "
 }
 
