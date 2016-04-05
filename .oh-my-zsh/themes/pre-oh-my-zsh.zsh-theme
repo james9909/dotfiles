@@ -100,7 +100,7 @@ function show_sys_info() {
 function count_jobs() {
     stopped=$(jobs -sp | wc -l)
     running=$(jobs -rp | wc -l)
-    ((running+stopped)) && echo "${MAGENTA}[${running}r/${stopped}s]"
+    ((running+stopped)) && echo " ${MAGENTA}[${running}r/${stopped}s]"
 }
 
 function is_tunnel_active() {
@@ -111,7 +111,7 @@ function is_tunnel_active() {
 
 function prompt_cmd() {
     get_exit_code
-    echo "$(tput bold)$(get_time) $(show_sys_info) $(user)$(pulse) $(get_pwd) $(count_jobs)$(is_tunnel_active) $(get_sign)
+    echo "$(tput bold)$(get_time) $(show_sys_info) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
 ${WHITE}>> "
 }
 
