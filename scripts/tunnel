@@ -23,6 +23,8 @@ function add_tunnel() {
         exit 1
     fi
     echo "$NAME=$IP" >> "$TUNNELS_PATH"
+    sort "$TUNNELS_PATH" > "$TUNNELS_PATH.tmp"
+    mv "$TUNNELS_PATH.tmp" "$TUNNELS_PATH"
     printf "${GREEN}Tunnel successfully added!${RESET}\n"
 }
 
@@ -36,7 +38,7 @@ function list_tunnels() {
         else
             printf "$NAME:\n\t$IP\n"
         fi
-    done < "$TUNNELS_PATH"
+    done < <(sort "$TUNNELS_PATH")
 }
 
 function delete_tunnel() {
