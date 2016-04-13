@@ -83,9 +83,9 @@ function pulse() {
 # Shows the present working directory
 function get_pwd() {
     if $shortenPath; then
-        DIR=$(pwd | sed -r "s|$HOME|~|g" | sed -r "s|/(.)[^/]*|/\1|g") # (.) holds the first letter and \1 recalls it
+        local DIR=$(pwd | sed -r "s|$HOME|~|g" | sed -r "s|/(.)[^/]*|/\1|g") # (.) holds the first letter and \1 recalls it
     else
-        DIR=$(pwd | sed -r "s|$HOME|~|g")
+        local DIR=$(pwd | sed -r "s|$HOME|~|g")
     fi
     echo -n "${BLUE}[$DIR]"
 }
@@ -98,8 +98,8 @@ function show_sys_info() {
 }
 
 function count_jobs() {
-    stopped=$(jobs -sp | wc -l)
-    running=$(jobs -rp | wc -l)
+    local stopped=$(jobs -sp | wc -l)
+    local running=$(jobs -rp | wc -l)
     ((running+stopped)) && echo " ${MAGENTA}[${running}r/${stopped}s]"
 }
 
