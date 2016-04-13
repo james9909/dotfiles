@@ -119,6 +119,13 @@ function rprompt_cmd() {
     echo "%{$GIT_PROMPT_INFO%}$(git_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status)"
 }
 
+function silently() {
+    $@ &> /dev/null
+    if [[ $? != 0 ]]; then
+        echo "Error when running \"$@\""
+    fi
+}
+
 
 PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
 RPROMPT='' # set asynchronously and dynamically
