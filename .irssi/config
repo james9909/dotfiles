@@ -45,6 +45,12 @@ servers = (
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
+  },
+  {
+    address = "irc.pdgn.co";
+    chatnet = "pdgn";
+    port = "6697";
+    use_ssl = "yes";
   }
 );
 
@@ -126,6 +132,7 @@ chatnets = {
     max_whois = "1";
   };
   easyctf = { type = "IRC"; };
+  pdgn = { type = "IRC"; };
 };
 
 channels = (
