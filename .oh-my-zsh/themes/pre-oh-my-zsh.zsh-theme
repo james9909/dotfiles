@@ -98,8 +98,8 @@ function show_sys_info() {
 }
 
 function count_jobs() {
-    local stopped=$(jobs -sp | wc -l)
-    local running=$(jobs -rp | wc -l)
+    local stopped=$(jobs -sp | grep -v "pwd" | wc -l)
+    local running=$(jobs -rp | grep -v "pwd" | wc -l)
     ((running+stopped)) && echo " ${MAGENTA}[${running}r/${stopped}s]"
 }
 
