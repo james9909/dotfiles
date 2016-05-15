@@ -1,6 +1,7 @@
 [user]
     name = James Wang
     email = jameswang9909@hotmail.com
+    signingkey = F263CD5B
 
 [branch]
     autosetuprebase = always
@@ -56,3 +57,5 @@
 
 [push]
     default = simple
+[commit]
+    gpgsign = true
