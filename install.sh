@@ -5,6 +5,7 @@ set -e # Abort if any command exits with non-zero exit code
 if [[ ! $(pwd) =~ .*dotfiles ]]; then
     echo "Please run from the root directory of the repository"
 fi
+dotfiles=$(pwd)
 
 sudo apt-get update
 sudo apt-get upgrade
@@ -84,6 +85,7 @@ fi
 echo -n "Using urxvt? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
+    sudo apt-get install -y libperl-dev
     cd /tmp
     curl http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-9.22.tar.bz2 > rxvt-unicode-9.22.tar.bz2
     bzip2 -dc rxvt-unicode-9.22.tar.bz2 | tar xvf -
@@ -99,6 +101,7 @@ echo -n "Custom font for urxvt? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get install -y x11-xserver-utils
+    cp .Xresources ~/.Xresources
     font_dir="$HOME/.local/share/fonts"
     if [[ ! -d $font_dir ]]; then
         mkdir -p "$font_dir"
@@ -110,7 +113,6 @@ if [[ $ans =~ ^[Yy]$ ]]; then
         echo -n "Resetting font cache, this may take a moment..."
         fc-cache -f "$font_dir"
     fi
-    cp .Xresources ~/.Xresources
     xrdb -merge ~/.Xresources
 fi
 
@@ -127,7 +129,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get -y build-dep vim-gnome
     sudo apt-get -y install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev mercurial libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
-    sudo apt-get -y install npm
+    sudo apt-get -y install npm nodejs-legacy
     sudo npm install -g npm
     sudo npm install -g instant-markdown-d
     if [[ ! -d /usr/include/lua5.1/include ]]; then
@@ -188,13 +190,8 @@ fi
 echo -n "Using i3? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev dunst
-    # i3status
-    if [[ ! -d ~/i3status ]]; then
-        git clone https://github.com/i3/i3status ~/i3status
-    fi
+    sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev dunst i3status
     sudo apt-get install -y libconfuse-dev libyajl-dev libasound2-dev libiw-dev asciidoc libcap2-bin libpulse-dev libnl-genl-3-dev feh xautolock
-    make && sudo make install
 
     # rofi
     sudo apt-get install -y libxft-dev libxinerama-dev libpango1.0-dev
@@ -211,6 +208,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
         git clone https://github.com/Airblader/i3 ~/i3-gaps
     fi
     cd ~/i3-gaps
+    sudo apt-get install libx11-xcb-dev
     make
     sudo make install
     sudo -v
@@ -235,10 +233,11 @@ sudo pip install xortool
 sudo -v
 
 # Network hooks
+cd "$dotfiles"
 sudo cp scripts/wifi-connect /etc/network/if-up.d/wifi-connect
 sudo cp scripts/wifi-disconnect /etc/network/if-down.d/wifi-disconnect
 
-sudo sed -i "s/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash intel_pstate=disable\"" /etc/
+sudo sed -i "s/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash intel_pstate=disable\"/" /etc/default/grub
 sudo update-grub
 
 chsh -s /bin/zsh
