@@ -6,3 +6,4 @@ tags/
 bundle/
 link.sh
 .netrwhist
+.oh-my-zsh/custom/plugins
