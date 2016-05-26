@@ -86,13 +86,14 @@ echo -n "Using urxvt? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get install -y libperl-dev
-    cd /tmp
-    curl http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-9.22.tar.bz2 > rxvt-unicode-9.22.tar.bz2
-    bzip2 -dc rxvt-unicode-9.22.tar.bz2 | tar xvf -
-    rm rxvt-unicode-9.22.tar.bz2
-    cd rxvt-unicode-9.22
-    ./configure --enable-everything
-    make && sudo make install
+    sudo apt-get install -y rxvt-unicode-256color
+    # cd /tmp
+    # curl http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-9.22.tar.bz2 > rxvt-unicode-9.22.tar.bz2
+    # bzip2 -dc rxvt-unicode-9.22.tar.bz2 | tar xvf -
+    # rm rxvt-unicode-9.22.tar.bz2
+    # cd rxvt-unicode-9.22
+    # ./configure --enable-everything
+    # make && sudo make install
     curl -L http://db.tt/JjlLYd5A | sudo tar -xz -C /usr/lib/urxvt/perl/ && sudo mv /usr/lib/urxvt/perl/urxvtclip /usr/lib/urxvt/perl/clipboard
     sudo -v
 fi
@@ -209,6 +210,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     fi
     cd ~/i3-gaps
     sudo apt-get install libx11-xcb-dev
+    git checkout gaps
     make
     sudo make install
     sudo -v
