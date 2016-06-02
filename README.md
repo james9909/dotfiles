@@ -8,12 +8,6 @@ Installation
 If you only want to use some of my dotfiles, modify `link.sh` to link files that you want.
 Otherwise, if you want to install everything, run `install.sh`.
 
-#### Vim
-
-Although [vim-plug](https://github.com/junegunn/vim-plug) is in `.vim/autoload`, cloning this repository wihout
-`--recursive` will leave in a bunch of empty folders in `.vim/bundle`. Remove those folders, and run
-`:PlugInstall` to install the plugins.
-
 ##### javacomplete2
 
 If you want to install [javacomplete2](https://github.com/artur-shaik/vim-javacomplete2), (since [javacomplete](http://www.vim.org/scripts/script.php?script_id=1785) is outdated), you need jdk8 and maven.
