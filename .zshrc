@@ -26,7 +26,7 @@ unsetopt EQUALS
 unsetopt correct_all
 unsetopt correct
 
-ZSH_THEME="pre-oh-my-zsh" # Theme to be used
+ZSH_THEME="oh-my-zsh" # Theme to be used
 
 COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
 

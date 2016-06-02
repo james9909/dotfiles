@@ -46,6 +46,12 @@ sudo apt-get remove $(dpkg --get-selections | cut -f1 | grep -P "^unity-(lens|sc
 sudo apt-get install -y zsh tmux
 sudo -v
 
+if [[ ! -d $HOME/.oh-my-zsh ]]; then
+    git clone https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    ln -s "$PWD/oh-my-zsh.zsh-theme" "$HOME/.oh-my-zsh/themes/oh-my-zsh.zsh-theme"
+fi
+
 sudo apt-get install -y ranger
 
 # youtube-dl
@@ -75,7 +81,7 @@ if [[ $(wget --version | grep "1.15") ]]; then
     sudo -v
 fi
 
-echo -n "Setup ssh tools? [y/n]"
+echo -n "Setup ssh tools? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get install -y openssh-server sshuttle
