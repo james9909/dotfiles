@@ -49,6 +49,7 @@ sudo -v
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
     git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
     ln -s "$PWD/oh-my-zsh.zsh-theme" "$HOME/.oh-my-zsh/themes/oh-my-zsh.zsh-theme"
 fi
 
