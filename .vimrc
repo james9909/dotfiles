@@ -325,9 +325,9 @@ nnoremap <Leader>h :split<CR>
 nnoremap <Leader>v :vsplit<CR>
 
 " Tab Mappings
-nnoremap <silent> <C-l> :tabnext<CR>
-nnoremap <silent> <C-h> :tabprevious<CR>
 nnoremap <silent> <C-t> :tabnew<CR>
+nnoremap <silent> <Tab> gt
+nnoremap <silent> <S-Tab> gT
 
 " Better k and j movement
 nnoremap <silent> k gk
