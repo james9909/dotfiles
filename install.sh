@@ -21,6 +21,7 @@ sudo apt-get install -y make gparted curl
 sudo apt-get install -y unity-tweak-tool
 sudo apt-get install -y silversearcher-ag
 sudo apt-get install -y mpd ncmpcpp irssi
+sudo apt-get install -y wicd-curses
 
 sudo -v
 
