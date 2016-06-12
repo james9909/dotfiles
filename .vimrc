@@ -11,7 +11,7 @@ augroup defaults
 augroup END
 
 " Automagically remove any trailing whitespace upon saving
-autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+autocmd BufWrite * if ! &bin | :call Preserve('silent! %s/\s\+$//ge') | endif
 
 augroup whitespace
     autocmd BufWinEnter * match ErrorMsg /\s\+$/
@@ -76,7 +76,7 @@ try
             let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
 
             if !exists('g:neocomplete#sources#omni#input_patterns')
-              let g:neocomplete#sources#omni#input_patterns = {}
+                let g:neocomplete#sources#omni#input_patterns = {}
             endif
 
             let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
