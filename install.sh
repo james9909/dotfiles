@@ -205,7 +205,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     # rofi
     sudo apt-get install -y libxft-dev libxinerama-dev libpango1.0-dev
 
-    wget -c https://github.com/DaveDavenport/rofi/releases/download/0.15.4/rofi-0.15.4.tar.gz
+    wget -c https://github.com/DaveDavenport/rofi/releases/download/1.1.0/rofi-1.1.0.tar.gz
     tar -xzvf rofi-0.15.4.tar.gz
     cd rofi-0.15.4
 
