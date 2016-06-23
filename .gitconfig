@@ -46,9 +46,11 @@
     autocrlf = false
     editor = vim
     excludesfile = ~/.git/gitignore
+    pager = diff-so-fancy | less --tabs=4 -RFX
 
 [diff]
     algorithm = patience
+    compactionHeuristic = true
 
 [rerere]
   # Remember my merges
@@ -59,3 +61,8 @@
     default = simple
 [commit]
     gpgsign = true
+[interactive]
+    diffFilter = diff-highlight
+[diff-so-fancy]
+    markEmptyLines = false
+    stripLeadingSymbols = false
