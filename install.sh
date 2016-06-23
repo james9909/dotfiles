@@ -138,7 +138,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
     sudo apt-get -y build-dep vim-gnome
     sudo apt-get -y install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev mercurial libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
-    sudo apt-get -y install npm nodejs-legacy
+    sudo apt-get -y install npm nodejs
     sudo npm install -g npm
     sudo npm install -g instant-markdown-d
     if [[ ! -d /usr/include/lua5.1/include ]]; then
