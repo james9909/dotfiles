@@ -23,3 +23,4 @@ alias homeworkserver='~/.homeworkserver/homeworkserver'
 # For long running commands
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias weather='curl -s wttr.in | head -n 7'
+alias mountwindows='mount -t ntfs-3g -o remove_hiberfile /dev/sda3 /media/windows'
