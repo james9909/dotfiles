@@ -212,4 +212,6 @@ bar {
     }
 }
 
+for_window [class="URxvt"] floating enable
+
 exec feh --bg-fill ~/Pictures/Wallpapers/black-wallpaper.jpg
