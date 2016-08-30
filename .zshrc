@@ -92,3 +92,7 @@ ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 
 . /etc/zsh_command_not_found # Bash-like command not found
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
