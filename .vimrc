@@ -135,6 +135,7 @@ try
     Plug 'xolox/vim-notes'
 
     " Instant markdown preview
+    let g:instant_markdown_autostart = 0 " Don't automatically open a preview
     let g:instant_markdown_slow = 1 " Only update after saving
 
     " Airline
