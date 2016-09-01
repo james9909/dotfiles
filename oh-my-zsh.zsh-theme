@@ -104,8 +104,8 @@ function is_tunnel_active() {
 
 function prompt_cmd() {
     get_exit_code
-    echo "$(tput bold)$(get_time) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
-${WHITE}>> "
+    echo "┌─$(tput bold)$(get_time) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
+└${WHITE}>> "
 }
 
 function rprompt_cmd() {
