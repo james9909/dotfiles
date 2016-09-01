@@ -36,6 +36,14 @@ BLUE="%{%F{blue}%}"
 MAGENTA="%{%F{magenta}%}"
 WHITE="%{%F{white}%}"
 
+function seq_color_bold() {
+    echo "\e[1;3${cco}m"
+}
+
+function seq_color() {
+    echo "\e[0;3${cco}m"
+}
+
 # Get the exit code
 function get_exit_code() {
     exitCode=$?
@@ -67,9 +75,9 @@ function get_time() {
 
 # Alters the display of the user
 function user() {
-    echo -n "${RED}$USER"
+    echo -n "$(seq_color)$USER"
     if $showHostname; then
-        echo -n "${RED}@$(hostname)"
+        echo -n "@$(seq_color_bold)$(hostname)"
     fi
 }
 
@@ -105,7 +113,7 @@ function is_tunnel_active() {
 function prompt_cmd() {
     get_exit_code
     echo "┌─$(tput bold)$(get_time) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
-└${WHITE}>> "
+${WHITE}└>> "
 }
 
 function rprompt_cmd() {
@@ -128,6 +136,7 @@ ASYNC_PROC=0
 
 setopt prompt_subst
 function precmd() {
+    cco=$(((cco % 6) + 1))
     function async() {
         # save to temp file
         printf "%s" "$(rprompt_cmd)" > "${HOME}/.zsh_tmp_prompt"
