@@ -75,27 +75,18 @@ function get_time() {
 
 # Alters the display of the user
 function user() {
-    echo -n "$(seq_color)$USER"
-    if $showHostname; then
-        echo -n "@$(seq_color_bold)$(hostname)"
-    fi
+    echo -n "$(seq_color)${USER}@$(seq_color_bold)$(hostname)"
 }
 
 # Appends a pulse to the user name
 function pulse() {
-    if $showPulse; then
-        echo "${RED}[~^v~]"
-    fi
+    echo "${RED}[~^v~]"
 }
 
 # Shows the present working directory
 function get_pwd() {
-    if $shortenPath; then
-        local DIR=$(pwd | sed -r "s|$HOME|~|g" | sed -r "s|/(.)[^/]*|/\1|g") # (.) holds the first letter and \1 recalls it
-    else
-        local DIR=$(pwd | sed -r "s|$HOME|~|g")
-    fi
-    echo -n "${BLUE}[$DIR]"
+    local DIR=$(pwd | sed -r "s|$HOME|~|g")
+    echo -n "${BLUE}($DIR)"
 }
 
 function count_jobs() {
@@ -195,20 +186,6 @@ ZSH_THEME_GIT_PROMPT_BEHIND="%{$FG[160]%}↓%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_STASHED="*"
 ZSH_THEME_GIT_PROMPT_DIVERGED="⑂"
 # }}}
-
-# Configuration options
-shortenPath=false
-showHostname=true
-showPulse=true
-
-# Configuration aliases
-alias shorton="export shortenPath=true"
-alias shortoff="export shortenPath=false"
-alias pulseon="export showPulse=true"
-alias pulseoff="export showPulse=false"
-alias hoston="export showHostname=true"
-alias hostoff="export showHostname=false"
-
 # }}}
 # Aliases {{{
 # import aliases from bash
