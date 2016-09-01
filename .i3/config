@@ -52,6 +52,9 @@ bindsym $mod+d exec "rofi -modi 'run,ssh,window' -show drun"
 exec --no-startup-id nm-applet
 exec --no-startup-id indicator-cpufreq
 
+# Transparency
+exec --no-startup-id compton
+
 # Dunst
 exec killall -q notify-osd
 exec --no-startup-id dunst -config ~/.i3/config_dunst

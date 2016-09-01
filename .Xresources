@@ -12,16 +12,13 @@ URxvt.internalBorder:     0
 URxvt*selectToClipboard:  true
 URxvt*saveLines:          10000
 
-URxvt.transparent: true
-URxvt.shading:60
-
 Urxvt.perl-lib: /usr/lib/urxvt/perl/
 URxvt.perl-ext-common: default,clipboard
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 URxvt.iso14755: False
 
 ! hard contrast: *background: #1d2021
-/* *background: #282828 */
+*background: #282828
 ! soft contrast: *background: #32302f
 *foreground: #ebdbb2
 ! Black + DarkGrey
