@@ -90,13 +90,6 @@ function get_pwd() {
     echo -n "${BLUE}[$DIR]"
 }
 
-# Shows current ram usage
-function show_sys_info() {
-    if $showSysInfo; then
-        echo "${GREEN}<$(free -m | grep -Eo '[0-9]*' | head -7 | tail -1) MB | $(sensors | grep -Eo '[0-9][0-9]\.[0-9]°C' | head -1)>"
-    fi
-}
-
 function count_jobs() {
     local stopped=$(jobs -sp | grep -v "pwd" | wc -l)
     local running=$(jobs -rp | grep -v "pwd" | wc -l)
@@ -111,7 +104,7 @@ function is_tunnel_active() {
 
 function prompt_cmd() {
     get_exit_code
-    echo "$(tput bold)$(get_time) $(show_sys_info) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
+    echo "$(tput bold)$(get_time) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
 ${WHITE}>> "
 }
 
@@ -198,7 +191,6 @@ ZSH_THEME_GIT_PROMPT_DIVERGED="⑂"
 shortenPath=false
 showHostname=false
 showPulse=true
-showSysInfo=true
 
 # Configuration aliases
 alias shorton="export shortenPath=true"
@@ -207,8 +199,6 @@ alias pulseon="export showPulse=true"
 alias pulseoff="export showPulse=false"
 alias hoston="export showHostname=true"
 alias hostoff="export showHostname=false"
-alias syson="export showSysInfo=true"
-alias sysoff="export showSysInfo=false"
 
 # }}}
 # Aliases {{{
