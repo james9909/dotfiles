@@ -198,7 +198,7 @@ ZSH_THEME_GIT_PROMPT_DIVERGED="⑂"
 
 # Configuration options
 shortenPath=false
-showHostname=false
+showHostname=true
 showPulse=true
 
 # Configuration aliases
