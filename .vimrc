@@ -113,6 +113,7 @@ try
     Plug 'Raimondi/delimitMate'
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
     Plug 'Yggdroot/indentLine'
+    Plug 'alvan/vim-closetag'
     Plug 'airblade/vim-gitgutter'
     Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'bling/vim-airline'
@@ -133,6 +134,10 @@ try
     Plug 'xolox/vim-easytags'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-notes'
+
+    " Fix conflict with delimitmate
+    let g:closetag_filenames = "*.xml,*.html,*.php"
+    au FileType xml,html,php let b:delimitMate_matchpairs = "(:),[:],{:}"
 
     " Instant markdown preview
     let g:instant_markdown_autostart = 0 " Don't automatically open a preview
