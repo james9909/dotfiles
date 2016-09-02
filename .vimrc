@@ -256,6 +256,7 @@ set cinkeys-=0# " Prevent # from removing indents from a line
 set indentkeys-=0# " Prevent # from removing indents from a line
 set wildmenu " Tab-like completion similar to zsh
 set ttyfast " Smoother redraw
+set formatoptions+=j " Remove comments when merging
 
 " Press % on 'if' to jump to its corresponding 'else'
 runtime macros/matchit.vim
