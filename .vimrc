@@ -131,9 +131,9 @@ try
     Plug 'tpope/vim-abolish'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
+    Plug 'vimwiki/vimwiki'
     Plug 'xolox/vim-easytags'
     Plug 'xolox/vim-misc'
-    Plug 'xolox/vim-notes'
 
     " Fix conflict with delimitmate
     let g:closetag_filenames = "*.xml,*.html,*.php"
@@ -166,9 +166,9 @@ try
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_nesting_quotes = ['"', '`', '"']
 
-    " Vim notes
-    let g:notes_word_boundaries = 1
-    let g:notes_directories = ['~/Documents/Dropbox/vim-notes']
+    " Vim wiki
+    let g:vimwiki_list = [{'path':'~/Education/Notes', 'path_html':'~/Education/Notes/export/html/'}]
+    let g:vimwiki_folding='expr'
 
     " MatchTagAlways
     let g:mta_use_match_paren_group = 1
