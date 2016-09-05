@@ -5,7 +5,7 @@ These are my dotfiles. There are many like them, but these are mine.
 
 Installation
 --------------
-If you only want to use some of my dotfiles, modify `link.sh` to link files that you want.
+If you only want to use some of my dotfiles, run `link.sh` to link files that you want.
 Otherwise, if you want to install everything, run `install.sh`.
 
 ##### javacomplete2
@@ -35,8 +35,3 @@ Follow the guide [here](http://eclim.org/eclimd.html#gvim-embedded) for more ins
 
 These dotfiles are meant to be used with either `gnome-terminal` or `urxvt`.
 The font used is `Droid Sans Mono for Powerline Regular`.
-
-If you are using [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), make sure
-to clone the [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) repository into `~/.oh-my-zsh/custom/plugins`.
-
-`$ git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting`
