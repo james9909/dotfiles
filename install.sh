@@ -51,7 +51,7 @@ if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
     git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
-    ln -s "$PWD/oh-my-zsh.zsh-theme" "$HOME/.oh-my-zsh/themes/oh-my-zsh.zsh-theme"
+    ./link.sh "oh-my-zsh.zsh-theme"
 fi
 
 sudo apt-get install -y ranger
@@ -253,3 +253,22 @@ sudo update-grub
 chsh -s /bin/zsh
 
 sudo -k
+
+files="
+.vimrc
+.zshrc
+.tmux.conf
+.vim
+.i3
+.i3status.conf
+.bashrc
+.bash_aliases
+.Xresources
+.ssh/config
+scripts
+.irssi
+.compton.conf
+.gitconfig
+"
+
+./link.sh $files
