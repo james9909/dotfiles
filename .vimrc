@@ -124,6 +124,7 @@ try
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
     Plug 'justmao945/vim-clang', { 'for': [ 'c', 'cpp' ] }
+    Plug 'Konfekt/FastFold'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
     Plug 'osyo-manga/vim-over'
