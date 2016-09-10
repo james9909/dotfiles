@@ -444,7 +444,7 @@ function! FollowSymLink()
     let b:orig_file = fnameescape(expand('<afile>:p'))
     if getftype(b:orig_file) == 'link'
         let b:target_file = fnamemodify(resolve(b:orig_file), ':p')
-        execute 'silent! file ' . fnameescape(b:target_file)
+        execute 'silent! edit ' . fnameescape(b:target_file)
     endif
 endfunction
 command! FollowSymlink call FollowSymLink()
