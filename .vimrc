@@ -1,100 +1,3 @@
-"{{{Misc Settings
-filetype indent on " Enable filetype-specific indentation
-filetype plugin on " Enable filetype-specific plugins
-let g:gruvbox_italic=1 " Enable italics
-set background=dark
-colorscheme gruvbox " Gruvbox runs 'syntax reset' anyways
-set cursorline " Highlight current line
-set laststatus=2 " Always show statusline on last window
-set showcmd " Shows what you are typing as a command
-set t_Co=256 " Enable 256 color
-set foldmethod=marker " Folds are neat
-set grepprg=grep\ -nH\ $* " Set command for :grep
-set expandtab " Tabs are spaces
-set smarttab " Enable smart tabbing
-set shiftwidth=4 " Tab size for auto indent
-set shiftround " Round indent to multiple of shiftwidth when using > or <
-set tabstop=4 " A tab is 4 columns
-set softtabstop=4 " A tab is 4 spaces
-set autoindent " Autoindent
-set copyindent " Copies the indentation of the previous line
-set number " Enable line numbers
-set wrap " Wrap lines
-set wildignore=*.class,*.swp,*.pyc,*.jar,*.cmake,*.tar.* " Ignore compiled things
-set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.mp3 " Ignore picture and media files
-set wildignore+=*.odt,*.doc,*.docx,*.pdf " Ignore formatted documents that will not render in plaintext
-set mouse=nvc " Enable the mouse for normal, visual, and command-line modes
-set backspace=indent,eol,start " Backspace is great
-set hlsearch " Highlight search term in text
-set incsearch " Show search matches as you type
-set ignorecase "Ignore case when searching
-set smartcase " When using an upper case letter in search, search becomes case-sensitive
-set lazyredraw " Don't redraw when executing macros
-set colorcolumn=80 " Highlight 80th column as guideline
-set completeopt=longest,menuone
-set pastetoggle=<F2> " Toggle paste mode
-set backup " Allow for a backup directory
-set wrapscan " Automatically wrap search when hitting bottom
-set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
-set linebreak " Break line on word
-set timeoutlen=500 " Timeout for entering key combinations
-set synmaxcol=300 " Limit syntax highlight parsing to first 300 columns
-set hidden " Hides buffers instead of closing them, allows opening new buffers when current has unsaved changes
-set cindent " Enable C like indentation
-set cinkeys-=0# " Prevent # from removing indents from a line
-set indentkeys-=0# " Prevent # from removing indents from a line
-set wildmenu " Tab-like completion similar to zsh
-set ttyfast " Smoother redraw
-set formatoptions+=j " Remove comments when merging
-set formatoptions-=o
-
-" Press % on 'if' to jump to its corresponding 'else'
-runtime macros/matchit.vim
-
-" If the backup directories do not exist, then make them
-if !isdirectory($HOME . '/.vim/_backup')
-    call mkdir($HOME . '/.vim/_backup')
-endif
-
-if !isdirectory($HOME . '/.vim/_swap')
-    call mkdir($HOME . '/.vim/_swap')
-endif
-
-if !isdirectory($HOME . '/.vim/_undo')
-    call mkdir($HOME . '/.vim/_undo')
-endif
-
-set directory=~/.vim/_swap " Set swap directory
-set backupdir=~/.vim/_backup " This is the backup directory
-set undofile " Allows for undos after saving
-set undodir=~/.vim/_undo " This is the undo directory
-set undolevels=1000 " Save a maximum of 1000 undos
-set undoreload=10000 " Save undo history when reloading a file
-
-set sessionoptions-=folds " Do not save folds
-
-let g:clipbrdDefaultReg = '+' " Default register for clipboard
-
-" File browsing
-let g:netrw_liststyle=3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-
-" Use different cursor for insert and normal modes depending on terminal
-" Not checking &term because of a weird bug with the zsh prompt if $TERM is rxvt*
-if $REALTERM =~ "rxvt"
-    " 1 or 0 -> blinking block
-    " 2 -> solid block
-    " 3 -> blinking underscore
-    " 4 -> solid underscore
-    " Recent versions of xterm (282 or above) also support
-    " 5 -> blinking vertical bar
-    " 6 -> solid vertical bar
-    let &t_SI = "\<Esc>[5 q" " Insert mode
-    let &t_SR = "\<Esc>[4 q" " Replace mode
-    let &t_EI = "\<Esc>[1 q" " Normal mode
-endif
-"}}}
 "{{{Plugins
 try
     call plug#begin('~/.vim/bundle')
@@ -280,6 +183,103 @@ try
 catch /:E117:/
     echom "Vim-Plug is not installed!"
 endtry
+"}}}
+"{{{Misc Settings
+filetype indent on " Enable filetype-specific indentation
+filetype plugin on " Enable filetype-specific plugins
+let g:gruvbox_italic=1 " Enable italics
+set background=dark
+colorscheme gruvbox " Gruvbox runs 'syntax reset' anyways
+set cursorline " Highlight current line
+set laststatus=2 " Always show statusline on last window
+set showcmd " Shows what you are typing as a command
+set t_Co=256 " Enable 256 color
+set foldmethod=marker " Folds are neat
+set grepprg=grep\ -nH\ $* " Set command for :grep
+set expandtab " Tabs are spaces
+set smarttab " Enable smart tabbing
+set shiftwidth=4 " Tab size for auto indent
+set shiftround " Round indent to multiple of shiftwidth when using > or <
+set tabstop=4 " A tab is 4 columns
+set softtabstop=4 " A tab is 4 spaces
+set autoindent " Autoindent
+set copyindent " Copies the indentation of the previous line
+set number " Enable line numbers
+set wrap " Wrap lines
+set wildignore=*.class,*.swp,*.pyc,*.jar,*.cmake,*.tar.* " Ignore compiled things
+set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.mp3 " Ignore picture and media files
+set wildignore+=*.odt,*.doc,*.docx,*.pdf " Ignore formatted documents that will not render in plaintext
+set mouse=nvc " Enable the mouse for normal, visual, and command-line modes
+set backspace=indent,eol,start " Backspace is great
+set hlsearch " Highlight search term in text
+set incsearch " Show search matches as you type
+set ignorecase "Ignore case when searching
+set smartcase " When using an upper case letter in search, search becomes case-sensitive
+set lazyredraw " Don't redraw when executing macros
+set colorcolumn=80 " Highlight 80th column as guideline
+set completeopt=longest,menuone
+set pastetoggle=<F2> " Toggle paste mode
+set backup " Allow for a backup directory
+set wrapscan " Automatically wrap search when hitting bottom
+set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
+set linebreak " Break line on word
+set timeoutlen=500 " Timeout for entering key combinations
+set synmaxcol=300 " Limit syntax highlight parsing to first 300 columns
+set hidden " Hides buffers instead of closing them, allows opening new buffers when current has unsaved changes
+set cindent " Enable C like indentation
+set cinkeys-=0# " Prevent # from removing indents from a line
+set indentkeys-=0# " Prevent # from removing indents from a line
+set wildmenu " Tab-like completion similar to zsh
+set ttyfast " Smoother redraw
+set formatoptions+=j " Remove comments when merging
+set formatoptions-=o
+
+" Press % on 'if' to jump to its corresponding 'else'
+runtime macros/matchit.vim
+
+" If the backup directories do not exist, then make them
+if !isdirectory($HOME . '/.vim/_backup')
+    call mkdir($HOME . '/.vim/_backup')
+endif
+
+if !isdirectory($HOME . '/.vim/_swap')
+    call mkdir($HOME . '/.vim/_swap')
+endif
+
+if !isdirectory($HOME . '/.vim/_undo')
+    call mkdir($HOME . '/.vim/_undo')
+endif
+
+set directory=~/.vim/_swap " Set swap directory
+set backupdir=~/.vim/_backup " This is the backup directory
+set undofile " Allows for undos after saving
+set undodir=~/.vim/_undo " This is the undo directory
+set undolevels=1000 " Save a maximum of 1000 undos
+set undoreload=10000 " Save undo history when reloading a file
+
+set sessionoptions-=folds " Do not save folds
+
+let g:clipbrdDefaultReg = '+' " Default register for clipboard
+
+" File browsing
+let g:netrw_liststyle=3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+
+" Use different cursor for insert and normal modes depending on terminal
+" Not checking &term because of a weird bug with the zsh prompt if $TERM is rxvt*
+if $REALTERM =~ "rxvt"
+    " 1 or 0 -> blinking block
+    " 2 -> solid block
+    " 3 -> blinking underscore
+    " 4 -> solid underscore
+    " Recent versions of xterm (282 or above) also support
+    " 5 -> blinking vertical bar
+    " 6 -> solid vertical bar
+    let &t_SI = "\<Esc>[5 q" " Insert mode
+    let &t_SR = "\<Esc>[4 q" " Replace mode
+    let &t_EI = "\<Esc>[1 q" " Normal mode
+endif
 "}}}
 "{{{Auto Commands
 
