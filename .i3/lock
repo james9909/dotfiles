@@ -3,7 +3,7 @@
 # Dependencies: imagemagick, i3lock-color-git, scrot, wmctrl (optional)
 set -o errexit -o noclobber -o nounset
 
-audio_playing=$(pacmd list-sink-inputs | grep -P "[^0]+ sink input")
+audio_playing=$(pacmd list-sink-inputs | { grep -P "[^0]+ sink input" || true; } )
 
 if [[ $audio_playing ]]; then
     exit
