@@ -1,21 +1,7 @@
-"{{{Auto Commands
-
-augroup defaults
-    autocmd!
-    autocmd VimEnter * call AirlineInit()
-    " Restore cursor location
-    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-augroup END
-
-" Automagically remove any trailing whitespace that is in the file
-autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
-
-"}}}
 "{{{Plugin
 try
     call plug#begin('~/.vim/bundle')
 
-    Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
     Plug 'bling/vim-airline'
     Plug 'ervandew/supertab'
@@ -39,7 +25,7 @@ try
     let g:SuperTabDefaultCompletionType = '<C-n>'
     let g:SuperTabDefaultCompletionType = 'context'
 
-	call plug#end()
+    call plug#end()
 catch /:E117:/
     echom "Vim-Plug is not installed!"
 endtry
@@ -88,7 +74,8 @@ set cindent " Enable C like indentation
 set cinkeys-=0# " Prevent # from removing indents from a line
 set indentkeys-=0# " Prevent # from removing indents from a line
 set wildmenu " Tab-like completion similar to zsh
-set gdefault " g flag is on by default
+set ttyfast " Smoother redraw
+set formatoptions=j " Remove comments when merging
 
 " Press % on 'if' to jump to its corresponding 'else'
 runtime macros/matchit.vim
@@ -122,6 +109,21 @@ let g:netrw_liststyle=3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 "}}}
+"{{{Auto Commands
+
+augroup defaults
+    autocmd!
+    autocmd VimEnter * call AirlineInit()
+    " Restore cursor location
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+    autocmd FileType * set formatoptions-=o
+augroup END
+
+" Automagically remove any trailing whitespace that is in the file
+autocmd BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+
+"}}}
 "{{{ Mappings
 
 " Map leader to space
@@ -152,10 +154,6 @@ nnoremap <Leader>v :vsplit<CR>
 nnoremap <silent> k gk
 nnoremap <silent> j gj
 
-" Swap ; and :
-nnoremap ; :
-nnoremap : ;
-
 " Remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <Esc>
 
@@ -177,15 +175,15 @@ vnoremap <C-j> 3j
 
 "{{{ Preserve cursor position
 function! Preserve(command)
-  " preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " do the business:
-  execute a:command
-  " clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
+    " preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " do the business:
+    execute a:command
+    " clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
 endfunction
 "}}}
 
