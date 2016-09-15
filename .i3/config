@@ -60,7 +60,11 @@ exec killall -q notify-osd
 exec --no-startup-id dunst -config ~/.i3/config_dunst
 
 # Lock
-exec xautolock -time 10 -locker "/home/james/.i3/lock"
+exec --no-startup-id xautolock -time 10 -locker "/home/james/.i3/lock"
+
+# # lemonbar
+# exec --no-startup-id conky -c ~/.i3/lemonbar/empty_conky
+# exec --no-startup-id ~/.i3/lemonbar/lemonbar.sh
 
 # change focus
 bindsym $mod+j focus left
@@ -155,7 +159,7 @@ bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 for_window [class="^.*"] border pixel 2
 
 # Gaps
-gaps inner 20
+gaps inner 15
 smart_borders no_gaps
 
 bindsym $mod+y gaps inner current minus 6
