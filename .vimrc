@@ -232,7 +232,6 @@ set indentkeys-=0# " Prevent # from removing indents from a line
 set wildmenu " Tab-like completion similar to zsh
 set ttyfast " Smoother redraw
 set formatoptions+=j " Remove comments when merging
-set formatoptions-=o
 
 " Press % on 'if' to jump to its corresponding 'else'
 runtime macros/matchit.vim
@@ -292,7 +291,7 @@ augroup defaults
     " Restore cursor location
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-    autocmd FileType * set formatoptions-=o
+    autocmd FileType * set formatoptions-=o " Override ftplugins
 augroup END
 
 " Automagically remove any trailing whitespace upon saving
