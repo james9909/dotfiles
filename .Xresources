@@ -13,9 +13,13 @@ URxvt*selectToClipboard:  true
 URxvt*saveLines:          10000
 
 Urxvt.perl-lib: /usr/lib/urxvt/perl/
-URxvt.perl-ext-common: default,clipboard
+URxvt.perl-ext-common: default,clipboard,matcher
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 URxvt.iso14755: False
+
+# Open links in chrome
+URxvt.url-launcher: /usr/bin/google-chrome-stable
+URxvt.matcher.button: 1
 
 ! hard contrast: *background: #1d2021
 *background: #282828
