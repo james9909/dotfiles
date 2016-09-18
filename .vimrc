@@ -4,20 +4,6 @@ try
 
     " We are using neovim
     if has('nvim')
-        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-        if executable('ag')
-            let $FZF_DEFAULT_COMMAND = 'ag -i --nocolor --nogroup --hidden
-                        \ --ignore .git
-                        \ --ignore .DS_Store
-                        \ --ignore "**/*.pyc"
-                        \ --ignore "**/*.class"
-                        \ --ignore _backup
-                        \ --ignore _undo
-                        \ --ignore _swap
-                        \ --ignore .cache
-                        \ -g ""'
-        endif
-        nnoremap <C-p> :FZF<CR>
 
         Plug 'Shougo/deoplete.nvim'
         let g:deoplete#enable_at_startup = 1 " Enable deoplete
@@ -97,6 +83,8 @@ try
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
     Plug 'justmao945/vim-clang', { 'for': [ 'c', 'cpp' ] }
     Plug 'Konfekt/FastFold'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
@@ -109,6 +97,20 @@ try
     Plug 'vimwiki/vimwiki'
     Plug 'xolox/vim-easytags'
     Plug 'xolox/vim-misc'
+
+    if executable('ag')
+        let $FZF_DEFAULT_COMMAND = 'ag -i --nocolor --nogroup --hidden
+                    \ --ignore .git
+                    \ --ignore .DS_Store
+                    \ --ignore "**/*.pyc"
+                    \ --ignore "**/*.class"
+                    \ --ignore _backup
+                    \ --ignore _undo
+                    \ --ignore _swap
+                    \ --ignore .cache
+                    \ -g ""'
+    endif
+    let g:fzf_layout = { 'down': '~40%' }
 
     " Fix conflict with delimitmate
     let g:closetag_filenames = "*.xml,*.html,*.php"
@@ -363,6 +365,7 @@ nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+nnoremap <C-p> :FZF<CR>
 "}}}
 "{{{ NeoVim
 if has('nvim')
