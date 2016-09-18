@@ -125,6 +125,7 @@ RPROMPT='' # set asynchronously and dynamically
 exitCode=0
 ASYNC_PROC=0
 
+# http://www.anishathalye.com/2015/02/07/an-asynchronous-shell-prompt/
 setopt prompt_subst
 function precmd() {
     cco=$(((cco % 6) + 1))
