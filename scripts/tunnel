@@ -56,9 +56,9 @@ function connect() {
     found=$(grep "$tunnel" "$TUNNELS_PATH")
     if [[ $found != "" ]]; then
         IP=$(echo "$found" | cut -d"=" -f2)
-        sshuttle --pidfile "$pidfile" --daemon 0/0 -r "$IP"
+        sshuttle --dns --pidfile "$pidfile" --daemon 0/0 -r "$IP"
     else
-        sshuttle --pidfile "$pidfile" --daemon 0/0 -r "$tunnel"
+        sshuttle --dns --pidfile "$pidfile" --daemon 0/0 -r "$tunnel"
     fi
 }
 
