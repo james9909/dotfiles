@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 # Color support {{{
 
+# Disable default virtualenv prompt modifications
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # Force color in terminal
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
@@ -35,6 +38,13 @@ YELLOW="%{%F{yellow}%}"
 BLUE="%{%F{blue}%}"
 MAGENTA="%{%F{magenta}%}"
 WHITE="%{%F{white}%}"
+
+function get_virtualenv() {
+    venv=$(basename "$VIRTUAL_ENV")
+    if [[ ! -z $venv ]]; then
+        echo "($venv) "
+    fi
+}
 
 function seq_color_bold() {
     echo "\e[1;3${cco}m"
@@ -103,7 +113,7 @@ function is_tunnel_active() {
 
 function prompt_cmd() {
     get_exit_code
-    echo "┌─$(tput bold)$(get_time) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
+    echo "┌─$(get_virtualenv)$(tput bold)$(get_time) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
 ${WHITE}└>> "
 }
 
