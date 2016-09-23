@@ -12,5 +12,3 @@ else
         rm "$proxy_file"
     fi
 fi
-
-/usr/local/bin/himawaripy
