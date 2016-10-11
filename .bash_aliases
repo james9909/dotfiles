@@ -26,3 +26,6 @@ alias weather='curl -s wttr.in | head -n 7'
 alias mountwindows='sudo mount -t ntfs-3g -ro remove_hiberfile /dev/sda3 /media/windows'
 alias downloadmoreram='sudo sysctl vm.drop_caches=3'
 alias hotspoot='sudo iptables -t mangle -A POSTROUTING -j TTL --ttl-set 65' # https://www.reddit.com/r/hacking/comments/54a7dd/_/
+
+alias eclipse='GTK_THEME=Default:light ~/eclipse/eclipse &> /dev/null &'
+alias gdb='gdb -q'
