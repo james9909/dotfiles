@@ -404,24 +404,24 @@ endif
 
 function! JavaConfig()
     " Eclim is not enabled, but javacomplete2 is installed
-    if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
+    " if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
         let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
         let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
         let g:JavaComplete_UseFQN = 1
         let g:JavaComplete_ServerAutoShutdownTime = 300
         setlocal omnifunc=javacomplete#Complete
 
-        " Running gvim embedded within eclipse
-    elseif eclim#PingEclim(0) && has("gui_running")
-        set guioptions-=m " Remove menu bar
-        set guioptions-=T " Remove toolbar
-        set ruler " Show line/column numbers
-        set laststatus=0 " Disable statusline
-    elseif eclim#PingEclim(0)
-        echom "Eclim is running"
-    else
-        echom "Neither eclim nor javacomplete2 is installed"
-    endif
+        " " Running gvim embedded within eclipse
+    " elseif eclim#PingEclim(0) && has("gui_running")
+        " set guioptions-=m " Remove menu bar
+        " set guioptions-=T " Remove toolbar
+        " set ruler " Show line/column numbers
+        " set laststatus=0 " Disable statusline
+    " elseif eclim#PingEclim(0)
+        " echom "Eclim is running"
+    " else
+        " echom "Neither eclim nor javacomplete2 is installed"
+    " endif
 endfunction
 
 "}}}
