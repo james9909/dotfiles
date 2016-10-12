@@ -18,12 +18,19 @@ try
                     \'^\s*@[A-Z][a-z]'
                     \]
 
+        Plug 'carlitux/deoplete-ternjs'
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
+        Plug 'zchee/deoplete-jedi'
+
+        " Tern
+        let g:tern_request_timeout = 1
+        let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+
     else
         " We are using vim
 
-        " Use neocomplete as preferred completion plugin if vim was built with lua support
         if has("lua")
+            " Use neocomplete as preferred completion plugin if vim was built with lua support
             Plug 'Shougo/neocomplete.vim'
             let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
             let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
@@ -36,9 +43,6 @@ try
                 let g:neocomplete#sources#omni#input_patterns = {}
             endif
 
-            let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-            let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
             autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
             autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -49,12 +53,18 @@ try
                 return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
             endfunction
 
-            " Lua is not available, so use lightweight completion plugin instead
         else
+            " Lua is not available, so use lightweight completion plugin instead
             Plug 'ajh17/VimCompletesMe'
         endif
 
+        Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+
+        " Jedi-vim
+        let g:jedi#popup_on_dot = 0
+        let g:jedi#popup_select_first = 0
+        let g:jedi#smart_auto_mappings = 0 " Remove automatic addition of 'import' when doing 'from module<space>'
     endif
     Plug 'Raimondi/delimitMate'
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
@@ -63,7 +73,6 @@ try
     Plug 'airblade/vim-gitgutter'
     Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'bling/vim-airline'
-    Plug 'davidhalter/jedi-vim', { 'for': 'python' }
     Plug 'ervandew/supertab'
     Plug 'gioele/vim-autoswap'
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
@@ -71,12 +80,12 @@ try
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-    Plug 'justmao945/vim-clang', { 'for': [ 'c', 'cpp' ] }
     Plug 'Konfekt/FastFold'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
     Plug 'osyo-manga/vim-over'
-    Plug 'Shougo/neomake'
+    Plug 'Rip-Rip/clang_complete', { 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
+    Plug 'neomake/neomake'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     Plug 'tpope/vim-abolish'
     Plug 'tpope/vim-commentary'
@@ -137,11 +146,6 @@ try
     " MatchTagAlways
     let g:mta_use_match_paren_group = 1
 
-    " Jedi-vim
-    let g:jedi#popup_on_dot = 0
-    let g:jedi#popup_select_first = 0
-    let g:jedi#smart_auto_mappings = 0 " Remove automatic addition of 'import' when doing 'from module<space>'
-
     " SuperTab
     let g:SuperTabDefaultCompletionType = 'context'
     let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
@@ -160,13 +164,15 @@ try
     let g:easytags_by_filetype = "~/.vim/tags"
 
     " vim-clang
-    let g:clang_auto = 0
-    " default 'longest' can not work with neocomplete
-    let g:clang_c_completeopt = 'menuone,preview'
-    let g:clang_cpp_completeopt = 'menuone,preview'
 
-    let g:clang_c_options = '-std=c11'
-    let g:clang_cpp_options = '-std=c++1z -stdlib=libc++ --pedantic-errors'
+    let g:clang_library_path='/usr/lib/llvm-3.6/lib/libclang.so.1'
+    " let g:clang_auto = 0
+    " " default 'longest' can not work with neocomplete
+    " let g:clang_c_completeopt = 'menuone,preview'
+    " let g:clang_cpp_completeopt = 'menuone,preview'
+
+    " let g:clang_c_options = '-std=c11'
+    " let g:clang_cpp_options = '-std=c++1z -stdlib=libc++ --pedantic-errors'
 
     call plug#end()
 catch /:E117:/
