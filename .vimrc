@@ -19,7 +19,7 @@ try
                     \]
 
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
-        Plug 'benekastah/neomake', { 'on': 'Neomake' }
+        Plug 'benekastah/neomake'
         autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
 
         " We are using vim
