@@ -2,8 +2,8 @@
 try
     call plug#begin('~/.vim/bundle')
 
-    " We are using neovim
     if has('nvim')
+        " We are using neovim
 
         Plug 'Shougo/deoplete.nvim'
         let g:deoplete#enable_at_startup = 1 " Enable deoplete
@@ -19,11 +19,8 @@ try
                     \]
 
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
-        Plug 'benekastah/neomake'
-        autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
-
-        " We are using vim
     else
+        " We are using vim
 
         " Use neocomplete as preferred completion plugin if vim was built with lua support
         if has("lua")
@@ -58,17 +55,6 @@ try
         endif
 
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
-        Plug 'scrooloose/syntastic'
-
-        let g:syntastic_python_checkers = ['flake8']
-        let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
-        let g:syntastic_mode_map = {'mode': 'passive'}
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list = 1
-        let g:syntastic_error_symbol='✗'
-        let g:syntastic_warning_symbol='⚠'
-        let g:syntastic_style_error_symbol = '✗'
-        let g:syntastic_style_warning_symbol = '⚠'
     endif
     Plug 'Raimondi/delimitMate'
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
@@ -90,6 +76,7 @@ try
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
     Plug 'osyo-manga/vim-over'
+    Plug 'Shougo/neomake'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     Plug 'tpope/vim-abolish'
     Plug 'tpope/vim-commentary'
@@ -294,6 +281,7 @@ augroup defaults
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
     autocmd FileType * set formatoptions-=o " Override ftplugins
+    autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
 augroup END
 
 " Automagically remove any trailing whitespace upon saving
@@ -366,6 +354,8 @@ nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 nnoremap <C-p> :FZF<CR>
+
+nnoremap <Leader>c :Neomake<CR>
 "}}}
 "{{{ NeoVim
 if has('nvim')
@@ -393,9 +383,6 @@ if has('nvim')
 
     let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Change cursor shape based on current mode
 
-    nnoremap <Leader>c :Neomake<CR>
-else
-    nnoremap <Leader>c :SyntasticCheck<CR>
 endif
 "}}}
 "{{{ Functions
