@@ -1,4 +1,5 @@
 *.swp
+*~
 _backup/
 _swap/
 _undo/
@@ -7,3 +8,6 @@ bundle/
 link.sh
 .netrwhist
 .oh-my-zsh/custom/plugins
+.vim/bin
+.vim/plugin
+.vim/.VimballRecord
