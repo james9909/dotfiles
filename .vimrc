@@ -179,9 +179,39 @@ catch /:E117:/
     echom "Vim-Plug is not installed!"
 endtry
 "}}}
+"{{{Auto Commands
+
+augroup defaults
+    autocmd!
+    autocmd BufReadPost * call FollowSymLink()
+    autocmd VimEnter * call AirlineInit()
+    autocmd VimEnter * call DetectEOL()
+    autocmd FileType java call JavaConfig()
+    " Restore cursor location
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+    autocmd FileType * set formatoptions-=o " Override ftplugins
+    autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
+augroup END
+
+" Automagically remove any trailing whitespace upon saving
+autocmd BufWrite * if ! &bin | :call Preserve('silent! %s/\s\+$//ge') | endif
+
+augroup whitespace
+    autocmd BufWinEnter * match ErrorMsg /\s\+$/
+    " Match whitespace except when typing
+    autocmd InsertEnter * match ErrorMsg /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ErrorMsg /\s\+$/
+    autocmd BufWinLeave * call clearmatches()
+augroup end
+
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+
+"}}}
 "{{{Misc Settings
-filetype indent on " Enable filetype-specific indentation
-filetype plugin on " Enable filetype-specific plugins
+filetype off " Clear filetype
+filetype plugin indent on " Enable filetype-specific indentation and plugins
+syntax on " Enable syntax highlighting
 let g:gruvbox_italic=1 " Enable italics
 set background=dark
 colorscheme gruvbox " Gruvbox runs 'syntax reset' anyways
@@ -274,35 +304,6 @@ if $REALTERM =~ "rxvt"
     let &t_SR = "\<Esc>[4 q" " Replace mode
     let &t_EI = "\<Esc>[1 q" " Normal mode
 endif
-"}}}
-"{{{Auto Commands
-
-augroup defaults
-    autocmd!
-    autocmd BufReadPost * call FollowSymLink()
-    autocmd VimEnter * call AirlineInit()
-    autocmd VimEnter * call DetectEOL()
-    autocmd FileType java call JavaConfig()
-    " Restore cursor location
-    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-    autocmd FileType * set formatoptions-=o " Override ftplugins
-    autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
-augroup END
-
-" Automagically remove any trailing whitespace upon saving
-autocmd BufWrite * if ! &bin | :call Preserve('silent! %s/\s\+$//ge') | endif
-
-augroup whitespace
-    autocmd BufWinEnter * match ErrorMsg /\s\+$/
-    " Match whitespace except when typing
-    autocmd InsertEnter * match ErrorMsg /\s\+\%#\@<!$/
-    autocmd InsertLeave * match ErrorMsg /\s\+$/
-    autocmd BufWinLeave * call clearmatches()
-augroup end
-
-autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-
 "}}}
 "{{{ Mappings
 
