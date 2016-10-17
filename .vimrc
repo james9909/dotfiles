@@ -29,7 +29,10 @@ try
     else
         " We are using vim
 
-        if has("lua")
+        if v:version >= 800
+            " Asynchronous completion if we are using vim 8
+            Plug 'maralla/completor.vim'
+        elseif has("lua")
             " Use neocomplete as preferred completion plugin if vim was built with lua support
             Plug 'Shougo/neocomplete.vim'
             let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
