@@ -83,14 +83,13 @@ try
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
+    Plug 'kchmck/vim-coffee-script'
     Plug 'Konfekt/FastFold'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
-    Plug 'osyo-manga/vim-over'
-    Plug 'Rip-Rip/clang_complete', { 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
+    Plug 'Rip-Rip/clang_complete', { 'for': 'c', 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
     Plug 'neomake/neomake'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
-    Plug 'tpope/vim-abolish'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'vimwiki/vimwiki'
@@ -176,6 +175,9 @@ try
 
     " let g:clang_c_options = '-std=c11'
     " let g:clang_cpp_options = '-std=c++1z -stdlib=libc++ --pedantic-errors'
+
+    " Get rid of conflicting whitespace errors
+    hi link coffeeSpaceError NONE
 
     call plug#end()
 catch /:E117:/
