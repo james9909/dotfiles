@@ -112,7 +112,7 @@ try
 
     " Fix conflict with delimitmate
     let g:closetag_filenames = "*.xml,*.html,*.php"
-    au FileType xml,html,php let b:delimitMate_matchpairs = "(:),[:],{:}"
+    au FileType xml,html,htmldjango,php let b:delimitMate_matchpairs = "(:),[:],{:}"
 
     " Instant markdown preview
     let g:instant_markdown_autostart = 0 " Don't automatically open a preview
