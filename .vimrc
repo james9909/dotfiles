@@ -161,7 +161,13 @@ try
     " easytags
     let g:easytags_updatetime_warn = 0
     let g:easytags_async = 1
-    let g:easytags_always_enabled = 1
+
+    let g:easytags_auto_update = 0
+    let g:easytags_python_enabled = 0
+	" let g:easytags_auto_highlight = 0
+    let g:easytags_events = ['BufWritePost']
+    let g:easytags_syntax_keyword = 'always'
+    " let g:easytags_always_enabled = 1
 
     let g:easytags_by_filetype = "~/.vim/tags"
 
