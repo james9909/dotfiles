@@ -5,3 +5,7 @@ proxy="/etc/apt/apt.conf.d/01proxy"
 if [[ -e "$proxy" ]]; then
     rm "$proxy"
 fi
+
+if [[ -e "/tmp/tunnel.pid" ]]; then
+    /home/james/scripts/tunnel -k
+fi
