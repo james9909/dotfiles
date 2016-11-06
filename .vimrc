@@ -202,7 +202,7 @@ augroup defaults
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
     autocmd FileType * set formatoptions-=o " Override ftplugins
-    autocmd! BufWritePost * Neomake " Asynchronously check for syntax errors upon saving
+    autocmd! BufWritePost * if &ft != "java" | Neomake | endif " Asynchronously check for syntax errors upon saving
 augroup END
 
 " Automagically remove any trailing whitespace upon saving
