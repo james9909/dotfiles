@@ -53,7 +53,7 @@ function delete_tunnel() {
 
 function connect() {
     tunnel=$1
-    found=$(grep "$tunnel" "$TUNNELS_PATH")
+    found=$(grep "$tunnel=" "$TUNNELS_PATH")
     if [[ $found != "" ]]; then
         IP=$(echo "$found" | cut -d"=" -f2)
         sshuttle --dns --pidfile "$pidfile" --daemon 0/0 -r "$IP"
