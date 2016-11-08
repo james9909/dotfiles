@@ -96,11 +96,12 @@ ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+export PATH="$HOME/Dev/google_appengine:$PATH"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f /home/james/Dev/google-cloud-sdk/path.zsh.inc ]; then
-  source '/home/james/Dev/google-cloud-sdk/path.zsh.inc'
-fi
+# # The next line updates PATH for the Google Cloud SDK.
+# if [ -f /home/james/Dev/google-cloud-sdk/path.zsh.inc ]; then
+#   source '/home/james/Dev/google-cloud-sdk/path.zsh.inc'
+# fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f /home/james/Dev/google-cloud-sdk/completion.zsh.inc ]; then
