@@ -17,7 +17,6 @@ alias sleepbot="mplayer -playlist http://sleepbot.com/ambience/cgi/listen.cgi/li
 alias groovesalad="mplayer -playlist http://somafm.com/groovesalad130.pls" # Soma FM Groove Salad iTunes AAC 128K
 
 # Other aliases
-alias aptproxyget='sh ~/.aptproxyget/apt-proxy-get.sh'
 alias emacs="echo 'nice try'; sleep .5; vim"
 alias homeworkserver='~/.homeworkserver/homeworkserver'
 # For long running commands
