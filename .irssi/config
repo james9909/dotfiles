@@ -86,7 +86,6 @@ chatnets = {
   Freenode = {
     type = "IRC";
     nick = "james9909";
-    autosendcmd = "/msg nickserv identify not_my_password";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
@@ -410,4 +409,10 @@ settings = {
     nick = "james";
   };
   "fe-text" = { actlist_sort = "refnum"; };
+  "fe-common/core" = {
+    bell_beeps = "yes";
+    beep_when_away = "yes";
+    beep_when_window_active = "yes";
+    beep_msg_level = "HILIGHT INVITES MSGS NOTICES CTCPS DCC DCCMSGS";
+  };
 };

@@ -11,3 +11,4 @@ link.sh
 .vim/bin
 .vim/plugin
 .vim/.VimballRecord
+.irssi/sasl.auth
