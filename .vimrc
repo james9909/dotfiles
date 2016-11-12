@@ -35,31 +35,6 @@ try
             inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
             inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
             inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
-        elseif has("lua")
-            " Use neocomplete as preferred completion plugin if vim was built with lua support
-            Plug 'Shougo/neocomplete.vim'
-            let g:neocomplete#enable_at_startup = 1 " Enable neocomplete
-            let g:neocomplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
-            let g:neocomplete#sources#syntax#min_keyword_length = 1 " Only show completions longer than 1 chars
-            let g:neocomplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
-            let g:neocomplete#enable_cursor_hold_i = 1 " Enable delaying generation of autocompletions until the cursor is held
-            let g:neocomplete#cursor_hold_i_time = 200 " Time to delay generation of autocompletions
-
-            if !exists('g:neocomplete#sources#omni#input_patterns')
-                let g:neocomplete#sources#omni#input_patterns = {}
-            endif
-
-            autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-            autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-            autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
-            " <CR>: close popup and save indent.
-            inoremap <silent> <C-Space> <C-r>=<SID>my_cr_function()<CR>
-            function! s:my_cr_function()
-                return pumvisible() ? neocomplete#close_popup() : "\<C-Space>"
-            endfunction
-
         else
             " Lua is not available, so use lightweight completion plugin instead
             Plug 'ajh17/VimCompletesMe'
