@@ -32,9 +32,6 @@ try
         if v:version >= 800
             " Asynchronous completion if we are using vim 8
             Plug 'maralla/completor.vim'
-            inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-            inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-            inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
         else
             " Lua is not available, so use lightweight completion plugin instead
             Plug 'ajh17/VimCompletesMe'
@@ -295,6 +292,10 @@ endif
 let mapleader = "\<Space>"
 
 nnoremap <expr> i SmartInsertModeEnter()
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>
