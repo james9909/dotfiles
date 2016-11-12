@@ -32,6 +32,10 @@ try
         if v:version >= 800
             " Asynchronous completion if we are using vim 8
             Plug 'maralla/completor.vim'
+            inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+            inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+            inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
         elseif has("lua")
             " Use neocomplete as preferred completion plugin if vim was built with lua support
             Plug 'Shougo/neocomplete.vim'
@@ -76,7 +80,6 @@ try
     Plug 'airblade/vim-gitgutter'
     Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'bling/vim-airline'
-    Plug 'ervandew/supertab'
     Plug 'gioele/vim-autoswap'
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
@@ -147,12 +150,6 @@ try
 
     " MatchTagAlways
     let g:mta_use_match_paren_group = 1
-
-    " SuperTab
-    let g:SuperTabDefaultCompletionType = 'context'
-    let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-    let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
-    autocmd FileType c,cpp call SuperTabChain('ClangComplete', '<c-p>') | let g:SuperTabDefaultCompletionType = '<c-x><c-u>'
 
     " indentLine
     let g:indentLine_char = '¦'
