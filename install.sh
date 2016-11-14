@@ -256,6 +256,7 @@ scripts
 .irssi
 .compton.conf
 .gitconfig
+.gitignore_global
 "
 
 ./link.sh $files
