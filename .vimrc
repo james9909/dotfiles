@@ -60,6 +60,7 @@ try
     Plug 'junegunn/fzf.vim'
     Plug 'kchmck/vim-coffee-script'
     Plug 'Konfekt/FastFold'
+    Plug 'ludovicchabant/vim-gutentags'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
     Plug 'Rip-Rip/clang_complete', { 'for': 'c', 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
@@ -68,8 +69,6 @@ try
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'vimwiki/vimwiki'
-    Plug 'xolox/vim-easytags'
-    Plug 'xolox/vim-misc'
 
     if executable('ag')
         let $FZF_DEFAULT_COMMAND = 'ag -i --nocolor --nogroup --hidden
@@ -127,29 +126,12 @@ try
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
 
-    " easytags
-    let g:easytags_updatetime_warn = 0
-    let g:easytags_async = 1
-
-    let g:easytags_auto_update = 0
-    let g:easytags_python_enabled = 0
-    " let g:easytags_auto_highlight = 0
-    let g:easytags_events = ['BufWritePost']
-    let g:easytags_syntax_keyword = 'always'
-    " let g:easytags_always_enabled = 1
-
-    let g:easytags_by_filetype = "~/.vim/tags"
+    " Gutentags
+    let g:gutentags_tagfile = "tags"
+    let g:gutentags_exclude = ["*.min.js"]
 
     " vim-clang
-
     let g:clang_library_path='/usr/lib/llvm-3.6/lib/libclang.so.1'
-    " let g:clang_auto = 0
-    " " default 'longest' can not work with neocomplete
-    " let g:clang_c_completeopt = 'menuone,preview'
-    " let g:clang_cpp_completeopt = 'menuone,preview'
-
-    " let g:clang_c_options = '-std=c11'
-    " let g:clang_cpp_options = '-std=c++1z -stdlib=libc++ --pedantic-errors'
 
     " Get rid of conflicting whitespace errors
     hi link coffeeSpaceError NONE
