@@ -127,8 +127,8 @@ try
     let g:indentLine_color_term = 239
 
     " Gutentags
-    let g:gutentags_tagfile = "tags"
-    let g:gutentags_exclude = ["*.min.js"]
+    let g:gutentags_tagfile = ".tags"
+    let g:gutentags_exclude = ["*.min.js", "build", "vendor", ".git"]
 
     " vim-clang
     let g:clang_library_path='/usr/lib/llvm-3.6/lib/libclang.so.1'
