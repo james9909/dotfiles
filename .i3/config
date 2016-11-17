@@ -222,5 +222,6 @@ bar {
 }
 
 for_window [class="URxvt"] floating enable
+for_window [window_role="pop-up"] floating enable
 
 exec feh --bg-fill ~/Pictures/Wallpapers/black-wallpaper.jpg
