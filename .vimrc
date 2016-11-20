@@ -299,7 +299,7 @@ nnoremap <Leader>h :split<CR>
 nnoremap <Leader>v :vsplit<CR>
 
 " Tab Mappings
-nnoremap <silent> <C-t> :tabnew<CR>
+nnoremap <silent> <Leader>t :tabnew<CR>
 nnoremap <silent> <Tab> gt
 nnoremap <silent> <S-Tab> gT
 
