@@ -128,7 +128,7 @@ try
 
     " Gutentags
     let g:gutentags_tagfile = ".tags"
-    let g:gutentags_exclude = ["*.min.js", "build", "vendor", ".git"]
+    let g:gutentags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git"]
 
     " vim-clang
     let g:clang_library_path='/usr/lib/llvm-3.6/lib/libclang.so.1'
