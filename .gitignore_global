@@ -39,6 +39,7 @@ ehthumbs.db
 # Other
 .netrwhist
 .tags
+.notags
 a.out
 *.class
 *.pyc
