@@ -329,6 +329,10 @@ nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 nnoremap <C-p> :FZF<CR>
 
 nnoremap <Leader>c :Neomake<CR>
+
+" Tag navigation
+nnoremap <C-\> :tab split<CR>:exec("tjump ".expand("<cword>"))<CR>
+nnoremap <A-]> :vsplit <CR>:exec("tjump ".expand("<cword>"))<CR>
 "}}}
 "{{{ NeoVim
 if has('nvim')
