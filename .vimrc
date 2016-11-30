@@ -277,7 +277,6 @@ nnoremap <expr> i SmartInsertModeEnter()
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>
