@@ -32,6 +32,7 @@ try
         if v:version >= 800
             " Asynchronous completion if we are using vim 8
             Plug 'maralla/completor.vim'
+            let g:completor_java_omni_trigger = '[^. *\t]\.\w*'
         else
             " Lua is not available, so use lightweight completion plugin instead
             Plug 'ajh17/VimCompletesMe'
