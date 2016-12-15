@@ -17,6 +17,9 @@ try
                     \'\s[A-Z][a-z]',
                     \'^\s*@[A-Z][a-z]'
                     \]
+        let g:deoplete#omni#input_patterns.javascript = [
+                    \'[^. \t0-9]\.([a-zA-Z_]\w*)?'
+                    \]
 
         Plug 'carlitux/deoplete-ternjs'
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
@@ -334,6 +337,8 @@ nnoremap <Leader>c :Neomake<CR>
 " Tag navigation
 nnoremap <C-\> :tab split<CR>:exec("tjump ".expand("<cword>"))<CR>
 nnoremap <A-]> :vsplit <CR>:exec("tjump ".expand("<cword>"))<CR>
+
+nnoremap <Backspace> <NOP>
 "}}}
 "{{{ NeoVim
 if has('nvim')
