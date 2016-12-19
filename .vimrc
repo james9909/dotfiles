@@ -120,7 +120,7 @@ try
     let g:delimitMate_nesting_quotes = ['"', '`', '"']
 
     " Vim wiki
-    let g:vimwiki_list = [{'path':'~/Education/Notes', 'path_html':'~/Education/Notes/export/html/'}]
+    let g:vimwiki_list = [{'path':'~/Documents/Google Drive/School/Notes', 'path_html':'~/Documents/Google Drive/School/Notes/export/html/'}]
     let g:vimwiki_folding='expr'
 
     " MatchTagAlways
