@@ -3,6 +3,7 @@
 function build_neovim() {
     cd "$HOME/neovim"
     make clean &&
+    sudo make distclean &&
     sudo make -j4 CMAKE_BUILD_TYPE=Release # Optimized build
     sudo make install
 }
