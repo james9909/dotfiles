@@ -366,6 +366,8 @@ if has('nvim')
 
     let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Change cursor shape based on current mode
 
+    set inccommand=split
+
 endif
 "}}}
 "{{{ Functions
