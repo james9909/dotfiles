@@ -168,7 +168,9 @@ function TRAPUSR1() {
 
     # redisplay
     # https://github.com/zsh-users/zsh-syntax-highlighting/issues/230
-    zle && zle .reset-prompt
+    if [[ $COLUMNS -gt 69 ]]; then
+        zle && zle .reset-prompt
+    fi
 }
 
 # {{{ Git Prompt
