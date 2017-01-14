@@ -7,45 +7,17 @@
     autosetuprebase = always
 
 [alias]
-  # via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
-    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-    snapshots = !git stash list --grep snapshot
-
-  #via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
-    recent-branches = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
-
-  # branch
-    b = branch -v                     # branch (verbose)
-
-  # commit
-    amend = commit --amend            # ammend your last commit
-
-  # checkout
-    nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
-
-  # diff
-    dc = diff --cached                # diff staged changes
-    last = diff HEAD^                 # diff last committed change
-
-  # log
+    # log
     changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
     short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
     simple = log --pretty=format:\" * %s\"
     shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
     tree = log --graph --oneline --all
 
-  # remote
-    r = remote -v                     # show remotes (verbose)
-
-  # reset
-    unstage = reset HEAD --
-    uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
-
-
 [core]
     autocrlf = false
     editor = vim
-	excludesfile = /home/james/.gitignore_global
+    excludesfile = /home/james/.gitignore_global
     pager = diff-so-fancy | less --tabs=4 -RFX
 
 [diff]
@@ -53,8 +25,8 @@
     compactionHeuristic = true
 
 [rerere]
-  # Remember my merges
-  # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
+    # Remember my merges
+    # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
     enabled = true
 
 [push]
@@ -67,4 +39,4 @@
     markEmptyLines = false
     stripLeadingSymbols = false
 [pull]
-	rebase = true
+    rebase = true
