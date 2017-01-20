@@ -225,6 +225,10 @@ set wildmenu " Tab-like completion similar to zsh
 set ttyfast " Smoother redraw
 set formatoptions+=j " Remove comments when merging
 
+" Invisible characters
+set list
+set listchars=tab:>-
+
 " Press % on 'if' to jump to its corresponding 'else'
 runtime macros/matchit.vim
 
