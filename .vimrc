@@ -58,6 +58,7 @@ try
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+    Plug 'fatih/vim-go'
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -139,6 +140,10 @@ try
 
     " Get rid of conflicting whitespace errors
     hi link coffeeSpaceError NONE
+
+    " Disable errors for the fmt command
+    let g:go_fmt_fail_silently = 1
+    let g:go_fmt_command = "goimports"
 
     call plug#end()
 catch /:E117:/

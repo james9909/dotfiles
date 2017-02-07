@@ -93,10 +93,13 @@ ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 
 . /etc/zsh_command_not_found # Bash-like command not found
 
+export GOPATH="$HOME/goprojects"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export PATH="$HOME/Dev/google_appengine:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$GOPATH/bin"
 
 # # The next line updates PATH for the Google Cloud SDK.
 # if [ -f /home/james/Dev/google-cloud-sdk/path.zsh.inc ]; then
