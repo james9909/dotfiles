@@ -1,1 +1,1 @@
-nickcolor.pl
+/home/james/Dev/dotfiles/.irssi/scripts/autorun/nickcolor.pl

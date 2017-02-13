@@ -1,1 +1,1 @@
-splitlong.pl
+/home/james/Dev/dotfiles/.irssi/scripts/autorun/splitlong.pl
