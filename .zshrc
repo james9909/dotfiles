@@ -32,7 +32,7 @@ COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
 
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Mark untracked files under VCS as dirty
 
-plugins=(git git-flow zsh-syntax-highlighting zsh-completions) # Plugins
+plugins=(git zsh-syntax-highlighting) # Plugins
 
 # User configuration
 
@@ -76,11 +76,11 @@ zstyle ':completion:*' menu select
 
 # use automatic path prediction
 # $predict-on to turn on and $predict-off to turn off
-autoload predict-off
+# autoload predict-off
 # use advanced completion system
-autoload -U compinit && compinit
+# autoload -U compinit && compinit
 # colors
-autoload -U colors && colors
+# autoload -U colors && colors
 
 # Set xterm because of urxvt backspace bugs
 export TERM="xterm-256color"
@@ -93,7 +93,7 @@ ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 
 . /etc/zsh_command_not_found # Bash-like command not found
 
-export GOPATH="$HOME/goprojects"
+export GOPATH="$HOME/Dev/go"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
