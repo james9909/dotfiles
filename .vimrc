@@ -378,7 +378,7 @@ if has('nvim')
     " Use :terminal to execute shell command
     nnoremap <Leader>T :terminal<CR>
 
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Change cursor shape based on current mode
+    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor " Change cursor shape based on current mode
 
     set inccommand=split
 
