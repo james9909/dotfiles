@@ -155,7 +155,7 @@ function TRAPUSR1() {
 
     # redisplay
     # https://github.com/zsh-users/zsh-syntax-highlighting/issues/230
-    if [[ $COLUMNS -gt 69 ]]; then
+    if [[ $COLUMNS -gt 90 ]]; then
         zle && zle .reset-prompt
     fi
 }
