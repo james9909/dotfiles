@@ -100,6 +100,7 @@ export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export PATH="$HOME/Dev/google_appengine:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # # The next line updates PATH for the Google Cloud SDK.
 # if [ -f /home/james/Dev/google-cloud-sdk/path.zsh.inc ]; then
