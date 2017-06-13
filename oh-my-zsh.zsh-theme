@@ -4,19 +4,6 @@
 # Disable default virtualenv prompt modifications
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Force color in terminal
-if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
-    export TERM=xterm-256color
-elif [ "$TERM" == "screen" ]; then
-    export TERM=screen-256color
-fi
-
-if [[ "$TERM" =~ "256color" ]]; then
-    is256ColorTerm=true
-else
-    is256ColorTerm=false
-fi
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
