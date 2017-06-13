@@ -28,3 +28,6 @@ alias hotspoot='sudo iptables -t mangle -A POSTROUTING -j TTL --ttl-set 65' # ht
 
 alias eclipse='GTK_THEME=Default:light ~/eclipse/eclipse &> /dev/null & disown'
 alias gdb='gdb -q'
+alias pmake='time nice make -j$(nproc) -l $(nproc)'
+alias disablemouse='sudo xinput set-prop 11 "Device Enabled" 0'
+alias enablemouse='sudo xinput set-prop 11 "Device Enabled" 1'
