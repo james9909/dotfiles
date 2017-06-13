@@ -68,6 +68,8 @@ try
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
+    Plug 'mxw/vim-jsx'
+    Plug 'pangloss/vim-javascript'
     Plug 'Rip-Rip/clang_complete', { 'for': 'c', 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
     Plug 'neomake/neomake'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
@@ -144,6 +146,9 @@ try
     " Disable errors for the fmt command
     let g:go_fmt_fail_silently = 1
     let g:go_fmt_command = "goimports"
+
+    " Allow JSX syntax highlighting in .js files
+    let g:jsx_ext_required = 0
 
     call plug#end()
 catch /:E117:/
