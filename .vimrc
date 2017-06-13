@@ -58,7 +58,7 @@ try
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-    Plug 'fatih/vim-go'
+    Plug 'fatih/vim-go', { 'for': 'go' }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
