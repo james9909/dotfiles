@@ -135,7 +135,7 @@ try
 
     " Gutentags
     let g:gutentags_ctags_tagfile = ".tags"
-    let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git"]
+    let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules"]
 
     " vim-clang
     let g:clang_library_path='/usr/lib/llvm-3.6/lib/libclang.so.1'
@@ -209,8 +209,6 @@ set copyindent " Copies the indentation of the previous line
 set number " Enable line numbers
 set wrap " Wrap lines
 set wildignore=*.class,*.swp,*.pyc,*.jar,*.cmake,*.tar.* " Ignore compiled things
-set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.mp3 " Ignore picture and media files
-set wildignore+=*.odt,*.doc,*.docx,*.pdf " Ignore formatted documents that will not render in plaintext
 set mouse=nvc " Enable the mouse for normal, visual, and command-line modes
 set backspace=indent,eol,start " Backspace is great
 set hlsearch " Highlight search term in text
