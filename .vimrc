@@ -309,7 +309,7 @@ nnoremap <silent><Leader>W! :w !sudo tee %>/dev/null<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>i :call Preserve('normal gg=G')<CR>
-nnoremap <silent><Leader>t :call ToggleVExplorer()<CR>
+nnoremap <silent><Leader>n :call ToggleVExplorer()<CR>
 nnoremap <Leader>h :split<CR>
 nnoremap <Leader>v :vsplit<CR>
 
