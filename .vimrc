@@ -45,7 +45,6 @@ try
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
         " Jedi-vim
-        let g:jedi#popup_on_dot = 0
         let g:jedi#popup_select_first = 0
         let g:jedi#smart_auto_mappings = 0 " Remove automatic addition of 'import' when doing 'from module<space>'
     endif
@@ -57,7 +56,6 @@ try
     Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
-    Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
     Plug 'fatih/vim-go', { 'for': 'go' }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
@@ -66,7 +64,6 @@ try
     Plug 'kchmck/vim-coffee-script'
     Plug 'Konfekt/FastFold'
     Plug 'ludovicchabant/vim-gutentags'
-    Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
     Plug 'morhetz/gruvbox'
     Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
