@@ -36,6 +36,8 @@ try
             " Asynchronous completion if we are using vim 8
             Plug 'maralla/completor.vim'
             let g:completor_java_omni_trigger = '[^. *\t]\.\w*'
+
+            let g:completor_racer_binary = '/home/james/.cargo/bin/racer'
         else
             " Lua is not available, so use lightweight completion plugin instead
             Plug 'ajh17/VimCompletesMe'
@@ -68,6 +70,8 @@ try
     Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
     Plug 'Rip-Rip/clang_complete', { 'for': 'c', 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
+    Plug 'racer-rust/vim-racer'
+    Plug 'rust-lang/rust.vim'
     Plug 'neomake/neomake'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     Plug 'tpope/vim-commentary'
@@ -146,6 +150,10 @@ try
 
     " Allow JSX syntax highlighting in .js files
     let g:jsx_ext_required = 0
+
+    " Racer
+    let g:racer_cmd = "~/.cargo/bin/racer"
+    let g:racer_experimental_completer = 1
 
     call plug#end()
 catch /:E117:/
