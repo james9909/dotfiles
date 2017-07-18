@@ -94,6 +94,7 @@ ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 . /etc/zsh_command_not_found # Bash-like command not found
 
 export RUST_SRC_PATH="$HOME/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+export RUST_SRC_PATH="${RUST_SRC_PATH}:$HOME/.cargo/registry/src"
 export GOPATH="$HOME/Dev/go"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"

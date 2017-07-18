@@ -151,6 +151,9 @@ try
     " Allow JSX syntax highlighting in .js files
     let g:jsx_ext_required = 0
 
+    " Run :RustFmt when saving a buffer
+    let g:rustfmt_autosave = 1
+
     " Racer
     let g:racer_cmd = "~/.cargo/bin/racer"
     let g:racer_experimental_completer = 1
@@ -188,6 +191,7 @@ augroup end
 
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType vimwiki setlocal spell
+autocmd FileType rust nmap K <Plug>(rust-doc)
 autocmd FileType python setlocal foldenable foldmethod=syntax
 
 "}}}
