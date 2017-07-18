@@ -103,6 +103,12 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# Virtualenv wrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Dev
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+
 # # The next line updates PATH for the Google Cloud SDK.
 # if [ -f /home/james/Dev/google-cloud-sdk/path.zsh.inc ]; then
 #   source '/home/james/Dev/google-cloud-sdk/path.zsh.inc'

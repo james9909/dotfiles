@@ -26,7 +26,7 @@ sudo apt-get install -y wicd-curses
 sudo -v
 
 sudo pip install Flask Pillow
-sudo pip install gcalcli vobject parsedatetime
+sudo pip install gcalcli vobject parsedatetime virtualenvwrapper
 sudo -v
 
 sudo apt-get autoclean -y
