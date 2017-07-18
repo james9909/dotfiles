@@ -188,6 +188,7 @@ augroup end
 
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType vimwiki setlocal spell
+autocmd FileType python setlocal foldenable foldmethod=syntax
 
 "}}}
 "{{{Misc Settings
