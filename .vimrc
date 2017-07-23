@@ -105,6 +105,7 @@ try
     let g:airline#extensions#hunks#enabled = 1
     let g:airline#extensions#hunks#hunk_symbols = ['+', 'Δ', '-']
     let g:airline#extensions#hunks#non_zero_only = 1
+    let g:airline#extensions#virtualenv#enabled = 1
 
     " Git Gutter
     let g:gitgutter_sign_added = "+"
