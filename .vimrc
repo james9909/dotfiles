@@ -32,16 +32,17 @@ try
     else
         " We are using vim
 
-        if v:version >= 800
-            " Asynchronous completion if we are using vim 8
-            Plug 'maralla/completor.vim'
-            let g:completor_java_omni_trigger = '[^. *\t]\.\w*'
+        " if v:version >= 800
+        "     " Asynchronous completion if we are using vim 8
+        "    Plug 'maralla/completor.vim'
+        "     let g:completor_java_omni_trigger = '[^. *\t]\.\w*'
 
-            let g:completor_racer_binary = '/home/james/.cargo/bin/racer'
-        else
-            " Lua is not available, so use lightweight completion plugin instead
-            Plug 'ajh17/VimCompletesMe'
-        endif
+        "     let g:completor_racer_binary = '/home/james/.cargo/bin/racer'
+        " else
+        "     " Lua is not available, so use lightweight completion plugin instead
+        "     Plug 'ajh17/VimCompletesMe'
+        " endif
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer --tern-completer --racer-completer' }
 
         Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
