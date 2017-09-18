@@ -187,13 +187,3 @@ ZSH_THEME_GIT_PROMPT_STASHED="*"
 ZSH_THEME_GIT_PROMPT_DIVERGED="⑂"
 # }}}
 # }}}
-# Aliases {{{
-# import aliases from bash
-if [[ -e $HOME/.bash_aliases ]]; then
-    . $HOME/.bash_aliases
-fi
-# import zsh-specific aliases
-if [[ -e $HOME/.zsh_aliases ]]; then
-    . $HOME/.zsh_aliases
-fi
-# }}}

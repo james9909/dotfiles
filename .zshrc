@@ -119,3 +119,14 @@ source /usr/local/bin/virtualenvwrapper_lazy.sh
 if [ -f /home/james/Dev/google-cloud-sdk/completion.zsh.inc ]; then
   source '/home/james/Dev/google-cloud-sdk/completion.zsh.inc'
 fi
+
+# Aliases {{{
+# import aliases from bash
+if [[ -e $HOME/.bash_aliases ]]; then
+    . $HOME/.bash_aliases
+fi
+# import zsh-specific aliases
+if [[ -e $HOME/.zsh_aliases ]]; then
+    . $HOME/.zsh_aliases
+fi
+# }}}
