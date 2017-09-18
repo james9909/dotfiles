@@ -69,6 +69,7 @@ try
     Plug 'morhetz/gruvbox'
     Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
+    Plug 'pearofducks/ansible-vim'
     Plug 'Rip-Rip/clang_complete', { 'for': 'c', 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
     Plug 'racer-rust/vim-racer'
     Plug 'rust-lang/rust.vim'
