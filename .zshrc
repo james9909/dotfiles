@@ -103,12 +103,14 @@ export PATH="$HOME/Dev/google_appengine:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/miniconda3/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Dev
-export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+export VIRTUALENVWRAPPER_SCRIPT=~/.local/bin/virtualenvwrapper.sh
+source ~/.local/bin/virtualenvwrapper_lazy.sh
 
 # # The next line updates PATH for the Google Cloud SDK.
 # if [ -f /home/james/Dev/google-cloud-sdk/path.zsh.inc ]; then
