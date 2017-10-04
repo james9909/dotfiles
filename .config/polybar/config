@@ -48,7 +48,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
 modules-center =
-modules-right = filesystem volume memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem volume memory cpu wlan eth battery date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -245,10 +245,10 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
+date = %a %b %d %Y
 date-alt = " %Y-%m-%d"
 
-time = %H:%M
+time = %I:%M:%S
 time-alt = %H:%M:%S
 
 format-prefix = 
