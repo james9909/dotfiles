@@ -247,7 +247,6 @@ files="
 .tmux.conf
 .vim
 .i3
-.i3status.conf
 .bashrc
 .bash_aliases
 .Xresources
@@ -257,6 +256,7 @@ scripts
 .compton.conf
 .gitconfig
 .gitignore_global
+.config/polybar
 "
 
 ./link.sh $files
