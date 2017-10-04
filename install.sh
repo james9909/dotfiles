@@ -25,8 +25,8 @@ sudo apt-get install -y wicd-curses
 
 sudo -v
 
-sudo pip install Flask Pillow
-sudo pip install gcalcli vobject parsedatetime virtualenvwrapper
+pip install --user Flask Pillow
+pip install --user gcalcli vobject parsedatetime virtualenvwrapper
 sudo -v
 
 sudo apt-get autoclean -y
@@ -171,8 +171,8 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     make clean
     make CMAKE_BUILD_TYPE=Release # Optimized build
     sudo make install
-    sudo pip3 install neovim
-    sudo pip install neovim
+    sudo pip3 install --user neovim
+    sudo pip install --user neovim
     mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
     if [[ ! -d $XDG_CONFIG_HOME/nvim ]]; then
         ln -s ~/.vim $XDG_CONFIG_HOME/nvim
@@ -226,7 +226,7 @@ sudo -v
 
 # CTF tools
 sudo apt-get install -y gimp bless binwalk audacity tshark wireshark
-sudo pip install xortool
+sudo pip install --user xortool
 sudo -v
 
 # Network hooks
