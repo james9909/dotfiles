@@ -1,5 +1,5 @@
 ! URxvt config
-URxvt.letterSpace:        -1
+/* URxvt.letterSpace:        -1 */
 URxvt*cursorBlink:        true
 URxvt.cursorColor:        #FFFFFF
 
@@ -7,7 +7,7 @@ URxvt.termName:           rxvt-unicode-256color
 
 URxvt.scrollBar:          off
 
-URxvt.font:               xft:Droid Sans Mono for Powerline:regular:size=11:pixelsize=20
+URxvt.font:               xft:Droid Sans Mono for Powerline:size=11:pixelsize=20
 URxvt.internalBorder:     0
 URxvt*selectToClipboard:  true
 URxvt*saveLines:          10000
