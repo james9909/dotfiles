@@ -32,7 +32,7 @@ COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
 
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Mark untracked files under VCS as dirty
 
-plugins=(git zsh-syntax-highlighting) # Plugins
+plugins=(git zsh-syntax-highlighting tmux) # Plugins
 
 # User configuration
 
@@ -90,6 +90,10 @@ export REALTERM="rxvt-unicode-256color"
 ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
+
+# Tmux
+export ZSH_TMUX_AUTOSTART="true"
+export ZSH_TMUX_AUTOCONNECT="true"
 
 . /etc/zsh_command_not_found # Bash-like command not found
 
