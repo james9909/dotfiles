@@ -212,10 +212,9 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo -v
 fi
 
-# Screenfetch
+# Neofetch
 sudo apt-get install -y lsb-release scrot
-sudo wget -O /usr/bin/screenfetch "https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev"
-sudo chmod +x /usr/bin/screenfetch
+cd ~ && git clone https://github.com/dylanaraps/neofetch && cd neofetch && sudo make install
 sudo -v
 
 # Dropbox
