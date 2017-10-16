@@ -118,8 +118,8 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     if [[ ! -d $font_dir ]]; then
         mkdir -p "$font_dir"
     fi
-    wget "https://github.com/powerline/fonts/raw/master/DroidSansMono/Droid%20Sans%20Mono%20for%20Powerline.otf"
-    mv Droid\ Sans\ Mono\ for\ Powerline.otf $font_dir
+    wget "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete%20Mono.ttf"
+    mv Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono.ttf "$font_dir"
 
     if command -v fc-cache @>/dev/null ; then
         echo -n "Resetting font cache, this may take a moment..."
