@@ -185,9 +185,7 @@ setw -g aggressive-resize on
 bind-key t new-window
 
 # Window killing
-unbind w
-bind w
-confirm-before -p "kill window #W? (y/n)" kill-window
+bind w confirm-before -p "kill window #W? (y/n)" kill-window
 
 # Pane killing
 bind x confirm-before -p "kill pane #W? (y/n)" kill-pane
