@@ -258,6 +258,8 @@ scripts
 .gitconfig
 .gitignore_global
 .config/polybar
+.config/ranger
+.config/dunst
 "
 
 ./link.sh $files
