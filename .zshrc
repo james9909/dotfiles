@@ -110,6 +110,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/miniconda3/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Dev
