@@ -45,6 +45,8 @@ sudo apt-get remove $(dpkg --get-selections | cut -f1 | grep -P "^unity-(lens|sc
 
 # zsh + tmux <3
 sudo apt-get install -y zsh tmux
+mkdir -p ~/.tmux/plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 sudo -v
 
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
