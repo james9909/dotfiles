@@ -245,6 +245,7 @@ files="
 .vimrc
 .zshrc
 .tmux.conf
+.tmux.conf.local
 .vim
 .i3
 .bashrc
