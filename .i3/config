@@ -60,7 +60,7 @@ exec killall -q notify-osd
 exec --no-startup-id dunst -config ~/.i3/config_dunst
 
 # Lock
-exec --no-startup-id xautolock -time 10 -locker "/home/james/.i3/lock"
+# exec --no-startup-id xautolock -time 10 -locker "/home/james/.i3/lock"
 
 # # lemonbar
 # exec --no-startup-id conky -c ~/.i3/lemonbar/empty_conky
