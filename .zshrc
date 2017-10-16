@@ -32,7 +32,7 @@ COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
 
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Mark untracked files under VCS as dirty
 
-plugins=(git zsh-syntax-highlighting tmux) # Plugins
+plugins=(git zsh-syntax-highlighting tmux notify) # Plugins
 
 # User configuration
 
