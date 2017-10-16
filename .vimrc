@@ -56,7 +56,7 @@ try
     Plug 'Yggdroot/indentLine'
     Plug 'alvan/vim-closetag'
     Plug 'airblade/vim-gitgutter'
-    Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+    " Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
     Plug 'fatih/vim-go', { 'for': 'go' }
@@ -173,7 +173,7 @@ augroup defaults
     autocmd BufReadPost * call FollowSymLink()
     autocmd VimEnter * call AirlineInit()
     autocmd VimEnter * call DetectEOL()
-    autocmd FileType java call JavaConfig()
+    " autocmd FileType java call JavaConfig()
     " Restore cursor location
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
