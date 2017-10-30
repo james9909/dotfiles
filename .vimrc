@@ -34,7 +34,8 @@ try
 
         " if v:version >= 800
         "     " Asynchronous completion if we are using vim 8
-        "    Plug 'maralla/completor.vim'
+        Plug 'maralla/completor.vim'
+
         "     let g:completor_java_omni_trigger = '[^. *\t]\.\w*'
 
         "     let g:completor_racer_binary = '/home/james/.cargo/bin/racer'
@@ -42,7 +43,7 @@ try
         "     " Lua is not available, so use lightweight completion plugin instead
         "     Plug 'ajh17/VimCompletesMe'
         " endif
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer --tern-completer --racer-completer --clang-completer' }
+        " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer --tern-completer --racer-completer --clang-completer' }
 
         Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -50,6 +51,7 @@ try
         " Jedi-vim
         let g:jedi#popup_select_first = 0
         let g:jedi#smart_auto_mappings = 0 " Remove automatic addition of 'import' when doing 'from module<space>'
+        let g:jedi#completions_enabled = 0
     endif
     Plug 'Raimondi/delimitMate'
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
