@@ -16,7 +16,7 @@ sudo apt-get install -y indicator-cpufreq lm-sensors
 sudo -v
 
 sudo apt-get install -y openjdk-7-jdk git python-dev python3
-sudo apt-get install -y python-software-properties software-properties-common python-pip
+sudo apt-get install -y python-software-properties software-properties-common python-pip python3-pip
 sudo apt-get install -y make gparted curl
 sudo apt-get install -y unity-tweak-tool
 sudo apt-get install -y silversearcher-ag
@@ -47,6 +47,7 @@ sudo apt-get remove $(dpkg --get-selections | cut -f1 | grep -P "^unity-(lens|sc
 sudo apt-get install -y zsh tmux
 mkdir -p ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+pip3 install --user powerline
 sudo -v
 
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
@@ -262,6 +263,7 @@ scripts
 .config/polybar
 .config/ranger
 .config/dunst
+.config/powerline
 "
 
 ./link.sh $files
