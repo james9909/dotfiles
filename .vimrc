@@ -42,7 +42,7 @@ try
         "     " Lua is not available, so use lightweight completion plugin instead
         "     Plug 'ajh17/VimCompletesMe'
         " endif
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer --tern-completer --racer-completer' }
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer --tern-completer --racer-completer --clang-completer' }
 
         Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
