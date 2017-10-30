@@ -74,11 +74,11 @@ try
     Plug 'Rip-Rip/clang_complete', { 'for': 'c', 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
     Plug 'racer-rust/vim-racer'
     Plug 'rust-lang/rust.vim'
-    Plug 'neomake/neomake'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'vimwiki/vimwiki'
+    Plug 'w0rp/ale'
 
     if executable('ag')
         let $FZF_DEFAULT_COMMAND = 'ag -i --nocolor --nogroup --hidden
@@ -161,6 +161,9 @@ try
     let g:racer_cmd = "~/.cargo/bin/racer"
     let g:racer_experimental_completer = 1
 
+    let g:ale_lint_on_text_changed = "insert" " Run ale only in insert mode
+    let g:ale_lint_on_insert_leave = 1 " Run ale when exiting insert mode
+
     call plug#end()
 catch /:E117:/
     echom "Vim-Plug is not installed!"
@@ -178,7 +181,6 @@ augroup defaults
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
     autocmd FileType * set formatoptions-=o " Override ftplugins
-    autocmd! BufWritePost * if &ft != "java" | Neomake | endif " Asynchronously check for syntax errors upon saving
 augroup END
 
 " Automagically remove any trailing whitespace upon saving
@@ -357,7 +359,7 @@ nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 
 nnoremap <C-p> :FZF<CR>
 
-nnoremap <Leader>c :Neomake<CR>
+nnoremap <Leader>c :ALELint<CR>
 
 " Tag navigation
 nnoremap <C-\> :tab split<CR>:exec("tjump ".expand("<cword>"))<CR>
