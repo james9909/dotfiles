@@ -163,8 +163,11 @@ try
     let g:racer_cmd = "~/.cargo/bin/racer"
     let g:racer_experimental_completer = 1
 
+    " Ale
     let g:ale_lint_on_text_changed = "insert" " Run ale only in insert mode
     let g:ale_lint_on_insert_leave = 1 " Run ale when exiting insert mode
+    let g:ale_type_map = {'flake8': {'ES': 'WS', 'E': 'W'}} " Map style errors to warnings
+    let g:ale_python_flake8_args = '--ignore=E302,E305,E501'
 
     call plug#end()
 catch /:E117:/
