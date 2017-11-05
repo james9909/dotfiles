@@ -75,10 +75,10 @@ function user() {
     echo -n "$(seq_color)${USER}@$(seq_color_bold)$(hostname)"
 }
 
-# Appends a pulse to the user name
-function pulse() {
-    echo "${RED}[~^v~]"
-}
+# # Appends a pulse to the user name
+# function pulse() {
+#     echo "${RED}[~^v~]"
+# }
 
 # Shows the present working directory
 function get_pwd() {
@@ -100,7 +100,7 @@ function is_tunnel_active() {
 
 function prompt_cmd() {
     get_exit_code
-    echo "┌─$(get_virtualenv)$(tput bold)$(get_time) $(user)$(pulse) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
+    echo "┌─$(get_virtualenv)$(tput bold)$(get_time) $(user) $(get_pwd)$(count_jobs)$(is_tunnel_active) $(get_sign)
 ${WHITE}└>> "
 }
 
