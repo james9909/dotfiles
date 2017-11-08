@@ -169,6 +169,7 @@ try
     let g:ale_lint_on_insert_leave = 1 " Run ale when exiting insert mode
     let g:ale_type_map = {'flake8': {'ES': 'WS', 'E': 'W'}} " Map style errors to warnings
     let g:ale_python_flake8_args = '--ignore=E302,E305,E501'
+    let g:ale_lint_delay = 500 " Lint after 500 milliseconds
 
     call plug#end()
 catch /:E117:/
