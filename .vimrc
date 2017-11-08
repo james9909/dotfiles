@@ -36,6 +36,7 @@ try
         "     " Asynchronous completion if we are using vim 8
         Plug 'maralla/completor.vim'
 
+        let g:completor_gocode_binary = "/home/james/Dev/go/bin/gocode"
         "     let g:completor_java_omni_trigger = '[^. *\t]\.\w*'
 
         "     let g:completor_racer_binary = '/home/james/.cargo/bin/racer'
