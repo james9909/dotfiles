@@ -107,8 +107,10 @@ export PATH="$HOME/Dev/google_appengine:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/miniconda3/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+# Pretend that we are using Unity (for the settings)
+export XDG_CURRENT_DESKTOP=Unity
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
