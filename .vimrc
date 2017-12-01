@@ -171,6 +171,8 @@ try
     let g:ale_python_flake8_args = '--ignore=E302,E305,E501'
     let g:ale_lint_delay = 500 " Lint after 500 milliseconds
 
+    let g:ale_linters = {'go': ['go build', 'gofmt']}
+
     call plug#end()
 catch /:E117:/
     echom "Vim-Plug is not installed!"
