@@ -146,3 +146,6 @@ if [[ -e $HOME/.zsh_aliases ]]; then
     . $HOME/.zsh_aliases
 fi
 # }}}
+
+# added by travis gem
+[ -f /home/james/.travis/travis.sh ] && source /home/james/.travis/travis.sh
