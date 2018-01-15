@@ -117,8 +117,14 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Dev
-export VIRTUALENVWRAPPER_SCRIPT=~/.local/bin/virtualenvwrapper.sh
-source ~/.local/bin/virtualenvwrapper_lazy.sh
+
+if [ -f ~/.local/bin/virtualenvwrapper.sh ]; then
+    export VIRTUALENVWRAPPER_SCRIPT=~/.local/bin/virtualenvwrapper.sh
+fi
+
+if [ -f ~/.local/bin/virtualenvwrapper_lazy.sh ]; then
+    source ~/.local/bin/virtualenvwrapper_lazy.sh
+fi
 
 # # The next line updates PATH for the Google Cloud SDK.
 # if [ -f /home/james/Dev/google-cloud-sdk/path.zsh.inc ]; then
