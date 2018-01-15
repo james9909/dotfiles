@@ -103,7 +103,7 @@ export GOPATH="$HOME/Dev/go"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-export PATH="$HOME/Dev/google_appengine:$PATH"
+export PATH="$HOME/Dev/tools/google_appengine:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -126,8 +126,8 @@ source ~/.local/bin/virtualenvwrapper_lazy.sh
 # fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f /home/james/Dev/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/home/james/Dev/google-cloud-sdk/completion.zsh.inc'
+if [ -f /home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc'
 fi
 
 # Aliases {{{
