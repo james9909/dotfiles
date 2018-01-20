@@ -68,6 +68,7 @@ try
     Plug 'rust-lang/rust.vim'
     Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-sleuth'
     Plug 'tpope/vim-surround'
     Plug 'vimwiki/vimwiki'
     Plug 'w0rp/ale'
