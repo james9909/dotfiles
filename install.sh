@@ -219,6 +219,16 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     make -j4
     sudo make install
     sudo -v
+
+    # Install polybar
+    if [[ ! -d ~/polybar ]]; then
+        git clone https://github.com/jaagr/polybar ~/polybar
+    fi
+    rm -rf ~/polybar/build
+    mkdir -p ~/polybar/build
+    cd ~/polybar/build
+    cmake ..
+    sudo make install
 fi
 
 # Neofetch
