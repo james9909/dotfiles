@@ -209,8 +209,14 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     fi
     cd ~/i3-gaps
     sudo apt-get install libx11-xcb-dev
-    git checkout gaps
-    make
+    autoreconf --force --install
+    rm -rf build/
+    mkdir -p build && cd build
+
+    # Disabling sanitizers is important for release versions!
+    # The prefix and sysconfdir are, obviously, dependent on the distribution.
+    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+    make -j4
     sudo make install
     sudo -v
 fi
