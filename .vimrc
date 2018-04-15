@@ -34,6 +34,7 @@ try
         Plug 'maralla/completor.vim'
 
         let g:completor_gocode_binary = "/home/james/Dev/go/bin/gocode"
+        " let g:completor_clang_binary = "/usr/bin/clang"
 
         Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -134,8 +135,8 @@ try
     let g:gutentags_ctags_tagfile = ".tags"
     let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules"]
 
-    " vim-clang
-    let g:clang_library_path='/usr/lib/llvm-3.6/lib/libclang.so.1'
+    " clang_complete
+    let g:clang_library_path = "/usr/lib/llvm-3.8/lib/libclang.so.1"
 
     " Get rid of conflicting whitespace errors
     hi link coffeeSpaceError NONE
@@ -161,7 +162,10 @@ try
     let g:ale_python_flake8_args = '--ignore=E302,E305,E501'
     let g:ale_lint_delay = 500 " Lint after 500 milliseconds
 
-    let g:ale_linters = {'go': ['go build', 'gofmt']}
+    let g:ale_linters = {'go': ['go build', 'gofmt'], 'cpp': ['clang', 'clangtidy']}
+
+    let g:ale_cpp_clang_options = '-std=c++11'
+    let g:ale_cpp_clangtidy_options = '-std=c++11'
 
     call plug#end()
 catch /:E117:/
