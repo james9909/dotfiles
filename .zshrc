@@ -100,9 +100,6 @@ export ZSH_TMUX_AUTOCONNECT="true"
 export RUST_SRC_PATH="$HOME/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
 export RUST_SRC_PATH="${RUST_SRC_PATH}:$HOME/.cargo/registry/src"
 export GOPATH="$HOME/Dev/go"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export PATH="$HOME/Dev/tools/google_appengine:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
@@ -117,6 +114,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Dev
+
+if [ -x "$(command -v foo)" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+  export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+fi
 
 if [ -f ~/.local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_SCRIPT=~/.local/bin/virtualenvwrapper.sh
