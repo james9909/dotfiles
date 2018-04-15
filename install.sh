@@ -55,7 +55,7 @@ if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
     git clone https://github.com/marzocchi/zsh-notify.git ~/.oh-my-zsh/custom/plugins/notify
-    ./link.sh "oh-my-zsh.zsh-theme"
+    ln -s "$PWD/oh-my-zsh.zsh-theme" "~/.oh-my-zsh/themes/oh-my-zsh.zsh-theme"
 fi
 
 sudo apt-get install -y ranger
