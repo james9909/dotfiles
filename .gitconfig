@@ -23,6 +23,7 @@
 [diff]
     algorithm = patience
     compactionHeuristic = true
+    colorMoved = plain
 
 [rerere]
     # Remember my merges
