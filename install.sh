@@ -15,7 +15,7 @@ sudo apt-get remove -y --purge thunderbird
 sudo apt-get install -y indicator-cpufreq lm-sensors
 sudo -v
 
-sudo apt-get install -y openjdk-7-jdk git python-dev python3
+sudo apt-get install -y openjdk-8-jdk git python-dev python3
 sudo apt-get install -y python-software-properties software-properties-common python-pip python3-pip
 sudo apt-get install -y make gparted curl
 sudo apt-get install -y unity-tweak-tool
@@ -47,7 +47,7 @@ sudo apt-get remove $(dpkg --get-selections | cut -f1 | grep -P "^unity-(lens|sc
 sudo apt-get install -y zsh tmux
 mkdir -p ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-pip3 install --user powerline
+pip3 install --user powerline-status
 sudo -v
 
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
@@ -65,27 +65,6 @@ sudo apt-get install -y libav-tools id3v2
 sudo curl https://yt-dl.org/downloads/2015.09.03/youtube-dl -o /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
 sudo -v
-
-# update wget
-if [[ $(wget --version | grep "1.15") ]]; then
-    sudo apt-get -y build-dep wget
-    cd /tmp
-    wget http://ftp.gnu.org/gnu/wget/wget-1.16.tar.gz
-    tar -xvf wget-1.16.tar.gz
-    cd wget-1.16/
-    ./configure --with-ssl=openssl --prefix=/opt/wget
-    make
-    sudo -v
-    sudo make install
-    if [[ ! -d /opt/wget/WGET_REAL_1_15 ]]; then
-        sudo mkdir /opt/wget/WGET_REAL_1_15
-    fi
-    sudo mv /usr/bin/wget /opt/wget/WGET_REAL_1_15/wget_1_15
-    if [[ ! -f /usr/bin/wget ]]; then
-        sudo ln -s /opt/wget/bin/wget /usr/bin/wget
-    fi
-    sudo -v
-fi
 
 echo -n "Setup ssh tools? [y/n] "
 read ans
