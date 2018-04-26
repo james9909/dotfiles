@@ -130,9 +130,9 @@ if [ -f ~/.local/bin/virtualenvwrapper_lazy.sh ]; then
 fi
 
 # # The next line updates PATH for the Google Cloud SDK.
-# if [ -f /home/james/Dev/google-cloud-sdk/path.zsh.inc ]; then
-#   source '/home/james/Dev/google-cloud-sdk/path.zsh.inc'
-# fi
+if [ -f /home/james/Dev/tools/google-cloud-sdk/path.zsh.inc ]; then
+  source '/home/james/Dev/tools/google-cloud-sdk/path.zsh.inc'
+fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f /home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc ]; then
