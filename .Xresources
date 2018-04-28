@@ -1,5 +1,5 @@
 ! URxvt config
-/* URxvt.letterSpace:        -1 */
+URxvt.letterSpace:        1
 URxvt*cursorBlink:        true
 URxvt.cursorColor:        #FFFFFF
 
