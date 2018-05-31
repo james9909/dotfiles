@@ -207,3 +207,4 @@ for_window [window_role="pop-up"] floating enable
 
 exec feh --bg-fill ~/Pictures/Wallpapers/background2.png
 exec_always --no-startup-id ~/.i3/polybar.sh
+exec xrandr --dpi 144

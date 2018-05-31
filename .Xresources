@@ -1,3 +1,5 @@
+Xft.dpi: 120
+
 ! URxvt config
 URxvt.letterSpace:        1
 URxvt*cursorBlink:        true
@@ -7,7 +9,7 @@ URxvt.termName:           rxvt-unicode-256color
 
 URxvt.scrollBar:          off
 
-URxvt.font:               xft:SauceCodePro Nerd Font Mono:size=11:pixelsize=21
+URxvt.font:               xft:SauceCodePro Nerd Font Mono:size=11:pixelsize=25
 URxvt.internalBorder:     0
 URxvt*selectToClipboard:  true
 URxvt*saveLines:          10000
@@ -61,3 +63,4 @@ rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
 rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844
 
 rofi.separator-style: solid
+rofi.dpi: 120
