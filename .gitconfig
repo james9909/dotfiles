@@ -34,8 +34,6 @@
     default = simple
 [commit]
     gpgsign = true
-[interactive]
-    diffFilter = diff-highlight
 [diff-so-fancy]
     markEmptyLines = false
     stripLeadingSymbols = false
