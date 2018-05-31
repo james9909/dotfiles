@@ -16,12 +16,15 @@ sudo apt-get install -y indicator-cpufreq lm-sensors
 sudo -v
 
 sudo apt-get install -y openjdk-8-jdk git python-dev python3
-sudo apt-get install -y python-software-properties software-properties-common python-pip python3-pip
+sudo apt-get install -y software-properties-common python-pip python3-pip
 sudo apt-get install -y make gparted curl
 sudo apt-get install -y unity-tweak-tool
 sudo apt-get install -y silversearcher-ag
 sudo apt-get install -y mpd ncmpcpp irssi
 sudo apt-get install -y wicd-curses
+
+sudo apt-get -y install npm nodejs
+sudo npm install -g npm diff-so-fancy
 
 sudo -v
 
@@ -45,7 +48,9 @@ sudo apt-get remove $(dpkg --get-selections | cut -f1 | grep -P "^unity-(lens|sc
 # zsh + tmux <3
 sudo apt-get install -y zsh tmux
 mkdir -p ~/.tmux/plugins
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 pip3 install --user powerline-status
 sudo -v
 
@@ -54,13 +59,13 @@ if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
     git clone https://github.com/marzocchi/zsh-notify.git ~/.oh-my-zsh/custom/plugins/notify
-    ln -s "$PWD/oh-my-zsh.zsh-theme" "~/.oh-my-zsh/themes/oh-my-zsh.zsh-theme"
+    ln -s "$dotfiles/oh-my-zsh.zsh-theme" "~/.oh-my-zsh/themes/oh-my-zsh.zsh-theme"
 fi
 
 sudo apt-get install -y ranger
 
 # youtube-dl
-sudo apt-get install -y libav-tools id3v2
+sudo apt-get install -y ffmpeg id3v2
 sudo curl https://yt-dl.org/downloads/2015.09.03/youtube-dl -o /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
 sudo -v
@@ -118,10 +123,7 @@ echo -n "Using vim? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
     sudo apt-get -y remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
-    sudo apt-get -y build-dep vim-gnome
-    sudo apt-get -y install python-dev ruby-dev libperl-dev mercurial libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
-    sudo apt-get -y install npm nodejs
-    sudo npm install -g npm
+    sudo apt-get -y install python-dev ruby-dev libperl-dev mercurial libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev exuberant-ctags
     sudo npm install -g instant-markdown-d
     cd "$HOME"
     git clone https://github.com/vim/vim "$HOME/vim"
@@ -131,27 +133,31 @@ if [[ $ans =~ ^[Yy]$ ]]; then
         --enable-largefile \
         --enable-netbeans \
         --enable-pythoninterp \
-        --with-python-config-dir=/usr/lib/python2.7/config \
+        --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
+        --with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu \
         --enable-perlinterp \
         --enable-gui=auto \
         --enable-fail-if-missing \
-        --enable-cscope
-    make
+        --enable-cscope \
+        --enable-terminal
+    make -j4
     sudo make install
     sudo -v
+    cd $dotfiles
+    ./link.sh .vim .vimrc
 fi
 
 echo -n "Using neovim? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja-build xclip python3-pip
+    sudo apt-get -y install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip ninja-build xclip texinfo
     if [[ ! -d ~/neovim ]]; then
         git clone https://github.com/neovim/neovim ~/neovim
     fi
     cd ~/neovim
     sudo cp /usr/bin/ninja /usr/sbin/ninja
     make clean
-    make CMAKE_BUILD_TYPE=Release # Optimized build
+    make -j4 CMAKE_BUILD_TYPE=Release # Optimized build
     sudo make install
     sudo pip3 install --user neovim
     sudo pip install --user neovim
@@ -168,25 +174,24 @@ fi
 echo -n "Using i3? [y/n] "
 read ans
 if [[ $ans =~ ^[Yy]$ ]]; then
-    sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev dunst i3status
+    sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-ewmh-dev libx11-xcb-dev libxcb-xrm-dev dunst
     sudo apt-get install -y libconfuse-dev libyajl-dev libasound2-dev libiw-dev asciidoc libcap2-bin libpulse-dev libnl-genl-3-dev feh xautolock compton
 
     # rofi
     sudo apt-get install -y libxft-dev libxinerama-dev libpango1.0-dev
 
     wget -c https://github.com/DaveDavenport/rofi/releases/download/1.1.0/rofi-1.1.0.tar.gz
-    tar -xzvf rofi-0.15.4.tar.gz
+    tar -xzvf rofi-1.1.0.tar.gz
     cd rofi-0.15.4
 
     autoreconf -i
     ./configure
-    make && sudo make install
+    make -j4 && sudo make install
 
     if [[ ! -d ~/i3-gaps ]]; then
         git clone https://github.com/Airblader/i3 ~/i3-gaps
     fi
     cd ~/i3-gaps
-    sudo apt-get install libx11-xcb-dev
     autoreconf --force --install
     rm -rf build/
     mkdir -p build && cd build
@@ -200,7 +205,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
 
     # Install polybar
     if [[ ! -d ~/polybar ]]; then
-        git clone https://github.com/jaagr/polybar ~/polybar
+        git clone --recursive https://github.com/jaagr/polybar ~/polybar
     fi
     rm -rf ~/polybar/build
     mkdir -p ~/polybar/build
@@ -239,11 +244,9 @@ chsh -s /bin/zsh
 sudo -k
 
 files="
-.vimrc
 .zshrc
 .tmux.conf
 .tmux.conf.local
-.vim
 .i3
 .bashrc
 .bash_aliases
@@ -260,4 +263,5 @@ scripts
 .config/powerline
 "
 
+cd $dotfiles
 ./link.sh $files
