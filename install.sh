@@ -25,8 +25,7 @@ sudo apt-get install -y wicd-curses
 
 sudo -v
 
-pip install --user Flask Pillow
-pip install --user gcalcli vobject parsedatetime virtualenvwrapper
+pip install --user Flask Pillow virtualenvwrapper
 sudo -v
 
 sudo apt-get autoclean -y
@@ -227,10 +226,10 @@ sudo apt-get install -y gimp bless binwalk audacity tshark wireshark
 sudo pip install --user xortool
 sudo -v
 
-# Network hooks
-cd "$dotfiles"
-sudo cp scripts/wifi-connect /etc/network/if-up.d/wifi-connect
-sudo cp scripts/wifi-disconnect /etc/network/if-down.d/wifi-disconnect
+# # Network hooks
+# cd "$dotfiles"
+# sudo cp scripts/wifi-connect /etc/network/if-up.d/wifi-connect
+# sudo cp scripts/wifi-disconnect /etc/network/if-down.d/wifi-disconnect
 
 sudo sed -i "s/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash intel_pstate=disable\"/" /etc/default/grub
 sudo update-grub
