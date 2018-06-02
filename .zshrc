@@ -74,6 +74,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # graphical auto-complete menu
 zstyle ':completion:*' menu select
 
+# alert after command runs for longer than 15 seconds
+zstyle ':notify:*' command-complete-timeout 15
+
 # use automatic path prediction
 # $predict-on to turn on and $predict-off to turn off
 # autoload predict-off
