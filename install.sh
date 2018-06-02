@@ -203,6 +203,7 @@ if [[ $ans =~ ^[Yy]$ ]]; then
     sudo make install
     sudo -v
 
+    sudo apt-get install -y fonts-font-awesome net-tools
     # Install polybar
     if [[ ! -d ~/polybar ]]; then
         git clone --recursive https://github.com/jaagr/polybar ~/polybar
