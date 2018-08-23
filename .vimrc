@@ -31,10 +31,7 @@ try
 
     else
         " We are using vim
-        Plug 'maralla/completor.vim'
-
-        let g:completor_gocode_binary = "/home/james/Dev/go/bin/gocode"
-        " let g:completor_clang_binary = "/usr/bin/clang"
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --rust-completer --go-completer' }
 
         Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -49,25 +46,19 @@ try
     Plug 'Yggdroot/indentLine'
     Plug 'alvan/vim-closetag'
     Plug 'airblade/vim-gitgutter'
-    " Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
     Plug 'fatih/vim-go', { 'for': 'go' }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
-    Plug 'james9909/stackanswers.vim', { 'on': 'StackAnswers' }
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-    Plug 'kchmck/vim-coffee-script'
     Plug 'Konfekt/FastFold'
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'morhetz/gruvbox'
     Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
     Plug 'pearofducks/ansible-vim'
-    Plug 'Rip-Rip/clang_complete', { 'for': 'c', 'dir': '~/.vim/bundle/clang_complete', 'do': 'make install' }
-    Plug 'racer-rust/vim-racer'
     Plug 'rust-lang/rust.vim'
-    Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sleuth'
     Plug 'tpope/vim-surround'
@@ -91,10 +82,6 @@ try
     " Fix conflict with delimitmate
     let g:closetag_filenames = "*.xml,*.html,*.php"
     au FileType xml,html,htmldjango,php let b:delimitMate_matchpairs = "(:),[:],{:}"
-
-    " Instant markdown preview
-    let g:instant_markdown_autostart = 0 " Don't automatically open a preview
-    let g:instant_markdown_slow = 1 " Only update after saving
 
     " Airline
     let g:airline_powerline_fonts = 1
@@ -135,9 +122,6 @@ try
     let g:gutentags_ctags_tagfile = ".tags"
     let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules"]
 
-    " clang_complete
-    let g:clang_library_path = "/usr/lib/llvm-3.8/lib/libclang.so.1"
-
     " Get rid of conflicting whitespace errors
     hi link coffeeSpaceError NONE
 
@@ -151,10 +135,6 @@ try
     " Run :RustFmt when saving a buffer
     let g:rustfmt_autosave = 1
 
-    " Racer
-    let g:racer_cmd = "~/.cargo/bin/racer"
-    let g:racer_experimental_completer = 1
-
     " Ale
     let g:ale_lint_on_text_changed = "insert" " Run ale only in insert mode
     let g:ale_lint_on_insert_leave = 1 " Run ale when exiting insert mode
@@ -162,7 +142,7 @@ try
     let g:ale_python_flake8_args = '--ignore=E302,E305,E501'
     let g:ale_lint_delay = 500 " Lint after 500 milliseconds
 
-    let g:ale_linters = {'go': ['go build', 'gofmt'], 'cpp': ['clang', 'clangtidy']}
+    let g:ale_linters = {'go': ['go build', 'gofmt'], 'cpp': ['clang', 'clangtidy'], 'rust': ['rustc', 'cargo']}
 
     let g:ale_cpp_clang_options = '-std=c++11'
     let g:ale_cpp_clangtidy_options = '-std=c++11'
