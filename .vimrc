@@ -31,7 +31,7 @@ try
 
     else
         " We are using vim
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --rust-completer --go-completer' }
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --js-completer --rust-completer --go-completer' }
 
         Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -147,6 +147,7 @@ try
     let g:ale_cpp_clang_options = '-std=c++11'
     let g:ale_cpp_clangtidy_options = '-std=c++11'
 
+    let g:clang_library_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
     call plug#end()
 catch /:E117:/
     echom "Vim-Plug is not installed!"
@@ -158,8 +159,6 @@ augroup defaults
     autocmd!
     autocmd BufReadPost * call FollowSymLink()
     autocmd VimEnter * call AirlineInit()
-    autocmd VimEnter * call DetectEOL()
-    " autocmd FileType java call JavaConfig()
     " Restore cursor location
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
@@ -179,7 +178,6 @@ augroup end
 
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType vimwiki setlocal spell
-autocmd FileType rust nmap K <Plug>(rust-doc)
 autocmd FileType python setlocal foldenable foldmethod=syntax
 
 "}}}
@@ -192,18 +190,18 @@ set background=dark
 colorscheme gruvbox " Gruvbox runs 'syntax reset' anyways
 set cursorline " Highlight current line
 set laststatus=2 " Always show statusline on last window
-set showcmd " Shows what you are typing as a command
+set showcmd " Show commands as you type
 set t_Co=256 " Enable 256 color
-set foldmethod=marker " Folds are neat
+set foldmethod=marker
 set grepprg=grep\ -nH\ $* " Set command for :grep
-set expandtab " Tabs are spaces
-set smarttab " Enable smart tabbing
+
+set expandtab " Set tabs to spaces
 set shiftwidth=4 " Tab size for auto indent
 set shiftround " Round indent to multiple of shiftwidth when using > or <
 set tabstop=4 " A tab is 4 columns
 set softtabstop=4 " A tab is 4 spaces
-set autoindent " Autoindent
-set copyindent " Copies the indentation of the previous line
+
+set autoindent
 set number " Enable line numbers
 set wrap " Wrap lines
 set wildignore=*.class,*.swp,*.pyc,*.jar,*.cmake,*.tar.* " Ignore compiled things
@@ -214,7 +212,7 @@ set incsearch " Show search matches as you type
 set ignorecase "Ignore case when searching
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
-set colorcolumn=80 " Highlight 80th column as guideline
+set colorcolumn=80
 set completeopt=longest,menuone
 set pastetoggle=<F2> " Toggle paste mode
 set backup " Allow for a backup directory
@@ -223,8 +221,7 @@ set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
 set linebreak " Break line on word
 set timeoutlen=500 " Timeout for entering key combinations
 set synmaxcol=300 " Limit syntax highlight parsing to first 300 columns
-set hidden " Hides buffers instead of closing them, allows opening new buffers when current has unsaved changes
-set cindent " Enable C like indentation
+set hidden " Hide buffers instead of closing them
 set cinkeys-=0# " Prevent # from removing indents from a line
 set indentkeys-=0# " Prevent # from removing indents from a line
 set wildmenu " Tab-like completion similar to zsh
@@ -386,32 +383,6 @@ endif
 "}}}
 "{{{ Functions
 
-"{{{ Java plugin config
-
-function! JavaConfig()
-    " Eclim is not enabled, but javacomplete2 is installed
-    " if !exists(":PingEclim") || (!(eclim#PingEclim(0)) && isdirectory(expand("$HOME/.vim/bundle/vim-javacomplete2")))
-        let g:JavaComplete_Home = $HOME . '/.vim/bundle/vim-javacomplete2'
-        let $CLASSPATH .= '.:' . $HOME . '/.vim/bundle/vim-javacomplete2/lib/javavi/target/classes'
-        let g:JavaComplete_UseFQN = 1
-        let g:JavaComplete_ServerAutoShutdownTime = 300
-        setlocal omnifunc=javacomplete#Complete
-
-        " " Running gvim embedded within eclipse
-    " elseif eclim#PingEclim(0) && has("gui_running")
-        " set guioptions-=m " Remove menu bar
-        " set guioptions-=T " Remove toolbar
-        " set ruler " Show line/column numbers
-        " set laststatus=0 " Disable statusline
-    " elseif eclim#PingEclim(0)
-        " echom "Eclim is running"
-    " else
-        " echom "Neither eclim nor javacomplete2 is installed"
-    " endif
-endfunction
-
-"}}}
-
 "{{{ Preserve cursor position while executing a command
 function! Preserve(command)
     " preparation: save last search, and cursor position.
@@ -443,15 +414,6 @@ function! AirlineInit()
     let g:airline_section_a = airline#section#create(["mode", " ", "paste"])
     let g:airline_section_b = airline#section#create(["branch", " ", "hunks"])
     let g:airline_section_c = airline#section#create_left(["file", "readonly"])
-endfunction
-"}}}
-
-"{{{ Detect binary files
-function! DetectEOL()
-    if &endofline == 0
-        set noendofline
-        set binary
-    endif
 endfunction
 "}}}
 
