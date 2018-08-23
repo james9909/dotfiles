@@ -349,6 +349,10 @@ nnoremap <C-\> :tab split<CR>:exec("tjump ".expand("<cword>"))<CR>
 nnoremap <A-]> :vsplit <CR>:exec("tjump ".expand("<cword>"))<CR>
 
 nnoremap <Backspace> <NOP>
+
+" Better x
+noremap x "_x
+noremap X "_X
 "}}}
 "{{{ NeoVim
 if has('nvim')
