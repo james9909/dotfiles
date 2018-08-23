@@ -109,6 +109,8 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
 # Pretend that we are using Unity (for the settings)
 export XDG_CURRENT_DESKTOP=Unity
 
