@@ -45,7 +45,6 @@ try
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
     Plug 'Yggdroot/indentLine'
     Plug 'alvan/vim-closetag'
-    Plug 'airblade/vim-gitgutter'
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
     Plug 'fatih/vim-go', { 'for': 'go' }
@@ -55,6 +54,7 @@ try
     Plug 'Konfekt/FastFold'
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'machakann/vim-sandwich'
+    Plug 'mhinz/vim-signify'
     Plug 'morhetz/gruvbox'
     Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
@@ -90,12 +90,16 @@ try
     let g:airline#extensions#hunks#non_zero_only = 1
     let g:airline#extensions#virtualenv#enabled = 1
 
-    " Git Gutter
-    let g:gitgutter_sign_added = "+"
-    let g:gitgutter_sign_modified = "Δ"
-    let g:gitgutter_sign_removed = "-"
-    let g:gitgutter_sign_removed_first_line = '^'
-    let g:gitgutter_sign_modified_removed = 'Δ-'
+    " Signify
+    let g:signify_vcs_list = ['git']
+    let g:signify_realtime = 1
+    let g:signify_cursorhold_insert = 0
+
+    let g:signify_sign_add = '+'
+    let g:signify_sign_change = 'Δ'
+    let g:signify_sign_delete = '-'
+    let g:signify_sign_delete_first_line = '^'
+    let g:signify_sign_changedelete = 'Δ-'
 
     " Gundo
     let g:gundo_width = 30
