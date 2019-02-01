@@ -161,7 +161,7 @@ bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 for_window [class="^.*"] border pixel 2
 
 # Gaps
-gaps inner 15
+gaps inner 10
 smart_borders no_gaps
 
 bindsym $mod+y gaps inner current minus 6
