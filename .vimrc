@@ -53,6 +53,7 @@ try
     Plug 'junegunn/fzf.vim'
     Plug 'Konfekt/FastFold'
     Plug 'ludovicchabant/vim-gutentags'
+    Plug 'luochen1990/rainbow'
     Plug 'machakann/vim-sandwich'
     Plug 'mhinz/vim-signify'
     Plug 'morhetz/gruvbox'
@@ -152,6 +153,8 @@ try
     let g:ale_cpp_clangtidy_options = '-std=c++11'
 
     let g:clang_library_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
+
+    let g:rainbow_active = 1
     call plug#end()
 catch /:E117:/
     echom "Vim-Plug is not installed!"
