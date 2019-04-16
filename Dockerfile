@@ -1,15 +1,16 @@
 FROM ubuntu:18.04
 
 # Create test user
-RUN useradd -m -s /bin/bash tester
-RUN usermod -aG sudo tester
-RUN echo "tester   ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers
-
-COPY . /home/tester/dotfiles
-RUN chown -R tester:tester /home/tester/dotfiles
+RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* && \
+    useradd -m -s /bin/bash tester && \
+    usermod -aG sudo tester && \
+    echo "tester   ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers
 
 USER tester
 ENV HOME /home/tester
+
+COPY . /home/tester/dotfiles
+RUN chown -R tester:tester /home/tester/dotfiles
 
 WORKDIR /home/tester/dotfiles
 
