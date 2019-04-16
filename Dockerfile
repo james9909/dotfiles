@@ -13,5 +13,5 @@ ENV HOME /home/tester
 
 WORKDIR /home/tester/dotfiles
 
-RUN ./install.sh
+RUN bash install.sh
 CMD ["/bin/zsh"]
