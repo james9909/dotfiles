@@ -220,9 +220,6 @@ sudo apt-get install -y lsb-release scrot
 cd ~ && git clone https://github.com/dylanaraps/neofetch && cd neofetch && sudo make install
 sudo -v
 
-# Dropbox
-cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-
 # Misc stuff
 sudo apt-get install -y sl fortune-mod espeak cowsay
 sudo -v
