@@ -43,3 +43,6 @@ ehthumbs.db
 a.out
 *.class
 *.pyc
+
+# Tern information
+.tern-port
