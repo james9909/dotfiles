@@ -10,28 +10,20 @@ try
         let g:deoplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
         let g:deoplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
         let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-        let g:deoplete#omni#input_patterns.java = [
-                    \'[^. \t0-9]\.\w*',
-                    \'[^. \t0-9]\->\w*',
-                    \'[^. \t0-9]\::\w*',
-                    \'\s[A-Z][a-z]',
-                    \'^\s*@[A-Z][a-z]'
-                    \]
-        let g:deoplete#omni#input_patterns.javascript = [
-                    \'[^. \t0-9]\.([a-zA-Z_]\w*)?'
-                    \]
+        let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ ]
+        let g:deoplete#sources#ternjs#docs = 1
+        let g:deoplete#sources#ternjs#timeout = 1
 
         Plug 'carlitux/deoplete-ternjs'
+        Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
         Plug 'zchee/deoplete-jedi'
-
-        " Tern
-        let g:tern_request_timeout = 1
-        let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
-
     else
         " We are using vim
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --js-completer --rust-completer --go-completer' }
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --js-completer --rust-completer --go-completer --ts-completer' }
 
         Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -52,6 +44,7 @@ try
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     Plug 'Konfekt/FastFold'
+    Plug 'leafgarland/typescript-vim'
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'luochen1990/rainbow'
     Plug 'machakann/vim-sandwich'
