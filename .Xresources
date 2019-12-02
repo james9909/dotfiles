@@ -19,8 +19,8 @@ URxvt.perl-ext-common: default,clipboard,matcher
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 URxvt.iso14755: False
 
-! Open links in chrome
-URxvt.url-launcher: /usr/bin/google-chrome-stable
+! Open links in firefox
+URxvt.url-launcher: /usr/bin/firefox
 URxvt.matcher.button: 1
 
 ! hard contrast: *background: #1d2021
