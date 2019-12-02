@@ -55,6 +55,7 @@ try
     Plug 'pearofducks/ansible-vim'
     Plug 'rust-lang/rust.vim'
     Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-sleuth'
     Plug 'vimwiki/vimwiki'
     Plug 'w0rp/ale'
