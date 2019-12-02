@@ -181,6 +181,7 @@ autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType vimwiki setlocal spell
 autocmd FileType python setlocal foldenable foldmethod=syntax
 autocmd FileType asm setlocal noexpandtab softtabstop=8 tabstop=8
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "}}}
 "{{{Misc Settings
