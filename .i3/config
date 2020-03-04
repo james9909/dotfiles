@@ -23,11 +23,28 @@ font pango:DejaVu Sans Mono 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-# class                 border  backgr. text    indicator
-client.focused          #676d3d #676d3d #ebdbb2 #676d3d
-client.unfocused        #323232 #323232 #ebdbb2 #323232
-client.focused_inactive #323232 #333333 #ebdbb2 #323232
-client.urgent           #383a3b #383a3b #ee0000 #383a3b
+# # class                 border  backgr. text    indicator
+# client.focused          #676d3d #676d3d #ebdbb2 #676d3d
+# client.unfocused        #323232 #323232 #ebdbb2 #323232
+# client.focused_inactive #323232 #333333 #ebdbb2 #323232
+# client.urgent           #383a3b #383a3b #ee0000 #383a3b
+
+# Set colors from Xresources
+# Change 'color7' and 'color2' to whatever colors you want i3 to use
+# from the generated scheme.
+# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+# it fails to get colors from Xresources.
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -43,7 +60,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec "rofi -modi combi -show combi -combi-modi drun,run"
+bindsym $mod+d exec sh ~/scripts/rofi.sh
 # bindsym $mod+d exec i3-dmenu-desktop --dmenu='rofi -dmenu -p "run: "'
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -53,11 +70,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id indicator-cpufreq
 
 # Transparency
-exec --no-startup-id compton
-
-# Dunst
-exec killall -q notify-osd
-exec --no-startup-id dunst
+exec_always --no-startup-id "killall compton; compton"
 
 # Lock
 # exec --no-startup-id xautolock -time 10 -locker "/home/james/.i3/lock"
@@ -209,7 +222,6 @@ for_window [class="URxvt"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="About"] floating enable
 
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-exec feh --bg-fill ~/Pictures/Wallpapers/kh3.png
-exec_always --no-startup-id ~/.i3/polybar.sh
+# exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wal.jpg && ~/.local/bin/wal -R && ~/.config/polybar/launch_polybar.sh && ~/.config/dunst/launch_dunst.sh
 exec xrandr --dpi 144

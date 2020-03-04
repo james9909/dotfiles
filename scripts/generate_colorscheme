@@ -1,0 +1,8 @@
+#!/bin/bash
+
+name="$HOME/Pictures/Wallpapers/wal.jpg"
+
+rm -f ~/.cache/wal/schemes/*
+curl -L "https://source.unsplash.com/random/2650x1440" > "$name"
+/home/james/.local/bin/wal -i "$name" -n &>> /tmp/out
+feh --bg-fill "$name"

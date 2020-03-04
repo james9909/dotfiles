@@ -34,7 +34,31 @@ DISABLE_UNTRACKED_FILES_DIRTY="true" # Mark untracked files under VCS as dirty
 
 plugins=(git zsh-syntax-highlighting tmux notify) # Plugins
 
-# User configuration
+# User configuration {{{
+
+# Aliases {{{
+# import aliases from bash
+if [[ -e $HOME/.bash_aliases ]]; then
+    . $HOME/.bash_aliases
+fi
+# import zsh-specific aliases
+if [[ -e $HOME/.zsh_aliases ]]; then
+    . $HOME/.zsh_aliases
+fi
+# }}}
+
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+(cat ~/.cache/wal/sequences &)
+
+# Alternative (blocks terminal for 0-3ms)
+cat ~/.cache/wal/sequences
+
+# To add support for TTYs this line can be optionally added.
+source ~/.cache/wal/colors-tty.sh
+
+# }}}
 
 source $ZSH/oh-my-zsh.sh
 
@@ -143,17 +167,6 @@ fi
 if [ -f /home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc ]; then
   source '/home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc'
 fi
-
-# Aliases {{{
-# import aliases from bash
-if [[ -e $HOME/.bash_aliases ]]; then
-    . $HOME/.bash_aliases
-fi
-# import zsh-specific aliases
-if [[ -e $HOME/.zsh_aliases ]]; then
-    . $HOME/.zsh_aliases
-fi
-# }}}
 
 # added by travis gem
 [ -f /home/james/.travis/travis.sh ] && source /home/james/.travis/travis.sh
