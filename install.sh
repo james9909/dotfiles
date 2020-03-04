@@ -259,6 +259,7 @@ scripts
 .config/ranger
 .config/dunst
 .config/powerline
+.config/wal
 "
 
 cd $dotfiles
