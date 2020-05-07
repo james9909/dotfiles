@@ -46,3 +46,7 @@ a.out
 
 # Tern information
 .tern-port
+
+.gdb_history
+.R_history
+peda-session-*.txt
