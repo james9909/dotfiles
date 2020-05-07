@@ -18,25 +18,25 @@ try
         let g:jedi#smart_auto_mappings = 0 " Remove automatic addition of 'import' when doing 'from module<space>'
         let g:jedi#completions_enabled = 0
     endif
-    Plug 'Raimondi/delimitMate'
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
     Plug 'Yggdroot/indentLine'
     Plug 'alvan/vim-closetag'
+    Plug 'alx741/vim-hindent'
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
+    Plug 'gruvbox-community/gruvbox'
     Plug 'fatih/vim-go', { 'for': 'go' }
+    Plug 'HerringtonDarkholme/yats.vim'
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
+    Plug 'jiangmiao/auto-pairs'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     Plug 'Konfekt/FastFold'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'ludovicchabant/vim-gutentags'
     Plug 'luochen1990/rainbow'
     Plug 'machakann/vim-sandwich'
+    Plug 'MaxMEllon/vim-jsx-pretty'
     Plug 'mhinz/vim-signify'
-    Plug 'morhetz/gruvbox'
-    Plug 'mxw/vim-jsx'
-    Plug 'pangloss/vim-javascript'
+    Plug 'neovimhaskell/haskell-vim'
     Plug 'pearofducks/ansible-vim'
     Plug 'rust-lang/rust.vim'
     Plug 'tpope/vim-commentary'
@@ -130,6 +130,10 @@ try
     " let g:clang_library_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
 
     let g:rainbow_active = 1
+    let g:rainbow_conf = {
+        \   'ctermfgs': ['white', 'lightgreen', 'lightblue', 'lightmagenta'],
+        \   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/'],
+      \}
     call plug#end()
 catch /:E117:/
     echom "Vim-Plug is not installed!"
