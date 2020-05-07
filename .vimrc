@@ -216,6 +216,9 @@ set indentkeys-=0# " Prevent # from removing indents from a line
 set wildmenu " Tab-like completion similar to zsh
 set ttyfast " Smoother redraw
 set formatoptions+=j " Remove comments when merging
+set signcolumn=yes " Always show the signcolumn, otherwise it would shift the text each time
+set shortmess+=c " Don't pass messages to |ins-completion-menu|.
+set updatetime=300
 
 " Invisible characters
 set list
@@ -386,6 +389,8 @@ if has('nvim')
 
     set inccommand=split
 
+    " Detect if file contents have changed when re-entering
+    autocmd FocusGained * checktime
 endif
 "}}}
 "{{{ Functions

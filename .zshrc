@@ -21,10 +21,11 @@ setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
 setopt COMPLETE_IN_WORD
 setopt ZLE
-setopt VI
 unsetopt EQUALS
 unsetopt correct_all
 unsetopt correct
+
+bindkey '^[[Z' reverse-menu-complete
 
 ZSH_THEME="oh-my-zsh" # Theme to be used
 
@@ -119,7 +120,7 @@ ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 
 # Tmux
-export ZSH_TMUX_AUTOSTART="true"
+export ZSH_TMUX_AUTOSTART="false"
 export ZSH_TMUX_AUTOCONNECT="true"
 
 . /etc/zsh_command_not_found # Bash-like command not found
@@ -132,6 +133,7 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/snap/bin:$PATH"
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
