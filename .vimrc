@@ -55,6 +55,7 @@ try
                     \ --ignore _undo
                     \ --ignore _swap
                     \ --ignore .cache
+                    \ --ignore .stack-work
                     \ -g ""'
     endif
     let g:fzf_layout = { 'down': '~40%' }
