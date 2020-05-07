@@ -4,23 +4,8 @@ try
 
     if has('nvim')
         " We are using neovim
-
-        Plug 'Shougo/deoplete.nvim'
-        let g:deoplete#enable_at_startup = 1 " Enable deoplete
-        let g:deoplete#enable_smart_case = 1 " Ignore case unless a capital letter is included
-        let g:deoplete#enable_fuzzy_completion = 0 " Disable fuzzy completion
-        let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-        let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx',
-                \ ]
-        let g:deoplete#sources#ternjs#docs = 1
-        let g:deoplete#sources#ternjs#timeout = 1
-
-        Plug 'carlitux/deoplete-ternjs'
-        Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
         Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
-        Plug 'zchee/deoplete-jedi'
     else
         " We are using vim
         Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --js-completer --rust-completer --go-completer --ts-completer' }
@@ -117,10 +102,6 @@ try
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
 
-    " Gutentags
-    let g:gutentags_ctags_tagfile = ".tags"
-    let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules"]
-
     " Get rid of conflicting whitespace errors
     hi link coffeeSpaceError NONE
 
@@ -146,7 +127,7 @@ try
     let g:ale_cpp_clang_options = '-std=c++11'
     let g:ale_cpp_clangtidy_options = '-std=c++11'
 
-    let g:clang_library_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
+    " let g:clang_library_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
 
     let g:rainbow_active = 1
     call plug#end()
@@ -289,8 +270,26 @@ let mapleader = "\<Space>"
 
 nnoremap <expr> i SmartInsertModeEnter()
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>
@@ -345,8 +344,8 @@ nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>c :ALELint<CR>
 
 " Tag navigation
-nnoremap <C-\> :tab split<CR>:exec("tjump ".expand("<cword>"))<CR>
-nnoremap <A-]> :vsplit <CR>:exec("tjump ".expand("<cword>"))<CR>
+" nnoremap <C-\> :tab split<CR>:exec("tjump ".expand("<cword>"))<CR>
+" nnoremap <A-]> :vsplit <CR>:exec("tjump ".expand("<cword>"))<CR>
 
 nnoremap <Backspace> <NOP>
 
@@ -450,6 +449,21 @@ function! ToggleVExplorer()
         let t:expl_buf_num = bufnr("%")
         exe "vertical resize 30"
     endif
+endfunction
+"}}}
+
+"{{{ coc functions
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
 "}}}
 

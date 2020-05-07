@@ -1,0 +1,5 @@
+{
+    "python.jediEnabled": false,
+    "suggest.autoTrigger": "trigger",
+    "tsserver.npm": "/usr/local/bin/npm",
+}
