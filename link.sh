@@ -26,6 +26,10 @@ function link_file() {
             echo -e "${YELLOW}Backing up $HOME/$1...${RESET}"
             run_with_status mv "$HOME/$1" "$BACKUP/"
         fi
+        base=$(dirname "$HOME/$1")
+        if [[ ! -d $base ]]; then
+            mkdir -p "$base"
+        fi
         echo -e "${YELLOW}Creating symlink: $PWD/$1 -> $HOME/$1"
         run_with_status ln -s "$PWD/$1" "$HOME/$1"
     else

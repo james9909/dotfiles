@@ -260,6 +260,8 @@ scripts
 .config/dunst
 .config/powerline
 .config/wal
+.config/spicetify/config.ini
+.config/spicetify/Themes
 .p10k.zsh
 "
 
