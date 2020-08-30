@@ -97,7 +97,7 @@ export UPDATE_ZSH_DAYS=2
 alias zshreload="source ~/.zshrc"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # FZF
-export FZF_DEFAULT_COMMAND='ag -i --nocolor --nogroup --hidden --ignore .git --ignore .DS_Store --ignore "**/*.pyc" --ignore "**/*.class" --ignore _backup --ignore _undo --ignore _swap --ignore .cache -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden --ignore-file ~/.gitignore_global -g "!{node_modules,.git,.cache}" --follow'
 
 # use cache when auto-completing
 zstyle ':completion::complete:*' use-cache 1

@@ -45,19 +45,16 @@ try
     Plug 'vimwiki/vimwiki'
     Plug 'w0rp/ale'
 
-    if executable('ag')
-        let $FZF_DEFAULT_COMMAND = 'ag -i --nocolor --nogroup --hidden
-                    \ --ignore .git
-                    \ --ignore .DS_Store
-                    \ --ignore "**/*.pyc"
-                    \ --ignore "**/*.class"
-                    \ --ignore _backup
-                    \ --ignore _undo
-                    \ --ignore _swap
-                    \ --ignore .cache
-                    \ --ignore .stack-work
-                    \ -g ""'
+    if executable('rg')
+        let $FZF_DEFAULT_COMMAND = 'rg
+              \ --files
+              \ --no-ignore-vcs
+              \ --hidden
+              \ --ignore-file ~/.gitignore_global
+              \ -g "!{node_modules,.git,.cache}"
+              \ --follow'
     endif
+
     let g:fzf_layout = { 'down': '~40%' }
 
     " Fix conflict with delimitmate
