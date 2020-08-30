@@ -2,4 +2,19 @@
     "python.jediEnabled": false,
     "suggest.autoTrigger": "trigger",
     "tsserver.npm": "/usr/local/bin/npm",
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp"],
+            "rootPatterns": [".ccls-root", "compile_commands.json"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": ".ccls-cache"
+                },
+                "client": {
+                    "snippetSupport": true
+                }
+            }
+        }
+    }
 }
