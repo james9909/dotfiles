@@ -59,7 +59,7 @@ if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
     git clone https://github.com/marzocchi/zsh-notify.git ~/.oh-my-zsh/custom/plugins/notify
-    ln -s "$dotfiles/oh-my-zsh.zsh-theme" "~/.oh-my-zsh/themes/oh-my-zsh.zsh-theme"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
 fi
 
 sudo apt-get install -y ranger
@@ -260,6 +260,7 @@ scripts
 .config/dunst
 .config/powerline
 .config/wal
+.p10k.zsh
 "
 
 cd $dotfiles

@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -27,7 +34,7 @@ unsetopt correct
 
 bindkey '^[[Z' reverse-menu-complete
 
-ZSH_THEME="oh-my-zsh" # Theme to be used
+ZSH_THEME="powerlevel10k/powerlevel10k" # Theme to be used
 
 COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
 
@@ -99,8 +106,10 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # graphical auto-complete menu
 zstyle ':completion:*' menu select
 
-# alert after command runs for longer than 15 seconds
-zstyle ':notify:*' command-complete-timeout 15
+# alert after command runs for longer than 5 seconds
+zstyle ':notify:*' command-complete-timeout 5
+# Use the time elapsed even when the command fails
+zstyle ':notify:*' always-notify-on-failure no
 
 # use automatic path prediction
 # $predict-on to turn on and $predict-off to turn off
@@ -172,3 +181,6 @@ fi
 
 # added by travis gem
 [ -f /home/james/.travis/travis.sh ] && source /home/james/.travis/travis.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
