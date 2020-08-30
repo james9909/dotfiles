@@ -50,3 +50,6 @@ a.out
 .gdb_history
 .R_history
 peda-session-*.txt
+
+.stack-work/
+.mypy_cache/
