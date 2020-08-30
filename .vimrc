@@ -21,12 +21,12 @@ try
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
     Plug 'Yggdroot/indentLine'
     Plug 'alvan/vim-closetag'
-    Plug 'alx741/vim-hindent'
+    Plug 'alx741/vim-hindent', { 'for': 'haskell' }
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
     Plug 'gruvbox-community/gruvbox'
     Plug 'fatih/vim-go', { 'for': 'go' }
-    Plug 'HerringtonDarkholme/yats.vim'
+    Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript', 'javascript', 'typescriptreact', 'javascriptreact'] }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
     Plug 'jiangmiao/auto-pairs'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -34,11 +34,11 @@ try
     Plug 'Konfekt/FastFold'
     Plug 'luochen1990/rainbow'
     Plug 'machakann/vim-sandwich'
-    Plug 'MaxMEllon/vim-jsx-pretty'
+    Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['typescript', 'javascript', 'typescriptreact', 'javascriptreact'] }
     Plug 'mhinz/vim-signify'
-    Plug 'neovimhaskell/haskell-vim'
-    Plug 'pearofducks/ansible-vim'
-    Plug 'rust-lang/rust.vim'
+    Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+    Plug 'pearofducks/ansible-vim', { 'for': 'yaml' }
+    Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-sleuth'
