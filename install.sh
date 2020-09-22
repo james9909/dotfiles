@@ -24,7 +24,6 @@ sudo apt-get install -y mpd ncmpcpp irssi
 sudo apt-get install -y wicd-curses
 
 sudo apt-get -y install npm nodejs
-sudo npm install -g npm diff-so-fancy
 
 sudo -v
 
@@ -69,6 +68,26 @@ sudo apt-get install -y ffmpeg id3v2
 sudo curl https://yt-dl.org/downloads/2015.09.03/youtube-dl -o /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
 sudo -v
+
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+. ~/.cargo/env
+rustup override set stable
+rustup update stable
+cargo install clippy
+sudo apt-get install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3
+git clone https://github.com/alacritty/alacritty.git
+cd alacritty
+cargo build --release
+sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
+sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+sudo desktop-file-install extra/linux/Alacritty.desktop
+sudo update-desktop-database
+sudo mkdir -p /usr/local/share/man/man1
+gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
+sudo cp target/release/alacritty /usr/local/bin/alacritty
+cd $dotfiles
 
 echo -n "Setup ssh tools? [y/n] "
 read ans
@@ -262,6 +281,7 @@ scripts
 .config/wal
 .config/spicetify/config.ini
 .config/spicetify/Themes
+.config/alacritty/
 .p10k.zsh
 "
 
