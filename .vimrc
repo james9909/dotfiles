@@ -24,7 +24,6 @@ try
     Plug 'alx741/vim-hindent', { 'for': 'haskell' }
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
-    Plug 'gruvbox-community/gruvbox'
     Plug 'fatih/vim-go', { 'for': 'go' }
     Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript', 'javascript', 'typescriptreact', 'javascriptreact'] }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
@@ -40,6 +39,7 @@ try
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'pearofducks/ansible-vim', { 'for': 'yaml' }
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+    Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-sleuth'
@@ -133,6 +133,9 @@ try
         \   'ctermfgs': ['white', 'lightgreen', 'lightblue', 'lightmagenta'],
         \   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/'],
       \}
+
+    let g:gruvbox_material_background = 'medium'
+
     call plug#end()
 
     if has("nvim")
@@ -149,43 +152,15 @@ catch /:E117:/
     echom "Vim-Plug is not installed!"
 endtry
 "}}}
-"{{{Auto Commands
-
-augroup defaults
-    autocmd!
-    autocmd BufReadPost * call FollowSymLink()
-    autocmd VimEnter * call AirlineInit()
-    " Restore cursor location
-    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-    autocmd FileType * set formatoptions-=o " Override ftplugins
-augroup END
-
-" Automagically remove any trailing whitespace upon saving
-autocmd BufWrite * if ! &bin | :call Preserve('silent! %s/\s\+$//ge') | endif
-
-augroup whitespace
-    autocmd BufWinEnter * match ErrorMsg /\s\+$/
-    " Match whitespace except when typing
-    autocmd InsertEnter * match ErrorMsg /\s\+\%#\@<!$/
-    autocmd InsertLeave * match ErrorMsg /\s\+$/
-    autocmd BufWinLeave * call clearmatches()
-augroup end
-
-autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType vimwiki setlocal spell
-autocmd FileType python setlocal foldenable foldmethod=syntax
-autocmd FileType asm setlocal noexpandtab softtabstop=8 tabstop=8
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-"}}}
 "{{{Misc Settings
+if has('termguicolors')
+  set termguicolors
+endif
 filetype off " Clear filetype
 filetype plugin indent on " Enable filetype-specific indentation and plugins
 syntax on " Enable syntax highlighting
-let g:gruvbox_italic=1 " Enable italics
 set background=dark
-colorscheme gruvbox " Gruvbox runs 'syntax reset' anyways
+colorscheme gruvbox-material " Gruvbox runs 'syntax reset' anyways
 set cursorline " Highlight current line
 set laststatus=2 " Always show statusline on last window
 set showcmd " Show commands as you type
@@ -485,5 +460,39 @@ function! s:show_documentation()
   endif
 endfunction
 "}}}
+
+"}}}
+"{{{Auto Commands
+
+augroup defaults
+    autocmd!
+    autocmd BufReadPost * call FollowSymLink()
+    autocmd VimEnter * call AirlineInit()
+    " Restore cursor location
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+    autocmd FileType * set formatoptions-=o " Override ftplugins
+augroup END
+
+" Automagically remove any trailing whitespace upon saving
+autocmd BufWrite * if ! &bin | :call Preserve('silent! %s/\s\+$//ge') | endif
+
+augroup whitespace
+    let s:configuration = gruvbox_material#get_configuration()
+    let s:palette = gruvbox_material#get_palette(s:configuration.background, s:configuration.palette)
+    execute 'highlight ExtraWhitespace ctermbg=' . s:palette.bg_red[1] . ' guibg=' . s:palette.bg_red[0]
+
+    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+    " Match whitespace except when typing
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd BufWinLeave * call clearmatches()
+augroup end
+
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType vimwiki setlocal spell
+autocmd FileType python setlocal foldenable foldmethod=syntax
+autocmd FileType asm setlocal noexpandtab softtabstop=8 tabstop=8
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "}}}
