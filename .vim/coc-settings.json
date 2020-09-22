@@ -1,5 +1,6 @@
 {
     "python.jediEnabled": false,
+    "python.linting.mypyEnabled": true,
     "suggest.autoTrigger": "trigger",
     "tsserver.npm": "/usr/local/bin/npm",
     "languageserver": {
