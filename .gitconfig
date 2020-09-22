@@ -18,7 +18,7 @@
     autocrlf = false
     editor = vim
     excludesfile = /home/james/.gitignore_global
-    pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta
 
 [diff]
     algorithm = patience
@@ -39,3 +39,8 @@
     stripLeadingSymbols = false
 [pull]
     rebase = true
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    features = line-numbers decorations
+    whitespace-error-style = 22 reverse

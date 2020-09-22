@@ -75,6 +75,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup override set stable
 rustup update stable
 cargo install clippy
+cargo install rustfmt
 sudo apt-get install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3
 git clone https://github.com/alacritty/alacritty.git
 cd alacritty
@@ -88,6 +89,11 @@ sudo mkdir -p /usr/local/share/man/man1
 gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
 sudo cp target/release/alacritty /usr/local/bin/alacritty
 cd $dotfiles
+
+curl -O https://github.com/dandavison/delta/releases/download/0.4.1/delta-0.4.1-x86_64-unknown-linux-musl.tar.gz
+tar -xzvf delta-0.4.1-x86_64-unknown-linux-musl.tar.gz
+sudo cp delta-0.4.1-x86_64-unknown-linux-musl /usr/local/bin
+rm -rf delta-0.4.1-x86_64-unknown-linux-musl
 
 echo -n "Setup ssh tools? [y/n] "
 read ans
