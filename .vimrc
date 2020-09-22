@@ -37,6 +37,7 @@ try
     Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['typescript', 'javascript', 'typescriptreact', 'javascriptreact'] }
     Plug 'mhinz/vim-signify'
     Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+    Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'pearofducks/ansible-vim', { 'for': 'yaml' }
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     Plug 'tpope/vim-commentary'
@@ -133,6 +134,17 @@ try
         \   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/'],
       \}
     call plug#end()
+
+    if has("nvim")
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"c", "cpp", "rust", "java", "javascript", "go", "bash", "toml", "yaml", "html", "typescript" },
+  highlight = {
+    enable = true,
+  },
+}
+EOF
+    endif
 catch /:E117:/
     echom "Vim-Plug is not installed!"
 endtry
