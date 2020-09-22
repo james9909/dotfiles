@@ -41,7 +41,7 @@ dpi = ${xrdb:Xft.dpi:-1}
 
 modules-left = i3
 modules-center = title
-modules-right = volume cpu wlan battery date
+modules-right = volume cpu wlan eth battery date
 
 tray-position = right
 tray-padding = 0
@@ -196,10 +196,10 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = br-78cc4f357e82
+interface = enx00e04c689ad6
 interval = 3.0
 
-format-connected-underline = #55aa55
+; format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
