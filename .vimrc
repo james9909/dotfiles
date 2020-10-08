@@ -136,6 +136,8 @@ try
 
     let g:gruvbox_material_background = 'medium'
 
+    let g:AutoPairsMultilineClose = 0
+
     call plug#end()
 
     if has("nvim")
