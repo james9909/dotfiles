@@ -16,7 +16,7 @@
 
 [core]
     autocrlf = false
-    editor = vim
+    editor = nvim
     excludesfile = /home/james/.gitignore_global
     pager = delta
 
