@@ -53,3 +53,7 @@ peda-session-*.txt
 
 .stack-work/
 .mypy_cache/
+.ccls-cache/
+
+# Rust
+target/
