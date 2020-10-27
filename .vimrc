@@ -47,13 +47,13 @@ try
     Plug 'w0rp/ale'
 
     if executable('rg')
-        let $FZF_DEFAULT_COMMAND = 'rg
+        let $FZF_DEFAULT_COMMAND = "rg
               \ --files
               \ --no-ignore-vcs
               \ --hidden
               \ --ignore-file ~/.gitignore_global
-              \ -g "!{node_modules,.git,.cache}"
-              \ --follow'
+              \ -g '!{node_modules,.git,.cache}'
+              \ --follow"
     endif
 
     let g:fzf_layout = { 'down': '~40%' }
