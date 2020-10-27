@@ -37,13 +37,14 @@ try
     Plug 'mhinz/vim-signify'
     Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
     Plug 'nvim-treesitter/nvim-treesitter'
-    Plug 'pearofducks/ansible-vim', { 'for': 'yaml' }
+    Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-sleuth'
     Plug 'w0rp/ale'
+    Plug 'plasticboy/vim-markdown'
 
     if executable('rg')
         let $FZF_DEFAULT_COMMAND = "rg
