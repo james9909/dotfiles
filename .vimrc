@@ -43,7 +43,6 @@ try
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-sleuth'
-    Plug 'vimwiki/vimwiki'
     Plug 'w0rp/ale'
 
     if executable('rg')
@@ -89,10 +88,6 @@ try
     let g:delimitMate_expand_inside_quotes = 1
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_nesting_quotes = ['"', '`', '"']
-
-    " Vim wiki
-    let g:vimwiki_list = [{'path':'~/Documents/Google Drive/School/Notes', 'path_html':'~/Documents/Google Drive/School/Notes/export/html/'}]
-    let g:vimwiki_folding='expr'
 
     " MatchTagAlways
     let g:mta_use_match_paren_group = 1
@@ -492,7 +487,6 @@ augroup whitespace
 augroup end
 
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType vimwiki setlocal spell
 autocmd FileType python setlocal foldenable foldmethod=syntax
 autocmd FileType asm setlocal noexpandtab softtabstop=8 tabstop=8
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
