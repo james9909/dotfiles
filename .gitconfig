@@ -31,7 +31,7 @@
     enabled = true
 
 [push]
-    default = simple
+	default = current
 [commit]
     gpgsign = true
 [diff-so-fancy]
@@ -44,3 +44,10 @@
 [delta]
     features = line-numbers decorations
     whitespace-error-style = 22 reverse
+[credential]
+	helper = cache
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
