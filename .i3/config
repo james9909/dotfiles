@@ -76,7 +76,7 @@ exec_always --no-startup-id "killall compton; compton"
 # exec --no-startup-id xautolock -time 10 -locker "/home/james/.i3/lock"
 
 # # lemonbar
-# exec --no-startup-id conky -c ~/.i3/lemonbar/empty_conky
+# exec --no-startup-id conky -c ~/.i3/lemonbar/empty_conKy
 # exec --no-startup-id ~/.i3/lemonbar/lemonbar.sh
 
 # change focus
@@ -224,4 +224,4 @@ for_window [window_role="About"] floating enable
 
 # exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wal.jpg && ~/.local/bin/wal -R && ~/.config/polybar/launch_polybar.sh && ~/.config/dunst/launch_dunst.sh
-exec xrandr --dpi 144
+exec xrandr --output HDMI1 --auto --right-of eDP1 && xrandr --dpi 144
