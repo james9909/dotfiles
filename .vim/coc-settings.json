@@ -3,6 +3,8 @@
     "python.linting.mypyEnabled": true,
     "suggest.autoTrigger": "trigger",
     "tsserver.npm": "/usr/local/bin/npm",
+    "rust-analyzer.inlayHints.chainingHint": false,
+    "rust-analyzer.inlayHints.enable": false,
     "languageserver": {
         "ccls": {
             "command": "ccls",
