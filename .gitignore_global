@@ -21,7 +21,7 @@
 *.dylib
 
 # Text Backup Files #
-*.s[a-w][a-z]
+*.sw[a-z]
 *~
 \#*#
 .\#*
