@@ -482,7 +482,7 @@ autocmd BufWrite * if ! &bin | :call Preserve('silent! %s/\s\+$//ge') | endif
 
 augroup whitespace
     let s:configuration = gruvbox_material#get_configuration()
-    let s:palette = gruvbox_material#get_palette(s:configuration.background, s:configuration.palette)
+    let s:palette = gruvbox_material#get_palette(s:configuration.background, s:configuration.foreground, s:configuration.colors_override)
     execute 'highlight ExtraWhitespace ctermbg=' . s:palette.bg_red[1] . ' guibg=' . s:palette.bg_red[0]
 
     autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
