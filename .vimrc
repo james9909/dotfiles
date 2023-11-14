@@ -2,28 +2,15 @@
 try
     call plug#begin('~/.vim/bundle')
 
-    if has('nvim')
-        " We are using neovim
-        Plug 'neoclide/coc.nvim', {'branch': 'release'}
-        Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
-    else
-        " We are using vim
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --js-completer --rust-completer --go-completer --ts-completer' }
-
-        Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-        Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
-
-        " Jedi-vim
-        let g:jedi#popup_select_first = 0
-        let g:jedi#smart_auto_mappings = 0 " Remove automatic addition of 'import' when doing 'from module<space>'
-        let g:jedi#completions_enabled = 0
-    endif
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'simnalamburt/vim-mundo', { 'on': 'GundoToggle' }
     Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
     Plug 'Yggdroot/indentLine'
     Plug 'alvan/vim-closetag'
     Plug 'alx741/vim-hindent', { 'for': 'haskell' }
     Plug 'bling/vim-airline'
     Plug 'gioele/vim-autoswap'
+    Plug 'github/copilot.vim'
     Plug 'fatih/vim-go', { 'for': 'go' }
     Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript', 'javascript', 'typescriptreact', 'javascriptreact'] }
     Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
@@ -56,11 +43,8 @@ try
               \ --follow"
     endif
 
-    let g:fzf_layout = { 'down': '~40%' }
-
-    " Fix conflict with delimitmate
-    let g:closetag_filenames = "*.xml,*.html,*.php"
-    au FileType xml,html,htmldjango,php let b:delimitMate_matchpairs = "(:),[:],{:}"
+    let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+    let g:fzf_buffers_jump = 1
 
     " Airline
     let g:airline_powerline_fonts = 1
@@ -71,7 +55,7 @@ try
 
     " Signify
     let g:signify_vcs_list = ['git']
-    let g:signify_realtime = 1
+    let g:signify_realtime = 0
     let g:signify_cursorhold_insert = 0
 
     let g:signify_sign_add = '+'
@@ -80,10 +64,10 @@ try
     let g:signify_sign_delete_first_line = '^'
     let g:signify_sign_changedelete = 'Δ-'
 
-    " Gundo
-    let g:gundo_width = 30
-    let g:gundo_preview_height = 15
-    let g:gundo_preview_bottom = 1
+    " Mundo
+    let g:mundo_width = 30
+    let g:mundo_preview_height = 15
+    let g:mundo_preview_bottom = 1
 
     " DelimitMate
     let g:delimitMate_expand_inside_quotes = 1
@@ -97,12 +81,15 @@ try
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
 
-    " Get rid of conflicting whitespace errors
-    hi link coffeeSpaceError NONE
-
     " Disable errors for the fmt command
     let g:go_fmt_fail_silently = 1
+    let g:go_code_completion_enabled = 0
+    let g:go_fmt_autosave = 0
+    let g:go_imports_autosave = 0
     let g:go_fmt_command = "goimports"
+    let g:go_def_mapping_enabled = 0
+    let g:go_gopls_enabled = "false"
+    let g:go_doc_keywordprg_enabled = 0
 
     " Allow JSX syntax highlighting in .js files
     let g:jsx_ext_required = 0
@@ -117,12 +104,7 @@ try
     let g:ale_python_flake8_args = '--ignore=E302,E305,E501'
     let g:ale_lint_delay = 500 " Lint after 500 milliseconds
 
-    let g:ale_linters = {'go': ['go build', 'gofmt'], 'cpp': ['clang', 'clangtidy'], 'rust': [], 'c': ['ccls'], 'python': [], 'java': []}
-
-    let g:ale_cpp_clang_options = '-std=c++11'
-    let g:ale_cpp_clangtidy_options = '-std=c++11'
-
-    " let g:clang_library_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
+    let g:ale_linters = {'go': ['revive'], 'rust': [], 'python': []}
 
     let g:rainbow_active = 1
     let g:rainbow_conf = {
@@ -139,18 +121,19 @@ try
     let g:vim_markdown_conceal_code_blocks = 0
     let g:vim_markdown_folding_disabled = 1
 
+    let g:copilot_assume_mapped = v:true
+    let g:copilot_no_tab_map = 1
+
     call plug#end()
 
-    if has("nvim")
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"c", "cpp", "rust", "java", "javascript", "go", "bash", "toml", "yaml", "html", "typescript" },
+  ensure_installed = {"rust", "javascript", "go", "bash", "toml", "yaml", "html", "typescript" },
   highlight = {
     enable = true,
   },
 }
 EOF
-    endif
 catch /:E117:/
     echom "Vim-Plug is not installed!"
 endtry
@@ -188,7 +171,7 @@ set incsearch " Show search matches as you type
 set ignorecase "Ignore case when searching
 set smartcase " When using an upper case letter in search, search becomes case-sensitive
 set lazyredraw " Don't redraw when executing macros
-set colorcolumn=80
+set colorcolumn=200
 set completeopt=longest,menuone
 set pastetoggle=<F2> " Toggle paste mode
 set backup " Allow for a backup directory
@@ -206,6 +189,7 @@ set formatoptions+=j " Remove comments when merging
 set signcolumn=yes " Always show the signcolumn, otherwise it would shift the text each time
 set shortmess+=c " Don't pass messages to |ins-completion-menu|.
 set updatetime=300
+set pyx=3
 
 " Invisible characters
 set list
@@ -265,26 +249,37 @@ let mapleader = "\<Space>"
 
 nnoremap <expr> i SmartInsertModeEnter()
 
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>
@@ -307,8 +302,6 @@ nnoremap <Leader>v :vsplit<CR>
 
 " Tab Mappings
 nnoremap <silent> <Leader>t :tabnew<CR>
-nnoremap <silent> <Tab> gt
-nnoremap <silent> <S-Tab> gT
 
 " Better k and j movement
 nnoremap <silent> k gk
@@ -326,8 +319,8 @@ nnoremap <C-j> 3j
 vnoremap <C-k> 3k
 vnoremap <C-j> 3j
 
-" Gundo
-nnoremap <Leader>u :GundoToggle<CR>
+" Mundo
+nnoremap <Leader>u :MundoToggle<CR>
 
 " View highlight group under cursor
 nnoremap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -347,6 +340,13 @@ nnoremap <Backspace> <NOP>
 " Better x
 noremap x "_x
 noremap X "_X
+
+nnoremap <Leader>f :Rg<CR>
+
+inoremap <silent><C-J> <C-R>=copilot#Accept("")<CR>
+inoremap <silent><C-H> <C-R>=copilot#Previous()<CR>
+inoremap <silent><C-K> <C-R>=copilot#Next()<CR>
+
 "}}}
 "{{{ NeoVim
 if has('nvim')
@@ -450,19 +450,24 @@ endfunction
 "}}}
 
 "{{{ coc functions
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    call feedkeys('K', 'in')
   endif
 endfunction
 "}}}
+
+command! -bang -nargs=* GGrep
+    \ call fzf#vim#grep(
+    \ 'git grep --line-number -- '.shellescape(<q-args), 0,
+    \ fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 "}}}
 "{{{Auto Commands
@@ -487,14 +492,13 @@ augroup whitespace
 
     autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
     " Match whitespace except when typing
-    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ErrorMsg /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ErrorMsg /\s\+$/
     autocmd BufWinLeave * call clearmatches()
 augroup end
 
-autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType python setlocal foldenable foldmethod=syntax
-autocmd FileType asm setlocal noexpandtab softtabstop=8 tabstop=8
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType go setlocal listchars+=tab:\ \  "Trailing space
 
 "}}}
