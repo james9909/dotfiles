@@ -22,7 +22,6 @@ try
     Plug 'machakann/vim-sandwich'
     Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['typescript', 'javascript', 'typescriptreact', 'javascriptreact'] }
     Plug 'mhinz/vim-signify'
-    Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -173,7 +172,6 @@ set smartcase " When using an upper case letter in search, search becomes case-s
 set lazyredraw " Don't redraw when executing macros
 set colorcolumn=200
 set completeopt=longest,menuone
-set pastetoggle=<F2> " Toggle paste mode
 set backup " Allow for a backup directory
 set wrapscan " Automatically wrap search when hitting bottom
 set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
@@ -226,21 +224,6 @@ let g:clipbrdDefaultReg = '+' " Default register for clipboard
 let g:netrw_liststyle=3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-
-" Use different cursor for insert and normal modes depending on terminal
-" Not checking &term because of a weird bug with the zsh prompt if $TERM is rxvt*
-if $REALTERM =~ "rxvt"
-    " 1 or 0 -> blinking block
-    " 2 -> solid block
-    " 3 -> blinking underscore
-    " 4 -> solid underscore
-    " Recent versions of xterm (282 or above) also support
-    " 5 -> blinking vertical bar
-    " 6 -> solid vertical bar
-    let &t_SI = "\<Esc>[5 q" " Insert mode
-    let &t_SR = "\<Esc>[4 q" " Replace mode
-    let &t_EI = "\<Esc>[1 q" " Normal mode
-endif
 "}}}
 "{{{ Mappings
 

@@ -36,3 +36,4 @@ alias py='python3'
 alias vim='nvim'
 alias workman='setxkbmap -v us workman'
 alias qwerty='setxkbmap -v us'
+alias awsume=". awsume"
