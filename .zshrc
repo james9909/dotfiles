@@ -19,6 +19,7 @@ setopt HIST_IGNORE_SPACE
 
 # User configuration
 export PATH="/bin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/games:/usr/sbin:/home/james/scripts"
+export PATH="/opt/homebrew/bin:$PATH"
 export EDITOR="nvim"
 
 setopt AUTO_CD
@@ -40,7 +41,10 @@ COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
 
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Mark untracked files under VCS as dirty
 
-plugins=(git zsh-syntax-highlighting tmux notify) # Plugins
+if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+plugins=(git zsh-syntax-highlighting tmux) # Plugins
 
 # User configuration {{{
 
@@ -54,17 +58,6 @@ if [[ -e $HOME/.zsh_aliases ]]; then
     . $HOME/.zsh_aliases
 fi
 # }}}
-
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences &)
-
-# Alternative (blocks terminal for 0-3ms)
-cat ~/.cache/wal/sequences
-
-# To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
 
 # }}}
 
@@ -96,7 +89,7 @@ export UPDATE_ZSH_DAYS=2
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zshreload="source ~/.zshrc"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # FZF
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden --ignore-file ~/.gitignore_global -g "!{node_modules,.git,.cache}" --follow'
 
 # use cache when auto-completing
@@ -106,11 +99,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # graphical auto-complete menu
 zstyle ':completion:*' menu select
 
-# alert after command runs for longer than 5 seconds
-zstyle ':notify:*' command-complete-timeout 5
-# Use the time elapsed even when the command fails
-zstyle ':notify:*' always-notify-on-failure no
-
 # use automatic path prediction
 # $predict-on to turn on and $predict-off to turn off
 # autoload predict-off
@@ -118,10 +106,6 @@ zstyle ':notify:*' always-notify-on-failure no
 # autoload -U compinit && compinit
 # colors
 # autoload -U colors && colors
-
-# Set xterm because of urxvt backspace bugs
-export TERM="xterm-256color"
-export REALTERM="rxvt-unicode-256color"
 
 # Override colors
 ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
@@ -132,19 +116,13 @@ ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 export ZSH_TMUX_AUTOSTART="false"
 export ZSH_TMUX_AUTOCONNECT="true"
 
-. /etc/zsh_command_not_found # Bash-like command not found
-
 export GOPATH="$HOME/Dev/go"
-export PATH="$HOME/Dev/tools/google_appengine:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/snap/bin:$PATH"
-export SPICETIFY_INSTALL="/home/james/spicetify-cli"
 export PATH="$SPICETIFY_INSTALL:$PATH"
-
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/library"
 
 # Pretend that we are using Unity (for the settings)
 export XDG_CURRENT_DESKTOP=Unity
@@ -169,21 +147,31 @@ if [ -f ~/.local/bin/virtualenvwrapper_lazy.sh ]; then
     source ~/.local/bin/virtualenvwrapper_lazy.sh
 fi
 
-# # The next line updates PATH for the Google Cloud SDK.
-if [ -f /home/james/Dev/tools/google-cloud-sdk/path.zsh.inc ]; then
-  source '/home/james/Dev/tools/google-cloud-sdk/path.zsh.inc'
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f /home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc'
-fi
-
-# added by travis gem
-[ -f /home/james/.travis/travis.sh ] && source /home/james/.travis/travis.sh
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH="/Users/james/Dev/discord/.local/bin:$PATH"
+#compdef clyde
+_clyde() {
+  eval "$(_CLYDE_COMPLETE=zsh_source clyde)"
+}
+if [[ "$(basename -- ${(%):-%x})" != "_clyde" ]]; then
+  compdef _clyde clyde
+fi
+
+source /Users/james/.nix-profile/etc/profile.d/nix.sh
+
+# pnpm
+export PNPM_HOME="/Users/james/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/library"
+

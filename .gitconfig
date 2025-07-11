@@ -1,7 +1,6 @@
 [user]
     name = James Wang
-    email = jameswang9909@hotmail.com
-    signingkey = F263CD5B
+    email = james.wang@discordapp.com
 
 [branch]
     autosetuprebase = always
@@ -32,8 +31,6 @@
 
 [push]
 	default = current
-[commit]
-    gpgsign = true
 [diff-so-fancy]
     markEmptyLines = false
     stripLeadingSymbols = false
