@@ -41,7 +41,9 @@ COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
 
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Mark untracked files under VCS as dirty
 
-if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+OS="$(uname)"
+
+if [[ $OS == "Darwin" && -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 plugins=(git zsh-syntax-highlighting tmux) # Plugins
@@ -152,9 +154,8 @@ fi
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export PATH="/Users/james/Dev/discord/.local/bin:$PATH"
+export PATH="$HOME/discord/.local/bin:$PATH"
 #compdef clyde
 _clyde() {
   eval "$(_CLYDE_COMPLETE=zsh_source clyde)"
@@ -163,7 +164,7 @@ if [[ "$(basename -- ${(%):-%x})" != "_clyde" ]]; then
   compdef _clyde clyde
 fi
 
-source /Users/james/.nix-profile/etc/profile.d/nix.sh
+source $HOME/.nix-profile/etc/profile.d/nix.sh
 
 # pnpm
 export PNPM_HOME="/Users/james/Library/pnpm"
@@ -174,4 +175,3 @@ esac
 # pnpm end
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/library"
-
