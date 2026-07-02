@@ -23,7 +23,8 @@ try
     Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['typescript', 'javascript', 'typescriptreact', 'javascriptreact'] }
     Plug 'mhinz/vim-signify'
     Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-    Plug 'nvim-treesitter/nvim-treesitter'
+    " Pinned to the frozen 'master' branch until we support `main`.
+    Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master' }
     Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     Plug 'sainnhe/gruvbox-material'
@@ -126,14 +127,19 @@ try
 
     call plug#end()
 
+if has('nvim')
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"rust", "javascript", "go", "bash", "toml", "yaml", "html", "typescript" },
-  highlight = {
-    enable = true,
-  },
-}
+local ok, configs = pcall(require, 'nvim-treesitter.configs')
+if ok then
+  configs.setup {
+    ensure_installed = {"rust", "javascript", "go", "bash", "toml", "yaml", "html", "typescript" },
+    highlight = {
+      enable = true,
+    },
+  }
+end
 EOF
+endif
 catch /:E117:/
     echom "Vim-Plug is not installed!"
 endtry
@@ -173,7 +179,9 @@ set smartcase " When using an upper case letter in search, search becomes case-s
 set lazyredraw " Don't redraw when executing macros
 set colorcolumn=200
 set completeopt=longest,menuone
-set pastetoggle=<F2> " Toggle paste mode
+if exists('+pastetoggle') " Removed in nvim 0.9+ (paste is auto-detected there)
+    set pastetoggle=<F2> " Toggle paste mode
+endif
 set backup " Allow for a backup directory
 set wrapscan " Automatically wrap search when hitting bottom
 set scrolloff=2 " Keep cursor 2 rows above the bottom when scrolling
@@ -275,11 +283,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Copy and paste to/from clipboard
 vnoremap <C-c> "+y<CR>

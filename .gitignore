@@ -1,5 +1,7 @@
 *.swp
 *~
+.zshrc.local
+.bash_aliases.local
 _backup/
 _swap/
 _undo/
