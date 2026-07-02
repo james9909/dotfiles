@@ -1,0 +1,26 @@
+# ~/.zshrc.local — machine-local shell config (NOT committed)
+#
+# Copy this to ~/.zshrc.local and put anything specific to THIS machine here:
+# per-host paths, work tooling, credentials, one-off tweaks. .zshrc sources
+# this file last, so it can override anything above it.
+#
+# Rule of thumb: if a line references an absolute path under /home/<someone>,
+# a single employer's tooling, or a machine that isn't every machine — it
+# belongs here, not in the committed .zshrc.
+#
+# $DOTFILES_OS is already set (macos | wsl | linux | unknown) if you need it.
+
+# ── Example: extra script/bin dirs on the PATH ──────────────────
+# export PATH="$HOME/scripts:$PATH"
+
+# ── Example: gcloud SDK (path varies per install) ───────────────
+# if [ -f "$HOME/Dev/tools/google-cloud-sdk/completion.zsh.inc" ]; then
+#   source "$HOME/Dev/tools/google-cloud-sdk/completion.zsh.inc"
+# fi
+
+# ── Example: desktop-linux extras ───────────────────────────────
+# if [[ $DOTFILES_OS == linux ]]; then
+#   export XDG_CURRENT_DESKTOP=Unity
+#   export SPICETIFY_INSTALL="$HOME/spicetify-cli"
+#   export PATH="$SPICETIFY_INSTALL:$PATH"
+# fi

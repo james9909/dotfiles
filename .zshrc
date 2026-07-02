@@ -1,13 +1,29 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+# ── OS detection ────────────────────────────────────────────────
+case "$(uname -s)" in
+    Darwin)
+        export DOTFILES_OS=macos ;;
+    Linux)
+        if grep -qiE 'microsoft|wsl' /proc/version 2>/dev/null; then
+            export DOTFILES_OS=wsl
+        else
+            export DOTFILES_OS=linux
+        fi
+        ;;
+    *) export DOTFILES_OS=unknown ;;
+esac
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# ── History ─────────────────────────────────────────────────────
 HIST_STAMPS="mm/dd/yyyy"
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
@@ -17,9 +33,8 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE
 
-# User configuration
-export PATH="/bin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/games:/usr/sbin:/home/james/scripts"
-export EDITOR="nvim"
+# ── Core options ────────────────────────────────────────────────
+export EDITOR="vim"
 
 setopt AUTO_CD
 setopt AUTO_PUSHD
@@ -34,96 +49,39 @@ unsetopt correct
 
 bindkey '^[[Z' reverse-menu-complete
 
-ZSH_THEME="powerlevel10k/powerlevel10k" # Theme to be used
+# ── Theme & plugins ─────────────────────────────────────────────
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion
-
+COMPLETION_WAITING_DOTS="true"       # Display red dots whilst waiting for completion
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Mark untracked files under VCS as dirty
 
-plugins=(git zsh-syntax-highlighting tmux notify) # Plugins
+plugins=(git zsh-syntax-highlighting tmux)
 
-# User configuration {{{
-
-# Aliases {{{
-# import aliases from bash
-if [[ -e $HOME/.bash_aliases ]]; then
-    . $HOME/.bash_aliases
-fi
-# import zsh-specific aliases
-if [[ -e $HOME/.zsh_aliases ]]; then
-    . $HOME/.zsh_aliases
-fi
-# }}}
-
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences &)
-
-# Alternative (blocks terminal for 0-3ms)
-cat ~/.cache/wal/sequences
-
-# To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
-
-# }}}
+# ── Aliases ─────────────────────────────────────────────────────
+[[ -e $HOME/.bash_aliases ]] && . $HOME/.bash_aliases
+[[ -e $HOME/.zsh_aliases ]]  && . $HOME/.zsh_aliases
 
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
-# Uncomment to change how often before auto-updates occur? (in days)
 export UPDATE_ZSH_DAYS=2
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zshreload="source ~/.zshrc"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # FZF
+# ── fzf ─────────────────────────────────────────────────────────
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden --ignore-file ~/.gitignore_global -g "!{node_modules,.git,.cache}" --follow'
 
-# use cache when auto-completing
-zstyle ':completion::complete:*' use-cache 1
-# use case-insensitive auto-completing
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# graphical auto-complete menu
-zstyle ':completion:*' menu select
-
-# alert after command runs for longer than 5 seconds
-zstyle ':notify:*' command-complete-timeout 5
-# Use the time elapsed even when the command fails
+# ── Completion styling ──────────────────────────────────────────
+zstyle ':completion::complete:*' use-cache 1              # use cache when auto-completing
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'       # case-insensitive completion
+zstyle ':completion:*' menu select                        # graphical auto-complete menu
+zstyle ':notify:*' command-complete-timeout 5             # alert after commands >5s
 zstyle ':notify:*' always-notify-on-failure no
 
-# use automatic path prediction
-# $predict-on to turn on and $predict-off to turn off
-# autoload predict-off
-# use advanced completion system
-# autoload -U compinit && compinit
-# colors
-# autoload -U colors && colors
-
-# Set xterm because of urxvt backspace bugs
-export TERM="xterm-256color"
+# ── Terminal ────────────────────────────────────────────────────
+export TERM="xterm-256color"    # xterm because of urxvt backspace bugs
 export REALTERM="rxvt-unicode-256color"
 
-# Override colors
 ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
 ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
@@ -132,58 +90,59 @@ ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
 export ZSH_TMUX_AUTOSTART="false"
 export ZSH_TMUX_AUTOCONNECT="true"
 
-. /etc/zsh_command_not_found # Bash-like command not found
-
-export GOPATH="$HOME/Dev/go"
-export PATH="$HOME/Dev/tools/google_appengine:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$HOME/.cargo/bin:$PATH"
+# ── Misc tooling ──
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/snap/bin:$PATH"
-export SPICETIFY_INSTALL="/home/james/spicetify-cli"
-export PATH="$SPICETIFY_INSTALL:$PATH"
-
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/library"
-
-# Pretend that we are using Unity (for the settings)
-export XDG_CURRENT_DESKTOP=Unity
-
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# Virtualenv wrapper
+# Go
+export GOPATH="$HOME/Dev/go"
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+if command -v rustc >/dev/null 2>&1; then
+    export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/library"
+fi
+
+# nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Dev
-
-if [ -x "$(command -v foo)" ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-  export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-fi
-
-if [ -f ~/.local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_SCRIPT=~/.local/bin/virtualenvwrapper.sh
-fi
-
 if [ -f ~/.local/bin/virtualenvwrapper_lazy.sh ]; then
+    export VIRTUALENVWRAPPER_SCRIPT=~/.local/bin/virtualenvwrapper.sh
     source ~/.local/bin/virtualenvwrapper_lazy.sh
 fi
 
-# # The next line updates PATH for the Google Cloud SDK.
-if [ -f /home/james/Dev/tools/google-cloud-sdk/path.zsh.inc ]; then
-  source '/home/james/Dev/tools/google-cloud-sdk/path.zsh.inc'
+# rbenv
+if command -v rbenv >/dev/null 2>&1; then
+    eval "$(rbenv init -)"
 fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f /home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/home/james/Dev/tools/google-cloud-sdk/completion.zsh.inc'
-fi
+# nix
+[ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
-# added by travis gem
-[ -f /home/james/.travis/travis.sh ] && source /home/james/.travis/travis.sh
+# ── Platform-specific setup ─────────────────────────────────────
+_dotfiles_platform_macos() {
+    export PATH="/opt/homebrew/bin:$PATH"
+}
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+_dotfiles_platform_linux() {
+    [ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
+    [ -d /snap/bin ] && export PATH="$PATH:/snap/bin"
+}
+
+case "$DOTFILES_OS" in
+    macos)     _dotfiles_platform_macos ;;
+    linux|wsl) _dotfiles_platform_linux ;;
+esac
+
+# ── p10k prompt ─────────────────────────────────────────────────
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# ── Machine-local overrides ─────────────────────
+# Per-machine paths, secrets, and work/host-specific tooling belong in
+# ~/.zshrc.local — never in this file. See .zshrc.local.example.
+[[ -r ~/.zshrc.local ]] && source ~/.zshrc.local
