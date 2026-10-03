@@ -1,4 +1,4 @@
-{ config, ... }:
+{ lib, ... }:
 
 {
   flake.modules.nixos."hosts/phoenix" = 

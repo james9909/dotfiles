@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ inputs, ... }:
 
 {
   flake.modules.nixos."hosts/phoenix" = 
@@ -63,10 +63,4 @@
       programs.hyprland.enable = true;
       programs.firefox.enable = true;
     };
-
-  flake.nixosConfigurations.phoenix = inputs.nixpkgs.lib.nixosSystem {
-    modules = [
-      config.flake.modules.nixos."hosts/phoenix"
-    ];
-  };
 }
