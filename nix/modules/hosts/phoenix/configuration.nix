@@ -1,10 +1,11 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 
 {
   flake.modules.nixos."hosts/phoenix" = 
     { pkgs, ... }:
     {
-      networking = {
+      imports = [ config.flake.modules.nixos.home-manager ];
+networking = {
         hostName = "phoenix";
 	networkmanager.enable = true;
       };
@@ -62,5 +63,7 @@
 
       programs.hyprland.enable = true;
       programs.firefox.enable = true;
+
+      home-manager.users.james.imports = [ config.flake.modules.homeManager.james ];
     };
 }
