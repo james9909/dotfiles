@@ -4,8 +4,14 @@
   flake.modules.nixos."hosts/phoenix" = 
     { pkgs, ... }:
     {
-      imports = [ config.flake.modules.nixos.home-manager ];
-networking = {
+      imports = with config.flake.modules.nixos; [
+	base
+	firefox
+	hyprland
+        home-manager 
+      ];
+
+      networking = {
         hostName = "phoenix";
 	networkmanager.enable = true;
       };
@@ -45,24 +51,12 @@ networking = {
 
       nixpkgs.config.allowUnfree = true;
 
-      environment.systemPackages = with pkgs; [
-        neovim
-        hyprland
-        kitty
-        git
-      ];
-
       system.stateVersion = "26.05"; # Did you read the comment?
 
       nix.settings.experimental-features = [
         "nix-command"
         "flakes"
       ];
-
-      environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-      programs.hyprland.enable = true;
-      programs.firefox.enable = true;
 
       home-manager.users.james.imports = [ config.flake.modules.homeManager.james ];
     };
