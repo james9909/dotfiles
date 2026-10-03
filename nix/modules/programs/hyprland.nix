@@ -6,14 +6,13 @@ in
   flake.modules.nixos.hyprland =
     { pkgs, ... }:
     {
-      imports = [ nixos.kitty ];
+      imports = [
+        nixos.kitty
+        nixos.noctalia
+      ];
 
       programs.hyprland.enable = true;
 
       environment.sessionVariables.NIXOS_OZONE_WL = "1";
     };
-
-  flake.modules.homeManager.hyprland = {
-    imports = [ homeManager.rofi ];
-  };
 }

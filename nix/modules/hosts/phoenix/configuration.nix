@@ -6,6 +6,7 @@
     {
       imports = with config.flake.modules.nixos; [
 	base
+	discord
 	firefox
 	hyprland
         home-manager 
