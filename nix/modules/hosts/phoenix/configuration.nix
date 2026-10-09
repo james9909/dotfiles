@@ -11,6 +11,7 @@
 	firefox
 	hyprland
         home-manager 
+	steam
       ];
 
       networking = {
