@@ -11,6 +11,7 @@
 	firefox
 	hyprland
         home-manager 
+	signal
 	steam
       ];
 
@@ -48,7 +49,7 @@
       users.users."james" = {
         isNormalUser = true;
         description = "James Wang";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [ "networkmanager" "wheel" "camera" ];
         packages = with pkgs; [];
       };
 

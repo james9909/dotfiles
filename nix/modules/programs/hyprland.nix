@@ -7,9 +7,12 @@ in
     { pkgs, ... }:
     {
       imports = [
+        nixos.imv
         nixos.kitty
+	nixos.nautilus
         nixos.noctalia
 	nixos.noctalia-greeter
+	nixos.removable-media
       ];
 
       programs.hyprland = {
